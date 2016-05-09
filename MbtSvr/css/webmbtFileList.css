@@ -1,0 +1,110 @@
+html, body {
+    margin:0;
+    padding:0;
+	padding-left: 0px;
+    height:100%;
+    width:100%;
+    border:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	overflow: auto;
+	color: #333333;
+}
+
+
+.menu {
+	width: 100px;
+}
+
+select {
+	font-size: 10px;
+}
+
+#fileHeader {
+	background-color: #F0EEE3;
+}
+
+#fileTable {
+	padding-top: 0px;
+	margin-top:0px;
+}
+
+.file:hover {
+	color:#333333;
+	text-decoration: none;
+	background-color: #F2F7F8;
+}
+
+table td {
+	padding-left: 3px;
+}
+
+
+.header {
+	background-color: #F0F0F0;
+	border-bottom: 1px dotted #AAAAAA;
+	height: 20px;
+}
+
+.lastmodified {
+	width: 130px;
+	font-weight: bold;
+}
+
+.modelname {
+	font-weight: bold;
+	border-left: 1px dotted #AAAAAA;
+	border-right: 1px dotted #AAAAAA;
+}
+
+.plugin {
+	font-weight: bold;
+	border-right: 1px dotted #AAAAAA;
+}
+
+ul {
+	margin-left: 0;
+	padding-left:0;
+}
+
+li img {
+	padding-right: 3px;
+	position:relative;
+	top: 2px;
+}
+
+#headerCtl img {
+	padding-right: 3px;
+	margin-top:5px;
+}
+
+#headerCtl a:hover {
+	background-color: #ADD8E6;
+	color: orange;
+}
+
+#headerCtl a, #headerCtl a:visited {
+	color: #333333;
+}
+
+.path {
+	padding-left: 8px;
+	font-style: italic;
+}
+
+#searchField {
+	font-size: 1em;
+}
+
+.file {
+	padding-bottom: 5px;
+	padding-top:0;
+	margin-top:0;
+	height: 12px;
+	text-align: top;
+}
+
+.file, .model, .archModel {
+	cursor: pointer;
+}
+

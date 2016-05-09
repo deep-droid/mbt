@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="JSDiagram.css" />
+  	<LINK href="common.css" rel="stylesheet" type="text/css">
+  	<LINK href="ModelEditor.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="jquery-1.7.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="jquery.qtip.min.css" />
+	<script type="text/javascript" src="jquery.qtip.min.js"></script>
+
+	<script>
+		$(document).ready( function () {
+			$(".ahover").qtip();
+		});
+		
+	</script>
+	
+	<style>
+		.ahover:hover {
+			background-color: #AAAAAA;
+		}
+	</style>
+</head>
+<body>
+	<div style="position:absolute; left: 100px; top: 5px; width: 500px; font-size: small;">
+		Move mouse over different component of the state and transition for description of actions and operations you can perform on the model.
+	</div>
+	<div id="box" style="position: absolute; left: 100px; top: 50px;border: 1px solid blue; border-radius: 5px; height: 250px; width: 500px;">
+	
+	</div>
+	<div id='stateUID' 
+		class='state' 
+		style='left:150px; top:100px; height:75px; width:100px;'>
+			<div class='head'>
+				<div id='stateBreak' class='icn break ahover' name='break'
+					title='<dl><dt>Breakpoint Indicator:<dd><li>Indicates if breakpoint is enabled for the state: orange - enabled, gray - disabled</li><li>Click to toggle between enabled and disabled</li></dd></dt></dl>'>
+					<a href='javascript:void(0);'>&#149;</a>
+				</div>
+				<div id='stateInit' class='icn initial ahover' 
+					title='<dl><dt>Initial State Indicator<dd><li>Indicates the state is an initial state.</li><li>Each model must have only one initial state.</li><li>Change initial state indicator in State Property</li></dd></dt></dl>' style='display:block !important;'>
+					i
+				</div>
+				<div id='stateFinal' class='icn final ahover' name='final' 
+					title='<dl><dt>Final State Indicator<dd><li>Indicates the state is a final state</li><li>Each model must have one at least one final state.</li><li>Change final state indicator in State Property</li></dd></dt></dl>' style='display:block !important;'>
+					f
+				</div>
+				<div id='stateHead' class='ahover' 
+					title='<dl><dt>State Context Menu:<dd><li>Right mouse click</li></dd></dt><dt>State Property:<dd><li>Double click on the state</li></dd></dt><dt>Add Transition to Another State:<dd><li>Left mouse drag and drop onto another state</li></dd></dt><dt>Add State and Transition:<dd><li>Left mouse click on the state and drag the mouse onto canvas</li></dd></dt><dt><dt>Mark State:<dd><li>Click to mark the state. It also automatically un-marks all marked states and transitions</li><li>Shift click to mark the state without affecting all marked states and transitions</li></dd></dt><dt>Un-mark State:<dd><li>Click to un-mark the state</li><li>Double click on canvas area to un-mark all marked states and transitions</li></dd></dt><dt>State Header<dd><li><span style="background-color:#97c3d4; width:20px">Normal</span></li><li><span style="background-color:#b7e3f4; width:20px">Optional</span>: optional traversal on this state from sub model</li><li><span style="background-color:#cccccc; width:20px">Removed</span>: state from sub model is <i>removed</i> from current model</li></dd></dt></dl>'
+					style='float: left; width: 35px; height: 15px;'>
+				
+				</div>
+				<div class='icnRDiv'>
+					<div id='stateLight' class='icnR liteUp ahover' 
+						title='<dl><dt>Splat:<dd><li>Click to highlight incoming transitions / states in yellow and outgoing transitions / states in green' name='liteUp</li></dd></dt></dl>'>
+						<img src='light.gif'/>
+					</div>
+					<div id='stateNotePad' class='icnR comment ahover' name='comment' 
+						title='<dl><dt>State Comment:<dd><li>When shown, indicates state comment has been entered</li><li>Click to view or edit state comment</li></dd></dt><dt>Create State Comment:<dd><li>Select "Notepad" from the state context menu</dd></dt></dl>' style="display: block;">
+						<img src='notepad.png'/>
+					</div>
+				</div>
+			</div>
+		<div class='ctnt'>
+			<div style='width:100%;'>
+				<center>
+					<span id='stateName' class='label ahover'
+						title='<dl><dt>Edit State Name:<dd><li>Double click to edit state name, click anywhere else to confirm the change</li></dd></dt><dt><dt>Mark State:<dd><li>Click to mark the state. It also automatically un-marks all marked states and transitions</li><li>Shift click to mark the state without affecting all marked states and transitions</li></dd></dt><dt>Un-mark State:<dd><li>Click to un-mark the state</li><li>Double click on canvas area to un-mark all marked states and transitions</li></dd></dt></dl>'>
+					state name</span>
+				</center>
+			</div>
+			<div id='stateCnt' class="ahover" style="width:100%; height: 37px;" 
+				title='<dl><dt>State Context Menu:<dd><li>Right mouse click</li></dd><dt>Add Transition to Another State:<dd><li>Left mouse click on the state and drag the mouse onto another state</li></dd></dt><dt>Add State and Transition:<dd><li>Left mouse click on the state and drag the mouse onto canvas</li></dd></dt><dt><dt>Mark State:<dd><li>Click to mark the state. It also automatically un-marks all marked states and transitions</li><li>Shift click to mark the state without affecting all marked states and transitions</li></dd></dt><dt>Un-mark State:<dd><li>Click to un-mark the state</li><li>Double click on canvas area to un-mark all marked states and transitions</li></dd></dt><dt>Resize State:<dd><li>Click and drag any of the sides to resize state</li><li>Click and drag the lower right corner to resize diagonally</li></dd></dt></dl>'>
+				
+			</div>
+		</div>
+	</div>
+
+	<div id='stateUID2' class='state' style='left:450px; top:170px; height:75px; width:100px;'>
+			<div class='head'>
+				<div class='icn' name='break'>
+					<a href='javascript:void(0);'>&#149;</a>
+				</div>
+				<div id='stateStereotype' class='icn stereotype ahover' 
+					title='<dl><dt>State Stereotype - Configurable<dd><li>P - Physical State</li><li>V - Virtual State</li><li>M - Model (sub model) state</li><li>Sup - Super State</li><li>D - Dummy State</li></dd></dt></dl>' style='display:block !important; border-radius: 4px;padding: 1px;background-color:#709e70;color:#ffffff'>
+					M
+				</div>
+				<div id='stateFlags' class='icn flag ahover' 
+					title='<dl><dt>State Flags<dd><li>A - State activate type</li><li>D - Uses DataSet</li><li>R - Requirement tag attached</li><li>V - Uses variables</li></dd></dt></dl>' style='display:block !important; padding: 1px;background-color:#666666;color:#ffffff'>
+					R
+				</div>
+				<div class='icnRDiv'>
+					<div class='' name='liteUp'>
+						<img src='light.gif'/>
+					</div>
+				</div>
+			</div>
+		<div class='ctnt'>
+			<center>
+				<span class='label'>state name</span>
+			</center>
+			
+		</div>
+	</div>
+	
+	<div id='trausUID' class='trans' style='left: 255px; top: 130px;'>
+		<span class='label transName ahover'
+			title='<dl><dt>Edit Transition Name:<dd><li>Double click to edit transition name</li><li>Click anywhere else to confirm the change</li></dd></dt><dt>Context Menu:<dd><li>Right mouse click on transition name</li></dd><dt>Mark Transition:<dd><li>Left mouse click to mark and un-mark the transition</li><li>Marking the transition automatically un-marks all other marked states and transitions</li><li>Shift click to mark transition without affecting other marked states and transitions</li></dd></dt><dt>Position:<dd><li>Relative to the transition start segment (breakpoint indicator)</li></dd></dt></dl>'>
+		trans name</span>
+		<span class='transFlags'>
+			<span id='transStereotype' class='ahover' 
+				title='<dl><dt>Transition Stereotype - Configurable<dd><li>A - Action type transition</li><li>D - Dummy transition</li><li>V - Virtual transition</li></dd></dt></dl>' style='border-radius: 4px;padding-left: 2px;background-color:#709e70;color:#ffffff'>
+				A
+			</span>
+	 		<span id='transGuard' class='ahover' style="padding:1px;margin:1px;"
+	 			title="<dl><dt>Guard Indicator:<dd><li>Indicates transition contains either a guard condition or a guard trigger or both</li><li>Both guard condition and guard trigger if defined must evaluate to true in order for the transition to be traversed</li></dd></dt><dt>Guard Condition:<dd><li>Add, edit or modify guard condition in transition property</li><li>Hover over to display the guard condition details if defined</li></dd></dt><dt>Guard Trigger:<dd><li>Add, edit and modify guard trigger in MScript editor</li></dd></dt></dl>">
+	 			G
+	 		</span>
+			<span id='transFinal' class='ahover' style="padding:1px;margin:1px;"
+	 			title="<dl><dt>Final State Transition:<dd><li>Indicates the transition is attached to a final state of a sub-model</li></dd></dt><dt>Change Final State:<dd><li>Edit transition property by changing the 'Submodel Final State' field to the state id of another 'final' state of a sub-model</li><li>Hover over to display the state id of the 'final state' the transition is attached to</li></dd></dt></dl>"
+				style="padding:1px;margin:1px;">
+			 	F
+			 </span>
+			<span id='transVar' class='ahover' 
+				title="<dl><dt>Transition Set Variable:<dd><li>Indicates if transition contains 'Set Var' or any of its MScript contains $setVar() calls</li></dd></dt><dt>Transition Set Var:<dd><li>Edit Transition Property 'Set Var' field</li><li>Call $setVar() anywhere in MScript in MScript Editor</li></dd></dt></dl>"
+				style="padding:1px;margin:1px;">
+				V
+			</span>
+	 		<span id='transDS' class='ahover' 
+				title="<dl><dt>Transition Data Set:<dd><li>Indicates transition has a data set defined</li><li>Use data set to perform Data-Driven Testing</li><li>Data set is populated with combinatorial & pairwise testing algorithms</li></dd></dt><dt>Edit Data Set:<dd><li>Select 'Transition DataSet' from transition context menu</li></dd></dt></dl>"
+	 			style="padding:1px;margin:1px;">
+	 			D
+	 		</span>
+	 		<span id='transReq' class='ahover' 
+				title="<dl><dt>Requirements Tag:<dd><li>Indicates transition has requirements tags assigned</li></dd></dt><dt>Edit Requirements Tag:<dd><li>Requirements tags are assigned in 'Transition Property'</li></dd></dt></dl>"
+	 			style="padding:1px;margin:0px;">
+	 			R
+	 		</span>
+			<img id='transNotePad' class='ahover' src='notepad.png'
+				title="<dl><dt>Transition NotePad:<dd><li>Indicates a comment/note has been entered for the transition</li><li>Click to view or edit notepad</li></dd></dt><dt>Create NotePad:<dd>Create a new notepad with transition context menu 'NotePad'</dd></dt><db>Delete NotePad:<dd><li>Notepad is deleted by clearing the text in the notepad</li></dd></dt></dl>"
+			/>
+		</span>
+	</div>
+	
+	<div id='transBreak' class='break transStart ahover'
+		title="<dl><dt>Transition Breakpoint:<dd><li>Breakpoint indicator: orange - enabled, gray - disabled</li></dd></dt><dt>Toggle Breakpoint:<dd><li>Click to toggle breakpoint</li></dd></dt><dt>Change Source State:<dd><li>Drag and drop breakpoint indicator onto another state to change transition's source state</li></dd></dt></dl>"
+		style='position: absolute; left: 250px; top:148px; width:9px;height:9px;border-radius:5px;'>
+	</div>
+	<div id='startSeg' id='transSeg0' class='trans seg ahover' 
+		title='<dl><dt>Transition Segment:<dd><li>Click on the segment and drag to move transition segment</li><li>Transition is auto routed using different routing strategy as segment is moved</li></dd></dt><dt>Highlight Transition:<dd><li>Hover over to highlight all transition segments and transition name</dd></dt><dt>Context menu:<dd><li>Right mouse click</dd></dt><dt>Transition Property:<dd><li>Double click or select Transition Propeprty from transition context menu</dd></dt></dl>'
+		style='position: absolute; left: 257px; top: 150px; height:3px; width: 93px; display:block;'>
+	</div>
+	<div id='midSeg' class='trans seg ahover' 
+		title='<dl><dt>Transition Segment:<dd><li>Click on the segment and drag to move transition segment</li><li>Transition is auto routed using different routing strategy as segment is moved</li></dd></dt><dt>Highlight Transition:<dd><li>Hover over to highlight all transition segments and transition name</dd></dt><dt>Context menu:<dd><li>Right mouse click</dd></dt><dt>Transition Property:<dd><li>Double click or select Transition Propeprty from transition context menu</dd></dt></dl>'
+		style='position: absolute; left: 350px; top: 150px; height:50px; width: 3px; display:block;'>
+	</div>
+	<div id='endSeg' class='trans seg ahover' 
+		title='<dl><dt>Transition Segment:<dd><li>Click on the segment and drag to move transition segment</li><li>Transition is auto routed using different routing strategy as segment is moved</li></dd></dt><dt>Highlight Transition:<dd><li>Hover over to highlight all transition segments and transition name</dd></dt><dt>Context menu:<dd><li>Right mouse click</dd></dt><dt>Transition Property:<dd><li>Double click or select Transition Propeprty from transition context menu</dd></dt></dl>'
+		style='position: absolute; left: 350px; top: 200px; height:3px; width: 93px; display:block;'>
+	</div>
+	<img id='transArrow' 
+		title="<dl><dt>Transition End:<dd>Drag and drop transition end onto another state to change transition's target state</dd></dt></dl>"
+		style="position:absolute; left: 441px; top: 197px;" class='arrow transEnd ahover' src='arrow_r.gif'/>
+	<div id='moreCmd' class='ahover' style='position: absolute; left: 150px; top: 225px; height: 20px; width: 100px;' 
+		title='<dl><dt>Model Context Menu:<dd><li>Right mouse click</li></dd><dt>Clear All Marked States and Transitions:<dd><li>Double click on canvas to clear all marked states and transitions</li></dd></dt><dt>Move Marked States:<dd><li>Press Ctrl/Cmd and one of arrow keys to move all marked states</li><li>Press Ctrl/Cmd, Shift and one of arrow keys for finer movement</li><dd></dt><dt>Delete Marked States and Transitions:<dd><li>Press Del key to delete all marked states and transition</li></dd></dt><dt>Lasso - Select states by dragging<dd><li>Left-mouse drag over canvas to mark states within drag rectangle</li><li>Must start the drag on canvas</li></dd></dt></dl>'>
+		Model Canvas
+	</div>
+</body>
+</html>

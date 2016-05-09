@@ -1,0 +1,209 @@
+Processed and response of sent: True
+
+processRequest received: performGeneralAction`StartApplication`calc``
+Exception thrown!: Process has exited, so the requested information is not available.
+Processed and response of sent: -1
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Add`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Add`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Multiply`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Multiply`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Subtract`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Subtract`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Divide`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: findElement`Clear`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Divide`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Equals`true`name`button`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: performGivenAction`invoke````latest
+Processed and response of sent: 7
+
+processRequest received: findElement`Result`true`name`text`1`false`0`true
+Processed and response of sent: 1
+
+processRequest received: retrieveObjectProperty`Value`
+Processed and response of sent: UIAERROR: No valid object currently selected.
+
+processRequest received: performGivenAction`window`close```window
+Processed and response of sent: 7
+
+processRequest received: CleanUp
+Shutting down the UIALib
+Processed and response of sent: true
+
+processRequest received: shutdown
+Processed and response of sent: true
+
+App die.

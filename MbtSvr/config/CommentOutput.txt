@@ -1,0 +1,5 @@
+Test Execution Comment Output by Model MScript Comments
+
+>>CONTENT>>@CONTENT_ROW@<<CONTENT<<
+
+================== END ====================

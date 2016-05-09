@@ -1,0 +1,61 @@
+<style>
+	#ReqList .headerDesc {
+		font-weight: bold;
+		padding-left: 3px;
+	}
+	
+	#ReqList tbody {
+		background-color: #EEEEEE;
+	}
+	
+	#ReqList tr {
+		cursor: pointer;
+	}
+
+	#ReqList tbody tr:hover {
+		background-color: #FFFFFF;
+	}
+</style>
+
+<div ng-controller="ReqListCtrl" id="ReqList" style="height: 100%;">
+		<button class="btn btn-primary form-control" ng-click="applyUpdates()">Sync Requirements</button>
+		<input class="form-control" type="text" ng-model="filterText" placeholder="filter text">
+	<table class="table">
+		<thead>
+	  		<tr>
+	  			<th title='Apply updates to requirements.'>
+	  				<input type="checkbox" ng-model="checkAll" ng-click="toggleCheckAll()"></input>
+	  			</th>
+				<th ng-click="changeSorting('tag')">Tag</th>
+	  			<th ng-click="changeSorting('originalRequirement.name')">Name</th>
+	  			<th ng-click="changeSorting('diffFlag')" title='Change flags: changed, added, retired'>Changed</th>
+	  			<th ng-click="changeSorting('originalRequirement.status')" title='Status of the requirement.'>Status</th>
+	  			<th ng-click="changeSorting('originalRequirement.desc')">Description</th>
+	  			<th ng-click="changeSorting('originalRequirement.modifiedDate')">Modified Date</th>
+	  			<th ng-click="changeSorting('originalRequirement.versions')">AUT Versions</th>
+	  			<th ng-click="changeSorting('originalRequirement.reqGroup')">Req. Group</th>
+	  			<th ng-click="changeSorting('originalRequirement.sprints')">Sprints</th>
+	  			<th ng-click="changeSorting('originalRequirement.keyaowrds')">Keywords</th>
+	  			<th ng-click="changeSorting('originalRequirement.storyids')">User Stories</th>
+	  		</tr>
+	  	</thead>
+		<tbody>
+			<tr ng-repeat="reqObj in reqList|filter: filterText | orderBy:sort.column:sort.descending">
+				<td>
+					<input type="checkbox" ng-model="reqObj.checked" ng-disabled="reqObj.diffFlag==''"></input>
+				</td>
+				<td>{{reqObj.tag}}</td>
+				<td>{{reqObj.originalRequirement.name}}</td>
+				<td>{{reqObj.diffFlag}}</td>
+				<td>{{reqObj.originalRequirement.status}}</td>
+				<td>{{reqObj.originalRequirement.desc}}</td>
+				<td>{{reqObj.originalRequirement.modifiedDate}}</td>
+				<td>{{reqObj.originalRequirement.versions.join(",")}}</td>
+				<td>{{reqObj.originalRequirement.reqGroup.join(",")}}</td>
+				<td>{{reqObj.originalRequirement.sprints.join(",")}}</td>
+				<td>{{reqObj.originalRequirement.keywords.join(",")}}</td>
+				<td>{{reqObj.originalRequirement.storyids.join(",")}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

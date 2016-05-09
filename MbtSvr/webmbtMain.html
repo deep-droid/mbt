@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+	<title>TestOptimal IDE</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<LINK REL="SHORTCUT ICON" HREF="favicon.ico">
+	<link type="text/css" href="packages/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/IDE_Tab.css" rel="stylesheet" type="text/css">
+	<link href="packages/facebox_1.3/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+	<LINK href="css/webmbtMain.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="packages/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+  	<script src="packages/jquery.cookie.js"></script>
+	<script src="packages/shortcut.js"></script>
+	<script src="packages/jquery.zoom.js"></script>
+    <script src="packages/facebox_1.3/facebox.js" type="text/javascript"></script>
+
+  	<script src="packages/jquery.kolorpicker-2.7/jquery.kolorpicker.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="packages/jquery.kolorpicker-2.7/style/kolorpicker.css" type="text/css" media="screen, tv, projection, print" />
+
+
+	<script src="js/webmbtUtility.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/webmbtMsgList.js"></script>
+	<script src="js/webmbtDataUtil.js"></script>
+	<script type="text/javascript" src="js/tabControl.js"></script>
+	<script type="text/javascript" src="js/navigate.js"></script>
+	<script type="text/javascript" src="js/webmbtMain.js"></script>
+	<script type="text/javascript" src="js/CommandAction.js"></script>
+	<script type="text/javascript" src="js/webmbtBuilder.js"></script>
+</head>
+<body onbeforeunload="closeAllWin();">
+	<div id="KPI">
+		<center class="elems">
+			<b><i>KPI:</i></b>
+		</center>
+	</div>
+	<div id="headerSection">
+		<ul id="nav-one" class="nav">
+			<li class="nav-dropdown">
+				<a href="#FileMenu"><span class="menuTopItem" id="fileMenu">File</span></a>
+				<ul>
+					<li class="devOnly"><a href="javascript:newModel();" id="fileNew">New Model<span class=msc></span></a></li>
+					<li class="devOnly"><a href="javascript:newFolder();" id="fileNewFolder">New Folder<span class=msc></span></a></li>
+					<li class="devOnly"><a href="javascript:openDataDesigner();" id="fileDataDesigner">Data Designer<span class=msc></span></a></li>
+					<li class="devOnly"><a href="javascript:openUIRepo();" id="fileUIRepo">UIRepo<span class=msc></span></a></li>
+					<!-- li><a href="javascript:openBDT();" id="fileBDT">BDT IDE<span class=msc></span></a></li-->
+					<li><a href="javascript:openDashboard();" id="fileDashboard">Dashboard<span class=msc></span></a></li>
+					<li class="newFeature" title="Playback screen recording"><a href="javascript:openPlayback();" id="playback">Playback<span class=msc></span></a></li>
+					<li id="lockMenu" class="reqLockModel"><a href="javascript:lockModel();" id="lockModel">Lock Model<span class=msc></span></a></li>
+					<li id="saveMenu" class="reqModelOpen"><a href="javascript:fileSave();" id="fileSave">Save<span class=msc></span></a></li>
+					<li id="saveAsMenu" class="reqModelOpen"><a href="javascript:fileSaveAs();" id="fileSaveAs">Save As<span class=msc></span></a></li>
+					<li class="devOnly reqModelOpen"><a href="javascript:renameModel();" id="fileRename">Rename<span class=msc></span></a></li>
+					<li class="devOnly reqModelOpen"><a href="javascript:backup();" id="fileBackup">Backup<span class=msc></span></a></li>
+					<li class="devOnly reqModelOpen"><a href="javascript:restore();" id="fileRestore">Restore<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr/></li>
+				    <li id="closeMenu" class="reqModelOpen"><a href="javascript:closeModel();" id="fileClose">Close<span class=msc></span></a></li>
+				    <li id="closeAllMenu" class="reqModelOpen"><a href="javascript:closeAllModel();" id="fileCloseAll">Close All<span class=msc></span></a></li>
+				    <li id="closeOtherMenu" class="reqModelOpen"><a href="javascript:closeOtherButton();" id="runCloseOthers">Close Others<span class=msc></span></a></li>
+				    <li id="closeMenu" class="reqModelOpen"><a href="javascript:revertModel();" id="fileRevert">Revert<span class=msc></span></a></li>
+					<li class="reqModelOpen"><a href="javascript:fileImport();" id="fileImport" class="devOnly">Import<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr/></li>
+				    <li><a href="javascript:batchRun();" id="batchRunMenu">Batch Run<span class=msc></span></a></li>
+					<li class="devOnly" id="fileArchiveMenu"><a href="javascript:batchDeploy();" id="fileArchive" title="Deploy models to SvrMgr">Batch Deploy<span class=msc></span></a></li>
+					<li id="conSvrMgrMenu"><a href="javascript:connectSvrMgr();" title="Connect to SvrMgr">Connect SvrMgr<span class=msc></span></a></li>
+					<li id="disconSvrMgrMenu" style="display:none;"><a href="javascript:disconnectSvrMgr();" title="Currently connected to SvrMgr, click to disconnect from SvrMgr"  style="font-weight: bold;">Disconnect SvrMgr<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr/></li>
+				    <li><a href="javascript:shutdownServer();" id="shutdownSvr" title="Shut down TestOptimal server">Shutdown Server<span class=msc></span></a></li>
+				</ul>
+			</li>
+			<li class="nav-dropdown reqModelOpen">
+				<a href="#ModelMenu"><span class="menuTopItem" id="modelMenu">Model</span></a>
+				<ul>
+					<li id="mbtSettingMenu"><a href="javascript:mbtSettingDialog();" id="editMbtSetting">MBT Setting<span class=msc></span></a></li>
+					<li id="modelPropMenu"><a href="javascript:modelPropDialog();" id="editModelProp">Model Property<span class=msc></span></a></li>
+				    <li id="treeViewMenu" title="open model tree view"><a href="javascript:runWinAction('Model', 'popupTreeView');" id="popTreeView">Model Tree View<span class=msc></span></a></li>
+				    <li id="mCaseMenu" title="open MCase view"><a href="javascript:runWinAction('Model','popupMCaseView');" id="popMCase">MCase View<span class=msc></span></a></li>
+				    <li id="reqMenu" title="open Requirements view"><a href="javascript:runWinAction('Model','popupReqView');" id="popMCase">Requirements View<span class=msc></span></a></li>
+				    <li id="defectsMenu" title="open Defects view"><a href="javascript:runWinAction('Model','popupDefectsView');" id="popDefects">Defects View<span class=msc></span></a></li>
+				    <li id="annotMenu" title="Model Annotation View"><a href="javascript:javascript:runWinAction('Model','popupAnnotView');" id="annotView">Annotation View<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr/></li>
+				    <li id="repoMenu" title="Checkin (deploy) to and checkout model from SvrMgr"><a href="javascript:openModelRepo();" id="modelRepo">Model Repository<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr/></li>
+				    <li title="ALM integration configuration"><a href="javascript:almConfig();" id="almConfig">Configure ALM<span class=msc></span></a></li>
+				    <li title="Open AUT"><a href="javascript:openAUT();" id="openAUT">Open AUT<span class=msc></span></a></li>
+					<!--li class="menuHR"><hr></li>
+				    <li><a href="javascript:printModel();" id="printModelMenu">Print Model<span class=msc></span></a></li>
+				    -->
+				</ul>
+			</li>
+			<li class="nav-dropdown reqModelOpen">
+				<a href="#RunMenu"><span class="menuTopItem" id="runMenu">Run</span></a>
+				<ul>
+					<li id="execMenu"><a href="javascript:startButton();" id="runExec">Execute<span class=msc></span></a></li>
+					<li id="debugMenu"><a href="javascript:debugButton();" id="runDebug">Debug<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr></li>
+				    <li id="pauseMenu"><a href="javascript:pauseButton();" id="runPause">Pause<span class=msc></span></a></li>
+				    <li><a href="javascript:debugButton();" id="runResume">Resume<span class=msc></span></a></li>
+				    <li id="stopMenu"><a href="javascript:stopButton();" id="runStop">Stop<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr></li>
+				    <li id="stepOverMenu"><a href="javascript:stepOverButton();" id="runStepOver">Step Traversal<span class=msc></span></a></li>
+				    <li id="stepInMenu"><a href="javascript:stepInButton();" id="runStepScript">Step MScript<span class=msc></span></a></li>
+				    <li id="execMScriptMenu"><a href="javascript:openMScriptExec();" id="runExecMScript">MScript Sandbox<span class=msc></span></a></li>
+					<li class="devOnly menuHR"><hr></li>
+				    <li><a href="javascript:batchRun();" id="batchRunMenu">Batch Run<span class=msc></span></a></li>
+				    <li id="stopAllMenu"><a href="javascript:stopAllButton();" id="runStopAll">Stop All<span class=msc></span></a></li>
+				</ul>
+			</li>
+			<li class="nav-dropdown">
+				<a href="#ReportMenu"><span class="menuTopItem" id="reportMenu">Report</span></a>
+				<ul>
+				    <li class="reqModelOpen"><a href="javascript:openExecMSC();" id="execMSCMenu">Inter-Model MSC<span class=msc></span></a></li>
+				    <li class="statsRptOpen"><a href="javascript:openStatsRpt();" id="statsRpt">Manage Stats<span class=msc></span></a></li>
+				    <li class="reqModelOpen"><a href="javascript:openReportSeqOut();" id="reportSeqOut">TestCase Report<span class=msc></span></a></li>
+				    <li class=""><a href="javascript:openDashboard();" id="dashboard">Dashboard<span class=msc></span></a></li>
+				</ul>
+			</li>
+			<li class="nav-dropdown reqModelOpen">
+				<a href="#SessionMenu"><span class="menuTopItem" id="sessionMenu">Session</span></a>
+				<ul>
+				</ul>
+			</li>
+			<li class="nav-dropdown">
+				<a href="#LogMenu"><span class="menuTopItem" id="logMenu">Log</span></a>
+				<ul>
+					<li><a href="javascript:openWin('Console');" id="logConsole">Console Log<span class=msc></span></a></li>
+					<li class="reqModelOpen"><a href="javascript:openWin('MScriptLog');" id="logMscript">mScript Log<span class=msc></span></a></li>
+				    <li><a href="javascript:openWin('ServerLog');" id="logServer">Server Log<span class=msc></span></a></li>
+					<li class="menuHR"><hr></li>
+				    <li><a href="javascript:openWin('WinUIALog');" id="logWinUIA">WinUIA Log<span class=msc></span></a></li>
+				</ul>
+			</li>
+			<li class="nav-dropdown">
+				<a href="#HelpMenu"><span class="menuTopItem" id="helpMenu">Help</span></a>
+				<ul>
+					<li><a href="http://TestOptimal.com/?reqCode=HelpDoc" target=_blank id="helpDoc">Online Help<span class=msc></span></a></li>
+				    <li><a href="http://TestOptimal.com/forum" target=_blank id="forum">Discussion Forum<span class=msc></span></a></li>
+				    <li><a href="http://TestOptimal.com/support" target=_blank id="helpSupport">Contact Support<span class=msc></span></a></li>
+				    <li><a href="http://testoptimal.com/tutorials/TutorialList.html" target=_blank id="helpTutorial">Tutorials<span class=msc></span></a></li>
+					<li class="menuHR"><hr></li>
+				    <li><a href="javascript:editConfig();" id="helpConfig">Configure Server<span class=msc></span></a></li>
+				    <li><a href="javascript:resetIDE();" id="resetLayout">Reset IDE Layout<span class=msc></span></a></li>
+					<li class="menuHR"><hr></li>
+				    <li><a href="javascript:setLicense();" id="setLic">Manage License<span class=msc></span></a></li>
+				    <li><a href="javascript:checkUpdates();" id="helpUpdates">Check for Updates<span class=msc></span></a></li>
+				    <li><a href="javascript:aboutWebMBT();" id="helpAbout">About TestOptimal<span class=msc></span></a></li>
+				</ul>
+			</li>
+		</ul>
+
+		<div id="editionTD">
+			<div class="editionSec">
+				<center>
+					<img src="img/to.png" width="20" id="toLogo"/><span id="edition"></span>
+					<div id="toVer">
+					</div>
+				</center>
+			</div>
+		</div>
+	</div>
+
+	<div id="appContent" style="width: 100%;">
+		<div id="sideBar">
+			<div id="sideBarFiller" title="" onclick="handleAlertMsg();">
+				<img src="img/save.png"/>
+			</div>
+			<div id="modeCov" class="sbIcon mode" title="set to green background for coloring visited states and transitions during debug and play/animate"><span onclick="toggleMode('modeCov');">Cov</span></div>
+			<div id="modeAUT" class="sbIcon mode modeSelected" title="AUT mode: set green background for testing with AUT"><span onclick="toggleMode('modeAUT');">AUT</span></div>
+			<div id="modeALM" class="sbIcon mode" title="set to green background to raise/update defect in ALM"><span onclick="toggleALM();">ALM</span></div>
+			<div id="modeMark" class="sbIcon mode" title="Marked only: set to green background for generating test to cover marked states/trans only"><span onclick="setMark();">Mark</span></div>
+			<!--div class="sbIcon" onclick="javascript:modeling();"><img class="btnBar" id="modelingBtn" title="Start AUT for modeling (for winMBT/White plugin only)" src="img/modeling.png"/><span class=sc></span></div-->
+			<div class="sbIcon" onclick="javascript:startButton();"><img class="btnBar" id="execBtn" title="Start MBT execution or continue to completion" src="img/start.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:debugButton();"><img class="btnBar" id="debugBtn" title="Start MBT execution in debug mode or continue to next breakpoint" src="img/debug.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:playButton();"><img class="btnBar" id="playBtn" title="Play/animate the model execution" src="img/play.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:stopButton();"><img class="btnBar" id="stopBtn" title="Stop MBT execution" src="img/stop.png"/><span class=sc></span></div>
+
+			<div class="sbIcon" style="margin-top: 5px;" onclick="javascript:pauseButton();"><img class="btnBar" id="pauseBtn" title="Pause execution" src="img/pause.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:stepInButton();"><img class="btnBar" id="stepInBtn" title="Step into/over mScript line" src="img/stepin.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:stepOverButton();"><img class="btnBar" id="bStepOver" title="Step over to next traversal (state or transition)" src="img/stepOver.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:stepLineButton();"><img class="btnBar" id="stepLineBtn" title="Step over a specified number of mScript lines or advance to a specific mScript line number" src="img/stepLine.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:openMScriptExec();"><img class="btnBar" id="execMScriptBtn" title="Open MScript Sandbox Dialog." src="img/execMScript.png"/><span class=sc></span></div>
+
+			<div class="sbIcon" style="margin-top: 5px;" onclick="javascript:openGraph();"><img class="btnBar" id="modelGraphBtn" title="Generate model graph using auto layout provided by Graphviz" src="img/modelGraph.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:openTravGraph();"><img class="btnBar" id="travGraphBtn" title="Generate sequence graph for current model execution" src="img/seqGraph.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:openCoverageGraph();"><img class="btnBar" id="coverageGraphBtn" title="Generate coverage graph for current model execution." src="img/covGraph.png"/><span class=sc></span></div>
+			<div class="sbIcon" onclick="javascript:openTravMSC();"><img class="btnBar" id="travMSCBtn" title="Generate Message Sequence Chart (MSC) for current model execution." src="img/execMSC.png"/><span class=sc></span></div>
+		</div>
+		<div id="panesWrapper">
+			<div id="paneLeft" class="tabGroup">
+	   		 	<span class="sizeCtrl">
+	   		 		<div class="icon-ctrl" title="Refresh" onclick="refreshLeftPane();"><img class="btnBar" src="img/refresh.png"/></div>
+	   		 		<div class="icon-ctrl" title="Reset all panes to their default positions" onclick="resetAllPanes();"><img class="btnBar" src="img/reset.png"/></div>
+	   		 		<div class="icon-ctrl" title="Minimize left pane" onclick="minLeftPane();"><img class="btnBar" src="img/minLeft.png"/></div>
+	   		 		<div class="icon-ctrl" title="Maximize left pane" onclick="maxLeftPane();"><img class="btnBar" src="img/maximize.png"/></div>
+	   		 		<div class="icon-ctrl" title="Add/remove tabs" onclick="customizeTab('leftPane');"><img class="btnBar" src="img/customize.png"/></div>
+	   		 		<div class="icon-ctrl zoom" title="Zoom in" onclick="zoomFrame('Model', 5);"><img class="btnBar" src="img/plus.png"/></div>
+	   		 		<div class="icon-ctrl zoom" title="Zoom out" onclick="zoomFrame('Model', -5);"><img class="btnBar" src="img/minus.png"/></div>
+	   		 	</span>
+				<div id="tabLeft" class="tabCnt">
+	   	  	 		<ul>
+	   	  	 		</ul>
+	   	  	 	</div>
+			</div>
+			<div id="hDivider" title="To resize, click - move - click.">
+			</div>
+		
+			<div id="paneRight" style="height: 100%;">
+				<div id="paneTopRight" class="tabGroup" style="overflow:hidden;">
+		   		 	<span class="sizeCtrl">
+		   		 		<div class="icon-ctrl" title="Refresh" onclick="refreshTopRightPane();"><img class="btnBar" src="img/refresh.png"/></div>
+		   		 		<div class="icon-ctrl" title="Reset all panes to their default positions" onclick="resetAllPanes();"><img class="btnBar" src="img/reset.png"/></div>
+		   		 		<div class="icon-ctrl hideShow" title="Hide bottom pane" onclick="minBottomRightPane();"><img class="btnBar" src="img/minBottom.png"/></div>
+		   		 		<div class="icon-ctrl" title="Maximize" onclick="maxTopRightPane();"><img class="btnBar" src="img/maximize.png"/></div>
+		   		 		<div class="icon-ctrl" title="Add/remove tabs" onclick="customizeTab('topRightPane');"><img class="btnBar" src="img/customize.png"/></div>
+					</span>
+					<div id="tabTopRight" class="tabCnt">
+		   	  	 		<ul>
+		   	  	 		</ul>
+	   	  	 		</div>
+				</div>
+				<div id="vDivider" title="To resize, click - move - click.">
+				</div>
+				<div id="paneBottomRight" class="tabGroup" style="overflow:hidden;">
+		   		 	<span class="sizeCtrl">
+		   		 		<div class="icon-ctrl" title="Refresh" onclick="refreshBottomRightPane();"><img class="btnBar" src="img/refresh.png"/></div>
+		   		 		<div class="icon-ctrl" title="Reset all panes to their default positions" onclick="resetAllPanes();"><img class="btnBar" src="img/reset.png"/></div>
+		   		 		<div class="icon-ctrl hideShow" title="Hide top pane" onclick="minTopRightPane();"><img class="btnBar" src="img/minTop.png"/></div>
+		   		 		<div class="icon-ctrl" title="Maximize" onclick="maxBottomRightPane();"><img class="btnBar" src="img/maximize.png"/></div>
+		   		 		<div class="icon-ctrl" title="Add/remove tabs" onclick="customizeTab('bottomRightPane');"><img class="btnBar" src="img/customize.png"/></div>
+					</span>
+					<div id="tabBottomRight" class="tabCnt">
+		   	  	 		<ul>
+		   	  	 		</ul>
+	   	  	 		</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<img src="img/loading.gif" id="loadingImg" />
+	<img src="img/cancel.png" id="indCancel" class="indImg" />
+	<img src="img/save.png" id="indOK" class="indImg"/>
+	<div id="opaqDiv"></div>
+	<div id="shareDialog" style="display:none; padding-top" class="ui-corner-all" title="Batch Run Models">
+		<iframe name="shareFrame" src="blank.html" frameborder="0" style="padding:0px; margin:0px; height:99%; width:100%;"></iframe>	
+	</div>
+
+	<div id="tabDefn" style="display:none;" class="ui-corner-all">
+		<div>
+			Drag and drop tab name to add or remove tabs from each pane.
+		</div>
+		<table border=1 height="100%" width="100%">
+			<tr><td class="tabPane" id="paneLeftTabs" tabGroup="paneLeft" rowspan=2 valign=top>
+					<div class="tabLabel"><center>Left&nbsp;Pane</center></div>
+					<ul class="tabContainer">
+					</ul>
+				</td>
+				<td class="tabPane" id=midPaneTabs tabGroup="unusedTabs" rowspan=2 valign=top>
+					<div class="tabLabelAvail"><center>Available&nbsp;Tabs</center></div>
+					<ul class="tabContainer">
+					</ul>
+				</td>
+				<td class="tabPane" id=paneTopRightTabs tabGroup="paneTopRight" valign=top>
+					<div class="tabLabel"><center>Top-Right&nbsp;Pane</center></div>
+					<ul class="tabContainer">
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="tabPane" id=paneBottomRightTabs tabGroup="paneBottomRight" valign=top>
+					<div class="tabLabel"><center>Bottom-Right&nbsp;Pane</center></div>
+					<ul class="tabContainer">
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

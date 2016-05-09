@@ -1,0 +1,25 @@
+<style>
+	#defRecList thead th {
+		border-bottom: 1px solid #AAAAAA;
+	}
+</style>
+
+<div>
+	<table id="defRecList" width="100%">
+		<thead>
+			<tr>
+				<th>TeseCase#</th><th>Step#</th><th>Req. Tag</th><th>AssertID</th><th>Status</th><th align="left">Status Message</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="defRec in almChangeList">
+				<td align="center">{{defRec.tcID}}</td>
+				<td align="center">{{defRec.step}}</td>
+				<td align="center">{{defRec.tag}}</td>
+				<td align="center">{{defRec.assertID}}</td>
+				<td align="center">{{defRec.saved}}</td>
+				<td>{{defRec.errorMsg}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

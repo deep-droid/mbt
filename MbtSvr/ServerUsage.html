@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+	<LINK href="css/ServerUsage.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+	<script type="text/javascript" src="js/ServerUsage.js"></script>
+
+</head>
+<body>
+	<div class="header">
+	<center>
+		<div style="margin-bottom: 10px;">
+			<span style="position:relative; top: 2px;" class="optionSelector"><input type=radio name=hourStat value="true" checked onclick="setHourlyView();">Hourly</input>
+				<input type=radio name=hourStat value="false" onclick="setDailyView();">Daily</input>
+				<input type=checkbox name=stackedChart value="true" checked onclick="setStackedChart(this.checked);">Stacked</input>
+				<select name=metricsType id=metricsSelect onchange="selectMetrics(this)">
+					<option value="Avg" selected>Average</option>
+					<option value="Max">Peak</option>
+				</select> 
+			</span>
+			<span style="position:relative; top: 2px;" class="optionSelector">Server: <select id="svrList" onchange="filterSvr(this)">
+				</select>
+			</span>
+			<span style="position:relative; top: 2px;" class="optionSelector">Category: <select id="catList" onchange="filterCat(this)">
+				</select>
+			</span>
+			<span style="padding-left: 8px; position:relative; top: 2px;" class="optionWidth">Chart Width: 
+				<input type="text" size=4 id="chartWidth" onchange="setWidth(this.value)">px
+			</span>
+			<span style="padding-left: 4px; position:relative; top: 2px;" class="optionHeight">Height: 
+				<input type="text" size=4 id="chartHeight" onchange="setHeight(this.value)">px
+			</span>
+		</div>
+	</center>
+	</div>
+	<div id=chartArea">
+	<center>
+		<div id=memUsage></div>
+		<div id=sessionUsage></div>
+		<div id=threadUsage></div>	
+	</center>
+	</div>
+</body>
+</html>

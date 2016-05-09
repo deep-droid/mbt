@@ -1,0 +1,83 @@
+<style>
+	#sysMsg {
+		background-color: #EEEEEE;
+		border: 1px solid Orange;
+		padding-left: 5px;
+		padding-bottom: 5px;
+		padding-top: 3px;
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		line-height: 15px;
+		z-index: 999;
+		width: 100%;
+		max-height: 250px;
+		overflow: auto;
+	}
+	
+	#sysMsg .msg {
+		padding-top: 2px;
+		margin-right: 3px;
+		color: #00000;
+	}
+
+	#sysMsg .icon {
+		position: relative;
+		top: 2px;
+	}
+		
+	#sysMsg #msgSetting {
+		padding: 3px;
+		font-size: 10px;
+		color: #000000;
+	}
+
+	#sysMsg #msgControl {
+		padding: 3px;
+		font-size: 10px;
+		position: fixed;
+		right: 5px;
+		bottom: 5px;
+		color: #000000;
+	}
+	
+	#sysMsg #msgSetting input {
+		height: 12px;
+		width: 35px;
+		font-size: 10px;
+		border-radius: 5px;
+	}	
+
+	#sysMsg .btnTO {
+		top: 0px;
+	}
+	
+	#sysMsg.expanded {
+		height: 350px;
+	}
+
+</style>
+
+<div ng-controller="ConsoleMsg">
+	<div id="sysMsg" ng-show="msg.show || msg.expanded" ng-click="expandMsg()"
+		title="click to view all console messages">
+		<div id="msgControl">
+			<div id="msgSetting" ng-show="msg.expanded">
+				Max Messages <input type="number" min="1" max="999" ng-change="checkMaxLength();" ng-model="msg.maxLength"/></span>
+			</div>
+			<div ng-show="msg.expanded" class="btnTO" ng-click="clearMsg();" title="clears all messages">Clear</div>
+			<div class="btnTO" ng-click="okMsg();" title="hides this message pane">OK</div>
+		</div> 
+		<div ng-show="msg.expanded">
+			<div class="msg {{msgObj.msgType}}Msg" ng-repeat="msgObj in msg.msgList track by $index">
+				<img class="icon" ng-src="img/{{msgObj.msgType}}.png"/> {{msgObj.msgText}} <small>({{msgObj.timestamp}})</small>
+			</div>
+		</div>
+		<div ng-hide="msg.expanded" class="msg {{msg.msgList[msg.msgList.length-1].msgType}}">
+			<img class="icon" ng-src="img/{{msg.msgList[msg.msgList.length-1].msgType}}.png"/> 
+			{{msg.msgList[msg.msgList.length-1].msgText}}
+		</div>
+	</div>
+</div>
+
+

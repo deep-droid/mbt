@@ -1,0 +1,79 @@
+
+<style>
+	#ALMProp table td {
+		padding-left: 3px;
+	}
+	
+	#ALMProp .dialogHeader {
+		background-color: #E0E0E0;
+	}
+	
+	#ALMProp textarea {
+		height: 150px;
+	}
+	
+	#ALMProp .header {
+		border-bottom: 1px solid #AAAAAA;
+		font-weight: bold;
+		height: 25px;
+	}
+	
+	
+</style>
+
+<div ng-controller="ALMPropCtrl" id="ALMProp" style="height: 100%;" ng-form="ALMPropForm">
+	<table cellspacing="0" cellpadding="2" width="100%">
+		<tr class="dialogHeader">
+			<td colspan="3">
+				Configure ALM Integration: Requirements System and Defect Tracking System.<br/>
+				<span class="alertMsg">{{alertMsg}}</span>
+			</td>
+		</tr>
+		<tr class='header'>
+			<td colspan="3"><br/>Requirement System 
+				<span class="msg" class="reqAlertMsg" ng-show="reqAlertMsg.length>0"> - Use <a href="#" ng-click="openReqView()">Requirement View</a> to sync/import requirements into model</span>
+				<button ng-click="saveReqConfig();" style="float:right;">Save</button></td>
+			</td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;&nbsp;</td>
+			<td width="10%" class="toLabel">Connection&nbsp;Type</td>
+			<td width="*">
+				<prop-field field="fieldList.reqConnType"></prop-field>
+			</td>			
+			</td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td valign="top" class="toLabel">Parameters
+	   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   				popover="Parameters, one parameter per line using format: code=value" href="#" >?</a>
+			</td>
+			<td>
+				<div>{{reqGroups}}</div>
+				<prop-field field="fieldList.reqConnParams"></prop-field>
+		</tr>
+		<tr class='header'>
+			<td colspan="3"><br/>Defect Tracking System<span class="msg" id="defectMsg" style="display:none;"> - Use <a href="javascript:openDefectView();">Defect View</a> to view a list of defects raised by this model</span>
+				<button ng-click="saveBugConfig();" style="float:right;">Save</button></td>
+			</td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td width="10%" class="toLabel">Connection&nbsp;Type</td>
+			<td width="*">
+				<prop-field field="fieldList.bugConnType"></prop-field>
+			</td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td valign="top" class="toLabel">Parameters
+	   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   				popover="Parameters, one parameter per line using format: code=value" href="#" >?</a>
+			</td>
+			<td>
+				<prop-field field="fieldList.bugConnParams"></prop-field>
+			</td>
+		</tr>
+	</table>	
+</div>

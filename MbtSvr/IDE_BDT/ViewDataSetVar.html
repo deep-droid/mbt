@@ -1,0 +1,100 @@
+<style>
+	#DebugDS table thead {
+		border-bottom: 1px solid #EEEEEE;
+		background-color: #EAEAEA;
+	}
+	
+	#DebugDS table tbody tr:hover {
+		background-color: #FFFFFF;
+	}
+	
+	#DebugDS ul {
+		margin-left: 0px;
+		padding-left: 14px;
+	}
+	
+	#DebugDS ul li {
+		margin-left: 0px;
+		padding-left: 5px;
+	}
+
+	
+	#DebugDS td {
+		padding-left: 3px;
+	}
+	
+	#DebugDS .header {
+		font-weight: bold;
+		height: 30px;
+		padding-top: 5px;
+		font-size: 12pt;
+		font-style: italic;
+	}
+	
+</style>
+<div ng-controller="DSVarCtrl" id="DebugDS" style="height: 100%;">
+	<table style="background-color: #F9F9F9 !important">
+		<thead class="header">
+			<tr>
+				<td width="1%"><img src="img/{{expandedDS?'minus':'plus'}}.png" ng-init="expandedDS=true" ng-click="expandedDS=!expandedDS"/></td>
+				<td colspan="2">DataSet Info</td>
+		</thead>
+		<thead ng-show="expandedDS">
+			<tr>
+				<th></th>
+				<th>Name</th>
+				<th>Value / Info <img class="btnTO" src="img/refresh.gif" ng-click="refreshDSList()"/></th>
+			</tr>
+		</thead>
+		<tbody ng-show="expandedDS">
+			<tr ng-repeat="dsObj in varList.dsList">
+				<td></td>
+				<td valign="top">{{dsObj.name}}</td>
+				<td>
+					<span ng-if="dsObj.valList">
+						<ul>
+							<li ng-repeat="dsVal in dsObj.valList">{{dsVal}}</li>
+						</ul>
+					</span>
+				</td>
+			</tr>		
+		</tbody>
+	</table>
+
+	<table style="background-color: #F9F9F9 !important">
+		<thead class="header">
+			<tr>
+				<td width="1%"><img src="img/{{expandedVar?'minus':'plus'}}.png" ng-init="expandedVar=true" ng-click="expandedVar=!expandedVar"/></td>
+				<td colspan="3">User and System Variables</td>
+			</tr>
+		</thead>
+		<thead ng-show="expandedVar">
+			<tr>
+				<th></th>
+				<th>Type</th>
+				<th>Name</th>
+				<th>Value / Info <img class="btnTO" src="img/refresh.gif" ng-click="refreshVarList()"/></th>
+			</tr>
+		</thead>
+		<tbody ng-show="expandedVar">
+			<tr ng-repeat="varObj in varList.varList">
+				<td></td>
+				<td valign="top">{{varObj.type}}</td>
+				<td valign="top">{{varObj.name}}</td>
+				<td>
+					<span ng-if="varObj.valList">
+						<ul>
+							<li ng-repeat="varVal in varObj.valList">{{varVal}}</li>
+						</ul>
+					</span>
+					<span ng-if="varObj.val && varObj.type=='sys'">
+						{{varObj.val}}
+					</span>
+					<span ng-if="varObj.val && varObj.type=='user'">
+						<input type="text" ng-model="varObj.val" ng-blur="setVar(varObj)"/>
+					</span>
+				</td>
+			</tr>		
+		</tbody>
+	</table>
+</div>

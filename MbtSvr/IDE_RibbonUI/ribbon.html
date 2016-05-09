@@ -1,0 +1,75 @@
+<div id="ribbon" ng-class="{showTab: ribbon.showTab}">
+	<div class="ribbon-edition">
+		<img id="logo" src="img/to.png" style="height: 18px;"/>
+		<span id="edition">{{ribbon.ribbonData.edition}} <span class="version">{{ribbon.ribbonData.version}}</span></span>
+	</div>
+
+	<div class="window-title">
+		{{ribbon.appTitle}}
+	</div>
+
+	<div class="window-control">
+		<img class="ribbon-icon" src="img/ToggleFS.png" ng-click="toggleFS()"></img>
+	</div>
+	
+	<div class="tab-header-strip" >
+		<div class="tab-title" ng-class="{sel: tabObj.selected}" ng-repeat="tabObj in ribbon.ribbonData.tabList"
+			ng-click="toggleTab(tabObj)" ng-hide="tabObj.disabled">
+			{{tabObj.tabTitle}}
+		</div>
+	</div>
+
+	<div class="tab-body">
+		<div class="tab-content" ng-class="{sel: tabObj.selected}" ng-repeat="tabObj in ribbon.ribbonData.tabList">
+			<ANY ng-repeat="section in tabObj.sectionList">
+				<div class="tab-section">
+					<span class="tab-section-title">{{section.sectionTitle}}&nbsp;</span>
+					<div class="tab-group" ng-class="{ condensed: groupObj.btnList.length>1 && window_width<=tabObj.condenseAtWidth }" ng-repeat="groupObj in section.groupList">
+						<ANY ng-repeat="btnObj in groupObj.btnList" ng-switch on="btnObj.btnType">
+							<div ng-switch-when="list" class="ribbon-button ribbon-button-{{groupObj.btnSize}} {{btnObj.btnOn?'button-on':''}}"
+								popover-placement="right" popover-trigger="mouseenter" 
+				   			    popover="{{btnObj.btnHelp}}" href="#" popover-popup-delay="{{ribbon.helpHintDelay}}">
+								<select ng-model="btnObj.btnSelectedVal" ng-change="changeBtn(btnObj)"
+									ng-options="optObj.label for optObj in btnObj.btnSelectList">
+								</select>
+							</div>
+							<div ng-switch-default class="ribbon-button ribbon-button-{{groupObj.btnSize}} {{btnObj.btnOn?'button-on':''}}" 
+								ng-click="clickBtn(btnObj)"
+								popover-placement="right" popover-trigger="mouseenter" 
+				   			    popover="{{btnObj.btnHelp}}" href="#" popover-popup-delay="{{ribbon.helpHintDelay}}">
+								<div class="ribbon-icon {{getBtnImgId(btnObj, groupObj.btnSize)}} ribbon-{{btnObj.btnMode}}" />
+								<span class="button-title">{{btnObj.btnLabel}}</span>
+							</div>
+						</ANY>
+					</div>
+				</div>
+				<span class="tab-section-sep"></span>
+			</ANY>
+		</div>
+	</div>
+
+	<div class="app-toolbar">
+		<div class="kpiHeader">
+				<span ng-show="kpiList.length>0">KPI: </span>
+				<span ng-repeat="kpiObj in kpiList |orderBy: 'seqNum'" class="kpiItem" style="background-color: {{kpiObj.color}}"
+					ng-class="{remoteKPI: kpiObj.hostURL!=''}">
+					<a href="/MbtSvr/Dashboard_Main.html" target=_blank>{{kpiObj.name}} {{kpiObj.value}}{{kpiObj.suffix}}</a>
+				</span>
+		</div>
+		<ANY ng-repeat="btnObj in ribbon.appCustBtnList track by $index" ng-switch on="btnObj.btnType">
+			<div ng-switch-when="list" class="ribbon-button ribbon-button-small {{btnObj.btnOn?'button-on':''}}">
+				<select ng-model="btnObj.btnSelectedVal" ng-change="changeBtn(btnObj)"
+					ng-options="optObj.label for optObj in btnObj.btnSelectList">
+				</select>
+			</div>
+			<div ng-switch-default class="ribbon-button ribbon-button-small {{btnObj.btnOn?'button-on':''}}" 
+				ng-click="clickBtn(btnObj)">
+				<div class="ribbon-icon {{getBtnImgId(btnObj, 'small')}} ribbon-{{btnObj.btnMode}}" 
+					title="{{btnObj.btnHelp}}"/>
+			</div>
+		</ANY>
+	</div>
+	
+</div>
+
+

@@ -1,0 +1,13 @@
+
+#statsList thead th {
+	border-right: #FFFFFF;
+}
+
+#statsList thead th:hover {
+	background-color: orange;
+}
+
+
+#statsList thead th:active {
+	background-color: #AAAAAA;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/DataSet.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/webmbtMsgList.js"></script>
+	<script src="js/webmbtUtility.js"></script>
+
+	<script src="js/DataSet.js"></script>
+</head>
+<body>
+	<table border="0" cellspacing="1" width="100%">
+		<tr>
+			<td>
+				<span title="DataSet name to be used with $getData() in mScript.">DataSet Name:</span>
+			</td>
+			<td colspan="2">
+				<input type=text id="dsName" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span title="Imported dataset info.">Imported From:</span>
+			</td>
+			<td>
+				<span id="extDSName"></span>
+				<a href="javascript:importDS();" title="import data from Excel, url, or DataSet created by DataDesign">import</a>
+			</td>
+			<td align="right">
+				<input type="checkbox" id="autoRefresh" title="Enable auto refresh dataset from import data source"/>Auto Refresh
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span title="Combinatorial algorithm to be used to generate test data for this dataset">Algorithm:</span>
+			</td>
+			<td>
+				<select id="algorithm">
+					<option value=pairWise>PairWise</option>
+					<option value=threeWise>Three Wise</option>
+					<option value=fourWise>Four Wise</option>
+					<option value=fiveWise>Five-Wise</option>
+					<option value=sixWise>Six-Wise</option>
+					<option value=full>Full</option>
+					<!--option value=DataSource>From Data Source</option-->
+				</select>
+			</td>
+			<td align="right">
+				<input type="checkbox" id="randRetrieval" title="How the data rows should be retrieved"/>Random Retrieval
+			</td>
+		</tr>
+	</table>
+	<table border="0" id="dsFieldList" class="comDS" cellspacing="1">
+		<colgroup width="5"></colgroup>
+		<thead>
+			<tr>
+				<th class="header" align="left" width="1%"><img class="btn devOnly" title="Add field." onclick="javascript:addField();" src="img/add.png" /></th>
+				<th nowrap class="header" title="Name of the field, used to retrieve data from this dataset. Must be unique within this dataset.">Field Name</th>
+				<th class="header" title="Field group, blank for independent fields, V for verify field.">Group</th>
+				<th class="header" title="Domain value, one value per line. Blank can not be the last line.">Domain</th>
+			</tr>
+		</thead>
+	  	<tbody class="contentArea" id="dsFieldListBody">
+
+		</tbody>
+	</table>
+	<div class="header" id="dataTableContent" width="100%" cellpadding="1" style="border-top: 1px solid #AAAAAA;">
+		<div>
+			Data Table  - Total: <span id="showTotal"></span> rows, showing <input id="startRowNum" value="" size="5"/> - <input id="endRowNum" value="" size="5"/> 
+				<img src="img/refresh.png" onclick="loadDS();"/> 
+				<a href="javascript:regen();" title="Re-Generate data table using selected algorithm.">regenerate</a>
+		</div>
+	</div>
+	<table id="dsTable" border="0" cellspacing="1" class="tablesorter">
+		<colgroup width="5"></colgroup>
+		<thead id="dsTableHead" class="header">
+		</thead>
+		<tbody  class="contentArea" id="dsTableBody" border="0">
+
+		</tbody>
+	</table>
+</body>
+</html>

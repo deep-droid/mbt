@@ -1,0 +1,40 @@
+<span ng-switch="field.fieldDef.type">
+	<a ng-switch-when="text" href="#" editable-text="field.formVal"
+		e-style="width: {{field.fieldDef.width}}">
+		{{field.formVal}} xxx</a>
+	<a ng-switch-when="number" href="#" editable-number="field.formVal" buttons="no"
+		e-required="{{field.fieldDef.required}}"
+		e-min="{{field.fieldDef.min}}"
+		e-max="{{field.fieldDef.max}}"
+		e-placeholder="{{field.fieldDef.placeholder}}">
+		{{field.formVal}}</a>
+	<a ng-switch-when="email" href="#" editable-email="field.formVal" buttons="no"
+		e-required="{{field.fieldDef.required}}"
+		e-placeholder="{{field.fieldDef.placeholder}}">
+		{{field.formVal}}</a>
+	<a ng-switch-when="url" href="#" editable-url="field.formVal" buttons="no"
+		e-required="{{field.fieldDef.required}}"
+		e-min="{{field.fieldDef.min}}"
+		e-max="{{field.fieldDef.max}}"
+		e-placeholder="{{field.fieldDef.placeholder}}">
+		{{field.formVal}}</a>
+	<a ng-switch-when="YesNo ehref="#" editable-radiolist 
+		e-ng-options="s.value as s.text for s in YesNoList"
+		e-placeholder="{{field.fieldDef.placeholder}}">
+		{{field.formVal}}</a>
+	<a ng-switch-when="textarea" editable-textarea href="#" 
+		style="width: 100%"
+		e-rows="{{field.fieldDef.rows}}"
+		e-placeholder="{{field.fieldDef.placeholder}}"><pref>{{field.formVal}}</pref></a>
+	<a ng-switch-when="selectList" editable-select="field.formVal" href="#" 
+		e-ng-options="optObj.desc for optObj in field.fieldDef.domain">
+		{{field.formVal}}</a>
+	<a ng-switch-when="selectList" editable-select="field.formVal" href="#" 
+		e-multiple
+		e-ng-options="optObj.desc for optObj in field.fieldDef.domain">
+		{{field.formVal}}</a>
+	<span ng-switch-default dynamic="field.formVal"></span>
+	<span ng-if="field.fieldDef.more" dynamic="field.fieldDef.more"></span>
+</span>
+
+	

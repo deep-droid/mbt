@@ -1,0 +1,9 @@
+skinparam activity {
+   StartColor #333333
+   BarColor #CCCCEE 
+   EndColor #333333
+   BackgroundColor #FFFFFF
+   BackgroundColor<< Begin >> Olive
+   BorderColor #CCCCEE
+   ArrowColor #333333
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TestOptimal IDE</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<LINK REL="SHORTCUT ICON" HREF="favicon.ico">
+    <script src="packages/jquery-2.2.0.min.js"></script>
+	<LINK href="ModelExecStats/ModelExecStats.css" rel="stylesheet" type="text/css">
+	<style>
+		.tabLabel.tabSelected {
+			background-color: #2ecc71;
+			color: #FFFFFF;
+		}
+		
+		.tabLabel {
+			height: 100%;
+			float:left;
+			padding-left: 5px;
+			padding-right: 5px;
+			color: #DDDDDD;
+			padding-top:2px;
+		}
+		
+		
+		#menuHeader {
+			background-color: #7f8c8d; 
+			color: #FFFFFF; 
+			font-weight:bold; 
+			height: 25px;
+			padding-left: 5px; 
+		}
+		
+		#menuBtns {
+			background-color: #7f8c8d; 
+			height: 25px; 
+			padding-top: 1px;
+			padding-left: 1px;
+			border-bottom: #FFFFFF; 
+			margin-bottom: 2px;
+		}
+		
+		.menuBtn {
+			position: relative;
+			top: 2px;
+			background-color: #EEEEEE;
+			border-radius: 8px;
+			padding-left: 4px;
+			padding-right: 4px;
+			margin-left: 2px;
+			font-size: small;
+			cursor: pointer;
+			color: #999999;
+		}
+		
+		.menuBtn:hover {
+			color: #000000;
+		}
+		
+		.menuBtn:active {
+			color: #AAAAAA;
+		}
+		
+		.menuBtn.btnEnabled {
+			background-color: #40d47e;
+			color: #FFFFFF;
+		}
+		
+		.menuBtn.logEnabled {
+			background-color: orange;
+			color: #FFFFFF;
+		}
+		
+		#msgBar {
+			display:none;
+			position:fixed;
+			bottom: 0px;
+			background-color: #000000;
+			color: #FFFFFF;
+		}
+	</style>
+</head>
+<body ng-app="Main" ng-controller="MainCtrl">
+	<div ng-hide="inIDE">
+		<div id="editionWrap">
+			<center>
+				<div id="edition">
+					<a style="color: #FFFFFF; text-decoration:none;" href="http://testoptimal.com/">TestOptimal {{TestCase.TOVersion}}</a>
+				</div>
+			</center>
+		</div>
+	
+		<div class="ribbon-header">
+			<img id="logo" src="img/to.png" style="height: 18px;"/>
+			<span id="window-title">
+				Model Execution Stats - {{TestCase.ModelName}}
+			</span> 
+		</div>
+	</div>		
+	<div>
+		<div id="menuHeader" style="width:{{winSize.windowWidth}}px">
+			<div style="float:left; height:23px">
+				<div ng-click="switchMode('Model')" class="tabLabel {{mode=='Model'?'tabSelected':''}}">Model</div>
+				<div ng-click="switchMode('Runs')" class="tabLabel {{mode=='Runs'?'tabSelected':''}}">Runs</div>
+				<div ng-click="switchMode('Trace')" class="tabLabel {{mode=='Trace'?'tabSelected':''}}">Traceability</div>
+				<div ng-click="switchMode('TestCases')" class="tabLabel {{mode=='TestCases'?'tabSelected':''}}">Test Cases</div>
+				<div ng-click="switchMode('Coverage')" class="tabLabel {{mode=='Coverage'?'tabSelected':''}}">Coverage</div>
+			</div>
+			<center style="padding-left: 3px; padding-top: 2px;">{{tabTitle}}</center>
+		</div>
+	</div>
+	
+	<div id="rightPane" style="width:100%; height: {{winSize.windowHeight - (inIDE?27:53)}}px;">
+		<div ng-show="mode=='Runs'" ng-include="'ModelExecStats/runsList.html'"></div>
+		<div ng-show="mode=='Model'" ng-include="'ModelExecStats/modelSummary.html'"></div>
+		<div ng-show="mode=='Coverage'" ng-include="'ModelExecStats/coverageCharts.html'"></div>
+		<div ng-show="mode=='Trace'" ng-include="'ModelExecStats/reqTrace.html'"></div>
+		<div ng-show="mode=='TestCases'" ng-include="'ModelExecStats/testcase.html'"></div>
+	</div>
+	
+	<div id="msgBar" ng-click="showMsgBar=false;" ng-init="showMsgBar=false;" ></div>
+	
+    <script src="packages/angular-1.2.21/angular.min.js"></script>
+    <script src="packages/angular-1.2.21/angular-animate.min.js"></script>
+
+    <script src="ModelExecStats/ModelExecStats_app.js"></script>
+    <script src="ide/packages/dynamicHtml.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<span ng-switch="field.fieldDef.type">
+	<input ng-switch-when="text" style="{{field.fieldDef.style}}" 
+		autocomplete="on" type="text" ng-model="field.formVal" 
+		class="form-control" dynamic-name="field.key"
+		cusval data-auto-focus="{{field.fieldDef.autoFocus}}"
+		domain="{{field.fieldDef.domain}}"
+		ng-minlength="{{field.fieldDef.minLength}}"
+		ng-maxlength="{{field.fieldDef.maxLength}}"
+		ng-required="{{field.fieldDef.required}}"
+		ng-pattern="{{field.fieldDef.pattern}}"/>
+	<input ng-switch-when="number" type="number" ng-model="field.formVal" 
+		class="form-control" dynamic-name="field.key"
+		data-auto-focus="{{field.fieldDef.autoFocus}}"
+		min="{{field.fieldDef.min}}"
+		max="{{field.fieldDef.max}}"
+		ng-required="{{field.fieldDef.required}}"/>
+	<input ng-switch-when="email" type="email" autocomplete="on" ng-model="field.formVal" 
+		class="form-control" dynamic-name="field.key"
+		data-auto-focus="{{field.fieldDef.autoFocus}}"
+		ng-minlength="{{field.fieldDef.minLength}}"
+		ng-maxlength="{{field.fieldDef.maxLength}}"
+		ng-required="{{field.fieldDef.required}}"/>
+	<input ng-switch-when="url" type="url" autocomplete="on" ng-model="field.formVal" 
+		class="form-control" dynamic-name="field.key"
+		data-auto-focus="{{field.fieldDef.autoFocus}}"
+		ng-minlength="{{field.fieldDef.minLength}}"
+		ng-maxlength="{{field.fieldDef.maxLength}}"
+		ng-required="{{field.fieldDef.required}}"/>
+	<input ng-switch-when="YesNo" type="checkbox" dynamic-name="field.key"
+		ng-model="field.checked" data-auto-focus="{{field.fieldDef.autoFocus}}"/>
+	<textarea ng-switch-when="textarea" auto-focus="{{field.fieldDef.autoFocus}}" style="width: 100%" dynamic-name="field.key"
+		ng-model="field.formVal"/>
+	<div ng-switch-when="selectBtn" class="btn-group" dynamic-name="field.key">
+        <label ng-repeat="optObj in field.fieldDef.domain" class="btn btn-success" ng-model="field.formVal" btn-radio="'{{optObj.code}}'">{{optObj.desc}}</label>
+    </div>
+	<select ng-switch-when="selectList" ng-model="field.formVal" 
+		 dynamic-name="field.key" data-auto-focus="{{field.fieldDef.autoFocus}}"
+		ng-options="optObj.desc for optObj in field.fieldDef.domain">
+	</select>
+	<div ng-switch-when="selectMulti" ng-model="field.formVal" 
+		multi-select
+		selection-mode="multiple"
+	    input-model="field.selectDomain"
+	    output-model="field.selectedList"
+	    button-label="code"
+	    item-label="desc"
+	    tick-property="selected"
+	    disable-property="disabled"
+	    helper-elements=""
+	    max-height="200px">
+	</div>
+	<span ng-switch-default dynamic="field.formVal"></span>
+	<span ng-if="field.fieldDef.more" dynamic="field.fieldDef.more"></span>
+</span>
+
+	

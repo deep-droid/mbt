@@ -1,0 +1,20 @@
+
+<style>
+	td.labelTO {
+		padding-left: 3px;
+	}
+
+</style>
+
+<div ng-controller="SysInfoCtrl" id="SysInfo" style="height: 100%;" ng-form="sysInfoForm">
+	<table id="ConfigProp">
+		<tr ng-repeat="configObj in configList">
+			<td class="labelNoWrap labelTO">{{configObj.msgDef.code}}
+    			<a ng-show="configObj.msgDef" class="helpHint" popover-placement="right" popover-trigger="mouseenter" popover="{{configObj.msgDef.desc}}" href="#" >?</a>
+			</td>
+			<td>
+				<prop-field field="configObj"></prop-field>
+			</td>
+		</tr>
+	</table>
+</div>

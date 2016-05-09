@@ -1,0 +1,75 @@
+
+<style>
+	.etlSvr.etlFailed {
+		background-color: orange;
+	}
+	
+	.etlSvr td.etlInactive {
+		background-color: seashell;
+	}
+	
+	#dashDurTable {
+		margin-top: 8px;
+	}
+	
+	#dashDurTable td {
+		padding-left: 8px;
+	}
+	
+	#etlSchedTime {
+		width: 85px;
+	}
+</style>
+
+<div ng-controller="DashConfigCtrl" ng-cloak>
+	<div style="height: {{viewHeight-headerHeight}}px; overflow:auto;">
+		<table id="dashDurTable">
+			<tr>
+				<td width="1%">Dashboard&nbsp;Trend&nbsp;Duration:<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.dashDur}}" href="#" >?</a>
+				</td>
+				<td><input type="text" ng-model="dashDur" ng-blur="setDashDur()"/></td>
+			</tr>
+			<tr>
+				<td>Keep&nbsp;Execution&nbsp;Stats:<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.statsDur}}" href="#" >?</a>
+				</td>
+				<td><input type="text" ng-model="statsDur" ng-blur="setDashDur()"/></td>
+			</tr>
+		</table>
+		<table class="table">
+			<thead>
+			<tr>
+				<th><input type="checkbox" ng-model="checkAllServer"/></th>
+				<th>Host Name</th>
+				<th>Port</th>
+				<th>Sched Time</th>
+				<th>Every</th>
+				<th>Next Run Date</th>
+				<th>Last Run Date/Time</th>
+				<th ng-show="etlExpanded">Duration</th>
+				<th>Last Run Status</th>
+				<th ng-show="etlExpanded">Last Run Log Message</th>
+				<th>Active</th>
+				<th ng-show="etlExpanded">Last Success Run</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="svr in svrList" class="etlSvr" ng-class="{etlFailed: svr.schedActive && svr.lastRunStatus=='Failed'}">
+				<th><input type="checkbox" ng-model="svr.checked"/></th>
+				<td><input type="text" style="width: 250px;" ng-model="svr.host" ng-blur="updHost(svr);"/></td>
+				<td><input type="text" style="width: 50px" ng-model="svr.port" ng-blur="updPort(svr);"/></td>
+				<td><input type="text" id="etlSchedTime" ng-model="svr.schedTime" class="inputField" ng-blur="updSchedTime(svr);"/></td>
+				<td><input type="number" style="width: 50px" min="1" max="10" class="inputField" ng-model="svr.schedDayInt" ng-blur="updSchedDay(svr);"> day</td>
+				<td>{{svr.nextRunDT}}</td>
+				<td>{{svr.lastRunStartDT}}</td>
+				<td ng-show="etlExpanded">{{svr.elapseTime}}</td>
+				<td>{{svr.lastRunStatus}}</td>
+				<td ng-show="etlExpanded">{{svr.lastRunMsg}}</td>
+				<td ng-class="{etlInactive: !svr.schedActive}"><input type="checkbox" ng-model="svr.schedActive" ng-change="updActive(svr);"/></td>
+				<td  ng-show="etlExpanded">{{svr.lastSuccessRunDT}}</td>
+			</tr>		
+			</tbody>
+		</table>
+	</div>
+</div>

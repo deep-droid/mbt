@@ -1,0 +1,163 @@
+<div id="statsMain" style="overflow:auto;">
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr style="padding:0px;">
+			<td class="label">Browser:</td><td>{{execStats.modelExec.browser}}</td>
+			<td class="label">Plugin(s):</td><td colspan="3">{{execStats.modelExec.plugins}}</td>
+		</tr>
+		<tr>
+			<td class="label">Start Time:</td><td>{{execStats.modelExec.startTime}}</td>
+			<td class="label">Elapse Time:</td><td>{{execStats.modelExec.elapseTime}}</td>
+			<td class="label">End Time:</td><td>{{execStats.modelExec.endTime}}</td>
+		</tr>
+		<tr>
+			<td class="label">MBT Mode:</td><td>{{execStats.modelExec.sequencer}}</td>
+			<td class="label">Iterations:</td><td>{{execStats.modelExec.numLoop}}</td>
+			<td class="label">Virtual Users:</td><td title="Number of concurrent threads to execute MBT" class="field">{{execStats.modelExec.numThread}}</td>
+		</tr>
+	</table>
+	<table width=100% cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid #AAAAAA">
+		<tr>
+			<th colspan=5 class="header" align="left" valign=middle style="height: 10px;padding:0px;">
+				<span class="covGraphDesc" style="height:10px;padding:0px;padding-left:2px;">
+					Overall Coverage
+				</span>
+				<span class="icon-ctrl" onclick="openCoverageGraph();"
+					 style="height:10px;padding:0px;" 
+					title="Generate Coverage Graph from the model and execution stats">
+					<img class="btnBar" src="img/covGraph.png"/>
+				</span>
+				<span class="icon-ctrl" onclick="openTravMSC();" 
+					 style="height:10px; padding:0px;"
+					title="Generate Traveral MSG from the model execution stats">
+					<img class="btnBar" src="img/execMSC.png"/>
+				</span>
+			</th>
+		</tr>
+		<tr>
+			<td class="header" style="height: 10px;padding:0px;padding-bottom:2px;">&nbsp;</td>
+			<td class="header" align="center" style="height: 10px;padding:0px;padding-bottom:2px;">Traversals</td>
+			<td class="header" align="center" style="height: 10px;padding:0px;padding-bottom:2px;">Covered</td>
+			<td class="header" align="center" style="height: 10px;padding:0px;padding-bottom:2px;">Un-Covered</td>
+			<td class="header" align="left" style="height: 10px;padding:0px;padding-bottom:2px;">Coverage</td>
+		</tr>
+		<tr>
+			<td align="left" class="label" id="coverageStateLabel">State</td>
+			<td align="center" class="field">{{execStats.modelExec.stateTravCount.val}}</td>
+			<td align="center" class="field">{{execStats.modelExec.stateCovCount.val}}</td>
+			<td align="center" class="field">{{execStats.modelExec.stateCount-execStats.modelExec.stateCovCount.val}}</td>
+			<td align="left" progressbar="{{execStats.modelExec.stateCovPct.val}}" title="Average is {{execStats.modelExec.stateCovPct.avg}}">{{execStats.modelExec.stateCovPct.val}}</td>
+		</tr>
+		<tr>
+			<td align="left" class="label" id="coverageTransLabel">Transition</td>
+			<td align="center" class="field">{{execStats.modelExec.transTravCount.val}}</td>
+			<td align="center" class="field">{{execStats.modelExec.transCovCount.val}}</td>
+			<td align="center" class="field">{{execStats.modelExec.transCount-execStats.modelExec.transCovCount.val}}</td>
+			<td align="left" progressbar="{{execStats.modelExec.transCovPct.val}}" title="Average is {{statObj_p.modelExec.transCovPct.avg}}">{{execStats.modelExec.transCovPct.val}}</td>
+		</tr>
+		<tr id="tagStat">
+			<td align="left" class="label">Tags</td>
+			<td align="center" class="field">{{execStats.modelExec.tagCovPct.val}}</td>
+			<td align="center" class="field">{{execStats.modelExec.tagCovCount.val}}</td>
+			<td align="center" class="field">{{execStats.modelExec.tagCount-execStats.modelExec.tagCovCount.val}}</td>
+			<td align="left" "progressbar="{{execStats.modelExec.tagCovPct.val}}">{{execStats.modelExec.tagCovPct.val}}</td>
+		</tr>
+		<tr id="mscriptStat" ng-hide="execStats.mscript==undefined">
+			<td align="left" class="label">MScript</td>
+			<td align="center"><span id="mscriptTraversals" class="field">{{execStats.mscript.mscriptTraversals}}</td>
+			<td align="center"><span id="mscriptCovered" class="field">{{execStats.mscript.mscriptExec}}</td>
+			<td align="center"><span id="mscriptUncovered" class="field">{{execStats.mscript.mscriptNotExec}}</td>
+			<td align="left" progressbar="{{execStats.mscript.coveragePct}}">{{execStats.mscript.coveragePct}}</td>
+		</tr>
+	</table>
+	<table width=100% cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid #AAAAAA">
+		<tr>
+			<td class="header" style="height: 10px;padding:0px;padding-top:2px;">
+				<img id="hide_statetransstats" src='img/minus.png' onclick="javascript:toggleHide('statetransstats')"/>
+ 				Test Coverage (Traversal Exceptions: <span id="exceptCount" class="field"></span>, Other Exceptions: <span id="sysExceptCount" class="field"></span>)
+			</td>
+		</tr>
+		<tr>
+			<td style="padding-left:0px;">
+				<table id="statetransstats" cellspacing="0" cellpadding="0" height="100%" width="100%" border="0">
+					<thead>
+						<tr class="header" style="height: 10px;padding:0px;padding-top:2px;">
+							<td align='center'>
+								<span width='100%' title='state and transition (event)'><span id="stateTransLabel">State: Transition</span> &nbsp;
+									<select name=type id=type value="ALL" onchange="javascript:filterType(this.value);">
+										<option value="ALL">Show All</option>
+										<option value="STATE" id="stateOnlyLabel">State Only</option>
+										<option value="TRANS" id="transOnlyLabel">Transition Only</option>
+									</select>
+								</span>
+							</td>
+							<td align='center'><span title='number of script executions'>Exec</span></td>
+							<td align='center'><span title='number of level 1 exceptions'>L<small><i>1</i></small></span></td>
+							<td align='center'><span title='number of level 2 exceptions'>L<small><i>2</i></small></span></td>
+							<td align='center'><span title='number of level 3 exceptions'>L<small><i>3</i></small></span></td>
+							<td align='center'><span title='number of level 4 exceptions'>L<small><i>4</i></small></span></td>
+							<td align='center' style="border-right: 1px dotted gray"><span title='number of level 5 exceptions'>L<small><i>5</i></small></span></td>
+							<td align='center' colspan='3'><span title='statistical comparison of this execution compared with past executions'>Response Time</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat-start="stats in execStats.statList" ng-click="toggleTravMsg(stats);">
+								<td align='left' class='numField'>{{stats.statKey}}</td>
+								<td class='numField' align='center' class='sampleSize'>{{stats.travCount}}</td>
+								<td class='numField' align='center'><span class='L1'>{{stats.L1.length}}</span></td>
+								<td class=numField align='center'><span class='L2'>{{stats.L2.length}}</span></td>
+								<td class=numField align='center'><span class='L3'>{{stats.L3.length}}</span></td>
+								<td class=numField align='center'><span class='L4'>{{stats.L4.length}}</span></td>
+								<td class=numField align='center'><span class='L5'>{{stats.L5.length}}</span></td>
+								<td class=numField align='center'><span class='Perf'>{{stats.slowCount}}</span></td>
+								<td align='right' valign='middle'><div class='bar'><div class='barMid'></div></div></td>
+								<td align='left' class='barNum'>(<span class='average'>{{stats.rsp.val}}</span><small><i>ms</i></small>)</td>
+						</tr>
+						<tr ng-repeat-end ng-show="stats.showMsg" ng-click="stats.showMsg=false">
+								<td colspan="10">
+									<ul>
+										<li ng-repeat="msg in stats.L1">L1: {{msg}}</li>
+										<li ng-repeat="msg in stats.L2">L2: {{msg}}</li>
+										<li ng-repeat="msg in stats.L3">L3: {{msg}}</li>
+										<li ng-repeat="msg in stats.L4">L4: {{msg}}</li>
+										<li ng-repeat="msg in stats.L5">L5: {{msg}}</li>
+									</ul>
+								</td>
+							</tr>
+						</div>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<table width=100% cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid #AAAAAA">
+		<tr>
+			<td class="header" style="height: 10px;padding:0px;padding-top:2px;">
+ 				<img id="hide_tagstats" src='img/minus.png' onclick="javascript:toggleHide('tagstats')"/>
+ 				Requirements Coverage (Exceptions: <span id="tagsExceptCount" class="field"></span>)
+			</td>
+		</tr>
+		<tr><td style="padding-left:0px;">
+			<table id="tagstats" cellspacing="0" cellpadding="2" height="100%" width="100%" border="0">
+				<thead>
+					<tr class='header'>
+						<td align='center' width='*'>
+							<span width='100%'>Tag</span>
+						</td>
+						<td align='center' title='Requirement priority' width='1%'>P</td>
+						<td class="header" align='center'><span title='Passed count'>Passed</span></td>
+						<td class="header" align='center'><span title='Failed count'>Failed</span></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="tag in execStats.tags" class='{{tag.priorityCode}}'>
+						<td class='tagName'>{{tag.tag}}</td>
+						<td width='1'>{{tag.priority}}</td>
+						<td class='numField passTrav' align='center'>{{tag.passCount.val}}</td>
+						<td class='numField failTrav' align='center'>{{tag.failCount.val}}</td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+	</table>
+</div>

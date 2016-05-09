@@ -1,0 +1,73 @@
+<style>
+	#sysMsg .msg {
+		padding-top: 2px;
+		margin-right: 3px;
+		color: #00000;
+	}
+
+	#sysMsg .icon {
+		position: relative;
+		top: 2px;
+	}
+		
+	#sysMsg #msgSetting {
+		padding: 3px;
+		font-size: 10px;
+		color: #000000;
+		float: right;
+		position: relative;
+		top: -5px;
+	}
+
+	#sysMsg #msgControl {
+		padding: 3px;
+		font-size: 10px;
+		bottom: 5px;
+		color: #000000;
+	}
+	
+	#sysMsg #msgSetting input {
+		height: 12px;
+		width: 50px;
+		font-size: 10px;
+		border-radius: 5px;
+	}	
+
+	#sysMsg .btnTO {
+		top: 0px;
+	}
+
+	#sysMsg ul {
+		padding-left: 3px;
+	}
+		
+	#sysMsg ul li {
+		list-style: none;
+		font-size: 11px;
+	}
+	
+	#msgControl {
+		background-color: #AEAEAE;
+	}
+
+</style>
+
+<div ng-controller="ConsoleMsgCtrl" id="sysMsg" style="height: 100%;">
+	<div id="msgControl">
+		<span class="btnTO" ng-click="clearMsg();" title="clears all messages">Clear</span>
+		<span id="msgSetting">
+			Max Messages <input type="number" min="1" max="999" ng-change="checkMaxLength();" ng-model="msg.maxLength"/></span>
+		</span>
+	</div> 
+	<ul>
+		<li class="msg {{msgObj.msgType}}Msg" ng-repeat="msgObj in msg.msgList track by $index"
+			title = "{{msgObj.timestamp}}">
+			<img class="icon" ng-src="img/{{msgObj.msgType}}.png"/> {{msgObj.msgText}}
+		</li>
+	</ol>
+	<form ng-ESCAPE="closeMsgView()">
+		<input type="text" class="autoClose" style="width:1px;"/>
+	</form>
+</div>
+
+

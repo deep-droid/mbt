@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/webmbtFileList.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<script type="text/javascript" src="packages/jquery.rightClick.js"></script>
+	<script type="text/javascript" src="packages/ctxMenu.js"></script>
+	
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+
+	<script src="packages/jquery.TestOptimal/jquery.enterkey.js"></script>
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+
+	<script src="js/webmbtFileList.js"></script>
+	<script src="js/webmbtUtility.js"></script>
+</head>
+<body>
+	<div class="header" id="fileHeader" style="position: absolete;">
+		<div id="headerCtl" style="float:left;overflow:hidden; margin-top: 5px; padding-left: 6px;">
+			<span id="upFolder" class="folderCtl"><a href="javascript:openFile('upFolder');"><img src="img/upFolder.png" height="12" border="0"/></a> |</span> 
+			<span id="gotoFolder" class="folderCtl"><a href="javascript:openFile('Root');">Goto <span class="folderPath"></span></a></span>
+			<span id="curFolder" class="folderPath folderCtl"></span>
+		</div>
+		<div id="actionBtn" style="position:fixed; right: 10px; padding-left: 5px;">
+			<div style="float: left; margin-top:2px;">
+				<input type="text" id="searchField" size=25 style="display:inline; background-color:#EEEEEE;" onkeypress="checkSearch(event);"/>
+			</div>
+			<div style="float: left; padding-left: 2px; padding-right: 2px; margin-top: 2px; position: relative; top: 3px;">
+				<span class="icon-ctrl" style="padding:2px; position: relative; top: -3px;" onclick="searchModel();" title="find models that match the expression" id="search"><img src="img/search.png"/></span>
+			</div>
+		</div>
+	</div>
+	
+	<div id="fileMain" style="overflow:auto; position: absolute; top: 32px; border-top: 1px solid #CCCCCC;">
+		<table id="fileTable" border="0" cellspacing="0" cellpadding="0" class="tablesorter">
+		</table>
+	</div>
+	
+
+	<div id="ctxMenuModel" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem" id="restoreFile">Restore</li>
+			 <li class="ctxMenuItem" id="deleteFile">Delete</li>
+			 <li class="ctxMenuItem" id="copyNode">Copy/Cut</li>
+			 <li class="noHL"><hr></li>
+			 <li class="ctxMenuItem" id="asyncExec">Run</li>
+			 <li class="ctxMenuItem" id="deployModel">Deploy</li>
+		</ul>
+	</div>
+
+	<div id="ctxMenuFolder" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem reqModel" id="pasteToFolder">Paste Model Here</li>
+			 <li class="ctxMenuItem reqModel" id="moveToFolder">Move Model Here</li>
+			 <li class="ctxMenuItem" id="deleteFolder">Delete Folder</li>
+		</ul>
+	</div>
+
+	<div id="ctxMenuCurFolder" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem reqModel" id="pasteToCurFolder">Paste Model Here</li>
+			 <li class="ctxMenuItem reqModel" id="moveToCurFolder">Move Model Here</li>
+			 <li class="ctxMenuItem" id="cleanFolder">Clean Up</li>
+			 <li class="noHL"><hr></li>
+			 <li class="ctxMenuItem" id="batchRun">Batch Run</li>
+			 <li class="ctxMenuItem" id="batchDeploy">Batch Deploy</li>
+		</ul>
+	</div>
+	
+	<div id="ctxMenuDS" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem" id="deleteDS">Delete</li>
+		</ul>
+	</div>
+	
+</body>
+</html>

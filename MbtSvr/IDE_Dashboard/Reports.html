@@ -1,0 +1,45 @@
+
+<style>
+	#dashRptTable tr:hover {
+		background-color: #EDEDED;
+	}
+</style>
+
+<div ng-controller="DashRptCtrl">
+	<div id="appHeader" class="paneTitle" style="height: 25px; text-align: left;">
+		<div class="paneTitle filter" style="width: {{paneWidth_1}}px; overflow:hidden;">
+			<input class="headerSearch" type="text" placeholder="Search text or regexp" ng-model="filterProj" ng-change="applyProjFilter(filterProj)"/>
+			<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filterProj=''; applyProjFilter('')"/></span>
+		</div>
+		<div style="float:left; margin-left: 10px;">
+			<div ng-if="curProj">{{curRpt.rptDesc}} {{curProj.project}}</div>
+		</div>
+	</div>
+	<div style="height: {{viewHeight-headerHeight - 25}}px;">
+		<div class="pane pane_1" style="width: {{paneWidth_1}}px;">
+			<ul id="projList" class="selection">
+				<li ng-repeat="proj in projList | orderBy:'project'"  ng-click="openProj(proj)"
+					ng-class="{selected: proj==curProj}" ng-hide="proj.hide">
+					<span class="projName">{{proj.project}}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" style="width: {{paneWidth_2}}px;">
+			<div class="pane-content">
+				<div style="height: {{viewHeight-headerHeight - 25}}px; overflow: auto">
+					<table id="dashRptTable">
+						<tr>
+							<th ng-repeat="colLabel in projTraceRpt.colLabels">{{colLabel}}</th>
+						</tr>
+						
+						<tr ng-repeat="projRow in projTraceRpt.rptRows">
+							<td ng-repeat="colLabel in projTraceRpt.colLabels">{{projRow[colLabel]}}</td>
+						</tr>
+					
+					</table>
+				</div>
+		     </div>
+		</div>
+		<pane-divider/>
+	</div>
+</div>

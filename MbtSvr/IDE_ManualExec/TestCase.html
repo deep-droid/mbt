@@ -1,0 +1,238 @@
+<style>
+	.tableHeader {
+		background-color: #95a5a6;
+	}
+
+	.tag {
+		font-weight: none;
+		font-size: small;
+		padding-left: 3px;
+		padding-right: 3px;
+		margin-right: 3px;
+		background-color: #eeeeee;
+	}
+	
+	.tag:hover {
+		background-color:orange;
+	}
+	
+	
+	.verifyStatus {
+		padding: 5px;
+		float: left;
+	}
+	
+
+	.verifyStatus div {
+		background-color: #d1d5d8;
+		margin-left: 0px;
+		width: 54px;
+		padding-left: 2px;
+		padding-right: 2px;
+		cursor: pointer;
+		margin-bottom: 1px;
+		text-align: center;
+		color: #999999;
+	}
+	
+	.verifyStatus div:hover {
+		color: #000000;
+	}
+	
+	#PreCondition, #PostCondition {
+		font-weight: bold;
+	}
+	
+	ul {
+		margin-top: 0px;
+	}
+	
+	#TestCasePage .sectionHeader {
+	 	background-color: #EEEEEE; 
+	 	border-bottom: 1px solid #AAAAAA; 
+	 	font-weight: bold; 
+	 	margin-bottom: 8px;
+	 	height: 25px;
+	}
+	
+	#TestCasePage .tcID, .sectionHeader .tcList {
+		position: relative;
+		top: 3px;
+	}
+	
+	
+	.testcaseFooter {
+		padding-top: 10px;
+		background-color: #EEEEEE;
+		padding-bottom: 10px;
+	}
+	
+	.testcaseFooter input, .testcaseFooter textarea {
+		background-color: #FAFAFA;
+	}
+		
+	#testcaseList  {
+		padding-left: 0px !important;
+		margin-left: 0px;
+		margin-top: 0px;
+		padding-top: 0px;
+	}
+	
+	#testcaseList li {
+		margin-left: 0px;
+		padding-left: 1px;
+	}
+	
+	.almDisabled {
+		font-style: italic;
+		color: orange;
+	}
+	
+	.almEnabled {
+		border: 1px solid #AAAAAA;
+	}
+	
+</style>
+
+<div  ng-controller="TestCaseCtrl" id="TestCasePage" style="height: {{viewHeight}}px; overflow:hidden;">
+	<div class="pane pane_1" style="width: {{paneWidth_1}}px; overflow: hidden;">
+		<div class="sectionHeader"><span class="tcList">Test Case List</span></div>
+		<div style="height: {{viewHeight-headerHeight}}px; overflow: auto;">
+			<ul id="testcaseList">
+				<li ng-repeat="tcObj in TestCase.TestCaseList" 
+					ng-click="setCurTestCase(tcObj)" class="modeItem" ng-class="{selected: tcObj.tcID==curTestCase.tcID}">
+					<span style="width: 5px;" class="{{tcObj.status}}" title="Color bar indicates status of test case">&nbsp;</span>
+					<span>{{tcObj.tcID}} <small>({{tcObj.stepList.length}})</small></span>
+					<span ng-show="tcObj.changed" class="changed" title="There are pending changes for this test case not pushed to ALM">*</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="pane pane_2" style="width: {{paneWidth_2}}px; overflow: hidden" class="pane-content">
+		<div class="sectionHeader">
+			<span class="tcID">Test Case: {{curTestCase.tcID}}</span>
+			<span style="float:right;">
+				<span class="almDisabled" ng-hide="almEnabled" title="ALM is enabled by setting up ALM configuration in ALM Config and activating ALM plugin in Model Property.">ALM Disabled</span>
+				<span class="almEnabled" ng-show="almEnabled"><input type="checkbox" ng-model="almActivated"/>ALM</span>
+				<button ng-click="resetTestCase(curTestCase);">Reset</button>
+				<button ng-click="resetAll()">Reset All</button>
+				<button ng-click="save()" style="color: {{changePending?'red':''}}">Save</button>
+				<button ng-show="almEnabled &&  almActivated" ng-click="saveALM()" style="color: {{TestCase.almPendingChange?'red':''}}"
+					title="Submit defect information to ALM">{{almPendingChangeCount>0? 'Saving ... ' + (almPendingChangeTotal-almPendingChangeCount) + ' of ' + almPendingChangeTotal: 'Submit ALM'}}</button>
+				<button ng-click="print()">Print</button>
+			</span>
+		</div>
+		
+		<div style="height: {{viewHeight-headerHeight}}px; overflow: auto;">
+			<div>
+				<b>Test Case Info:</b> <span class="tcMark">Length: {{curTestCase.stepList.length}}</span>;
+				<span class="tcMark">Weight: {{curTestCase.weight}}</span>;
+				<span class="tcMark">Requirements: {{curTestCase.RequirementList.length}}</span>
+				<span style="float: right">
+					<a href="{{curTestCase.graphFileName}}" target=_blank>Test Case Graph</a>
+					<!--img ng-if="TestCase.LinkGraph!='Y'" border="0" ng-src="{{curTestCase.graphFileName}}"/-->
+				</span>
+			</div>
+			
+			
+			<div><b>Requirements:</b> 
+				<span ng-repeat="reqTag in curTestCase.RequirementList" 
+					class="tag" class="p_{{getReqDefn(reqTag).priority}}">
+					{{reqTag}}<sup><small>{{getReqDefn(reqTag).priority}}</small></sup>
+				</span>
+			</div>
+			<div>
+				<span id="PreCondition">Test Setup / Pre-Conditions</span>
+				<ul ng-if="curTestCase.preList.length>0">
+					<li ng-repeat="preItem in curTestCase.preList">
+						{{preItem.msg}}
+					</li>
+				</ul>
+			</div>
+			
+			<table id="testcase" class="table"> 
+				<tr>
+					<th class="tlabel" width="2%">Step</th> 
+					<th class="tlabel">Action</th> 
+					<th class="tlabel">Assert Expected Results 
+						<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(curTestCase, undefined, 'passed')">passed</a>
+						<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(curTestCase, undefined, 'failed')">failed</a>
+						<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(curTestCase, undefined, 'blocked')">blocked</a>
+						<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(curTestCase, undefined, 'reset')">reset</a>
+					</th>
+				</tr>  
+				<tr ng-repeat="stepObj in curTestCase.stepList">
+					<td valign="top" align="center" class="colNum">
+						<span ng-show="stepObj.changed" class="changed" title="change pending">*</span>
+						{{curTestCase.stepList.indexOf(stepObj) + 1}}</td> 
+					<td align="left" valign="top" class="colAction">
+						<span ng-if="stepObj.From!=stepObj.At"><b>From:</b>&#160;{{stepObj.From}}<br/></span>
+						<b>Do:</b>&#160;{{stepObj.transID}}
+						<ul>
+							<li ng-repeat="actionObj in stepObj.actions" dynamic="actionObj.msg"></li>
+						</ul>
+					</td>
+					<td valign="top" align="left" class="colVerify">
+						<span ng-if="stepObj.From!=stepObj.At"><b>At:</b>&#160;{{stepObj.At}}<br/></span>
+						<b>Expected Results:</b>
+							<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(curTestCase, stepObj, 'passed');">passed</a>
+							<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(curTestCase, stepObj, 'failed');">failed</a>
+							<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(curTestCase, stepObj, 'blocked');">blocked</a>
+							<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(curTestCase, stepObj, 'none');">reset</a>
+						<br/>
+						<ul class="assertItems">
+							<li ng-repeat="verifyObj in stepObj.verifyList">
+								<div dynamic="verifyObj.msg"></div>
+								<div><span ng-show="verifyObj.changed" class="changed" title="change pending">*</span> Requirements:
+									<span ng-repeat="tag in verifyObj.tags">
+										<a name="{{curTestCase.tcID}}_{{tag}}">
+											<span title="Priority " class="p_{{tag.priority}}">
+												<span class="tag">{{tag}}</span>
+												<sup>{{tag.priority}}</sup>
+											</span>&#160;
+										</a>
+									</span>
+									<span ng-if="verifyObj.assertID.length>0">({{verifyObj.assertID}})</span>
+								</div>
+								<div>
+									<span ng-if="verifyObj.type=='assert'" class="verifyStatus">
+										<div ng-click="toggleAssertItemStatus(curTestCase, stepObj, verifyObj, 'passed')" class="passed {{verifyObj.status=='passed'? 'statusSet':''}}">Passed</div>
+										<div ng-click="toggleAssertItemStatus(curTestCase, stepObj, verifyObj, 'failed')" class="failed {{verifyObj.status=='failed'? 'statusSet':''}}">Failed</div>
+										<div ng-click="toggleAssertItemStatus(curTestCase, stepObj, verifyObj, 'blocked')" class="blocked {{verifyObj.status=='blocked'? 'statusSet':''}}">Blocked</div>
+									</span>
+									<span><textarea class="statusCmt" ng-model="verifyObj.statusCmt" ng-change="setAssertItemStatus(curTestCase, stepObj, verifyObj, verifyObj.status)"></textarea>
+									</span>
+								</div>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<div style="border-top: 1px solid #CCCCCC;">
+				<span id="PostCondition">Test Teardown / Post-Conditions</span>
+				<ul ng-if="curTestCase.postList.length>0">
+					<li ng-repeat="postItem in curTestCase.postList">
+						{{postItem.msg}}
+					</li>
+				</ul>
+			</div>
+			
+			<div class="testcaseFooter">
+				<table border="0" cellspacing="2" cellpadding="2">
+					<tr>
+						<th width="1%">Tester&nbsp;Name:</th><td><input class="testerName" type="text" ng-model="curTestCase.testerName" ng-change="setChangePending();"/></td>
+						<th align="right">Date:</th><td><input class="testedDate" type="text" ng-model="curTestCase.testedDate" ng-change="setChangePending();"/></td>
+						<th align="right">Effort:</th><td><input type="text" class="testEffort" ng-model="curTestCase.testEffort" ng-change="setChangePending();"/></td>
+					</tr>
+					<tr>
+						<th valign="top">Notes:</th><td colspan="5">
+							<textarea class="testerNote" ng-model="curTestCase.testerNote" ng-change="setChangePending();"
+								style="margin-top: 5px; border: 1px solid #AAAAAA;" ng-style="{width: (paneWidth_2-130)+'px'}"></textarea>
+							</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<pane-divider/>
+</div>

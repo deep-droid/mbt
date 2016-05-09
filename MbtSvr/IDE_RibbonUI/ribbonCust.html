@@ -1,0 +1,183 @@
+<style>
+  	#custMenuList .header {
+		height: 25px; 
+  	}
+  	
+  	#custMenuList .title {
+  		width: 100%;
+  	}
+  	
+  	
+  	#custMenuList .header {
+  		text-decoration: underline;
+  		font-weight: bold;
+  	}
+
+
+	#custMenuList .custBtn:hover {
+		background-color: #F0F0F0;
+	}
+	
+	#custMenuList ul {
+	    list-style: none;
+	    padding-left: 8px;
+	    display: block;
+	}
+	
+	#custMenuList ul.root {
+		padding-left: 0px;
+		margin-top: 0px;
+		padding-top: 0px;
+	}
+	
+	#custMenuList img {
+		position: relative;
+		top: -3px;
+	}
+  
+  
+	#custBtnListBkg {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		width: 100%;
+		height: 100%;
+		font-size: medium;
+		font-weight: bold;
+		padding: 3px;
+	}
+
+	#custBtnListBkg .iconListDiv {
+		background-color: #EEEEEE; 
+		position: absolute; 
+		border-radius: 8px;
+		border: 1px solid #333333;
+		padding-left: 5px;	
+		padding-top: 3px;
+	}
+	
+	#custBtnListBkg img, #custMenuList img {
+		border: 1px solid transparent;
+		border-radius: 4px;
+	}
+	
+	#custBtnListBkg img.ribbon-icon, #custMenuList img.ribbon-icon {
+		margin: 2px;
+		cursor: pointer;
+	}
+	
+	#custMenuList .button-title {
+		border: 1px solid transparent;
+	}
+	
+	#custBtnListBkg img:hover, #custMenuList .button-title:hover {
+		border: 1px solid red;
+	}
+	
+	#custBtnListBkg .shortcut {
+		width: 100px;
+	}
+	
+	#custBtnListBkg .shortcutDef {
+		float: left;
+		padding-bottom: 5px;
+	}
+	
+	#custBtnListBkg .custArea {
+		padding-top: 3px;
+	}
+	
+	#custMenuList .paneTitle {
+		background-color: #DADFE1;
+	}
+	
+	#custMenuList .tabSection {
+		background-color: #DADFE1;
+	}
+	
+	.button-title {
+		cursor: pointer;
+	}
+</style>
+<table id="custMenuList" border="0">
+	<tr class="paneTitle" >
+		<th colspan="{{ribbon.ribbonData.tabList.length}}">
+			<center>Customize Toolbar and ShortCut
+				<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="set checkbox to add/remove menu item to/from Toolbar ShortCut, click menu icon to change icon and set shortcut key." href="#" >?</a>
+			</center>
+			
+			<span style="position: absolute; top: 0px;right: 0px; "> 
+				<a href="#" ng-click="resetCust()">reset</a>
+			</span>
+		</th>
+	</tr>
+	<tr class="tabSection">
+		<th ng-repeat="tabObj in ribbon.ribbonData.tabList">
+			<div class="title">
+			{{tabObj.tabTitle}}
+			</div>
+		</th>
+	</tr>
+	<tr>
+		<td valign="top" ng-repeat="tabObj in ribbon.ribbonData.tabList">
+			<div style="overflow: auto; height:{{viewHeight-50}}px;">
+			<ul>
+				<li ng-repeat="section in tabObj.sectionList" class="moreTabSection">
+					{{section.sectionTitle}}
+					<ul>
+						<ANY ng-repeat="groupObj in section.groupList">
+							<li ng-repeat="btnObj in groupObj.btnList" title="{{btnObj.btnHelp}}"
+								style="white-space: nowrap">
+								<input type="checkbox" ng-model="btnObj.enabled" ng-change="custBtnToggle(btnObj)"/>
+								<span class="button-title" ng-click="openCustBtnDialog(tabObj, section, btnObj)">{{btnObj.btnLabel}}
+									<img class="ribbon-button ribbon-icon {{getBtnImgId(btnObj, 'small')}} ribbon-normal" src="IDE_RibbonUI/img/blank-01.png"/>
+									{{btnObj.shortcut}}
+								</span>
+							</li>
+						</ANY>
+					</ul>
+				</li>
+			</ul>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<div id="custBtnListBkg" ng-show="cust.custBtnCur.btnObj" style="height2: {{viewHeight}}px;">
+	<div class="iconListDiv" ng-style="{top: (viewHeight/4)+'px', left: (viewWidth/4)+'px', width: (viewWidth/2)+'px', height: (viewHeight/2)+'px'}">
+		<div class="header">
+			<center>Toolbar Icon Selection for <i>{{cust.custBtnCur.tabObj.tabTitle}} / {{cust.custBtnCur.sectionObj.sectionTitle}} / {{cust.custBtnCur.btnObj.btnLabel}}</i></center>
+			<span class="btnTO" style="position: absolute; right: 3px; top: 2px" ng-click="closeCustBtnDialog()">x</span>
+		</div>
+		<div class="custArea" ng-style="{'border-top': '1px solid #333333', height: (viewHeight/2-30)+'px', overflow: 'auto'}">
+			<table><tr>
+				<td valign="top">Shortcut:</td> 
+				<td><select ng-model="cust.custBtnCur.modKeyObj" ng-change="custBtnSetShortcutKey()"
+						data-ng-options="opt.name for opt in cust.modifyKeyList">
+					</select>
+					+ 
+					<select ng-model="cust.custBtnCur.scKeyObj" ng-change="custBtnSetShortcutKey()"
+						data-ng-options="opt.name for opt in cust.scKeyList"> 
+					</select>
+					<button ng-click="custClearShortcut();">Reset</button>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">
+					Icon: 
+				</td>
+				<td>
+					<span>
+						<img class="ribbon-icon {{getBtnImgId()}} ribbon-normal" src="IDE_RibbonUI/img/blank-01.png"/>
+					</span>
+					<button ng-click="custBtnSetIcon()">Reset</button>
+					<br/>
+					<span ng-repeat="iconId in cust.iconList" ng-click="custBtnSetIcon(iconId)" >
+					     <img class="ribbon-icon btn{{iconId}}-02 ribbon-normal" src="IDE_RibbonUI/img/blank-02.png"/>
+					</span>
+				</td>
+			</tr></table>
+		</div>
+	</div>
+</div>

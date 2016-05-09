@@ -1,0 +1,14 @@
+# ====== This is a customized format file for DDI Health
+# Only the custom field and fields to be overriden need to be defined in this file.
+#
+# Definition of seqout generation format. @xxx@ is the token to be replaced by runtime values and their names 
+# must match exactly the reserved token list. See http://testoptimal.com/doku/doku.php?id=seqoutformat
+
+# Custom fields - must be prefixed by char "@". Custom fields are used by seqout.xsl 
+# (or customer seqout xsl) with locator fieldList/field[name='xx']/value
+@Company=DDI Health
+@ReqTagColumnCount=20
+@LinkCoverageGraph=Y
+
+# mscript function/tag formatting. keys and tokens are case sensitive and should not contain white spaces.
+ASSERT=@PASSED@

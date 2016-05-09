@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ModelRepo.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+	<script type="text/javascript" src="packages/jquery.rightClick.js"></script>
+	<script type="text/javascript" src="packages/ctxMenu.js"></script>
+
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/ModelRepo.js"></script>
+</head>
+<body>
+	<table id=archList border=0 class="tablesorter" width="100%">
+		<thead>
+			<tr>
+				<td colspan=5 nowrap>
+					Comment: <input type=text id='checkinCmt' size=60 /><button onclick='checkinModel()'>CheckIn Model</button>
+				</td>
+			</tr>
+			<tr class=header>
+				<th class="header" width="1%" nowrap></th>
+				<th class="header" width="10%">Version</th>
+				<th class="header {sorter: 'text'}" width="21%" nowrap>Date/Time</th>
+				<th class="header" width="49%">Comments</th>
+				<th class="header {sorter: 'text'}" width="20%" nowrap>Updated By</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+
+	<div id="ctxMenu" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem" id="delArch" title='Delete archive from SvrMgr'>Delete</li>
+			 <li class="ctxMenuItem" id="checkoutArch" title="Check out model archive to your model directory.">Check Out</li>
+		</ul>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+
+.separator {
+	border-top: 1px solid #dddddd; 
+	margin-top: 3px;
+}
+
+.graph {
+	horizontal-align: center;
+}
+
+
+.label {
+	font-weight: bold;	
+}
+
+
+sup {
+	font-size: xx-small;
+}
+
+
+#tcExecStatusHead, #reqExecStatusHead {
+	background-color: #DDDDDD;
+	font-weight: bold;
+	color: #EFEFEF;
+}
+
+ 
+.checkAllCase {
+	padding-left: 2px;
+	padding-right: 3px;
+	font-size: small;
+}
+
+.checkAllStep {
+	padding-left: 2px;
+	padding-right: 3px;
+	font-size: small;
+}
+
+
+.measureList a, .measureList span{
+	margin-right: 5px;
+	font-size: small;
+	float: left;
+}
+
+.tcID th, .measureList a {
+	cursor: pointer;
+}
+
+.tcID th:hover, .measureList a:hover {
+	text-decorator: underline;
+	color: blue;
+}
+
+.measureList span:hover {
+	color: #333333;
+}
+
+.subItem {
+	margin-left: 25px;
+}
+
+.measure {
+	text-align: center;
+}
+
+.req_passed {
+	color: #000000;
+	font-weight: bold;
+}
+
+.req_partial {
+	font-size: small;
+	color: #000000;
+}
+
+.req_failed {
+	color: red;
+	font-weight: bold;
+}
+
+.req_blocked {
+	font-size: small;
+	color: red;
+}
+
+#legendStatus li {
+	padding-left: 3px;
+	padding-right: 3px;
+	display: inline;
+	margin: 2px;
+	border: 1px solid #999999;
+}
+
+		
+#tagMode {
+	font-size: -1;
+	padding-left: 4px;
+}
+
+.covered {
+	background-color: #b2e0f9;
+}
+
+
+
+.verifyStatus .passed.statusSet, #testcaseList .passed, .colTC .passed {
+	background-color: #4da944;
+	color: #FFFFFF;
+}
+
+.verifyStatus .failed.statusSet, #testcaseList .failed, .colTC .failed {
+	background-color: #f26522;
+	color: #FFFFFF;
+}
+
+.verifyStatus .blocked.statusSet, #testcaseList .blocked, .colTC .blocked {
+	background-color: #f1c40f;
+	color: #FFFFFF;
+}
+
+.statusCmt {
+	background-color: #FFFFFF;
+	padding-left:3px; 
+	height: 70px; 
+	width: 400px; 
+	border: 1px solid #DDDDDD;
+}
+
+
+.assertItem {
+	padding-left: 3px;
+}
+
+#updateExecSum {
+	font-size: small;
+}
+
+.testerName {
+	width: 300px;
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid #000000;
+}
+
+.testedDate {
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid #000000;
+	width: 150px;
+}
+
+.testEffort {
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid #000000;
+	width: 100px;
+}
+
+#runNote {
+	height: 100px;
+}
+
+#testcaseList {
+	margin-top: 0px;
+	margin-left: 0px;
+	padding-left: 8px;
+	list-style: none;
+}
+
+#testcaseList li, .paneTitle {
+	cursor: pointer;
+}
+
+#testcaseList li:hover, .paneTitle:hover {
+	font-decoration: underline;
+}
+
+#rightPane {
+	overflow: auto;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+.tcMark {
+	font-size: small;
+	padding-left: 3px;
+	padding-top: 1px;
+}
+
+#reqMatrix {
+	margin-top: 8px;
+}
+
+.changed {
+	color: red;
+}
+
+.error {
+	color: red;
+}
+
+.alert {
+
+	color: orange;
+}
+
+.info {
+
+}
+
+#logList {
+	margin-left: 0px;
+	padding-left: 20px;
+}
+
+#logList li {
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+.modeItem:active {
+	color: #AAAAAA;
+}
+
+.modeItem:hover, #summaryTbl tbody tr:hover {
+	background-color: #FAFAFA;
+}
+
+.modeItem {
+	padding-left: 4px;
+	cursor: pointer;
+}
+
+
+#summaryTbl {
+	margin-left: 0px;
+}
+
+#menuHeader {
+	background-color: #7f8c8d; 
+	color: #FFFFFF; 
+	font-weight:bold; 
+	height: 25px;
+	padding-top: 2px; 
+	padding-left: 5px; 
+}
+
+#menuBtns {
+	background-color: #7f8c8d; 
+	height: 25px; 
+	padding-top: 1px;
+	padding-left: 1px;
+	border-bottom: #FFFFFF; 
+	margin-bottom: 2px;
+}
+
+.menuBtn {
+	position: relative;
+	top: 2px;
+	background-color: #EEEEEE;
+	border-radius: 8px;
+	padding-left: 4px;
+	padding-right: 4px;
+	margin-left: 2px;
+	font-size: small;
+	cursor: pointer;
+	color: #999999;
+}
+
+.menuBtn:hover {
+	color: #000000;
+}
+
+.menuBtn:active {
+	color: #AAAAAA;
+}
+
+.menuBtn.btnEnabled {
+	background-color: #40d47e;
+	color: #FFFFFF;
+}
+
+.menuBtn.logEnabled {
+	background-color: orange;
+	color: #FFFFFF;
+}

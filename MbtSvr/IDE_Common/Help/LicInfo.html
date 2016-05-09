@@ -1,0 +1,41 @@
+
+<div ng-controller="LicInfoCtrl" id="LicInfo" style="height: 100%;" ng-form="licInfoForm">
+	<table id="licProp">
+		<tr ng-repeat="fieldObj in infoFieldList">
+			<td class="labelNoWrap labelTO" valign="top">{{fieldObj.msgDef.code}}
+	   			<a ng-show="fieldObj.msgDef" class="helpHint" popover-placement="right" popover-trigger="mouseenter" popover="{{fieldObj.msgDef.desc}}" href="#" >?</a>
+			</td>
+			<td>
+				<prop-field field="fieldObj"></prop-field>
+			</td>
+			<td ng-if="$index==0" valign="top" rowspan="{{infoFieldList.length}}">
+				<span class="labelTO" >Plugins:</span><a ng-show="pluginField.msgDef" class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" popover="{{pluginField.msgDef.desc}}" href="#" >?</a></br>
+				<ul>
+					<li ng-repeat="plugin in pluginField.val">
+						{{plugin}}
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr ng-show="exceptions">
+			<td class="labelNoWrap labelTO" valign="top">Exceptions<a ng-show="exceptions" class="helpHint" popover-placement="right" popover-trigger="mouseenter" popover="License key exceptions" href="#" >?</a></br>
+			</td>
+			<td colspan="2">{{exceptions}}
+			</td>
+		</tr>
+		<tr ng-show="alert">
+			<td class="labelNoWrap labelTO" valign="top">Alert<a ng-show="alert" class="helpHint" popover-placement="right" popover-trigger="mouseenter" popover="System alert message" href="#" >?</a></br>
+			</td>
+			<td colspan="2" align="left">{{alert}}
+			</td>
+		</tr>
+		<tr ng-repeat="fieldObj in licFieldList">
+			<td class="labelNoWrap labelTO" valign="top">{{fieldObj.msgDef.code}}
+	   			<a ng-show="fieldObj.msgDef" class="helpHint" popover-placement="right" popover-trigger="mouseenter" popover="{{fieldObj.msgDef.desc}}" href="#" >?</a>
+			</td>
+			<td colspan="2">
+				<prop-field field="fieldObj"></prop-field>
+			</td>
+		</tr>
+	</table>
+</div>

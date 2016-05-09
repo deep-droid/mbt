@@ -1,0 +1,176 @@
+
+#toLogo {
+	position: relative;
+	top: 8px;
+}
+
+#KPI {
+	position: absolute;
+	top: 7px;
+	width: 100%;
+}
+
+#KPI .elems {
+	margin: 0px;
+}
+
+#KPI .elems .elem {
+	color: #FFFFFF;
+	padding: 3px;
+	cursor: pointer;
+	font-style: italic;
+}
+
+#editionTD {
+ 	float: right; 
+	height: 100%;
+	width: 125px;
+	color: #ffffff;
+}
+
+#editionTD .editionSec {
+	height: 100%;
+	background-image: url(../img/button_bg.png);
+	background-repeat: repeat-x;
+}
+
+
+#edition {
+	padding-top: 20px;
+	position: relative;
+	top: 3px;
+	padding-left: 2px;
+	margin-bottom: 3px;
+	color: #205282;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.expired {
+	font-weight: bold;
+	color: RED;
+}
+
+#toVer {
+	margin-top: 3px;
+	color: #333333;
+	font-size: 6pt;
+	font-style: italic;
+	float: right;
+	margin-right: 2px;
+}
+
+#nav-one {
+	margin-left: 1px; 
+	float: left; 
+	position: relative; 
+	top: 3px;
+}
+
+
+#headerSection {
+	width: 100%;
+	background-color: #ffffff;
+	background-image: url(../img/bghead.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+	height: 36px;
+}
+
+#FileList, #Model, #Monitor, #Stats, #Vars, #UIMap, #SeqTrace {
+	height: 100%;
+	width: 100%;
+	padding:0px;
+	margin: 0px;
+}
+
+.tabCnt {
+	height: 100%;
+ 	border-left: 1px solid #DDDDDD;
+}
+
+.tabCnt ul li a {
+	position: relative;
+}
+
+.tabLabel, .tabLabelAvail {
+	height: 25px;
+	background-image:url(../img/middle.jpg);
+	background-repeat: repeat-x;
+	font-size: 11px;
+}
+
+.tabItemFixed {
+	color: #000000;
+}
+
+.tabItem {
+	cursor: pointer;
+}
+
+.tabItem:hover {
+	font-weight: bold;
+}
+
+.ui-tabs-panel {
+	border-top: 1px solid #ECE9DA !important;
+}
+
+#paneLeft, #paneTopRight, #paneBottomRight, #svrMgr {
+	font-size: 10px;
+	padding:0px; 
+	margin:0px;
+	background-color: #FFFFFF;
+}
+
+
+#panesWrapper {
+	height: 100%; 
+	background-color: #F4F1E8;
+}
+
+#paneLeft {
+	float:left; 
+	height: 100%;
+}
+
+#paneRight{
+	float:right;
+	height: 100%;
+}
+
+#paneTopRight, #paneBottomRight {
+	width: 100%;
+}
+
+#svrMgr {
+	height: 100%;
+}
+
+#hDivider {
+	width: 8px; 
+	height: 100%;
+	cursor: col-resize;
+	float: left;
+}
+
+#vDivider {
+	height: 8px; 
+	width: 100%;
+	cursor: row-resize;
+	border-top: 1px solid #DEDEDE;
+}
+
+.sizeCtrl {
+	float: right;
+	margin: 0px;
+}
+
+.sizeCtrl div {
+	float: left;
+}
+
+UL.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all {
+	overflow: hidden;
+	height: 27px;
+}

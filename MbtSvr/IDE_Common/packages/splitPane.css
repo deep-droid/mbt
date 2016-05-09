@@ -1,0 +1,92 @@
+#tab-target .target {
+	width: 100%;
+	height: 100%;
+}
+
+#tab-target {
+	overflow: hidden;
+	position: absolute; 
+	bottom: 0px;
+	width: 100%;
+}
+
+
+
+.paneDivider {
+	background-color: #DADFE1;
+//	background: linear-gradient(to bottom, #FAFAFA, #eaefd1); 
+	width: 1px;
+//	-webkit-box-shadow: #4e4e4e 0px 3px 0px;
+//	-moz-box-shadow: #4e4e4e 0px 3px 0px;
+	bbox-shadow: #4e4e4e 0px 3px 0px;
+	
+	padding-left:1px;
+	padding-right:2px;
+	cursor: col-resize !important;
+	position: absolute;
+	bottom: 0px;
+}
+
+.paneTitle {
+	text-align: center;
+	color: #000000;
+	height: 25px;
+	font-size: 11pt;
+	background-color: #BDC3C7;
+//	background: linear-gradient(to bottom, #FAFAFA, #eaefd1); 
+//	white-space: nowrap;
+	font-weight: bold;
+}
+
+
+.pane {
+	height: 100%;
+}
+
+.pane-content {
+	padding-left: 3px;
+}
+
+.pane_1 {
+	overflow-x: hidden;
+	overflow-y: auto;
+	float: left;
+}
+
+.pane_2 {
+	overflow-x: auto;
+	overflow-y: auto;
+	float: right;
+}
+	
+.filter {
+	white-space: nowrap;
+	float: left;
+}
+	
+.filter input {
+	width: 100%;
+	background-color:#FAFAFA;
+	padding-left: 3px;
+	margin-top: 1px;
+	margin-left: 0px !important;
+	border: none;
+	height: 23px;
+	font-weight: none;
+	font-size: 10pt;
+	color: #999999;
+}
+
+.filter .appBtn {
+	float: right;
+	position: relative;
+	top: -16px;
+	right: 2px;
+}
+
+
+.rightPaneTitle {
+	position: relative;
+	top: 1px;
+	font-size: 11pt;
+}

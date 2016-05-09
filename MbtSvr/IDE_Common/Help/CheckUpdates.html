@@ -1,0 +1,13 @@
+<style>
+	
+	#checkUpdates .summary {
+		padding-left: 5px;
+	}
+	
+</style>
+<div id="checkUpdates" ng-controller="CheckUpdatesCtrl">
+	<form id="checkUpdatesTO" ng-ENTER="closeCheckUpdates()" ng-ESCAPE="closeCheckUpdates()">
+		<input type="text" class="autoClose" style="width:1px;"/>
+		<div class="summary" dynamic="updatesLog"></div>
+	</form>
+</div>

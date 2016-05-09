@@ -1,0 +1,417 @@
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+img {display:block}
+
+
+body
+{
+  	background-color:#F0E9DD;
+	font-size:12pt;
+}
+
+#tcList td {
+	width: 80px;	
+}
+
+.logoImg {
+	height: 25px;
+	display: inline;
+	position: relative;
+	top: 3px;
+}
+
+.TO_Release {
+	float: right;
+	position: relative;
+	bottom: 0px;
+}
+
+.TOLink {
+	color: #000000;
+	font-size: small;
+	font-style: italic;
+}
+
+div.banner	{
+  background-color:#3d4659;
+  color:#EEEEFF;
+  padding: 0; 
+	 
+}
+
+div.banner a {
+	color: #eeeeee;
+}
+
+#reportTitle {
+  font-size:1.2em;
+  font-weight:normal;
+  font-family: verdana, helvetica, sans-serif;
+  color: orange;
+}
+
+.reqCheck {
+	background-color: #CCCC9A;
+}
+
+p,pre,h1,h2,h3,h4,h5,h6 {
+  margin: 0 10px 10px 10px;
+  text-align:left;
+  color:#433;
+  padding: 0px;
+}
+
+ul {
+	text-align:left;
+	color:#334;
+}
+
+
+.ulReq {
+}
+
+.ulReq li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 1em;
+}
+
+
+h2 {
+ background-color:#F0F0F0;
+ color:#303030;
+ border-bottom: solid 1px #CCC;
+}
+
+
+.subTitle {
+  padding-left: 1em;
+  font-size: small;
+}
+
+div.testcase {
+  margin:0;
+  padding:0;
+}
+
+
+
+.index {
+	text-align: left;
+	margin: 0 10px 10px 10px;
+	font-size: small;
+}
+
+.graph {
+	horizontal-align: center;
+}
+
+.graph img {
+}
+
+div.content	{
+  background-color:#FFFFFF;
+  color: #333;
+  border-width: 0px 1px 1px 1px;
+  border-style:solid;
+  border-color:#333;
+  margin: 0 auto;	 
+}
+
+
+
+
+
+div.spacer, div.tail {
+ clear:both;
+ text-align:center
+}
+
+div.hidden {
+position:absolute;
+top:0px;
+left:0px;
+  display:none;
+}
+
+a.expand {
+float:right;
+ text-align:right;
+}
+
+table.testcase {
+  text-align:left;
+}
+
+
+table td, table th {
+ padding:0 0.5em;
+ text-align:left;
+ border-style:solid;
+ border-color:#999;
+ border-width: 1px 1px 0px 0px;
+}
+
+
+th.tlabel, #tcList.tlabel {
+ padding:0 0.5em;
+  color:#FFF;
+   background-color:#CC3333;
+}
+
+
+.label {
+	font-weight: bold;	
+}
+
+
+.preambleH2, .testcaseH2, .postscriptH2 {
+	page-break-before: always;
+}
+
+.p_C, .p_1 {
+	background-color: #FF0000;
+	color: #000000;
+}
+
+.p_H, .p_2 {
+	background-color: #E55B3C;
+	color: #000000;
+}
+
+.p_M, .p_3 {
+	background-color: #FF9900;
+	color: #000000;
+}
+
+.p_L, .p_4 {
+	background-color: #FFCC00;
+	color: #000000;
+}
+
+.passed {
+	background-color: #2C6700;
+}
+.failed {
+	background-color: red;
+}
+.blocked {
+	background-color: #FF8040;
+}
+.partial {
+	background-color: #92cd00; // blue
+}
+
+sup {
+	font-size: xx-small;
+}
+
+.testcaseFooter {
+	margin-left: 10px;
+	background-color: #C0C0C0;
+}
+
+#testerNotesPopup {
+	position: fixed;
+	top: 200px;
+	left: 300px;
+	display: block;
+	background-color: #ADD8E6;
+	width: 400px;
+	height: 150px;
+	horizontal-align: center;
+	vertical-align: middle;
+}
+
+#testerNotesPopup th {
+	background-color: #ADD8E6;
+}
+
+.noteArea {
+	background-color: #FFFFFF;
+	padding-left:3px; 
+	height: 80px; 
+	width: 100%; 
+	border: 0px;
+}
+
+
+button {
+	width: 100px;
+}
+
+
+.summaryTbl td {
+	vertical-align: top;
+}
+
+#summaryHead {
+	background-color: #AAAAAA;
+	font-weight: bold;
+
+}
+
+#tcExecStatusHead, #reqExecStatusHead {
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+.summaryUL {
+ 	list-style:none;
+ 	margin-left: 1px;
+ 	padding-left: 1px;
+ 	margin-right: 1px;
+ 	padding-right: 1px;
+ }
+ 
+ .summaryUL li {
+ 	float: left;
+ 	display: block;
+ 	padding-right: 2px;
+ }
+ 
+ .reqStat li, .testcaseStat li {
+ 	background-color: lightgray;
+ 	margin-right: 2px;
+ }
+ 
+.testcaseFooter .clearNote {
+ 	color: red;
+ }
+ 
+.testcaseFooter .addNote {
+ 	color: green;
+ }
+
+.testcaseFooter a:visited {
+ 	color: none;
+ }
+
+.testcaseFooter a:hover {
+ 	color: blue;
+ 	font-weight:bold;
+ 	font-decoration: underline;
+ }
+ 
+ .testcaseFooter ol {
+ 	list-style: circle;
+ 	margin-left: 10px;
+ }
+ 
+ .testcaseFooter li {
+ }
+ 
+#runComment {
+	margin-top: 5px;
+}
+
+#runComment textarea { 
+    width:100%; 
+} 
+
+#runComment .textwrapper { 
+    margin:5px 0; 
+    padding:3px; 
+} 
+ 
+ 
+.checkAllCase {
+	padding-left: 2px;
+	padding-right: 3px;
+	color: #EEEEEE;
+}
+
+.checkAllStep {
+	padding-left: 2px;
+	padding-right: 3px;
+}
+
+.radioLabel {
+	padding-right: 12px;
+}
+
+#defectStatus {
+	display:none;
+	color: red;
+}
+
+#defectRecordsPopup {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	height: 100%;
+	border: 1px solid #AAAAAA;
+	background: #f7f7f7;
+	display: none;
+	horizontal-align: center;
+	vertical-align: middle;
+	overflow: auto;
+	font-size: 10pt;
+}
+
+#defectRecordsPopup .header {
+	background-color: #CCCCCC;
+	color: #333333;
+}
+
+.updDefect {
+	float: right;
+	cursor: pointer;
+}
+
+.updDefect:hover {
+	color: blue;
+}
+
+.checkMark {
+	padding-right: 5x;
+}
+
+#almClose {
+	float: right;
+	cursor:pointer;
+	font-size: large;
+	position: relative;
+	top: -4px;
+}
+
+#almClose:hover {
+	color: orange;
+}
+
+.defLink {
+	color: blue;
+	cursor: pointer;
+}
+
+.defLink:hover {
+	text-decoration: underline;
+}
+
+#legends {
+	padding: 3px;
+	height: 25px;
+	background-color: #F0F0F0;
+}
+
+#legends ul {
+	padding-left: 0px;
+ 	list-style: none; 
+ 	display:inline; 
+}
+
+#legends ul li {
+	display: inline;
+	margin-right: 3px;
+	padding: 2px;
+}
+
+#runComment {
+	padding-left: 5px;
+}

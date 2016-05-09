@@ -1,0 +1,18 @@
+<div class="view" id="{{elemid}}" ng-show="ribbon.views[elemid]" 
+	ng-draggable ng-drag-data="elemid" ng-drag-success="alert(elemid);vewDraggedTo($data, $event)">
+	<div class="viewHeader">
+		<span class="viewTitle">{{title}}</span>
+		<span class="btnTO clickable viewClose" style="float: right;" 
+			ng-click="closeView(elemid);">x
+		</span>
+	</div>
+	<form ng-Enter="okView(elemid);">
+		<div class="viewArea autoResize">
+			<div class="Content" ng-transclude></div>
+			<div class="cmdBtn" ng-hide="modal">
+				<button class="btnOK btn btn-primary" ng-click="okView(elemid);">OK</button>
+			</div>
+		</div>
+	</form>
+</div>
+	

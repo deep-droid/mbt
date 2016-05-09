@@ -1,0 +1,32 @@
+html, body {
+    margin:0;
+    padding:0;
+	padding-left: 0px;
+    height:100%;
+    border:none;
+	background-color: #FCFCFC;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	overflow: auto;
+}
+
+tbody tr:hover {
+	background-color: #F2F7F8;
+}
+
+td, th {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+html, body {
+	height: 100%;
+}
+
+.expired {
+	background-color: orange;
+}
+
+.licExhausted {
+	background-color: yellow;
+}

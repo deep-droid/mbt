@@ -1,0 +1,43 @@
+html, body {
+    margin:0;
+    padding:0;
+	padding-left: 0px;
+    height:100%;
+    border:none;
+	background-color: #F5F5F5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+table td, table th {
+	padding-left: 3px;
+}
+
+
+.user .type {
+	background: #B5DA57;
+	color: #660000;
+	font-size: 0.75em;
+	font-style: italic;
+	margin-right: 2px;
+}
+
+.sys .type {
+	color: #660000;
+	background: #CCCCFF;
+	font-size: 0.75em;
+	font-style: italic;
+	margin-right: 2px;
+}
+
+.hideFilter, .showFilter {
+	margin-left: 5px;
+	font-weight: none;
+	font-size: 0.85em;
+	height: 18px;
+}
+
+.showFilter span {
+	padding-left: 5px;
+}

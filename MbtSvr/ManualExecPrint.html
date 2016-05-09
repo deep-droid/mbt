@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- http://localhost:8888/model/report/tcExec.html?rptName=testcase2.js  -->
+<head>
+	<title>TestOptimal IDE</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<LINK REL="SHORTCUT ICON" HREF="favicon.ico">
+    <script src="packages/jquery-2.2.0.min.js"></script>
+	<LINK href="IDE_ManualExec/seqout.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-app="Main" ng-controller="TestCaseCtrl">
+
+	<div id="TestCaseApp">
+		<div class="banner">
+			<table width="100%" border="0">
+				<tr>
+					<td>
+						<a href="{{TestCase.LogoImgURL}}"><img border="0" class="logoImg" ng-src="{{TestCase.LogoImg}}"/>{{TestCase.Company}}</a>
+						<span id="reportTitle">
+							Test Cases for Model {{TestCase.ModelName}}
+						</span> 
+						<span class="TO_Release">
+							<a class="TOLink" href="http://testoptimal.com/">TestOptimal {{TestCase.TOVersion}}</a>
+						</span>
+					</td>
+				</tr>
+			</table>
+		</div> 
+		<table border="1" id="headerTable" width="100%">
+			<tr>
+				<td class="label" align="left">Model&#160;Name:</td><td colspan="3" align="left">{{TestCase.ModelName}}</td> 
+			</tr>
+			<tr>
+				<td class="label" align="left">Description:</td><td colspan="3" align="left">{{TestCase.ModelDescription}}</td>
+			</tr>
+			<tr>
+				<td class="label" align="left">AUT&#160;Version:</td><td align="left">{{TestCase.AUTVersion}}</td> 
+				<td class="label" align="left">Requirements&#160;Version:</td><td align="left">{{TestCase.RequirementsVersion}}</td> 
+			</tr>
+			<tr>
+				<td class="label" align="left">Model&#160;Version:</td><td align="left">{{TestCase.ModelVersion}}</td> 
+				<td class="label" align="left">TestOptimal&#160;Version:</td><td align="left">{{TestCase.TOVersion}}</td> 
+			</tr>
+			<tr>
+				<td class="label" align="left">Sequencer:</td><td align="left">{{TestCase.Sequencer}} (seed: {{TestCase.Seed}})</td> 
+				<td class="label" rowspan="4" valign="top" align="left">Stop Conditions:</td>
+				<td rowspan="4" valign="top" align="left">
+						<span ng-if="TestCase.StopConditions.TransitionCoverage>0">Stop Coverage: {{TestCase.StopConditions.TransitionCoverage?TestCase.StopConditions.TransitionCoverage:''}}<br/></span>
+						<span ng-if="TestCase.StopConditions.TraversalCount>0">Stop Traversal Count: {{TestCase.StopConditions.TraversalCount}}<br/></span>
+						<span ng-if="TestCase.StopConditions.ElapseTime > 0"Stop Time: {{TestCase.StopConditions.ElapseTime}} mins<br/></span>
+						<span ng-if="TestCase.StopConditions.TestCaseCount > 0">Stop TestCase Count: {{TestCase.StopConditions.TestCaseCount}}<br/></span>
+						<span ng-if="TestCase.StopConditions.ExceptionCount > 0">Stop Exception Count: {{TestCase.StopConditions.ExceptionCount}}<br/></span>
+				</td> 
+			</tr>
+			<tr>
+				<td class="label" align="left">Generation Date:</td><td align="left">{{TestCase.PluginID}}, {{TestCase.GenerationDate}}</td> 
+			</tr>
+			<tr>
+				<td class="label" align="left">Coverage Type:</td>
+				<td align="left">{{TestCase.CoverateType}}</td> 
+			</tr>
+			<tr>
+				<td class="label" valign="top" align="left" nowrap="nowrap">Transition Coverage:</td><td valign="top" align="left">{{TestCase.TransitionCoverage}}% 
+				</td> 
+			</tr>
+			<tr>
+				<td class="label" valign="top" align="left" nowrap="nowrap">Test Case Count:</td><td valign="top" align="left">{{TestCase.TestCaseList.length}} 
+				</td> 
+				<td class="label" valign="top" align="left" nowrap="nowrap">Duplicate TestCases Removed:</td><td valign="top" align="left">{{TestCase.DuplicateTestCasesRemoved}} 
+				</td> 
+			</tr>
+		</table> 
+	</div> 
+	
+	<h2><a name="model">Model / Coverage Graph</a></h2>
+	<center class="lengend">Legend: <span style="color: #006600">DarkGreen - Covered</span>, <span style="color: #FF9900;">Gold - Partially Covered</span>, <span style="color: #CC0033">Red - Not Covered</span></center>
+	<div class="graph" align="center">
+		<a ng-if="TestCase.LinkCoverageGraph=='Y'" href="{{TestCase.TestCaseReportName}}/coverage.png">Coverage Graph</a>
+		<img ng-if="TestCase.LinkCoverageGraph!='Y'" border="0" ng-src="{{TestCase.TestCaseReportName && TestCase.TestCaseReportName + '/coverage.png' || ''}}"/>
+	</div>
+
+	<h2><a name="INDEX">Requirement Traceability Table</a></h2>
+	<table border="1" cellpadding="0px" cellspacing="0px" id="tcList" style="margin-top: 2px;" width="100%">
+		<tr class="summaryHead">
+			<th width="1%" align="center" class="tlabel" valign="middle" rowspan="2">TC#</th>
+			<th width="1%" align="center" class="tlabel" valign="middle" rowspan="2" title="Total weight of all transition in test case">Wt</th>
+			<th width="1%" align="center" class="tlabel" valign="middle" rowspan="2" title="Number of transitions in test case">Sz</th>
+			<th align="center" class="tlabel" colspan="{{TestCase.RequirementList.length}}">
+				Requirement Tags
+				<a id="tagMode" href="javascript:void();" ng-click="tagShowMode=(tagShowMode=='show tag name'?'hide tag name':'show tag name')" 
+					ng-model="tagShowMode" ng-init="tagShowMode='show tag name'">{{tagShowMode}}
+				</a>
+			</th>
+		</tr>
+		<tr class="summaryHead">
+			<th align="center" ng-repeat="reqObj in TestCase.RequirementList" 
+				title="Priority {{reqObj.priority}}, requirement tag {{reqObj.tag}}">
+				{{TestCase.RequirementList.indexOf(reqObj)+1}}<sup><small class="p_{{reqObj.priority}}">{{reqObj.priority==''?'':reqObj.priority.substring(0,1)}}</small></sup>
+				{{tagShowMode=='hide tag name'? reqObj.tag: ''}}
+			</th>
+		</tr>
+		<tr ng-repeat="tcObj in TestCase.TestCaseList">
+			<th align="left" class="colTC {{tcObj.status}}">
+				<a href="#{{tcObj.tcID}}">{{tcObj.tcID}} {{tcObj.pathName}}</a>
+			</th>
+			<th align="center">{{tcObj.weight}}</th>
+			<th align="center">{{tcObj.stepList.length}}</th>
+			<td align="center" ng-repeat="tagObj in TestCase.RequirementList"
+				class="{{tcObj.RequirementList.indexOf(tagObj.tag)>=0?'covered':''}} req_{{tcObj.ReqStatusList[tagObj.tag]}}"
+				ng-click="alert(tagObj.tag);" ng-switch="tcObj.ReqStatusList[tagObj.tag]">
+					<span ng-switch-when="passed">&#x2713;</span>
+					<span ng-switch-when="partial">&#x2713;</span>
+					<span ng-switch-when="failed">&#x2717;</span>
+					<span ng-switch-when="blocked">&#x2717;</span>
+			</td>
+		</tr>
+	</table>
+	<div class="legends">Requirement Tags:
+		<ul id="reqList" style="list-style:none; margin-left: 0px; padding-left: 0px;">
+			<li ng-repeat="reqObj in TestCase.RequirementList">
+				{{TestCase.RequirementList.indexOf(reqObj)+1}}<sup><small class="p_{{reqObj.priority}}">{{reqObj.priority==''?'':reqObj.priority.substring(0,1)}}</small></sup>: {{reqObj.tag}}
+			</li>
+		</ul>
+	</div>
+	
+	<div class="legends">Execution Status: 
+		<ul id="legendStatus">
+			<li> Not Covered</li>
+			<li class="covered">Covered</li>
+			<li class="covered"><span class="req_partial">&#x2713;</span> - Partially Passed</li>
+			<li class="covered"><span class="req_passed">&#x2713;</span> - Passed</li>
+			<li class="covered"><span class="req_failed">&#x2717;</span> - Failed</li>
+			<li class="covered"><span class="req_blocked">&#x2717;</span> - Blocked</li>
+		</ul>	
+	</div>
+
+	<div style="display: block;" id="runComment"> 
+		<div class="label">Run Specific Details:</div>
+		<textarea id="runNote" ng-model="TestCase.runNote"></textarea>
+	</div> 
+
+	<h2 class="summaryH2"><a name="SUMMARY">Execution Summary</a> 
+		<a href="javascript:void();" ng-click="calcExecSum();" id="updateExecSum">Update</a>
+	</h2> 
+	<div class="index">
+		<table id="summaryTbl" width="100%" border="1" cellspacing="2" cellpadding="2">
+			<thead>
+				<tr id="summaryHead">
+					<th>Test Case Matrix</th><th>Measure (count / %)</th><th width="*">Test Case List</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Total Test Cases</td>
+					<td class="measure">{{ExecSum.tcNum}}</td>
+					<td class="measureList"></td>
+				</tr>
+				<tr>
+					<td>Completed</td>
+					<td class="measure">{{ExecSum.tcCount.done}}</td>
+					<td class="measureList">
+						<a ng-repeat="tcID in ExecSum.tcStatusList.done" href="#{{tcID}}">{{tcID}}</a>
+					</td>
+				</tr>					
+				<tr>
+					<td align="right">Passed</td>
+					<td class="measure">{{ExecSum.tcCount.passed}}</td>
+					<td class="measureList">
+						<a ng-repeat="tcID in ExecSum.tcStatusList.passed" href="#{{tcID}}">{{tcID}}</a>
+					</td>
+				</tr>					
+				<tr >
+					<td align="right">Failed</td>
+					<td class="measure">{{ExecSum.tcCount.failed}}</td>
+					<td class="measureList">
+						<a ng-repeat="tcID in ExecSum.tcStatusList.failed" href="#{{tcID}}">{{tcID}}</a>
+					</td>
+				</tr>					
+				<tr>
+					<td align="right">Blocked</td>
+					<td class="measure">{{ExecSum.tcCount.blocked}}</td>
+					<td class="measureList">
+						<a ng-repeat="tcID in ExecSum.tcStatusList.blocked" href="#{{tcID}}">{{tcID}}</a>
+					</td>
+				</tr>
+				<tr>
+					<td>Partially Passed</td>
+					<td class="measure">{{ExecSum.tcCount.partial}}</td>
+					<td class="measureList">
+						<a ng-repeat="tcID in ExecSum.tcStatusList.partial" href="#{{tcID}}">{{tcID}}</a>
+					</td>
+				</tr>
+				<tr>
+					<td>Not Executed</td>
+					<td class="measure">{{ExecSum.tcCount.none}}</td>
+					<td class="measureList">
+						<a ng-repeat="tcID in ExecSum.tcStatusList.none" href="#{{tcID}}">{{tcID}}</a>
+					</td>
+				</tr>
+				<thead>
+					<tr id="summaryHead">
+						<th>Requirement Matrix</th><th>Measure (count / %)</th><th width="*">Requirement List</th>
+					</tr>
+				</thead>
+				<tr>
+					<td title="Total number of requirements">Total Requirements</td>
+					<td class="measure">{{ExecSum.reqNum}}</td>
+					<td class="measureList"></td>
+				</tr>					
+				<tr>
+					<td title="Requirements fully executed including passed, failed and blocked">Completed</td>
+					<td class="measure">{{ExecSum.reqCount.done}}</td>
+					<td class="measureList">
+						<span ng-repeat="reqTag in ExecSum.reqStatusList.done">{{reqTag}}</span>
+					</td>
+				</tr>					
+				<tr>
+					<td align="right" title="Requirements fully executed and all passed">Passed</td>
+					<td class="measure">{{ExecSum.reqCount.passed}}</td>
+					<td class="measureList">
+						<span ng-repeat="reqTag in ExecSum.reqStatusList.passed">{{reqTag}}</span>
+					</td>
+				</tr>					
+				<tr>
+					<td align="right" title="Requirements partially executed with some failures">Failed</td>
+					<td class="measure">{{ExecSum.reqCount.failed}}</td>
+					<td class="measureList">
+						<span ng-repeat="reqTag in ExecSum.reqStatusList.failed">{{reqTag}}</span>
+					</td>
+				</tr>					
+				<tr>
+					<td align="right" title="Requirements either fully or partially executed with blocked steps">Blocked</td>
+					<td class="measure">{{ExecSum.reqCount.blocked}}</td>
+					<td class="measureList">
+						<span ng-repeat="reqTag in ExecSum.reqStatusList.blocked">{{reqTag}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td title="Requirements partially executed and so far all passed.">Partially Passed</td>
+					<td class="measure">{{ExecSum.reqCount.partial}}</td>
+					<td class="measureList">
+						<span ng-repeat="reqTag in ExecSum.reqStatusList.partial">{{reqTag}}</span>
+					</td>
+				</tr>					
+				<tr>
+					<td title="Requirements not started yet">Not Executed</td>
+					<td class="measure">{{ExecSum.reqCount.none}}</td>
+					<td class="measureList">
+						<span ng-repeat="reqTag in ExecSum.reqStatusList.none">{{reqTag}}</span>
+					</td>
+				</tr>					
+			</tbody>
+		
+		</table>
+	</div>
+	<hr />
+
+	<h2 class="preambleH2"><a name="PREAMBLE">PREAMBLE</a></h2> 
+	<div id="PREAMBLE" class="testcasedetail" style="horizontal-align: left"> 
+		<ul>
+			<li ng-repeat="msg in TestCase.mbtStartList">{{msg.msg}}</li>
+		</ul>
+	</div> 
+	<hr />
+
+	<DIV ng-repeat="tcObj in TestCase.TestCaseList">
+		<div class="index"><a href="#INDEX">Test Case List</a></div> 
+		<h2 class="testcaseH2">
+			<a name="{{tcObj.tcID}}">{{tcObj.tcID}}{{tcObj.pathName==''?'':' - ' + tcObj.pathName}}</a>
+			<span class="subTitle"> (weight: {{tcObj.weight}}, length: {{tcObj.stepList.length}})</span>
+		</h2> 
+		<span class="backTCList"><a href="#INDEX">Test Case List</a></span>
+		<div class="graph" align="center">
+			<a ng-if="TestCase.LinkGraph=='Y'" href="{{tcObj.graphFileName}}">{{tcObj.tcID}} Graph</a>
+			<img ng-if="TestCase.LinkGraph!='Y'" border="0" ng-src="{{tcObj.graphFileName}}"/>
+		</div>
+		<h4>Requirements: 
+			<span ng-repeat="reqTag in tcObj.RequirementList" 
+				class="tag" class="p_{{getReqDefn(reqTag).priority}}">
+				{{reqTag}}<sup><small>{{getReqDefn(reqTag).priority}}</small></sup>
+			</span>
+		</h4>
+		<h4>Test Setup / Pre-conditions</h4> 
+		<ul> 
+			<li ng-repeat="preCond in tcObj.preList">{{preCond.msg}}</li>
+		</ul>
+		<table border="1" width="100%" cellpadding="5" cellspacing="0" class="testcase" > 
+			<tr class="tableHeader">
+				<th class="tlabel" width="2%">Step</th> 
+				<th class="tlabel">Action</th> 
+				<th class="tlabel">Assert Expected Results 
+					<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(tcObj, undefined, 'passed')">passed</a>
+					<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(tcObj, undefined, 'failed')">failed</a>
+					<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(tcObj, undefined, 'blocked')">blocked</a>
+					<a href="javascript:void(0);" class="checkAllCase" ng-click="checkAll(tcObj, undefined, 'none')">none</a>
+				</th>
+			</tr>  
+			<tr ng-repeat="stepObj in tcObj.stepList">
+				<td valign="top" align="right" class="colNum">{{tcObj.stepList.indexOf(stepObj) + 1}}</td> 
+				<td align="left" valign="top" class="colAction">
+					<span ng-if="stepObj.From!=stepObj.At"><b>From:</b>&#160;{{stepObj.FROM}}<br/></span>
+					<b>Do:</b>&#160;{{stepObj.transID}}
+					<ul>
+						<li ng-repeat="actionObj in stepObj.actions"><span dynamic="actionObj.msg"></span></li>
+					</ul>
+				</td>
+				<td valign="top" align="left" class="colVerify">
+					<span ng-if="stepObj.From!=stepObj.At"><b>At:</b>&#160;{{stepObj.At}}<br/></span>
+					<b>Expected Results:</b>
+						<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(tcObj, stepObj, 'passed');">passed</a>
+						<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(tcObj, stepObj, 'failed');">failed</a>
+						<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(tcObj, stepObj, 'blocked');">blocked</a>
+						<a href="javascript:void(0);" class="checkAllStep" ng-click="checkAll(tcObj, stepObj, 'none');">none</a>
+					<br/>
+					<ul class="assertItems">
+						<li ng-repeat="verifyObj in stepObj.verifyList" class="assertItem">
+							<span dynamic="verifyObj.msg"></span><br/>
+							Requirements: 
+							<span ng-repeat="tag in verifyObj.tags">
+								<a name="{{tcObj.tcID}}_{{tag}}">
+									<span title="Priority " class="p_{{tag.priority}}">
+										<span class="tag">{{tag}}</span>
+										<sup>{{tag.priority}}</sup>
+									</span>&#160;
+								</a>
+							</span>
+							<span ng-if="verifyObj.assertID.length>0">({{verifyObj.assertID}})</span>
+							<span ng-if="verifyObj.type=='assert'" class="verifyStatus">
+								<br/>
+								<span ng-click="setAssertItemStatus(tcObj, stepObj, verifyObj, 'passed')" class="statusLeft {{verifyObj.status=='passed'? 'statusSet':''}}">Passed</span>
+								<span ng-click="setAssertItemStatus(tcObj, stepObj, verifyObj, 'failed')" class="{{verifyObj.status=='failed'? 'statusSet':''}}">Failed</span>
+								<span ng-click="setAssertItemStatus(tcObj, stepObj, verifyObj, 'blocked')" class="{{verifyObj.status=='blocked'? 'statusSet':''}}">Blocked</span>
+								<span ng-click="setAssertItemStatus(tcObj, stepObj, verifyObj, 'none')" class="statusRight {{verifyObj.status=='none'? 'statusSet':''}}">None</span>
+							</span>
+							<br/>
+							<textarea class="statusCmt" ng-model="verifyObj.statusCmt"></textarea>
+							<br/>
+						</li>
+						<li ng-repeat="postCond in stepObj.postConditions">{{postCond}}</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<h4>Test Teardown / Post-conditions</h4> 
+		<ul> 
+			<li ng-repeat="postCond in tcObj.postList">{{postCond.msg}}</li>
+		</ul>
+		<table width="100%" class="testcaseFooter" border="0">
+			<tr>
+				<td width="1%">Tester&nbsp;Name:</td><td><input class="testerName" type="text" ng-model="tcObj.testerName"/></td>
+				<td align="right">Date:</td><td><input class="testedDate" type="text" ng-model="tcObj.testedDate"/></td>
+				<td align="right">Effort:</td><td><input type="text" class="testEffort" ng-model="tcObj.testEffort"/></td>
+			</tr>
+			<tr>
+				<td valign="top">Notes:</td><td colspan="5"><textarea class="testerNote" ng-model="tcObj.testerNote"></textarea></td>
+			</tr>
+		</table>
+	</DIV>
+	<hr />
+	<h4>POSTAMBLE</h4> 
+	<ul> 
+		<li ng-repeat="postCond in TestCase.mbtEndList">{{postCond.msg}}</li>
+	</ul>
+	<hr />
+	<div>
+		<input type="button" ng-click="resetAll();" title="Clear all fields" value="Reset" />
+		<input type="button" onclick="window.print();" title="Print this page. Make sure your browser is configured to print background color/images.  You may print to pdf if you have doPDF installed." value="Print"/>
+		<input type="button" onclick="resizeAll();" title="Resize all over sized graphs to fill the width of the current window." value="Resize Images"/>
+	</div>
+    <script src="packages/angular-1.2.21/angular.min.js"></script>
+    <script src="IDE_ManualExec/seqout_app.js"></script>
+	<script src="IDE_Common/packages/dynamicHtml.js"></script>
+</body>
+</html>

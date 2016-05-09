@@ -1,0 +1,132 @@
+<style>
+	#reqMatrix {
+		margin-top: 4px;
+	}
+	
+	#runNote {
+		margin-left: 3px;
+	}
+</style>
+
+<div ng-controller="StatusCtrl" style="overflow: auto; height: {{viewHeight-headerHeight}}px;">
+	<table id="summaryTbl"  class="table">
+		<colgroup>
+			<col  valign="top"/>
+			<col  valign="top"/>
+			<col  valign="top"/>
+		</colgroup>
+		<thead>
+			<tr class="summaryHead">
+				<th>Test Case Matrix</th><th>Measure (count / %)</th><th width="*">Test Case List</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Total Test Cases</td>
+				<td class="measure">{{ExecSum.tcNum}}</td>
+				<td class="measureList"></td>
+			</tr>
+			<tr>
+				<td>Completed</td>
+				<td class="measure">{{ExecSum.tcCount.done}}</td>
+				<td class="measureList">
+					<a ng-repeat="tcID in ExecSum.tcStatusList.done" ng-click="setCurTestCase(tcID)">{{tcID}}</a>
+				</td>
+			</tr>					
+			<tr>
+				<td><span class="subItem">Passed</span></td>
+				<td class="measure">{{ExecSum.tcCount.passed}}</td>
+				<td class="measureList">
+					<a ng-repeat="tcID in ExecSum.tcStatusList.passed" ng-click="setCurTestCase(tcID)">{{tcID}}</a>
+				</td>
+			</tr>					
+			<tr >
+				<td><span class="subItem">Failed</span></td>
+				<td class="measure">{{ExecSum.tcCount.failed}}</td>
+				<td class="measureList">
+					<a ng-repeat="tcID in ExecSum.tcStatusList.failed" ng-click="setCurTestCase(tcID)">{{tcID}}</a>
+				</td>
+			</tr>					
+			<tr>
+				<td><span class="subItem">Blocked</span></td>
+				<td class="measure">{{ExecSum.tcCount.blocked}}</td>
+				<td class="measureList">
+					<a ng-repeat="tcID in ExecSum.tcStatusList.blocked" ng-click="setCurTestCase(tcID)">{{tcID}}</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Partially Passed</td>
+				<td class="measure">{{ExecSum.tcCount.partial}}</td>
+				<td class="measureList">
+					<a ng-repeat="tcID in ExecSum.tcStatusList.partial" ng-click="setCurTestCase(tcID)">{{tcID}}</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Not Executed</td>
+				<td class="measure">{{ExecSum.tcCount.none}}</td>
+				<td class="measureList">
+					<a ng-repeat="tcID in ExecSum.tcStatusList.none" ng-click="setCurTestCase(tcID)">{{tcID}}</a>
+				</td>
+			</tr>
+			<thead>
+				<tr class="summaryHead">
+					<th>Requirement Matrix</th><th>Measure (count / %)</th><th width="*">Requirement List</th>
+				</tr>
+			</thead>
+			<tr>
+				<td title="Total number of requirements">Total Requirements</td>
+				<td class="measure">{{ExecSum.reqNum}}</td>
+				<td class="measureList"></td>
+			</tr>					
+			<tr>
+				<td title="Requirements fully executed including passed, failed and blocked">Completed</td>
+				<td class="measure">{{ExecSum.reqCount.done}}</td>
+				<td class="measureList">
+					<span ng-repeat="reqTag in ExecSum.reqStatusList.done" class="reqItem">{{reqTag}}</span>
+				</td>
+			</tr>					
+			<tr>
+				<td title="Requirements fully executed and all passed"><span class="subItem">Passed</span></td>
+				<td class="measure">{{ExecSum.reqCount.passed}}</td>
+				<td class="measureList">
+					<span ng-repeat="reqTag in ExecSum.reqStatusList.passed" class="reqItem">{{reqTag}}</span>
+				</td>
+			</tr>					
+			<tr>
+				<td title="Requirements partially executed with some failures"><span class="subItem">Failed</span></td>
+				<td class="measure">{{ExecSum.reqCount.failed}}</td>
+				<td class="measureList">
+					<span ng-repeat="reqTag in ExecSum.reqStatusList.failed" class="reqItem">{{reqTag}}</span>
+				</td>
+			</tr>					
+			<tr>
+				<td title="Requirements either fully or partially executed with blocked steps"><span class="subItem">Blocked</span></td>
+				<td class="measure">{{ExecSum.reqCount.blocked}}</td>
+				<td class="measureList">
+					<span ng-repeat="reqTag in ExecSum.reqStatusList.blocked" class="reqItem">{{reqTag}}</span>
+				</td>
+			</tr>
+			<tr>
+				<td title="Requirements partially executed and so far all passed.">Partially Passed</td>
+				<td class="measure">{{ExecSum.reqCount.partial}}</td>
+				<td class="measureList">
+					<span ng-repeat="reqTag in ExecSum.reqStatusList.partial" class="reqItem">{{reqTag}}</span>
+				</td>
+			</tr>					
+			<tr>
+				<td title="Requirements not started yet" valign="top">Not Executed</td>
+				<td class="measure" valign="top">{{ExecSum.reqCount.none}}</td>
+				<td class="measureList">
+					<span ng-repeat="reqTag in ExecSum.reqStatusList.none" class="reqItem">{{reqTag}}</span> 
+				</td>
+			</tr>					
+		</tbody>
+	
+	</table>
+</div>
+
+<div style="display: block; height: 25px;" id="runComment"> 
+	<div class="summaryHead" style="font-weight:bold;">Run Specific Details:</div>
+	<textarea id="runNote" ng-model="TestCase.runNote" ng-change="setChangePending();"></textarea>
+</div> 
+

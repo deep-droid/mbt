@@ -1,0 +1,16 @@
+
+<style>
+	.labelNoWrap {
+		white-space:nowrap;
+	}
+	
+	.alertMsg {
+		padding-left: 5px;
+	}
+</style>
+<div ng-controller="AlertCtrl" id="alertDialog">
+	<form ng-Enter="closeAlert()" ng-ESCAPE="closeAlert()">
+		<input type="text" class="autoClose" style="width:1px; border: 0px;"/>
+		<div class="alertMsg" ng-repeat="msgObj in msgList track by $index"><img class="icon" ng-src="img/{{msgObj.msgType}}.png"/> <span dynamic="msgObj.msgText"></span></div> 
+	</form>
+</div>

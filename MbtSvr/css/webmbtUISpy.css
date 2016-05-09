@@ -1,0 +1,70 @@
+html, body {
+    margin:0;
+    padding:0;
+	padding-left: 0px;
+    height:100%;
+    border:none;
+	background-color: #F5F5F5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.headerLabel {
+	position: relative;
+	top: 3px;
+}
+
+button {
+	position: relative;
+	top: -15px;
+	height: 22px;
+	font-size: 0.75em;
+}
+
+.ui {
+	overflow: hidden;
+}
+
+.uiHover {
+	background-color: orange;
+	opacity: .5;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+}
+
+
+.mapped {
+	background-color: blue;
+	opacity: .10;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+	filter: alpha(opacity=10);
+}
+
+.innerDiv {
+	height:100%;
+	width:100%;
+}
+
+.ind {
+	float: left;
+	height: 5px;
+	width: 5px;
+}
+
+#uiElemProp {
+	font-size: x-small;
+}
+
+#uiElemProp tr, #uiElemProp tr td, #uiElemProp input {
+	height: 10px;
+	font-size: x-small;
+}
+
+#uiElemProp input {
+	width: 210px;
+}
+
+.zControl {
+	z-index: 1;
+}

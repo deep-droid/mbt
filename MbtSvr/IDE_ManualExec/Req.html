@@ -1,0 +1,88 @@
+<style>
+
+	span.reqItem {
+		border: 1px solid #AAAAAA;
+		margin: 3px;
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	
+	span.reqItem:hover {
+		background-color: #F0F0F0;
+	}
+		
+	#legendStatus {
+		list-style: none; 
+		padding-left:0px; 
+		margin-left:0px;
+		display: inline;
+	}
+	 	
+	#legends {
+		font-size: 10pt;
+		padding-left: 5px;
+		border-top: 1px solid #AAAAAA;
+	}
+	
+	.summaryHead {
+		background-color: #F5F5F5;
+	}
+	
+</style>
+
+<div ng-controller="ReqCtrl" id="ManualExecReq" style="overflow: auto; height: {{viewHeight-headerHeight}}px;">
+	<table border="0" id="reqMatrix" class="table">
+		<tr class="summaryHead">
+			<th width="1%" align="center" rowspan="2">Test&nbsp;Case</th>
+			<th width="1%" align="center" rowspan="2" title="Total weight of all transition in test case">Weight</th>
+			<th width="1%" align="center" rowspan="2" title="Number of transitions in test case">Steps</th>
+			<th style="text-align: center" colspan="{{TestCase.RequirementList.length}}">
+				Requirement Tags
+				<small><a id="tagMode" href="javascript:void();" ng-click="tagShowMode=(tagShowMode=='show tag name'?'hide tag name':'show tag name')" 
+					ng-model="tagShowMode" ng-init="tagShowMode='show tag name'">{{tagShowMode}}
+				</a></small>
+			</th>
+		</tr>
+		<tr class="summaryHead">
+			<td align="center" ng-repeat="reqObj in TestCase.RequirementList" 
+				title="Priority {{reqObj.priority}}, requirement tag {{reqObj.tag}}">
+				<span ng-hide="tagShowMode=='hide tag name'">{{TestCase.RequirementList.indexOf(reqObj)+1}}<sup><small class="p_{{reqObj.priority}}">{{reqObj.priority==''?'':reqObj.priority.substring(0,1)}}</small></sup></span>
+				<span ng-show="tagShowMode=='hide tag name'"><small>{{reqObj.tag}}</small></span>
+			</td>
+		</tr>
+		<tr class="tcID" ng-repeat="tcObj in TestCase.TestCaseList">
+			<th align="right" class="colTC" style="white-space: nowrap;">
+				<span style="width: 5px;" class="{{tcObj.status}}">&nbsp;</span>
+				<span ng-click="setCurTestCase(tcObj)">{{tcObj.tcID}} {{tcObj.pathName}}</span>
+			</th>
+			<td align="center">{{tcObj.weight}}</td>
+			<td align="center">{{tcObj.stepList.length}}</td>
+			<td align="center" ng-repeat="tagObj in TestCase.RequirementList"
+				class="{{tcObj.RequirementList.indexOf(tagObj.tag)>=0?'covered':''}} req_{{tcObj.ReqStatusList[tagObj.tag]}}"
+				ng-click="alert(tagObj.tag);" ng-switch="tcObj.ReqStatusList[tagObj.tag]">
+					<span ng-switch-when="passed">&#x2713;</span>
+					<span ng-switch-when="partial">&#x2713;</span>
+					<span ng-switch-when="failed">&#x2717;</span>
+					<span ng-switch-when="blocked">&#x2717;</span>
+			</td>
+		</tr>
+	</table>
+	
+	<div id="legends">
+		<span>Execution Status:</span> 
+		<ul id="legendStatus">
+			<li style="background-color: #FFFFFF;"> Not Covered</li>
+			<li class="covered">Covered</li>
+			<li class="covered"><span class="req_partial">&#x2713;</span> - Partially Passed</li>
+			<li class="covered"><span class="req_passed">&#x2713;</span> - Passed</li>
+			<li class="covered"><span class="req_failed">&#x2717;</span> - Failed</li>
+			<li class="covered"><span class="req_blocked">&#x2717;</span> - Blocked</li>
+		</ul>	
+		<div>
+			<span style="border: none;">Requirement Tags</span>:
+			<span ng-repeat="reqObj in TestCase.RequirementList" class="reqItem">
+					{{TestCase.RequirementList.indexOf(reqObj)+1}}<sup><small class="p_{{reqObj.priority}}">{{reqObj.priority==''?'':reqObj.priority.substring(0,1)}}</small></sup>: {{reqObj.tag}}
+			</span>
+		</div>
+	</div>
+</div>

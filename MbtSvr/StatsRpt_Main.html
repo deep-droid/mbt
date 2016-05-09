@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>StatsReport - TestOptimal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<LINK REL="SHORTCUT ICON" HREF="favicon.ico">
+    <script src="packages/jquery-2.2.0.min.js"></script>
+    <script src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+</head>
+<body ng-app="Main" ng-controller="mainCtrl" ng-cloak>
+	<div ng-controller="RibbonCtrl">
+		<div class="modalBkg modalMode" ng-show="modalMode"></div>
+		<div class="modalBkg dragMode" ng-show="dragMode"></div>
+		<div ng-include="'IDE_RibbonUI/ribbon.html'">
+		</div>
+	
+		<div id="tab-target" style="height: {{viewHeight}}px;">
+			<div id="Batch" ng-include="'IDE_StatsRpt/Batch/Batch.html'" ng-show="ribbon.curWin=='Batch'">
+			</div>
+			<div id="Model" ng-include="'IDE_StatsRpt/Model/Model.html'" ng-show="ribbon.curWin=='Model'">
+			</div>
+			<div id="TestCase" ng-include="'IDE_StatsRpt/TestCase/TestCase.html'" ng-show="ribbon.curWin=='TestCase'">
+			</div>
+			<div id="Run" ng-include="'IDE_StatsRpt/Requirement/Requirement.html'" ng-show="ribbon.curWin=='Requirement'">
+			</div>
+			<div class="target" id="Help" ng-include="'IDE_Common/Help/Help.html'" ng-show="ribbon.curWin=='Help'">
+			</div>
+			<div class="target" id="RibbonCust" ng-include="'IDE_RibbonUI/ribbonCust.html'" ng-show="ribbon.curWin=='RibbonCust'">
+			</div>
+		</div>
+		
+		<view data-viewid="viewSysInfo" data-title="System Configuration"
+			data-height="460" data-width="400" data-left="200" data-top="100" data-class="infoView sysInfo">
+			<div ng-include="'IDE_Common/Help/SysInfo.html'"></div>
+		</view>
+		
+		<view data-viewid="viewLicInfo" data-title="Manage License"
+			data-height="500" data-width="500" data-left="center" data-top="center" data-class="infoView">
+			<div ng-include="'IDE_Common/Help/LicInfo.html'"></div>
+		</view>
+		
+		<view data-viewid="viewHelpAbout" data-title="About TestOptimal" data-modal="true"
+			data-height="320" data-width="400" data-left="center" data-top="center" data-class="aboutView">
+			<div ng-include="'IDE_Common/Help/About.html'"></div>
+		</view>
+
+		<view data-viewid="viewCheckUpdates" data-title="TestOptimal Updates" data-modal="true"
+			data-height="200" data-width="400" data-left="center" data-top="center" data-class="aboutView">
+			<div ng-include="'IDE_Common/Help/CheckUpdates.html'"></div>
+		</view>
+
+		<view data-viewid="viewConsole" data-title="Console Log" data-modal="true"
+			data-height="200" data-width="400" data-left="center" data-top="center" data-class="alertView">
+			<div ng-include="'IDE_Common/Views/ConsoleMsg.html'"></div>
+		</view>
+
+		<view data-viewid="viewAlert" data-title="Alert" data-modal="true"
+			data-height="200" data-width="400" data-left="center" data-top="center" data-class="alertView">
+			<div ng-include="'IDE_Common/Views/AlertDialog.html'"></div>
+		</view>
+	</div>
+
+    <script src="packages/angular-1.2.21/angular.min.js"></script>
+    <script src="packages/angular-1.2.21/ui-bootstrap-tpls-0.11.0.js"></script>
+    <link href="packages/angular-1.2.21/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="packages/angular-multi-select-master/angular-multi-select.css">
+	<script src="packages/angular-multi-select-master/angular-multi-select.js"></script> 
+
+	<script src="packages/angular-qtip2-directive-master/qtip2.js"></script> 
+
+    <link rel="stylesheet" href="IDE_Common/packages/splitPane.css">
+    <script src="IDE_Common/ide_init.js"></script>
+    <script src="IDE_StatsRpt/StatsRpt_app.js"></script>
+
+    <link rel="stylesheet" href="IDE_RibbonUI/ribbon.css">
+    <link rel="stylesheet" href="IDE_RibbonUI/ribbonMenuIcon.css">
+    <script src="IDE_RibbonUI/ribbonMenuDefn.js"></script>
+    <script src="IDE_StatsRpt/ribbonTabDefn_StatsRpt.js"></script>
+    <script src="IDE_RibbonUI/keyboardManager.js"></script>
+    <script src="IDE_RibbonUI/ribbon_app.js"></script>
+
+    <script src="IDE_Common/directives/directives.js"></script>
+    <script src="IDE_Common/ide_commands.js"></script>
+    <link rel="stylesheet" href="IDE_Common/ide_common.css">
+    <script src="js/webmbtMsgList.js"></script>
+    <script src="IDE_Common/propertyFieldDef.js"></script>
+    <script src="IDE_Common/Views/AlertDialog_app.js"></script>
+
+    <script src="IDE_Common/ide_common.js"></script>
+    <script src="IDE_Common/packages/dynamicHtml.js"></script>
+	<script src="IDE_Common/Views/ConsoleMsg.js"></script>
+    
+    <script src="IDE_StatsRpt/Model/Model_app.js"></script>
+    <script src="IDE_StatsRpt/Batch/Batch_app.js"></script>
+    <script src="IDE_StatsRpt/Requirement/Requirement_app.js"></script>
+    <script src="IDE_Common/Help/Help_app.js"></script>
+	<script src="packages/angular-ui-codemirror/src/ui-codemirror.js"></script>
+
+    <script src="IDE_StatsRpt/TestCase/TestCase_app.js"></script>
+</body>
+
+</html>

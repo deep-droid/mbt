@@ -1,0 +1,73 @@
+html,body{
+    height:100%;
+	width:100%;
+    border:none;
+	color: black;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
+	background-color: #ebeff5;
+}
+
+#main {
+	padding: 0px;
+	margin: 0px;
+}
+
+.header {
+	border-bottom: 1px dotted #CCCCCC;
+	background-color: #ebeff5;
+}
+
+#dsName {
+	width: 400px;
+}
+
+a.btn {
+	font-size: x-small;
+	color: orange;
+}
+
+#dataTableContent, #fieldDesc {
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+input[type=text], select, textarea {
+	font-size: 11px;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+	padding: 2px;
+}
+
+A:link {text-decoration: none}
+A:visited {text-decoration: none; color: blue;}
+A:active {text-decoration: none}
+A:hover {text-decoration: underline}
+
+img:hover {
+	background-color: #CCCCCC;
+}
+
+
+.hidden {
+	display:none;
+}
+
+#dataTableContent input {
+	height: 8px;
+	font-size: 10px;
+}
+
+#dataTableContent img {
+	position: relative;
+	top: 3px;
+}
+
+.hideField {
+	display: none;	
+}

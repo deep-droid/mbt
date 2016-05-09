@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/BatchDeleteArchModel.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/BatchDeleteArchModel.js"></script>
+</head>
+<body>
+	<table width="100%" id=modelList border=0 class="tablesorter">
+		<thead>
+			<tr>
+				<td colspan=5 nowrap>
+					Select the models to be deleted and click on 'Delete Selected Models' button.
+				</td>
+			</tr>
+			<tr class=header>
+				<th class="header" width="1%" nowrap>#</th>
+				<th class="header" width="1%" nowrap align=left><input type=checkbox onclick='checkAll(this.checked)'/></th>
+				<th class="header" width="60%" >Model Name</th>
+				<th class="header {sorter: 'text'}" width="19%" nowrap>Updated Date</th>
+				<th class="header {sorter: 'text'}" width="19%" nowrap>Updaetd By Email</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		<thead>
+			<tr class=header>
+				<td colspan=5 nowrap>
+					<button onclick='delSelected()'>Delete Selected Models</button>
+				</td>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>

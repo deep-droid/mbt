@@ -1,0 +1,71 @@
+
+<div ng-controller="TrendCtrl" ng-cloak>
+	<div>
+		<center>Dashboard Stats contains automated test executions only. Manual test case executions are not considered in these stats.</center>
+	</div>
+	<div class="container-fluid" style="height: {{viewHeight-headerHeight}}px; overflow:auto;">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 title">
+				<h4><img src="img/{{expKPIHist?'minus':'plus'}}.png" ng-init="expKPIHist=true" ng-click="expKPIHist=!expKPIHist"/> 
+					Historical Trend - KPI</h4>
+			</div>
+			<div ng-show="expKPIHist">
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="HistKPIVal"></svg>
+					<h5 class="chart-title">KPI Trend<h5>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 title">
+				<h4><img src="img/{{expReqHist?'minus':'plus'}}.png" ng-init="expReqHist=true" ng-click="expReqHist=!expReqHist"/> 
+					Historical Trend - Requirement</h4>
+			</div>
+			<div ng-show="expReqHist">
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="HistReqByStatus"></svg>
+					<h5 class="chart-title">Requirement Coverage<h5>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="HistReqByProject"></svg>
+					<h5 class="chart-title">Requirement By Project<h5>
+				</div>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 title">
+				<h4><img src="img/{{expTCHist?'minus':'plus'}}.png" ng-init="expTCHist=true" ng-click="expTCHist=!expTCHist"/> 
+					Historical Trend - Test Case Execution</h4>
+			</div>
+			<div ng-show="expTCHist">
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="HistTCByStatus"></svg>
+					<h5 class="chart-title">Test Case Execution<h5>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="HistTCByProject"></svg>
+					<h5 class="chart-title">Test Case By Project<h5>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 title">
+				<h4><img src="img/{{expDefectHist?'minus':'plus'}}.png" ng-init="expDefectHist=true" ng-click="expDefectHist=!expDefectHist"/> 
+					Historical Trend - Defects</h4>
+			</div>
+			<div ng-show="expDefectHist">
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="HistDefectByStatus"></svg>
+					<h5 class="chart-title">Defects By Severity<h5>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="HistDefectByProject"></svg>
+					<h5 class="chart-title">Defects By Project<h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

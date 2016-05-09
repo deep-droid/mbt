@@ -1,0 +1,335 @@
+
+html
+{
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+}
+
+body
+{
+	font-family: verdana;
+	font-size: 10px;
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+#modelName {
+	position: absolute; 
+	left: 0px; 
+	top: 0px;
+	background-color: #F0EEE3;
+	color: #666666;
+	padding: 7px;
+	font-size: x-small;
+	height: 14px;
+	margin: 0px;
+	width: 100%;
+}
+	
+
+table {
+	padding: 0px;
+	margin: 0px;
+}
+
+ul, li {
+	padding: 0px;
+	margin: 0px;
+}
+
+#mainCnt {
+	height: 100%;
+	width: 100%;
+}
+
+#mainCanvas
+{
+	padding: 0px;
+	margin: 0px;
+	background-color: #ffffff;
+}
+
+.contextMenu {
+	display: none;
+}
+
+
+#jqContextMenu {
+	cursor: move;
+	background-color: #ffffff;
+}
+
+#jqContextMenu ul {
+	padding-top: 10px;
+}
+
+#jqContextMenu hr {
+	cursor: move;
+}
+
+.state .head {
+	background-color: #97C3D4;
+	height:15px;
+	margin-top: 1px;
+	margin-left: 1px;
+	margin-right: 1px;
+	cursor: pointer;
+}
+
+.state {
+	width: 75px;
+	height: 50px;
+	background-color: #F8F8F8;
+	border: 1px solid #555555;
+	position: absolute;
+	color: #111111;
+}
+
+
+#opaqDiv {
+  opacity: 0.02;
+  filter: alpha(opacity = 10);
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background-color: #ffffff;
+  z-index: 1000;
+  display:none;
+}
+
+#modelNotePad:hover {
+	background-color: yellow;
+}
+
+#notePad {
+	display: none;
+	position: absolute;
+	border-Radius: 8px;
+	z-index: 10001;
+	background-color: rgb(255, 240, 70);
+}
+
+#notePad .noteHeader {
+	padding-top: 8px;
+	padding-bottom: 2px;
+	margin-bottom: 3px;
+	padding-left: 3px;
+	
+	color: #777777;
+	border-bottom: 1px solid #CCCCCC;
+	cursor: move;
+}
+
+#notePad textarea {
+	border: none;
+	height: 150px;
+	width: 250px;
+	background-color: rgb(255, 240, 70);
+	padding: 5px;
+}
+
+.comment {
+	display:none;
+}
+
+.comment.exists, .transLink.comment.exists {
+	display: inline;
+}
+
+#treeViewPanel, #mcaseViewPanel {
+	position:fixed; 
+	font-size: 10px;
+	overflow: hidden; 
+	display: none; 
+	border: 1px solid #999999; 
+	background-color: #F0EEE3;
+	border-radius: 5px; 
+	margin: 2px;
+	color: #222222;
+}
+#treeViewPanel li div, #mcaseViewPanel li div {
+	display:inline;
+}
+	
+#treeViewPanel {	
+	z-index: 9998;
+	top: 30px;
+	right: 16px;
+	width: 200px; 
+	height: 280px; 
+}
+	
+#mcaseViewPanel {
+	z-index: 9999;
+	top: 70px;
+	right: 48px;
+	width: 150px; 
+	height: 180px; 
+}
+
+
+#treeViewCnt {
+	overflow: auto; 
+	height: 245px; 
+}
+
+#mcaseViewCnt {
+	overflow: auto; 
+	height: 145px; 
+}
+
+#treeViewPanel li, #mcaseViewPanel li {
+	background-color: #F0EEE3;
+}
+
+#treeViewPanel li span.label:hover, #mcaseViewPanel li span.label:hover {
+	color: #000000;
+}
+
+
+#treeViewClose, #mcaseViewClose {
+	float: right; 
+	position:relative;
+	font-weight: bold; 
+	color: #333333;
+	padding-right: 4px;
+	margin-left: 3px;
+	cursor: pointer;
+}
+
+.header .label {
+	cursor: move;
+}
+
+#treeViewPanel .header {
+	padding-top: 3px;
+	padding-left: 3px; 
+	height: 34px; 
+	width: 100%; 
+	vertical-align: bottom;
+	background-color: #E9E4D3;
+}
+
+#mcaseViewPanel .header {
+	padding-top: 3px; 
+	padding-left: 3px; 
+	height: 34px; 
+	width: 100%; 
+	vertical-align: bottom;
+	cursor: move;
+	background-color: #E9E4D3;
+}
+
+.treecontrol {
+	position: relative; 
+	top: 6px;
+}
+
+li .label {
+	padding-right: 5px;
+}
+
+
+
+#stateList, #mcaseList {
+	white-space: nowrap;
+}
+
+.tvMCaseNode.disabledOn, .tvStepNode.disabledOn {
+	background-color: #AAAAAA;	
+}
+
+.tvStateNode, .tvTransNode, .tvMCaseNode, .tvStepNode {
+	border-radius: 5px;	
+	margin-right: 3px;
+	padding-left: 2px;
+	padding-right: 2px;	
+	color: #FFFFFF;
+	background-color: #777777;
+}
+
+
+li span.readonly {
+	border: 1px solid orange;
+}
+
+li .label:hover {
+	background-color: #add8e6;	
+}
+
+#rtMsg {
+	display: none;
+	background-color: #F0EEE3;
+    margin: 0px;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: fixed;
+    top: 0px;
+    right: 15px;
+    border-bottom-left-Radius: 12px;
+    font-color: orange;
+    font-Size: 11px;
+    fontFamily: arial;
+    color: orange;
+    max-width: 200px;
+    fontSize: 11px;
+    overflow: auto;
+    textDecoration: none;
+    z-index: 9999;
+}
+
+.treecontrol a {
+	color: #555555;
+}
+
+.textBtn {
+	display: inline;
+	border-radius: 5px;
+	background-color: #F0EEE3;
+	padding-left: 2px;
+	padding-right: 2px;
+	margin-left: 2px;
+}
+
+.textBtn:hover {
+	background-color: orange;
+	color: #111111;
+}
+
+
+.delBtn span {
+	position: relative;
+	top: -1px;
+}
+
+#treeViewClose, #mcaseViewClose {
+	padding-left: 2px;
+	margin-right: 2px;
+}
+
+#treeViewClose:hover, #mcaseViewClose:hover {
+	background-color: orange;
+	border-radius: 5px;
+}
+	
+#stateList .breakEnabled {
+	background-color: #FF9900;
+}
+
+#stateList .pausedAt {
+	background-color: #FFCC99;
+}
+
+.nodeIcon {
+	cursor: pointer;
+}
+

@@ -1,0 +1,181 @@
+.viewPanel {
+	position:fixed; 
+	font-size: 10px;
+	overflow: hidden; 
+	display: none; 
+	border: 1px solid #999999; 
+	background-color: #F0EEE3;
+	border-radius: 5px; 
+	margin: 2px;
+	padding-bottom: 10px;
+	color: #222222;
+}
+
+.viewPanel {
+	top: 70px;
+	right: 48px;
+}
+
+.viewTitle {
+	cursor: move;
+	font-weight:bold;
+	color: #333333;
+}
+
+.reqAttr {
+	display: none;
+}
+
+.viewLine {
+	padding-top: 8px;
+	cursor: point;
+}
+
+.viewCnt {
+	overflow: auto; 
+}
+
+.viewClose {
+	float: right; 
+	position:relative;
+	top: -14px;
+	font-weight: bold; 
+	color: #333333;
+	padding-right: 4px;
+	margin-left: 3px;
+	cursor: pointer;
+}
+
+
+.viewPanel div.header {
+	padding-top: 3px; 
+	padding-left: 3px; 
+	height: 34px; 
+	width: 100%; 
+	vertical-align: bottom;
+	background-color: #E9E4D3;
+}
+
+.viewClose {
+	padding-left: 2px;
+	margin-right: 2px;
+}
+
+
+.viewClose:hover {
+	background-color: orange;
+	border-radius: 5px;
+}
+
+
+#reqViewPanel {
+	top: 90px;
+	right: 50px;
+	width: 300px; 
+	height: 300px; 
+}
+
+
+#reqViewPanel .viewCnt {
+	width: 300px; 
+	height: 270px; 
+}	
+
+#tagList {
+	margin-top: 0px;
+}
+
+#tagList th {
+	border-right: 1px solid #CCCCCC;
+	height: 12px;
+}
+
+#tagList td input {
+	height: 10px;
+	padding: 0px;
+	margin: 0px;
+}
+
+
+#tagList tbody tr, #tagList tbody td {
+	cursor: arrow;
+}
+
+#tagList tbody tr:hover, #defectDetails tr:hover {
+	background-color: #DDDDDD;
+}
+
+#tagList tr.reqNotCovered {
+	background-color: #facc9a;
+}
+
+#tagList tr.reqCovered {
+	background-color: #bed8a6;
+}
+
+#saveReqBtn {
+	display: none;
+}
+
+.syncMode {
+	display: none;
+}
+
+.reqStatusChanged {
+	background-color: #f08771;
+}
+
+.reqRetired {
+	background-color: #f08771;
+}
+
+.reqAdded {
+	background-color: #f08771;
+}
+
+
+
+#defectsViewPanel {
+	top: 90px;
+	right: 50px;
+	width: 200px; 
+	height: 300px; 
+}
+
+
+#defectsViewPanel .viewCnt {
+	width: 200px; 
+	height: 270px; 
+}	
+
+#defectsList tbody tr:hover {
+	background-color: #DDDDDD;
+}
+
+
+#filterSPAN, #colListSPAN {
+	padding-left: 3px;
+	background-color: #CCCCCC;
+	font-size: x_small;
+	position: absolute;
+	left: 0px;
+	top: 20px;
+	display: none;
+	width: 100%;
+	z-index: 99900;
+	color: #000000;
+	font-weight: bold;
+}
+
+#filterSPAN select, #filterSPAN input {
+	font-size: x-small;
+	background-color: #DFDFDF;
+}
+
+#filterValue {
+	width: 150px;
+}
+
+#filterBtn.selected {
+	color: blue;
+}

@@ -1,0 +1,178 @@
+
+.fileListHeader {
+	margin-top: 3px;
+}
+
+.pane .hideChildren div {
+	display:none;
+}
+
+.pane div {
+	background-color: #AFAFA;
+}
+
+.pane_1 .newBtn {
+	float: right; 
+	top:-4px;"
+}
+
+#binningWrapper ul {
+    list-style: none;
+    padding-left: 8px;
+    display: block;
+}
+
+#binningWrapper ul.root {
+	padding-left: 0px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+.accordian {
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+#binningWrapper li {
+    margin-left: 5px;
+    line-height: 18px;
+}
+
+.collapsed ul {
+	display: none;
+}
+
+div.folderLabel {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+}
+
+div.folderLabel img.ctrl {
+	padding-right: 0px;
+}
+
+div.folderLabel img.node-type {
+	padding-right: 0px;
+	position: relative;
+	top: 4px;
+}
+
+#pane_2 img.node-type {
+	margin-right: 3px;
+	position: relative;
+	top: 1px;
+}
+
+
+#pane_2 table {
+	margin-top: 2px;
+}
+
+#binningWrapper input {
+	height: 13px;
+	width: 100px;
+	border: 1px solid #7f8c8d;
+	border-radius: 3px;
+	background-color: #FAFAFA;
+}
+
+#binningWrapper input.searchInput {
+	width: 185px;
+}
+
+#binningWrapper input.enterTag, #binningWrapper input.enterBin {
+	width: 150px;
+}
+
+#binningWrapper input.enterProject {
+	width: 300px;
+}
+
+#binningWrapper input.modelCheckbox {
+	width: 20px;
+}
+
+#binningWrapper button {
+	height: 18px;
+	font-size: 8pt;
+}
+
+
+#binningWrapper .binSection, #binningWrapper .tagSection {
+	padding-left: 3px;
+	padding-top: 5px;
+}
+
+#pane_2 .tag {
+	color: #FAFAFA;
+	padding-left: 3px;
+	cursor: pointer;
+}
+
+#pane_2 .tag {
+	border: 1px solid transparent;
+	border-radius: 5px;
+	height: 10px;
+	line-height: 15px;
+	background-color: #95a5a6;
+	padding: 0px 2px 0px 3px;
+	margin-right: 2px;
+	font-size: 8pt;
+	cursor: default;
+}
+
+#binningWrapper .tagList {
+	white-space: nowrap;
+	margin-left: 10px;
+}
+
+
+#refreshRoot {
+	float: right;
+	position: relative;
+	top: -16px;
+}
+
+tbody td, .filterTag {
+	border-bottom: 1px dotted #FFFFFF;
+	padding-left: 3px;
+}
+
+
+#binningWrapper table tbody tr {
+	line-height: 15px;
+}
+
+.searchSection {
+	padding: 3px;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.section {
+	margin-bottom: 1px;
+}
+
+.radioOption {
+	margin-bottom: 8px;
+}
+
+
+#newFolderName {
+	padding-left: 15px;
+}
+
+#newFolderName input {
+	width: 250px;
+}
+
+input.editFileName {
+	width: 100%;
+}
+
+.header {
+	height: 20px;
+}

@@ -1,0 +1,28 @@
+<table id="statsList">
+	<thead class="header">
+		<tr valign="bottom">
+			<th rowspan="2" valign="bottom">ExecID</th>
+			<th rowspan="2" valign="bottom">Exec Date</th>
+			<th rowspan="2" valign="bottom">Stat Desc</th>
+			<th colspan="3">Coverage (%)</th>
+			<th rowspan="2" valign="bottom">Batch Exec</th>
+			<th rowspan="2" valign="bottom"></th>
+		</tr>
+		<tr>
+			<th>Requirements</th>
+			<th>States/Nodes</th>
+			<th>Transition/Edges</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="execStats in execStatsList">
+			<td>{{execStats.execID}}</td>
+			<td>{{execStats.startTime}}</td>
+			<td><a href="#showExecStats/{{execStats.execID}}">{{execStats.statDesc}}</a></td>
+			<td>{{execStats.tagCovPct.avg}}</td>
+			<td>{{execStats.stateCovPct.avg}}</td>
+			<td>{{execStats.transCovPct.avg}}</td>
+			<td><img class="btnTO clickable" ng-click="delExecStats(execStats)" src="img/delete.png"/></td>
+		</tr>
+	</tbody>
+</table>

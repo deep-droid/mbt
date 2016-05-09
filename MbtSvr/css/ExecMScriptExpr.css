@@ -1,0 +1,20 @@
+html {
+	background-color: #Ebeff5;
+}
+
+table {
+	background-color: #Ebeff5;
+}
+
+a:hover {
+	font-decoration: underline;
+	color: orange;
+}
+
+#mscriptFuncLink, #execMScriptBtns, #clearMScriptBtn {
+	margin-right: 0px;
+}
+
+.pluginLink {
+	padding-right: 5px;
+}

@@ -1,0 +1,17 @@
+<div class="view" id="{{elemid}}" ng-show="showView" ng-click="selectView();"
+		resizable="view" resizer=".resizer" draggable=".viewHeader" ng-class="{modalView: modal}">
+	<div class="resizer resizer-e"></div>
+	<div class="resizer resizer-s"></div>
+	<div class="resizer resizer-se"></div>
+	<div class="viewHeader">
+		<span class="viewTitle">{{title}}</span>
+		<span class="btnTO clickable viewClose" style="float: right;" ng-click="closeView();">x</span>
+	</div>
+	<div class="viewArea autoResize">
+		<div class="Content" ng-transclude></div>
+		<div class="cmdBtn">
+			<button class="btnOK btn btn-primary" ng-click="okView();">OK</button>
+		</div>
+	</div>
+</div>
+	

@@ -1,0 +1,239 @@
+>>> Date: 2016-5-6 
+17:24:2.37 SEVERE [MBT Director for SESS_0.2715309749957351] TCP should be ready, begin recreate IO Socket
+17:24:2.48 INFO [MBT Director for SESS_0.2715309749957351] SendTCPMessage: Sending - performGeneralAction`StartApplication`calc``
+17:24:2.493 INFO [MBT Director for SESS_0.2715309749957351] SendTCPMessage: Received - -1
+17:24:2.494 SEVERE [MBT Director for SESS_0.2715309749957351] performGeneralAction(): return code is ERROR - unknown. An exception may have occurred.
+17:24:2.498 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.504 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.504 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.504 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.507 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.507 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.507 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.539 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Add`true`name`button`1`false`0`true
+17:24:2.541 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.541 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.542 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.543 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.543 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.543 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.564 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.565 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.565 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.566 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.566 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.566 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.566 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.567 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.568 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.568 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.569 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.581 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.582 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.583 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'110' (lid:21)
+17:24:2.584 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.585 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.585 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.585 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.586 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.586 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.586 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.603 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Add`true`name`button`1`false`0`true
+17:24:2.604 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.604 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.604 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.605 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.605 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.610 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.619 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.620 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.620 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.620 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.621 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.621 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.621 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.621 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.622 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.622 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.623 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.623 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.624 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.625 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'210' (lid:21)
+17:24:2.626 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.627 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.627 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.627 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.628 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.628 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.628 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.656 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Multiply`true`name`button`1`false`0`true
+17:24:2.656 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.657 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.657 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.658 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.658 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.658 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.672 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.674 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.674 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.675 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.675 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.681 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.681 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.682 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.683 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.683 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.683 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.684 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.684 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.684 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'1000' (lid:21)
+17:24:2.685 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.686 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.686 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.687 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.687 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.688 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.688 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.711 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Multiply`true`name`button`1`false`0`true
+17:24:2.712 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.712 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.712 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.712 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.713 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.713 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.725 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.726 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.726 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.727 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.727 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.727 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.728 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.728 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.729 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.729 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.729 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.730 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.730 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.731 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'2000' (lid:21)
+17:24:2.732 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.733 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.733 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.733 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.734 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.734 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.734 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.758 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Subtract`true`name`button`1`false`0`true
+17:24:2.760 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.760 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.760 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.761 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.761 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.761 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.770 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.770 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.771 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.771 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.771 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.771 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.772 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.772 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.773 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.773 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.773 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.774 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.774 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.776 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'90' (lid:21)
+17:24:2.777 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.777 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.777 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.778 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.778 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.779 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.779 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.796 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Subtract`true`name`button`1`false`0`true
+17:24:2.797 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.797 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.797 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.798 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.798 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.798 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.808 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.809 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.809 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.809 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.810 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.810 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.810 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.811 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.811 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.811 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.812 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.812 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.813 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.813 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'190' (lid:21)
+17:24:2.814 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.815 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.815 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.815 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.816 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.816 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.816 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.837 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Divide`true`name`button`1`false`0`true
+17:24:2.838 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.838 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.838 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.839 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.839 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.839 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.849 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.850 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.850 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.850 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.851 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.851 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.851 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.852 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.852 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.852 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.853 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.853 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.853 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.854 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'10' (lid:21)
+17:24:2.855 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Clear`true`name`button`1`false`0`true
+17:24:2.856 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.856 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.856 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.857 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.857 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.857 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.872 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Divide`true`name`button`1`false`0`true
+17:24:2.872 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.872 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.872 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.873 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.873 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.873 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.897 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Equals`true`name`button`1`false`0`true
+17:24:2.897 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.897 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.898 INFO [vUser-7-thread-1] SendTCPMessage: Sending - performGivenAction`invoke````latest
+17:24:2.900 INFO [vUser-7-thread-1] SendTCPMessage: Received - 7
+17:24:2.900 SEVERE [vUser-7-thread-1] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:2.900 INFO [vUser-7-thread-1] doAction(invoke, : false
+17:24:2.901 INFO [vUser-7-thread-1] SendTCPMessage: Sending - findElement`Result`true`name`text`1`false`0`true
+17:24:2.901 INFO [vUser-7-thread-1] SendTCPMessage: Received - 1
+17:24:2.901 INFO [vUser-7-thread-1] findElement(): return code is FAILED
+17:24:2.901 INFO [vUser-7-thread-1] SendTCPMessage: Sending - retrieveObjectProperty`Value`
+17:24:2.902 INFO [vUser-7-thread-1] SendTCPMessage: Received - UIAERROR: No valid object currently selected.
+17:24:2.902 SEVERE [vUser-7-thread-1] getProperty:Value Result:UIAERROR: No valid object currently selected.
+17:24:2.903 SEVERE [vUser-7-thread-1] L1:  assert failed, $getValue():'' eq $getTransData('answer'):'20' (lid:21)
+17:24:6.495 INFO [VirtualUser_Monitor_-5] SendTCPMessage: Sending - performGivenAction`window`close```window
+17:24:6.495 INFO [VirtualUser_Monitor_-5] SendTCPMessage: Received - 7
+17:24:6.496 SEVERE [VirtualUser_Monitor_-5] performGivenAction(): return code is ERROR - operation, or UI element, is not available.
+17:24:6.496 INFO [VirtualUser_Monitor_-5] doAction(window, close: false
+17:24:6.496 INFO [VirtualUser_Monitor_-5] SendTCPMessage: Sending - CleanUp
+17:24:6.497 INFO [VirtualUser_Monitor_-5] SendTCPMessage: Received - true
+17:24:6.497 INFO [VirtualUser_Monitor_-5] UIAutomation Plugin closing
+17:24:6.498 INFO [VirtualUser_Monitor_-5] SendTCPMessage: Sending - shutdown
+17:24:6.498 INFO [VirtualUser_Monitor_-5] SendTCPMessage: Received - true
+17:24:7.797 INFO [VirtualUser_Monitor_-5] UIA TCP Server still live. On instance: 1

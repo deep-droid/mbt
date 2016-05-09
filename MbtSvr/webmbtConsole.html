@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<LINK href="css/webmbtConsole.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+
+<script>
+
+function logMsg (msg_p, logLevel_p) {
+	if (logLevel_p==undefined) logLevel_p = 2;
+	if (parseInt($("#logLevel").val())<logLevel_p) return; 
+
+	var now = new Date();
+	var nowString = "" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+	$("#consLog").prepend("<tr><td valign='top' align='left'>"+nowString+"</td><td align='left'>"+msg_p + "&nbsp;<small>("+logLevel_p+")</small></td></tr>");
+}
+
+$(document).ready(function(){
+	initFrame("Console");
+
+	$(".sizeCtrl img").hover(function(){$(this).addClass("btnHover");}, function(){$(this).removeClass("btnHover")});
+	$(".sizeCtrl img").mousedown(function(){$(this).css("border", "1px solid red");})
+					  .mouseup(function(){$(this).css("border", "1px solid #808080");})
+					  .mouseout(function(){$(this).css("border", "1px solid #808080");});
+	window.onbeforeunload = checkClosing;
+});
+
+
+function checkClosing () {
+	if (inIFrame) return;
+	else parentWinObj.restoreTab(FrameName);
+}
+
+function clearConsole() {
+	$("#consLog >*").remove();
+}
+
+
+function adjustHeight(topPaneHeight, bottomPaneHeight) {
+//	$("#fileMain").css("height", $(window).height() - 52);
+}
+
+// callback by webmbtMain.js
+function mainCallbackFunc(action_p, params_p) {
+	if (action_p=="adjustHeight") {
+		adjustHeight();
+	}
+	else if (action_p=="reset") {
+		return;
+	}
+	else if (action_p=="display") {
+//		display();
+	}
+	else if (action_p=="close") {
+		// nothing
+	}
+	else if (action_p=="isLoaded") {
+		return true;
+	}
+	else if (action_p=="logMsg") {
+		logMsg(params_p.msg, params_p.level);
+	}
+}
+
+
+
+</script>
+</head>
+<body>
+<table width="100%" height=100% cellspacing=0 cellpadding=0>
+	<tr>
+		<td class="header" valign="top" align="center">
+			Debug Level: <select id="logLevel" title="Change the level of log messages written to console" style="margin-right:3px;">
+				<option value=0>Off</option>
+				<option value=1>Low</option>
+				<option value=2 selected>Normal</option>
+				<option value=3>Debug</option>
+			</select>
+			<a href="javascript:clearConsole();" title="Clear console log">clear log</a>
+		</td>
+	</tr>
+	<tr height="100%">
+		<td id="consoleDiv" valign="top">
+			<table border="0" id="consLog">
+			</table>
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>
+
+ 

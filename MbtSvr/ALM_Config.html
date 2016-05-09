@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ALM_Config.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/ALM_Config.js"></script>
+</head>
+<body>
+	<table cellspacing="0" cellpadding="2" width="100%">
+		<tr>
+			<td colspan="3">
+				Configure the integration with Requirements System and Defect Tracking System.<br/>
+				<span id="msg"></span>
+			</td>
+		</tr>
+		<tr class='startRow header'>
+			<td colspan="3">Requirement System <span class="msg" id="reqMsg" style="display:none;"> - Use <a href="javascript:openReqView();">Requirement View</a> to sync/import requirements into model</span></td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td>Connection Type</td>
+			<td width="*"><select id="reqmgtAddOn">
+					<option value=""></option>
+					<option value="EXCEL" title="Enter excel file name (only .xls file supported) into Parameter field. Excel file must contain header row with Tag, Name, Desc, Priority and Status">Excel Worksheet (xls)</option>
+					<option value="FILE" title="Enter a file name with file extension (.txt,.tab,csv) into Parameter field. File must contain header row with Tag, Name, Desc, Priority and Status">File - CSV or TAB</option>
+					<!--  option value="SQL" title="Enter ) into Parameter field. Excel file must have header row with Tag, Name, Desc, Priority and Status">SQL - JDBC Database</option-->
+					<option value="URL" title="Enter url into Parameter field. File retrieved from url must contain header row with Tag, Name, Desc, Priority and Status">URL - CSV or TAB over http</option>
+				</select>
+				<a id="lookupReqGroup" style="float: right;" href="javascript:void();">Lookup Req. Groups</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td valign="top" nowrap title="Parameters, one parameter per line using format name=value.">Parameters</td>
+			<td><textarea class="params" rows="3" id="reqmgtParams"></textarea>
+				<button id="saveReqmgtBtn" style="float:right;">Save</button></td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td colspan="2">
+		<tr class='startRow header'>
+			<td colspan="3">Defect Tracking System<span class="msg" id="defectMsg" style="display:none;"> - Use <a href="javascript:openDefectView();">Defect View</a> to view a list of defects raised by this model</span></td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td nowrap>Connection Type</td>
+			<td><select id="defectAddOn">
+					<option value=""></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="tab">&nbsp;</td>
+			<td valign="top" nowrap title="Parameters, one parameter per line using format name=value">Parameters</td>
+			<td><textarea class="params" rows="3" id="defectParams"></textarea>
+				<button id="saveDefectBtn" style="float:right;">Save</button></td>
+		</tr>
+	</table>
+</body>
+</html>

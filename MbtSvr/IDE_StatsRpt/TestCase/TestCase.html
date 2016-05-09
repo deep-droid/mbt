@@ -1,0 +1,122 @@
+<style>
+
+	.verifyStatus {
+		padding: 5px;
+		float: left;
+	}
+	
+	ul.assertItems {
+		list-style-type: circle;
+		padding-left: 12px;
+		margin-top: 0px;
+	}
+	
+	#tcReqList {
+		padding-left: 5px;
+		margin-bottom: 5px;
+	}
+	
+	#testcase td, #testcase th, .testcaseFooter td {
+		padding-left: 3px;
+	}
+	.shade {
+		background-color: #FAFAFA;
+	}
+	
+	.testcaseFooter {
+		border-top: 1px solid #AAAAAA;
+	}
+	
+	.tcStatus {
+		width: 5px;
+	}
+	
+	#testcase thead th {
+		border-bottom: 1px solid #CCCCCC;
+	}
+	
+	.stepStatus {
+		width: 5px;
+		float:right;
+	}
+	
+	.assertItems li:hover {
+		background-color: #F0F0F0;
+	}
+</style>
+
+<div ng-controller="TestCaseCtrl">
+	<div id="appHeader" class="paneTitle" style="height: 25px; text-align: left;">
+		<div class="paneTitle filter" style="width: {{paneWidth_1}}px; overflow:hidden;">
+			<input type="text" placeholder="Search text or regexp" ng-model="filter" ng-change="applyFilter(filter)"/>
+			<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filter=''; applyFilter('')"/></span>
+			<span style="display:none;" id=imp>File: <input id="fileupload" type="file" name="filename"></span>
+		</div>
+		<div style="float:left; margin-left: 10px;">
+			TestCase {{curTestCase.tcID}}
+		</div>
+	</div>
+	<div style="height: {{viewHeight-headerHeight - 25}}px;">
+		<div class="pane pane_1" style="width: {{paneWidth_1}}px;">
+			<ul id="tcList" class="selection">
+				<li ng-repeat="tcObj in curModelExec.tcList" 
+					ng-click="openTestCase(tcObj);" 
+					ng-hide="tcObj.hide"
+					ng-class="{selected: tcObj.selected}">
+					<span class="tcStatus {{tcObj.tcStatus}}">&nbsp;</span>
+					<span>{{tcObj.tcID}}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" style="width: {{paneWidth_2}}px;">
+<div id="tcReqList">Requirements: 
+	<span ng-repeat="reqTag in curTestCase.Requirements" 
+		class="tag p_{{getReqDefn(reqTag).priority}}">
+		{{reqTag}}<sup><small>{{getReqDefn(reqTag).priority}}</small></sup>
+	</span>
+</div>
+
+<table cellspacing="1" cellpadding="2" id="testcase"> 
+	<thead>
+		<tr class="tcHeader">
+			<th class="tlabel" width="2%">Step</th> 
+			<th class="tlabel">Execution Result</th>
+		</tr>  
+	</thead>
+	<tbody>
+		<tr ng-repeat="stepObj in curTestCase.StepList" 
+			ng-class="{shade: (curTestCase.StepList.indexOf(stepObj)%2==0)}">
+			<td align="center" valign="top" align="right" class="colNum">
+				<span ng-show="stepObj.changed" class="changed" title="change pending">*</span>
+				{{curTestCase.StepList.indexOf(stepObj) + 1}}</td>
+			<td valign="top" align="left" class="colVerify">
+				<span ng-if="stepObj.type=='state'"><b>State:</b>&#160;{{stepObj.state}}<br/></span>
+				<span ng-if="stepObj.type=='trans'"><b>Transition:</b>&#160;{{stepObj.trans}}<br/></span>
+				<ul class="assertItems">
+					<li ng-repeat="verifyObj in stepObj.itemList">
+						<div>Requirement:
+							<span class="tag">{{verifyObj.reqTag}}</span>
+							<span ng-if="verifyObj.assertID.length>0">({{verifyObj.assertID}})</span>
+							<span class="stepStatus {{verifyObj.status}}">&nbsp;</span>
+						</div>
+						<div dynamic="verifyObj.execMsg"></div>
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="testcaseFooter" border="0">
+	<tr>
+		<td width="1%">Tester&nbsp;Name:</td><td>{{curTestCase.testerName}}</td>
+		<td align="right">Date:</td><td>{{curTestCase.testedDate}}</td>
+		<td align="right">Effort:</td><td>{{curTestCase.testEffort}}</td>
+	</tr>
+	<tr>
+		<td valign="top">Notes:</td><td colspan="5">{{curTestCase.testerNote}}</td>
+	</tr>
+</table>
+		</div>
+	</div>
+	<pane-divider/>
+</div>

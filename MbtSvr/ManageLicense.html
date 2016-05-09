@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+		
+	$(document).ready(function() {
+		parent.sendAction("config", "cmd=getLic", function (data) {
+			$("#licEmail").val(data.licEmail);
+			$("#licKey").val(decodeURIComponent(data.licKey));
+			$("#licStatus").text(data.licStatus);
+			$("#licEdition").text(data.edition);
+			$("#expireDate").text(data.expireDate);
+			$("#exceptions").text(data.exceptions);
+			$("#authPluginList").html(data.authPluginList);
+			$("#TempLicToken").html(data.TempLicToken);
+			$("#alert").html(data.alert);
+			$("#hostport").html("http://"+data.hostport);
+			$("#ipaddress").html(data.ipaddress);
+			$("#sessionnum").html(data.sessionnum);
+			$("#maxthreadnum").html(data.maxthreadnum);
+			$("#osName").html(data.osName);
+			$("#osVersion").html(data.osVersion);
+			$("#javaVersion").html(data.javaVersion);
+			$("#TestOptimalVersion").html(data.TestOptimalVersion + " <small>(build: " + data.releaseDate + ")</small>");
+		});
+		
+	});
+	
+	function showReqTrial() {
+		$("#msg").html("");
+		if ($("#licEmail").val()=="") {
+			$("#msg").html("Email field required.");
+			return;
+		}
+		$(".trial").show();
+		$("#showTrial").hide();
+	}
+	
+	function reqTrial() {
+		$("#msg").html(""); 
+		var params = "cmd=reqTrial&first=" + $("#tFirst").val()
+				   + "&last=" + $("#tLast").val()
+				   + "&email=" + $("#licEmail").val()
+				   + "&company=" + $("#tCompany").val()
+				   + "&country=" + $("#tCountry").val();
+		
+		parent.sendAction ("config", params, function (data) {
+			var dataMsg = data.alertMessage;
+			if (data.error) {
+				dataMsg = "Error: " + data.error;
+			}
+			$("#msg").html(dataMsg);
+		});
+	}
+		
+	function saveLic() {
+	
+		if (!$("#LicenseAcked").is(":checked")) {
+			$("#msg").html("You must accept the license terms to use this product.");
+			return;
+		}
+		
+		var params = "cmd=saveLic&email=" + $("#licEmail").val()
+				   + "&licKey=" + $("#licKey").val() + "&TempLicToken=" + $("#TempLicToken").val() + "&LicenseAcked=Y";
+		parent.sendAction ("config", params, function (data) {
+			var dataMsg = data.alertMessage;
+			if (data.error) {
+				dataMsg = data.error;
+			}
+			if (dataMsg=="ok") {
+				dataMsg = "License changes saved. Refresh IDE to make the changes effective.";
+			}
+			$("#msg").html(dataMsg);
+		});
+	}
+	
+	</script>
+	
+	<style>
+		html, body {
+			background-color: #Ebeff5; 
+			height: 100%;	
+			overflow:hidden;
+			padding:0px;
+			margin: 0px;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		
+		#msg {
+			color: blue;
+		}
+		
+		input {
+			width: 300px;
+			height: 13px;
+			font-size: 11px;
+		}
+		
+		.trial {
+			display: none;
+		}
+		
+		.label {
+			font-weight: bold;
+		}
+		
+		#TempLicToken {
+			width: 150px;
+		}
+	</style>
+</head>
+<body style="overflow: auto;">
+	<table id=modelList border=0 width="100%" cellspacing="0">
+		<tr><td class="label" nowrap>Server URL:</td><td id="hostport"></td>
+			<td class="label" nowrap>IP Address:</td><td id="ipaddress"></td>
+		</tr>
+		<tr><td class="label" nowrap>OS Name:</td><td id="osName"></td>
+			<td class="label" nowrap>OS Version:</td><td id="osVersion"></td>
+		</tr>
+		<tr><td class="label" nowrap>Java Version:</td><td id="javaVersion"></td>
+			<td valign="top" rowspan="8" class="label">Plugin List:</td>
+			<td id="authPluginList" rowspan="8" valign="top"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>TO Version:</td><td id="TestOptimalVersion"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>Edition:</td><td id="licEdition"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>Licensed Session:</td><td id="sessionnum"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>Licensed Thread:</td><td id="maxthreadnum"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>Status:</td><td id="licStatus"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>Expiration:</td><td id="expireDate"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>Exception:</td><td id="exceptions"></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>Email:</td><td colspan="3"><input id='licEmail'/></td>
+		</tr>
+		<tr>
+			<td class="label" nowrap>License Key:</td><td colspan="3"><input id='licKey'/></td>
+		</tr>
+		<tr>
+			<td class="label" title="Temporary license token">License Token:</td>
+			<td><input id="TempLicToken"></input></td>
+		</tr>
+		<tr>
+			<td class="label" title="Acknowledge that you have read and agreed to the license agreement.">License Terms:</td>
+			<td align="left" colspan=3 nowrap valign="bottom"><input type="checkbox" id="LicenseAcked" style="width: 10px;"/><span style="position:relative; top:-3px; padding-left: 4px;">I agree to <a href="http://testoptimal.com/TestOptimalLicense.pdf" target=_blank">the license terms</a>.</span></td>
+		</tr>
+
+		<tr class="header">
+			<td colspan="4">
+				<button onclick="saveLic();">Save</button>
+			</td>
+		</tr>
+		<tr style="height: 35px;"><td colspan="4"><span id='msg'></span></td></tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+html, body {
+	color: #555555;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+table {
+	padding-top: 0px;
+	padding-left: 0px;
+}
+
+
+.header {
+	height: 29px;
+
+}
+
+table td {
+	padding-right: 2px;
+}
+
+a, a:visited, a:hover {
+	color: #333333;
+}
+
+#hoverMenu {
+	top: 25px;
+}
+

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/webmbtUIMap.css" rel="stylesheet" type="text/css">
+    <script src="packages/jquery-2.2.0.min.js"></script>
+    
+</head>
+<body ng-app="Main" ng-controller="mainCtrl" ng-cloak style="font-size: small !important">
+	<div id="uiMapMainDIV" style="overflow:auto; height: 100%;">
+		<div style="background-color: #F0EEE3; padding-top: 5px; height: 28px;" >
+			<div style="font-size: x-small;">
+        		<span class="glyphicon glyphicon-search"></span>
+	            <input type="text" style="width: 200px;" class="" placeholder="Filter" ng-model="uiSearch"></input>
+		        <a href="#" ng-click="uiSearch=''" style="position: relative; left: -15px">x</a>
+				<a href="#" style="font-size: x-small;" ng-click="collapseAll();" title="Collapse all UI Pages">Collapse All</a> 
+				<a href="UIRepo_Main.html" style="margin-left: 5px;font-size: x-small;" target="UIRepo" title="open UIRepo App">UIRepo</a> 
+			</div>
+			<div class="dropdown dropdown-scroll" style="float: right; position:relative; top: -15px; font-size: x-small" ng-click="loadUIPageList()">
+				<a href="#" style="font-decoration:none;" class="dropdown-toggle" id="uiPageAdd" data-toggle="dropdown">UI Page <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="uiPageAdd" 
+					style="left: initial; font-size:x-small; min-width: 100px; max-width: {{viewWidth/2}}px; right: 0px; overflow: auto; height: {{viewHeight-30}}px;">
+					<li role="presentation" style="margin-bottom: 3px;">
+				    	<div class="input-group input-group-sm search-control">
+				    		<span class="input-group-addon">
+				        		<span class="glyphicon glyphicon-search"></span>
+							</span>
+				            <input type="text" class="form-control" placeholder="Query" ng-model="query"></input>
+				        </div>
+				    </li>
+				    <li role="presentation" ng-repeat='page in uiPageList | filter:query' title="{{page.uiCat}}: {{page.desc}} (elems: {{page.elemCount}})">
+				    	<a href="#" style="padding: 0px 5px" ng-click="addUIPage(page)"> {{page.name}} </a>
+			        </li>
+			 	</ul>			
+		 	</div>
+		</div>
+		<any ng-repeat="uiMap in uiMapList">
+			<any ng-repeat="uiApp in uiMap.appList">
+				<any ng-repeat="uiWin in uiApp.winList">
+					<div class="appWin">
+						<div class="uiitem" ng-click="uiWin.expanded=!uiWin.expanded">
+							<img src="img/{{uiWin.expanded?'minus':'plus'}}.png" />
+							<span style="cursor: context-menu;" title="{{uiWin.desc}}">{{uiApp.app}} / {{uiWin.win}}</span>
+							<a href="#" style="float:right; position:relative; top: -2px;" class="delBtn" ng-hide="uiMap.readonly" ng-click="delUIPage(uiApp, uiWin)">x</a>
+						</div>
+						<ul ng-show="uiWin.expanded" style="padding-left: 28px">
+							<li class="uiitem" ng-repeat="elem in uiWin.elemList | filter: uiSearch" title="{{elem.loc + '\n\Domains: ' + elem.domain.join(';')}}">
+								{{elem.uiid}} ({{elem.type}}): {{elem.desc}}
+								<a href="#" style="float:right; position:relative; top: -2px;" ng-hide="uiMap.readonly" ng-click="delUIElem(uiApp, uiWin, elem)">x</a>
+							</li>
+						</ul>
+					</div>
+				</any>
+			</any>
+		</any>
+	</div>
+	
+    <script src="packages/angular-1.2.21/angular.min.js"></script>
+    <script src="packages/angular-1.2.21/ui-bootstrap-tpls-0.11.0.js"></script>
+    <link href="packages/angular-1.2.21/bootstrap.min.css" rel="stylesheet">
+    <script src="IDE_Common/ide_init2.js"></script>
+    <script src="IDE_Common/ide_common.js"></script>
+	<script src="js/webmbtUIMap.js"></script>
+	
+</body>
+</html>

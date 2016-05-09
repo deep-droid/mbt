@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+	<meta http-equiv="Content-Language" content="en" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<LINK REL="SHORTCUT ICON" HREF="favicon.ico">
+	<title>TestOptimal Logs</title>
+	<LINK href="css/tabs.css" rel="stylesheet" type="text/css">
+	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/tabControl.js"></script>
+	<style>
+		html, body {
+			margin: 0;			/* Remove body margin/padding */
+			padding: 0;
+		    height: 100%;
+		    border: none;
+			background-color: #F8F8F8;
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			overflow: hidden;	/* hidden Remove scroll bars on browser window */
+		}
+			
+		.btnHover {
+			background-color: #F0F0F0;
+		}
+		
+		#logcontrol, #logcontrol img {
+			vertical-align: bottom;
+		}
+				
+	</style>
+	<script>
+		$(document).ready(function() {
+			
+			$("ul.tabList li").click(function() {
+				selectTab($(this).find("a").attr("id"));
+				return false;
+			});	
+			
+			setupMiniButtons($(".sizeCtrl img"));
+			document.title = "TestOptimal - Logs";
+			
+		});
+
+
+		function reloadLogs() {
+			window.frames["frameMscriptLog"].window.location.href=window.frames["frameMscriptLog"].window.location.href;
+			window.frames["frameServerLog"].window.location.href=window.frames["frameServerLog"].window.location.href;
+		}
+
+
+		function logMsg (msg_p, logLevel_p) {
+			window.frames["frameConsole"].logMsg(msg_p, logLevel_p);
+		}
+
+		function clearConsole() {
+			window.frames["frameConsole"].clearConsole();
+		}
+
+
+		function refresh () {
+			var selectedTabId = getSelectedTab("logTab");
+			if (selectedTabId) {
+				var frameName = selectedTabId.replace("tab", "frame");
+				window.frames[frameName].window.location.href=window.frames[frameName].window.location.href;
+			}
+			
+			return;
+		}
+
+	</script>
+	
+	
+</head>
+<body>
+
+	<table id="logTab" class="tabGroup" border=0 width=100% height=100% cellpadding=0 cellspacing=0>
+		<tr class="tabTR">
+ 	  		<td valign="bottom" height="2%">
+				<ul class="tabList">
+   	  	 			<li><a href="#" id="tabConsole"><span>IDE</span></a></li>
+   	  	 			<li><a href="#" id="tabMscriptLog"><span>mScript</span></a></li>
+   	  	 			<li><a href="#" id="tabServerLog"><span>Server</span></a></li>
+   	  	 			<li><a href="#" id="tabSeleniumLog"><span>Selenium</span></a></li>
+   	  	 			<li><a href="#" id="tabWinLog"><span>White</span></a></li>
+   	  	 		</ul>
+	  		 </td>
+	  		 <td align="right">
+				<div align="right" class="sizeCtrl" id="botomCtrl"><span><img class="btnLeft" onclick="javascript:refresh();" title="Refresh Log" src="img/refresh.png" align="top"/></span></div>
+	  		 </td>
+	  	</tr>
+	  	<tr>
+	  		<td class="tab_container" colspan=3 valign="top" height="98%" style="border-top: 1px solid #CCCCCC">
+				<iframe class="tab_content" style="display:none" src="webmbtConsole.html" id="tabConsoleFrame" name="frameConsole" frameborder="0"></iframe>
+				<iframe class="tab_content" style="display:none" src="log/mscript.log" id="tabMscriptLogFrame" name="frameMscriptLog" frameborder="0"></iframe>
+				<iframe class="tab_content" style="display:none" src="log/webmbtServer.log" id="tabServerLogFrame" name="frameServerLog" frameborder="0"></iframe>
+				<iframe class="tab_content" style="display:none" src="log/seleniumRC.log" id="tabSeleniumLogFrame" name="frameSeleniumLog" frameborder="0"></iframe>
+				<iframe class="tab_content" style="display:none" src="log/WhiteOptimal.log" id="tabWinLogFrame" name="frameWinLog" frameborder="0"></iframe>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

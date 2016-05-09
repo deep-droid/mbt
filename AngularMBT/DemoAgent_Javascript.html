@@ -1,0 +1,55 @@
+
+<html>
+<head>
+<script src="jquery-2.0.2.min.js"></script>
+<script src="TOAgent.js"></script>
+<script>
+	var consoleLogElem;
+	$(document).ready() {
+		var consoleLogElem = $("#consoleLog");
+	});
+
+	function logMsg (msg) {
+		$(consoleLogElem).append("<span>" + msg + "</span><br/>");
+	}
+	
+	function startModel() {
+		var svrURL = $("#svrURL").text();
+		var modelName = $("#modelName").text();
+		
+		TOAgent_RunModel(svrURL, modelName), function(rmtCmd) {
+			logMsg (rmtCmd.action);
+			return "received " + rmtCmd.action;
+		});
+	}
+	
+	//These are model specific trigger examples
+	function MBT_start () {
+		return "mbt_start executed"
+	}
+
+	function OneQuarter_addOneQuarter_action () { 
+		return "nice quarter."
+	}
+
+	Function Start_AddQuarter_action () 
+		throw "fake quarter rejected."
+	}
+
+</script>
+
+</head>
+
+<body>
+
+<div>TestOptimal Server URL: <input type="text" id="svrURL"/></div>
+<div>Model Name: <input type="text" id="modelName"/>
+	<span style="float:right;"><button onclick="startModel()">Start Model</button> <button onclick="clearLog()">Clear Log</button></span>
+</div>
+
+<div id="consoleLog">
+
+</div>
+</body>
+
+</html>

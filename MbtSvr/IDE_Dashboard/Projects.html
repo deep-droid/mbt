@@ -1,0 +1,102 @@
+<style>
+	img.projActiveInd, img.projModelInd {
+		border-radius: 3px;
+		padding: 2px;
+	}
+	
+	img.projActiveInd:hover, img.projModelInd:hover {
+		background-color: orange;
+	}
+	
+	#projModelList .projModelName {
+		padding-left: 5px;
+	}
+	
+	
+	#projModelList {
+		padding-left: 0px;
+		margin-left: 0px;
+	}
+	
+	#projModelList li {
+		list-style: none;
+		padding-left: 0px;
+		margin-left: 0px;
+	}
+	
+	#projModelList li:hover {
+		background-color: #EEEEEE;
+		cursor: default;
+	}
+	
+	#projModelListHeader {
+		border-bottom: 1px solid #DDDDDD;
+		line-height: 25px;
+	}
+</style>
+
+<div ng-controller="ProjModelCtrl">
+	<div id="appHeader" class="paneTitle" style="height: 25px; text-align: left;">
+		<div class="paneTitle filter" style="width: {{paneWidth_1}}px; overflow:hidden;">
+			<input class="headerSearch" type="text" placeholder="Search text or regexp" ng-model="filterProj" ng-change="applyProjFilter(filterProj)"/>
+			<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filterProj=''; applyProjFilter('')"/></span>
+		</div>
+		<div style="float:left; margin-left: 10px;">
+			<div>Project: 
+				<input ng-if="curProj" ng-model="curProj.project" style="width: {{paneWidth_2-100}}px" ng-blur="changeProjName();"/>
+			</div>
+		</div>
+	</div>
+	<div style="height: {{viewHeight-headerHeight - 25}}px;">
+		<div class="pane pane_1" style="width: {{paneWidth_1}}px;">
+			<ul id="projList" class="selection">
+				<li ng-repeat="proj in projList | orderBy:'project'"  ng-click="openProj(proj)"
+					ng-class="{selected: proj==curProj}" ng-hide="proj.hide">
+					<input type="checkbox" ng-model="proj.checked"/> 
+					<span class="projName">{{proj.project}}</span>
+					<img style=" float: right; position: relative; right: 5px; top: -20px;" 
+						ng-src="img/check{{proj.projActive=='Y'?'':'No'}}.png"
+						ng-click="toggleProjActive(proj);" class="projActiveInd"
+						popover-placement="right" popover-popup-delay="{{ribbon.helpHintDelay}}" 
+						popover-trigger="mouseenter" popover="Project Active Flag, click to toggle"/>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" style="width: {{paneWidth_2}}px;">
+			<div class="pane-content">
+				<div style="height: {{viewHeight-headerHeight - 25}}px; overflow: auto">
+					<table id="projModelList">
+						<tr id="projModelListHeader">
+							<th>
+								<span class="filter" style="padding-left: 5px;">Model&nbsp;&nbsp; </span>
+								<span class="filter" style="height: 18px;">
+									<input style="width: {{250}}px" class="headerSearch" type="text" placeholder="Search text or regexp" ng-model="filterModel" ng-change="applyModelFilter(filterModel)"/>
+									<span class="appBtn" title="clear filter field" style="top: -20px; right: 20px;"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filterModel=''; applyModelFilter('')"/></span>
+								</span>
+							</th>
+							<th align="center" width="1%">
+								<img ng-src="img/check{{showAll?'No':''}}.png"
+									ng-click="toggleShowAll();" class="projModelInd"
+									popover-placement="right" popover-popup-delay="{{ribbon.helpHintDelay}}" popover-trigger="mouseenter" 
+									popover="Show all models or show selected models only, click to toggle"/>
+							</th>
+							<th align="center" width="1%">Execution&nbsp;Count&nbsp;</th>
+							<th align="center" width="1%">Execution&nbsp;Date</th>
+						</tr>
+						<tr ng-repeat="model in modelList" ng-show="!model.hide && (showAll || isProjModel(model))">
+							<td class="projModelName">{{model.name}}</td>
+							<td align="center"><img ng-src="img/check{{isProjModel(model)?'':'No'}}.png"
+								ng-click="toggleProjModel(model);" class="projModelInd"
+								popover-placement="right" popover-popup-delay="{{ribbon.helpHintDelay}}" 
+								popover-trigger="mouseenter" popover="Model included in current project, click to toggle"/>
+							</td>
+							<td align="center">{{model.execCount<=0?'':model.execCount}}</td>
+							<td align="center">{{model.lastExecDT}}</td>
+						</tr>
+					</table>
+				</div>
+		     </div>
+		</div>
+		<pane-divider/>
+	</div>
+</div>

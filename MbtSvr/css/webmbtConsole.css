@@ -1,0 +1,33 @@
+html,body{
+    margin:0;
+    padding:0;
+    height:100%;
+	width: 100%;
+    border: none;
+	background-color: #F5F5F5;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.header {
+	background-color: #AAAAAA;
+	font-size: small;
+}
+
+A:link {
+	text-decoration: underline;
+}
+
+A:visited {
+	text-decoration: none;
+}
+
+A:active {
+	text-decoration: none;
+}
+
+A:hover {
+	text-decoration: underline; 
+	font-weight: bold;
+}
+

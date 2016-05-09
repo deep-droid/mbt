@@ -1,0 +1,399 @@
+
+<style>
+	#execList thead th {
+		border-bottom: 1px solid #CCCCCC;
+	}
+	
+	.sectionHeader {
+		background-color: #EAEAEA;
+		font-weight: bold;
+	}
+	
+	.dsCheck {
+		font-size: x-small;
+		height: 8px;
+	}
+	
+	#dsFieldList {
+		padding-left: 5px;
+	}
+	#dsFieldList td {
+		padding-left: 2px;
+	}
+	
+	.fieldData, #dsFieldList td {
+		white-space: nowrap;
+	}
+	
+	#dsFieldList input {
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	
+	.fieldSelected {
+//		background-color: green;
+	}
+	
+	.dsLabel {
+		padding-left: 5px;
+	}
+
+	.tableSep {
+		border-top: 1px solid #DEDEDE; 
+		padding-top: 3px;
+		padding-bottom: 5px;
+		background-color: #F5F5F5;
+	}
+	
+	#dsAppHeader input, #dsAppContent input, #dsAppContent textarea, #dsAppContent select {
+		font-size: 10pt;
+	}	
+	
+	
+	#dsList .dsName {
+		padding-left: 4px;
+	}
+
+	#dataSetSection .subHeader {
+		font-style: italic;
+		border-bottom: 1px dotted #CCCCCC;
+	}
+</style>
+
+<div ng-controller="DSCtrl">
+	<div id="dsAppHeader" class="paneTitle" style="height: 25px; text-align: left;">
+		<div class="paneTitle filter" ng-style="{width: paneWidth_1+'px', overflow: 'hidden'}">
+			<input type="text" placeholder="Enter text to filter DataSet List" ng-model="filter" ng-change="applyFilter(filter)"/>
+			<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filter=''; applyFilter('')"/></span>
+			<span style="display:none;" id=imp>File: <input id="fileupload" type="file" name="filename"></span>
+		</div>
+		<div style="float:right; right:0px;" ng-hide="dataset.dsName==undefined">
+			<div class="rightPaneTitle">
+				DataSet <input type="text" class="dsName" ng-model="dataset.dsName" 
+				ng-style="{width: (paneWidth_2-67)+'px'}" ng-blur="renameDS();"/>
+			</div>
+		</div>
+	</div>
+	
+	<div id="dsAppContent" ng-style="{height: (viewHeight-headerHeight) +'px'}">
+		<div class="pane pane_1" ng-style="{width: paneWidth_1+'px'}">
+			<ul id="dsList" class="selection">
+				<li ng-repeat="dsObj in dsList" ng-if="dsObj" ng-hide="dsObj.hide"
+					ng-class="{selected: dataset.dsName==dsObj.dsName}">
+					<input type="checkbox" class="dsCheck" ng-model="dsObj.selected"><span class="dsName" ng-click="openDS(dsObj)">{{dsObj.dsName}}</span></input>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" ng-style="{width: paneWidth_2+'px'}" class="pane-content">
+
+<div ng-style="{height: (viewHeight-headerHeight)+'px', overflow: 'auto'}" ng-hide="dataset.dsName==undefined">
+	<div id="dataSetSection">
+		<div class="sectionHeader">
+			<img class="btnTO collapseExpand" ng-click="showDataSetSection=!showDataSetSection" 
+				ng-src="img/{{showDataSetSection?'folderExpanded.png':'folderCollapsed.png'}}"/>
+			<span>Advanced Options</span>
+		</div>
+		<div ng-show="showDataSetSection">
+			<div style="display:block;">
+			
+<table width="100%" cellspacing="2" cellpadding="2">
+	<thead class="tableSep">
+		<tr class="subSec">
+			<td width="1%">&nbsp;</td>
+			<td colspan="3" class="subHeader">
+				Interaction Groups <img id="addInteractionBtn" class="btnTO" ng-hide="ReadOnly" title="Add an interaction." src="img/add.png" ng-click="addRelation();"/>
+			</td>
+		</tr>
+		<tr class="subSec">
+			<td width="1%" colspan="2">&nbsp;</td>
+			<td align="left" width="30%" align="left" title="Interaction group">Group Name
+	   			<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.dsInteractionGroup}}" href="#" >?</a>
+			</td>
+			<td align="left" width="*" align="left" title="Degree of interaction/strength">Strength
+	   			<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.dsStrength}}" href="#" >?</a>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="relObj in dataset.relations">
+			<td width="1%">&nbsp;</td>
+			<td width="1%">
+				<img class="btnTO delete" src="img/dsDelete.png"/ 
+					ng-hide="relObj.refCount>0" ng-click="deleteRel(relObj);"/>
+			</td>
+			<td valign="top" style="white-space: nowrap;">
+				<input type="text" style="width:99%" class="interactionName" ng-model="relObj.relName" ng-click="changeRelName(relObj);"/>
+			</td>
+		   	<td>
+		   		<select ng-model="relObj.strengthOpt" ng-change="changeRelStrength(relObj);"
+					ng-options="strengthObj.label for strengthObj in strengthList">
+			    </select>
+			</td>
+		</tr>
+		<tr style="height:8px;">
+			<td colspan="4">&nbsp;</td>
+		</tr>
+	</tbody>
+	<thead class="tableSep">
+		<tr class="subSec">
+			<td width="1%">&nbsp;</td>
+			<td colspan="3" class="subHeader">
+				Filter Rules <img class="btnTO" ng-hide="ReadOnly" title="Add a rule" src="img/add.png" ng-click="addRule();"/>
+			</td>
+		</tr>
+		<tr class="subSec">
+			<td colspan="2">&nbsp;</td>
+			<td align="left" width="30%" title="Rule name identifier">Rule Name
+	   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.dsRuleName}}" href="#" >?</a>
+			</td>
+			<td align="left" width="69%" title="Boolean expression to filter out unwanted rows. E.g. F0>F3, IF F0=3 && F2='xyz' THEN F2>10">Rule Expression
+	   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.dsRuleExpr}}" href="#" >?</a>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="ruleObj in dataset.rules">
+			<td width="1%">&nbsp;</td>
+			<td width="1%">
+				<img class="btnTO delete" src="img/dsDelete.png" ng-click="deleteRule(ruleObj);"/>
+			</td>
+			<td valign="top" style="white-space: nowrap;">
+				<input type="text" style="width:99%" class="ruleName" ng-model="ruleObj.ruleName" ng-change="changeRuleName(ruleObj);"></input>
+			</td>
+			<td>
+				<input type="text" class="ruleExpr" ng-model="ruleObj.ruleExpr" 
+				style="width: 100%"
+				ng-change="changeRuleExpr(ruleObj);"></input>
+			</td>
+		</tr>
+		<tr style="height:8px;">
+			<td colspan="4">&nbsp;</td>
+		</tr>
+	</tbody>
+	<thead class="tableSep">
+		<tr class="subSec">
+			<td width="1%">&nbsp;</td>
+			<td colspan="3" class="subHeader">
+				<span style="margin-left: 8px;">Other Options</span>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+			<td cellspacing="2" colspan="2" width="*">
+				<table cellspacing="2" width="100%">
+					<tr>
+						<td width="10%" style="white-space:nowrap">
+							<span style="position: relative; top: 0px;">Overall Strength</span> 
+				   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+   			   				   popover="{{fieldDefList.dsStrength}}" href="#" >?</a>:
+						</td>
+						<td width="40%">
+							<select ng-model="dataset.strengthObj" ng-change="saveStrength()"
+								ng-options="optObj.label for optObj in strengthList">
+							</select>
+							<a href="#" ng-click="DataSetRegen()"><i>generate</i></a>
+						</td>
+						<td width="10%"><span>Mode</span>
+				   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   						   popover="{{fieldDefList.dsGenMode}}" href="#" >?</a>:
+						</td>
+						<td width="40%">
+							<div multi-select
+								selection-mode="single"
+							    input-model="dataset.algorithmList"
+							    output-model="dataset.algorithmListSelected"
+							    button-label="label"
+							    item-label="label"
+							    tick-property="selected"
+							    disable-property="disabled"
+							    helper-elements=""
+							    max-height="200px"
+							    on-item-click="saveAlgorithm()">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="10%" style="white-space:nowrap">
+							<span style="position: relative; top: 0px;">Partition Field</span> 
+				   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+   			   				   popover="{{fieldDefList.dsPartField}}" href="#" >?</a>:
+						</td>
+						<td width="40%">
+							<select ng-model="dataset.partFieldObj" ng-change="savePartField()"
+								ng-options="optObj.fieldName for optObj in dataset.fields">
+							</select>
+						</td>
+						<td width="10%" style="white-space:nowrap">
+							<span style="position: relative; top: 0px;">Plugins</span> 
+				   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+   			   				   popover="{{fieldDefList.dsPlugin}}" href="#" >?</a>:
+						</td>
+						<td width="40%" align="left">
+							<div multi-select
+							    input-model="dataset.pluginList"
+							    output-model="dataset.pluginListSelected"
+							    button-label="code"
+							    item-label="code desc"
+							    tick-property="selected"
+							    orientation="vertical"
+							    disable-property="disabled"
+							    helper-elements=""
+							    max-height="200px"
+							    on-item-click="savePlugins()">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>	
+		<tr style="height:8px;">
+			<td colspan="4">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+			</div>
+		</div>
+	</div>
+	<div id="fieldSection">
+		<div class="sectionHeader">
+			<img class="btnTO collapseExpand" ng-click="hideFieldDetails=!hideFieldDetails" ng-src="img/{{hideFieldDetails?'folderCollapsed.png':'folderExpanded.png'}}"/>
+			<span>Field Definition</span>
+			<img class="btnTO" ng-disabled="ReadOnly" title="Add a field" src="img/add.png" ng-click="addField();"/>
+			<span style="float: right;white-space: nowrap; font-size: x-small;font-weight:none !important; font-style: italic;">
+				<span>Field Width <input type="text" style="width: 30px;font-size: x-small; border:none" ng-model="fieldWidth"/>px</span>
+				<span style="padding-left: 8px;">Domain Height <input type="text" style="width: 30px; font-size: x-small; border:none" ng-model="domainHeight"/>px</span>
+			</span>
+		</div>
+		<table border="0" id="dsFieldList" cellspacing="0">
+			<thead>
+				<tr>
+					<td valign="bottom">
+						<div  ng-hide="fieldObj.hidden">
+							<span class="dsLabel">Name</span>
+						</div>
+					</td>
+					<td ng-repeat="fieldObj in dataset.fields" 
+						ng-class="{fieldSelected: fieldObj.selected}"
+						ng-hide="fieldObj.hidden">
+						<span class="fieldData">
+							<input class="fName" ng-model="fieldObj.fieldName" ng-change="changeFieldName(fieldObj);"
+								ng-style="{width: fieldWidth+'px'}"/>
+						</span>
+		   			</td>
+				</tr>
+				<tr>
+					<td valign="top">
+						<div ng-hide="hideFieldDetails">
+				   			<span class="dsLabel">Couplling
+	   				   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   				   popover="{{fieldDefList.dsCoupling}}" href="#" >?</a>
+				   			</span>
+					   	</div>
+					</td>
+					<td ng-repeat="fieldObj in dataset.fields" 
+						ng-class="{fieldSelected: fieldObj.selected}"
+						ng-hide="fieldObj.hidden">
+						<div ng-hide="hideFieldDetails" ng-style="{width: fieldWidth+'px'}">
+					   		<div class="fieldData">
+				   				<select class="couplingGroup"  ng-change="changeFieldGroup(fieldObj);"
+				   					ng-model="fieldObj.groupOpt"
+					   				ng-options="groupOpt.label for groupOpt in couplingGroupOptions">
+				   				</select>
+							</div>
+				   		</div>
+		   			</td>
+				</tr>
+				<tr>
+					<td valign="top">
+						<div ng-hide="hideFieldDetails">
+					   		<div>
+					   			<span class="dsLabel">Interaction
+		   				   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   						popover="{{fieldDefList.dsInteractionGroup}}" href="#" >?</a>
+					   			</span>
+					   		</div>
+					   	</div>
+					</td>
+					<td ng-repeat="fieldObj in dataset.fields" 
+						ng-class="{fieldSelected: fieldObj.selected}"
+						ng-hide="fieldObj.hidden">
+						<div ng-hide="hideFieldDetails" class="fieldData" ng-style="{width: fieldWidth+'px'}">
+			   				<select class="interaction" ng-change="changeFieldRelID(fieldObj);"
+			   					ng-model="fieldObj.relIDOpt"
+								ng-options="relOpt.relName for relOpt in dataset.relations">
+								<option value=""></option>
+			   				</select>
+				   		</div>
+		   			</td>
+				</tr>
+				<tr>
+					<td valign="top">
+						<div ng-hide="hideFieldDetails">
+							<span class="dsLabel">Domain
+					   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   					popover="{{fieldDefList.dsDomain}}" href="#" >?</a>
+							</span>
+					   	</div>
+					</td>
+					<td ng-repeat="fieldObj in dataset.fields" 
+						ng-class="{fieldSelected: fieldObj.selected}"
+						ng-hide="fieldObj.hidden">
+						<div ng-hide="hideFieldDetails" ng-style="{width: fieldWidth+'px'}">
+							<div class="fieldData">
+				   				<textarea class="domain" ng-model="fieldObj.domainText" 
+				   					ng-click="setCurField (fieldObj)"
+									ng-style="{width: fieldWidth+'px', height: domainHeight+'px'}"
+					   				ng-change="changeFieldDomain(fieldObj);">
+					   			</textarea>
+					   		</div>
+				   		</div>
+		   			</td>
+				</tr>
+				<tr style="font-style: italic; font-size: small" ng-dblclick="curFieldObj=undefined;" title="double click to hide">
+					<td align="right" style="padding-top: 5px; padding-bottom: 5px;">{{curFieldObj.fieldName}}</td>
+					<td colspan="{{dataset.fields.length}}">{{curFieldObj.domainText}}</td>
+				</tr>
+		  		<tr class="actionSec sectionHeader">
+					<td>
+						<div style="position: relative; left: -5px; width:20px;">
+							<img class="btnTO collapseExpand" ng-click="hideDataTable=!hideDataTable" ng-src="img/{{hideDataTable?'folderCollapsed.png':'folderExpanded.png'}}"/>
+							<span>DataTable</span>
+						</div>
+					</td>
+					<td align="center" ng-repeat="fieldObj in dataset.fields" valign="top"
+						ng-hide="fieldObj.hidden">
+						<input type="checkbox" ng-model="fieldObj.selected" ng-dblclick="checkAllFields(fieldObj.selected)" style="width: 10px;"/>
+					</td>
+				</tr>
+			</thead>
+		  	<tbody ng-hide="hideDataTable" id="dataTableRow">
+				<tr ng-repeat="rowObj in dataset.rows | orderBy:predicate:reverse"
+					class="hoverActive">
+					<td><span style="float: left;" class="seqNum">{{$index+1}}</span>
+						<input type="checkbox" style="float: right;" ng-model="rowObj.selected"
+							ng-change="updateSelectedRowList();" ng-dblclick="checkAllRows(rowObj.selected)" />
+					</td>
+					<td ng-repeat="fieldObj in dataset.fields" valign="top" 
+						ng-class="{fieldSelected: fieldObj.selected}"
+						ng-hide="fieldObj.hidden">
+						<input type=text ng-model="rowObj[fieldObj.fieldName]" 
+							 ng-hide="fieldObj.hidden" ng-style="{width: fieldWidth+'px'}"
+							ng-change="changeDataRow(rowObj, fieldObj.fieldName)"/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<link rel="stylesheet" href="IDE_DataDesign/datadesign.css">
+
+		</div>
+	</div>
+	<pane-divider/>
+</div>

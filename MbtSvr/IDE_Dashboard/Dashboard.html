@@ -1,0 +1,200 @@
+
+<style>
+	
+	ul.kpi {
+		list-style-type: none;
+		text-align: center;
+		paddig: 0px;
+		margin: 0px;
+	}
+	
+	ul.kpi li {
+		display: inline;
+		background-color: #FFFFFF;
+		margin-left: 5px;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+	
+	.kpi {
+		color: #000000;
+		background: linear-gradient(to bottom, #EFEFEF, #CCCCCC); 
+		cursor: pointer;
+	}	
+	
+	.kpi .ind {
+		border-radius: 8px;
+		height: 16px;
+		width: 16px;
+		display: inline;
+		background-color: blue;
+	}
+	
+	svg {
+		padding-top:15px;
+	}
+	
+	div.dashSec {
+		padding: 0px;
+		margin: 0px;
+	}
+
+	.row.headerKPI {
+		background-color: #FAFAFA;
+		color: #000000;
+	}
+	
+	.title {
+		background-color: #EEEEEE;
+	}
+
+	.title h4 {
+		margin-top:5px;
+		margin-bottom:5px;
+		font-size:14px;
+		font-weight:bold;
+		color: #555555;
+	}
+	
+	.row table {
+		margin-top:15px;
+	}
+	
+	svg {
+		position:relative;
+	}
+	
+	.row>div {
+		position: relative !important;
+	}
+	
+	h5.chart-title {
+		font-size:14px;
+		font-weight:bold;
+		text-align:center;
+	}
+	
+	.container {
+		border: 1px solid #D0D0D0;
+	}
+	
+	.nvtooltip {
+//		  border: 2px solid orange !important;
+		  background-color: lightblue !important;
+	}
+	
+	.nvtooltip h3 {
+		  margin: 0 !important;
+		  padding: 4px 14px !important;
+		  line-height: 18px !important;
+		  font-weight: bold !important;
+		  font-size:13px !important;
+		  background-color: rgba(247,247,247,0.75) !important;
+		  text-align: center !important;
+		
+		  border-bottom: 1px solid #ebebeb !important;
+		
+		  -webkit-border-radius: 5px 5px 0 0 !important;
+		  -moz-border-radius: 5px 5px 0 0 !important;
+		  border-radius: 5px 5px 0 0 !important;
+	}
+
+	.nvd3.nv-stackedarea path.nv-area {
+		  fill-opacity: .05 !important;
+		  stroke-opacity: 1 !important;  
+	}
+	
+</style>
+
+<div ng-controller="DashCtrl" ng-cloak>
+	<div>
+		<center>Dashboard Stats contains automated test executions only. Manual test case executions are not considered in these stats.</center>
+	</div>
+	<div class="container-fluid" style="height: {{viewHeight-headerHeight}}px; overflow:auto;">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 title">
+				<h4><img src="img/{{expReqSum?'minus':'plus'}}.png" ng-init="expReqSum=true" ng-click="expReqSum=!expReqSum"/> 
+					Requirement Summary</h4>
+			</div>
+			<div ng-show="expReqSum">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<svg id="reqByPriority"></svg>
+					<h5 class="chart-title">Requirements Status<h5>
+				</div>
+	
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<svg id="ReqByStatus"></svg>
+					<h5 class="chart-title">Requirement Execution Status<h5>
+				</div>
+				
+				<div class="col-sm-12 col-md-8 col-lg-4">
+					<h5 class="chart-title">Requirement Execution Stats<h5>
+					<table id="ReqMatrix" class="table table-striped table-bordered">
+					<tr>
+					<th>Status</th><th>High</th><th>Medium</th><th>Low</th><th>Other</th><th>Total</th>
+					</tr>
+					<tr ng-repeat="reqRow in summaryReq">
+					<td>{{reqRow.status}}</td><td>{{reqRow.high}}</td><td>{{reqRow.medium}}</td><td>{{reqRow.low}}</td><td>{{reqRow.other}}</td><td>{{reqRow.total}}</td>
+					</tr>
+					<tr>
+					<th>Total</th><th>{{summaryReqTotal.countH}}</th><th>{{summaryReqTotal.countM}}</th><th>{{summaryReqTotal.countL}}</th><th>{{summaryReqTotal.countO}}</th><th>{{summaryReqTotal.countH+summaryReqTotal.countM+summaryReqTotal.countL + summaryReqTotal.countO}}</th>
+					</tr>
+					</table>
+				</div>
+				</div>
+			</div>
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 title">
+				<h4><img src="img/{{expTCSum?'minus':'plus'}}.png" ng-init="expTCSum=true" ng-click="expTCSum=!expTCSum"/> 
+					Test Case Summary</h4>
+			</div>
+			<div ng-show="expTCSum">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<svg id="TCByStatus"></svg>
+					<h5 class="chart-title">Test Case Execution Status<h5>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<svg id="TCByProject"></svg>
+					<h5 class="chart-title">Test Case By Project<h5>
+				</div>
+				<div class="col-sm-12 col-md-8 col-lg-4">
+					<h5 class="chart-title">Test Case Execution Stats<h5>
+					<table id="TCMatrix" class="table table-striped table-bordered">
+					<tr>
+					<td style="width:140px;">Total Test Cases</td><td>{{tcExec.tcCount}}</td>
+					</tr>
+					<tr>
+					<td align="right">Failed</td><td>{{tcExec.tcFailCount}}</td>
+					</tr>
+					<tr>
+					<td align="right">Blocked</td><td>{{tcExec.tcBlockCount}}</td>
+					</tr>
+					<tr>
+					<td align="right">Partial</td><td>{{tcExec.tcPartialCount}}</td>
+					</tr>
+					<tr>
+					<td>Total Test Steps</td><td>{{tcExec.tcStepCount}}</td>
+				</tr>
+				</table>
+			</div>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 title">
+				<h4><img src="img/{{expDefectSum?'minus':'plus'}}.png" ng-init="expDefectSum=true" ng-click="expDefectSum=!expDefectSum"/> 
+					Defects Summary</h4>
+			</div>
+			<div ng-show="expDefectSum">
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="DefectBySeverity"></svg>
+					<h5 class="chart-title">Defects By Severity<h5>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6">
+					<svg id="DefectByProject"></svg>
+					<h5 class="chart-title">Defects By Project<h5>
+				</div>
+			</div>
+		</div>
+	</div>		
+</div>

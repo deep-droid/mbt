@@ -1,0 +1,24 @@
+<style>
+   #Progress div.chart {
+   		background-color: #F0F0F0;
+   		margin-bottom: 3px;
+   		width: 100%;
+   }
+</style>
+
+<div id="Progress" ng-controller="ProgressCtrl" style="overflow: auto; height: {{viewHeight}}px;">
+	<div class="chart">
+		<svg id="reqByPriority"></svg>
+		<center class="chart-title">Requirements Overall Execution</center>
+	</div>
+
+	<div class="chart">
+		<svg id="reqByTestCase"></svg>
+		<center class="chart-title">Requirements Execution By Test Case</center>
+	</div>
+
+	<div class="chart">
+		<svg id="testCaseExec"></svg>
+		<center class="chart-title">Test Case Execution Progress (Assert Item)</center>
+	</div>
+</div>

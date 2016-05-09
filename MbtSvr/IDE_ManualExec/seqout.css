@@ -1,0 +1,369 @@
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+  	background-color:#FFFFFF;
+	font-size:12pt;
+}
+
+img {display:block}
+
+
+#tcList td {
+	width: 80px;	
+}
+
+.logoImg {
+	height: 25px;
+	display: inline;
+	position: relative;
+	top: 3px;
+}
+
+.TO_Release {
+	float: right;
+	position: relative;
+	bottom: 0px;
+}
+
+.TOLink {
+	color: #000000;
+	font-size: small;
+	font-style: italic;
+}
+
+div.banner	{
+  background-color:#3d4659;
+  color:#EEEEFF;
+  padding: 0; 
+	 
+}
+
+div.banner a {
+	color: #eeeeee;
+}
+
+#reportTitle {
+  font-size:1.2em;
+  font-weight:normal;
+  font-family: verdana, helvetica, sans-serif;
+  color: orange;
+}
+
+
+h2 {
+ background-color:#F0F0F0;
+ color:#303030;
+ border-bottom: solid 1px #CCC;
+}
+
+
+.subTitle {
+  padding-left: 1em;
+  font-size: small;
+}
+
+div.testcase {
+  margin:0;
+  padding:0;
+}
+
+
+.graph {
+	horizontal-align: center;
+}
+
+.graph img {
+}
+
+div.content	{
+  background-color:#FFFFFF;
+  color: #333;
+  border-width: 0px 1px 1px 1px;
+  border-style:solid;
+  border-color:#333;
+  margin: 0 auto;	 
+}
+
+
+
+
+
+div.spacer, div.tail {
+ clear:both;
+ text-align:center
+}
+
+div.hidden {
+position:absolute;
+top:0px;
+left:0px;
+  display:none;
+}
+
+a.expand {
+float:right;
+ text-align:right;
+}
+
+table.testcase {
+  text-align:left;
+}
+
+
+th.tlabel, #tcList.tlabel {
+  padding:0 0.5em;
+  background-color:#AAAAAA;
+}
+
+
+.label {
+	font-weight: bold;	
+}
+
+
+.preambleH2, .testcaseH2, .postscriptH2 {
+	page-break-before: always;
+}
+
+.p_C, .p_1 {
+	color: #FF0000;
+}
+
+.p_H, .p_2 {
+	color: red;
+}
+
+.p_M, .p_3 {
+	color: #FF9900;
+}
+
+.p_L, .p_4 {
+	color: #333333;
+}
+
+sup {
+	font-size: xx-small;
+}
+
+button {
+	width: 100px;
+}
+
+
+.summaryTbl td {
+	vertical-align: top;
+}
+
+#summaryHead {
+	background-color: #AAAAAA;
+	font-weight: bold;
+
+}
+
+#tcExecStatusHead, #reqExecStatusHead {
+	background-color: #DDDDDD;
+	font-weight: bold;
+	color: #EFEFEF;
+}
+
+.summaryUL {
+ 	list-style:none;
+ 	margin-left: 1px;
+ 	padding-left: 1px;
+ 	margin-right: 1px;
+ 	padding-right: 1px;
+ }
+ 
+ .summaryUL li {
+ 	float: left;
+ 	display: block;
+ 	padding-right: 2px;
+ }
+ 
+ .reqStat li, .testcaseStat li {
+ 	background-color: lightgray;
+ 	margin-right: 2px;
+ }
+ 
+.checkAllCase {
+	padding-left: 2px;
+	padding-right: 3px;
+	font-size: small;
+}
+
+.checkAllStep {
+	padding-left: 2px;
+	padding-right: 3px;
+	font-size: small;
+}
+
+
+.measureList a, .measureList span{
+	margin-right: 5px;
+	font-size: x-small;
+}
+
+#TestCaseApp {
+	width: 100%; 
+	overflow:hidden; 
+	border: 2px sold #333333;
+}
+
+.legends {
+	font-size: 10pt;
+}
+
+
+.req_passed {
+	color: #000000;
+	font-weight: bold;
+}
+
+.req_partial {
+	font-size: small;
+	color: #000000;
+}
+
+.req_failed {
+	color: red;
+	font-weight: bold;
+}
+
+.req_blocked {
+	font-size: small;
+	color: red;
+}
+
+#legendStatus li {
+	padding-left: 3px;
+	padding-right: 3px;
+	display: inline;
+	margin: 2px;
+	border: 1px solid #999999;
+}
+#legendStatus {
+	list-style: none; 
+	padding-left:0px; 
+	margin-left:0px;
+	display: inline;
+}
+
+#reqList li {
+	border: 1px solid #999999;
+	padding-left: 3px;
+	padding-right: 3px;
+	display: inline; 
+	margin-right: 3px;
+}
+
+#reqList {
+	display: inline;
+}
+		
+#tagMode {
+	font-size: -1;
+	padding-left: 4px;
+}
+
+.covered {
+	background-color: lightgreen;
+}
+
+.verifyStatus {
+	padding: 5px;
+}
+
+.verifyStatus span {
+	background-color: #EEEEEE;
+	margin-right: -2px;
+	maring-left: -3px;
+	padding-right: 3px;
+	padding-left: 3px;
+	margin-bottom: 5px;
+	border: 1px dotted orange;
+}
+
+.verifyStatus .statusLeft {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.verifyStatus .statusRight {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.verifyStatus span:hover {
+	border: 1px solid orange;
+}
+
+.verifyStatus .statusSet {
+	background-color: orange;
+}
+
+.failedCmt {
+	margin-top: 4px;
+}
+
+.assertItem {
+	padding-left: 3px;
+}
+
+#updateExecSum {
+	font-size: small;
+}
+
+.testerName {
+	width: 400px;
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid #000000;
+}
+
+.testedDate {
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid #000000;
+	width: 150px;
+}
+
+.testEffort {
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid #000000;
+	width: 200px;
+}
+
+.testerNote {
+	width: 900px;
+}
+
+.testcaseFooter {
+	margin-top: 10px;
+}
+
+#runNote {
+	width: 98%;
+	height: 100px;
+}
+
+.statusCmt {
+	background-color: #FFFFFF;
+	padding-left:3px; 
+	height: 80px; 
+	width: 600px; 
+	border: 1px solid #DDDDDD;
+}
+
+.backTCList {
+	float:right;
+	position: relative;
+	top: -41px;
+	font-size: small;
+}

@@ -1,0 +1,90 @@
+<style>
+	#ManualExecSum table {
+		padding-top: 10px;
+		padding-left: 10px;
+	}
+</style>
+
+<div ng-controller="SummaryCtrl" id="ManualExecSum" style="overflow: auto; height: {{viewHeight-headerHeight}}px;">
+	<table class="table">
+		<tr>
+			<th align="left">Model Name:</th>
+			<td align="left">{{TestCase.ModelName}}
+				<span style="position: relative; top: 5px; font-size: x-small;float: right;"><a href="{{TestCase.TestCaseReportName}}/coverage.png" target="_blank">Open Graph in New Window</a></span>
+			</td> 
+		</tr>
+		<tr>
+			<th valign="top" align="left">Description:</th>
+			<td align="left">{{TestCase.ModelDescription}}</td>
+		</tr>
+		<tr>
+			<th align="left" colspan="2">Versions</th>
+		</tr>
+		<tr>
+			<td align="left"><span class="subItem">AUT:</span></td>
+			<td align="left">{{TestCase.AUTVersion}}</td> 
+		</tr>
+		<tr>
+			<td valign="top" align="left"><span class="subItem">Model:</span></td>
+			<td align="left">{{TestCase.ModelVersion}}</td> 
+		</tr>
+		<tr>
+			<td align="left"><span class="subItem">Requirements:</span></td>
+			<td align="left">{{TestCase.RequirementsVersion}}</td> 
+		</tr>
+		<tr>
+			<td align="left"><span class="subItem">TestOptimal:</span></td>
+			<td align="left">{{TestCase.TOVersion}}</td> 
+		</tr>
+		<tr>
+			<th align="left">Sequencer:</th>
+			<td align="left">{{TestCase.Sequencer}} (seed: {{TestCase.Seed}})</td> 
+		</tr>
+		<tr>
+			<th valign="top" align="left" colspan="2">Stop Conditions</th>
+		</tr>
+		<tr ng-if="TestCase.StopConditions.TransitionCoverage>0">
+			<td><span class="subItem">At Coverage:</td>
+			<td>{{TestCase.StopConditions.TransitionCoverage?TestCase.StopConditions.TransitionCoverage:''}}%</td>
+		</tr>
+		<tr ng-if="TestCase.StopConditions.TraversalCount>0">
+			<td><span class="subItem">At Traversal Count:</span></td>
+			<td>{{TestCase.StopConditions.TraversalCount}}<td>
+		</tr>
+		<tr ng-if="TestCase.StopConditions.ElapseTime > 0">
+			<td><span class="subItem">At Elapse Time:</span></td>
+			<td>{{TestCase.StopConditions.ElapseTime}} minutes</td>
+		</tr>
+		<tr ng-if="TestCase.StopConditions.TestCaseCount > 0">
+			<td><span class="subItem">At TestCase Count:</span></td>
+			<td>{{TestCase.StopConditions.TestCaseCount}}</td>
+		</tr>
+		<tr ng-if="TestCase.StopConditions.ExceptionCount > 0">
+			<td><span class="subItem">At Exception Count:</span></td>
+			<td>{{TestCase.StopConditions.ExceptionCount}}</td>
+		</tr>
+		<tr>
+			<th align="left">Generation Date:</th>
+			<td align="left">{{TestCase.PluginID}}, {{TestCase.GenerationDate}}</td> 
+		</tr>
+		<tr ng-show="TestCase.CoverateType.length>0">
+			<th align="left">Coverage Type:</th>
+			<td align="left">{{TestCase.CoverateType}}</td> 
+		</tr>
+		<tr>
+			<th valign="top" align="left">Model Coverage:</th>
+			<td valign="top" align="left">{{TestCase.TransitionCoverage}}% 
+			</td> 
+		</tr>
+		<tr>
+			<th valign="top" align="left" title="Number of test cases generated.">Test Case Count:</th>
+			<td valign="top" align="left">{{TestCase.TestCaseList.length}} 
+			</td> 
+		</tr>
+		<tr>
+			<th valign="top" align="left" title="Number of duplicate test cases removed" nowrap="nowrap">Duplicates Removed:</th>
+			<td valign="top" align="left">{{TestCase.DuplicateTestCasesRemoved}} 
+			</td> 
+		</tr>
+	</table> 
+</div>

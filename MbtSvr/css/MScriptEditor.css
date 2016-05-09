@@ -1,0 +1,213 @@
+html, body {
+	margin: 0;
+	padding: 0;
+    height: 100%;
+    width: 100%;
+    border: none;
+	background-color: #F7F7F7;
+ 	font-size: 12px;
+    font-family: Droid Sans, Arial, sans-serif;
+	overflow: hidden;	/* hidden Remove scroll bars on browser window */
+}
+
+
+.icon-ctrl {
+   background-color: #FDFDFD;
+   -moz-box-shadow:    inset 0 0 10px #F0EEE3;
+   -webkit-box-shadow: inset 0 0 10px #F0EEE3;
+    box-shadow:         inset 0 0 10px #F0EEE3;
+   position: relative;
+   top: -2px;
+}
+
+.icon-ctrl img {
+	padding: 0px;
+	border: 1px solid #CCCCCC;
+	margin: 0px;
+}
+
+
+#editScriptType {
+	padding-left: 3px;
+}
+
+select, #mScriptEditHead {
+	font-size: 10px;
+}
+
+#readonly {
+	color: red;
+}
+
+a {
+	color: #000080;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.btn img:hover {
+	border-radius: 3px;
+	background-color: yellow;
+}
+
+#tagSelect .innerMenu {
+	height: 118px; 
+	width: 140px; 
+}
+
+
+#attrOptionSelect {
+	height: 150px;
+    overflow: auto;
+	width: 250px;	
+}
+
+#attrOptionSelect .innerMenu {
+	height: 118px; 
+	width: 240px; 
+}
+
+#attrOptionSelect select {
+	font-size: 11px;
+}
+
+#attrOptionSelect .filter, #attrOptionSelect .filterLabel, #attrOptionSelect .funcType {
+	font-size: 11px;
+	padding-left: 3px;
+}
+
+#mScriptTextarea {
+	background-color: #F5F5F5;
+}
+
+.macroParam {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#mScriptEditHead {
+	position: relative;
+	top: 2px;
+}
+
+
+.pausedAt {
+	background-color: #FFE5B4;
+}
+      
+.break {
+	background-color: #F87431 !important;
+}
+
+
+#hoverMsg {
+	position: absolute; 
+	border-radius: 8px; 
+	background-color: #DCE9F0;
+	padding: 5px;
+	border: 0px;
+	color: red;
+}
+
+
+.userTrigger {
+	background-color: #FDF7D2;
+}
+
+#hoverMenu {
+	width: 120px;
+}
+
+.dialog {
+	border: 2px ridge #F0EEE3;
+	border-radius: 5px;
+	display:none; 
+	position: absolute; 
+	height: 20px; 
+	left: 0px; 
+	top: 0px; 
+	z-index: 9000; 
+	background-color: #97c3d4; 
+	width:100%;
+	font-size: small;
+	font-color: #999999;	
+	padding-top: 8px;
+	padding-bottom: 4px;
+	overflow: hidden;
+}
+
+.closeDialog {
+	float: right; 
+	margin-right: 8px; 
+	background-color: #EEEEEE;
+	font-weight: bold;
+	font-size: medium;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.closeDialog:hover {
+	background-color: orange;
+	font-color: #FFFFFF;
+}
+
+.cmpErr {
+	color: red;
+	background-color: #EF8330;
+}
+
+#compileMsg {
+	color: #000000;
+	padding-left: 3px;
+	font-style: italic;
+	border-left: 1px solid green;
+}
+
+.dialog .msg {
+	font-size:small;
+	font-style: italic;
+	position: relative:
+	top: 8px;
+}
+
+#compileErrorNum {
+	font-size: x-small;
+}
+
+.dialog .btn {
+	position:relative;
+	top: 4px;
+	padding-left: 1px;
+	margin-left: 0px;
+}
+
+.dialog .label {
+	font-size: small;
+	font-weight: bold;
+	padding-left: 2px;
+}
+
+#searchDialog .textBtn {
+	border-radius: 5px;
+	border: 1px solid #aaaaaa;
+	font-size: x-small;
+	background-color: #ddab24;
+	padding: 2px;
+	color: #FFFFFF;
+}
+
+#searchDialog .textBtn:hover {
+	background-color: #FFFFFF;
+	color: #000000;
+}
+
+#searchDialog .replace {
+	display: none;
+}
+
+#moreMenu {
+	padding-right: 1px;
+}

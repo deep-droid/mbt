@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Behavior-Driven Testing (BDT) - TestOptimal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<LINK REL="SHORTCUT ICON" HREF="favicon.ico">
+    <script src="packages/jquery-2.2.0.min.js"></script>
+    <script src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+    <link href="packages/qtip2/jquery.qtip.min.css" rel="stylesheet">
+    <script src="packages/qtip2/jquery.qtip.min.js"></script>
+    
+    <style>
+    </style>
+</head>
+<body ng-app="Main" ng-controller="mainCtrl" ng-cloak>
+	<div ng-controller="RibbonCtrl">
+		<div class="modalBkg modalMode" ng-show="modalMode"></div>
+		<div class="modalBkg dragMode" ng-show="dragMode"></div>
+		<div ng-include="'IDE_RibbonUI/ribbon.html'">
+		</div>
+	
+		<div id="tab-target" ng-style="{height: viewHeight+'px'}">
+			<div class="target" id="BDT_Editor" ng-include="'IDE_BDT/BDT_Editor.html'" ng-show="ribbon.curWin=='BDT_Editor'">
+			</div>
+			<!--  >div class="target" id="File" ng-include="'IDE_Common/File/File.html'" ng-show="ribbon.curWin=='File'">
+			</div-->
+			<div class="target" id="Help" ng-include="'IDE_Common/Help/Help.html'" ng-show="ribbon.curWin=='Help'">
+			</div>
+			<div class="target" id="RibbonCust" ng-include="'IDE_RibbonUI/ribbonCust.html'" ng-show="ribbon.curWin=='RibbonCust'">
+			</div>
+		</div>
+
+		<view data-viewid="viewSysInfo" data-title="System Configuration" 
+			data-height="460" data-width="400" data-left="100" data-top="100" data-class="infoView sysInfo">
+			<div ng-include="'IDE_Common/Help/SysInfo.html'"></div>
+		</view>
+		
+		<view data-viewid="viewALMProp" data-title="ALM Configuration" 
+			data-height="550" data-width="550" data-left="200" data-top="150" data-class="editView">
+			<div ng-include="'IDE_Common/Views/ALMProp.html'"></div>
+		</view>
+
+		<view data-viewid="viewReqList" data-title="Requirement List"
+			data-height="350" data-width="550" data-left="200" data-top="150" data-class="editView">
+			<div ng-include="'IDE_Common/Views/ReqList.html'"></div>
+		</view>
+
+		<view data-viewid="viewModelProp" data-title="Model Property"
+			data-height="600" data-width="600" data-left="200" data-top="150" data-class="editView">
+			<div ng-include="'IDE_Common/Views/ModelProp.html'"></div>
+		</view>
+
+		<view data-viewid="viewScreenShot" data-title="Model ScreenShot List"
+			data-height="300" data-width="400" data-left="250" data-top="150" data-class="editView">
+			<div ng-include="'IDE_Common/Views/ScreenShot.html'"></div>
+		</view>
+
+		<view data-viewid="viewUIMap" data-title="UI Element List"
+			data-height="400" data-width="650" data-left="150" data-top="250" data-class="editView">
+			<div ng-include="'IDE_Common/Views/UIMap.html'"></div>
+		</view>
+
+		<view data-viewid="viewModelMBT" data-title="Model Execution Setting"
+			data-height="400" data-width="500" data-left="200" data-top="100" data-class="editView">
+			<div ng-include="'IDE_Common/Views/ModelMBT.html'"></div>
+		</view>
+
+		<view data-viewid="viewDSVar" data-title="DataSet & Variables"
+			data-height="400" data-width="400" data-left="200" data-top="100" data-class="editView">
+			<div ng-include="'IDE_BDT/ViewDataSetVar.html'"></div>
+		</view>
+
+		<view data-viewid="viewMScriptSandbox" data-title="MScript Sandbox"
+			data-height="300" data-width="400" data-left="250" data-top="150" data-class="editView">
+			<div ng-include="'IDE_BDT/ViewMScriptSandbox.html'"></div>
+		</view>
+
+		<view data-viewid="viewExecProgress" data-title="Execution Progress"
+			data-height="400" data-width="400" data-left="300" data-top="200" data-class="infoView">
+			<div ng-include="'IDE_BDT/ExecProgress.html'"></div>
+		</view>
+		
+		<view data-viewid="viewLicInfo" data-title="Manage License"
+			data-height="500" data-width="500" data-left="center" data-top="center" data-class="infoView">
+			<div ng-include="'IDE_Common/Help/LicInfo.html'"></div>
+		</view>
+		
+		<view data-viewid="viewCheckUpdates" data-title="TestOptimal Updates" data-modal="true"
+			data-height="200" data-width="400" data-left="center" data-top="center" data-class="aboutView">
+			<div ng-include="'IDE_Common/Help/CheckUpdates.html'"></div>
+		</view>
+
+		<view data-viewid="viewHelpAbout" data-title="About TestOptimal" data-modal="true"
+			data-height="320" data-width="400" data-left="center" data-top="center" data-class="aboutView">
+			<div ng-include="'IDE_Common/Help/About.html'"></div>
+		</view>
+
+		<view data-viewid="viewConsole" data-title="Console Log" data-modal="true"
+			data-height="200" data-width="400" data-left="center" data-top="center" data-class="alertView">
+			<div ng-include="'IDE_Common/Views/ConsoleMsg.html'"></div>
+		</view>
+
+		<view data-viewid="viewAlert" data-title="Alert" data-modal="true"
+			data-height="200" data-width="400" data-left="center" data-top="center" data-class="alertView">
+			<div ng-include="'IDE_Common/Views/AlertDialog.html'"></div>
+		</view>
+	</div>
+		 
+    <script src="packages/angular-1.2.21/angular.min.js"></script>
+    <script src="packages/angular-1.2.21/ui-bootstrap-tpls-0.11.0.js"></script>
+    <link href="packages/angular-1.2.21/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="packages/angular-multi-select-master/angular-multi-select.css">
+	<script src="packages/angular-multi-select-master/angular-multi-select.js"></script> 
+	
+	<!-- link href="packages/angular-xeditable/css/xeditable.css" rel="stylesheet">
+	<script src="packages/angular-xeditable/js/xeditable.min.js"></script-->
+	
+	<script src="packages/angular-qtip2-directive-master/qtip2.js"></script> 
+
+    <link rel="stylesheet" href="IDE_Common/packages/splitPane.css">
+    <script src="IDE_Common/ide_init.js"></script>
+
+    <link rel="stylesheet" href="IDE_RibbonUI/ribbon.css">
+    <link rel="stylesheet" href="IDE_RibbonUI/ribbonMenuIcon.css">
+    <script src="IDE_RibbonUI/ribbonMenuDefn.js"></script>
+    <script src="IDE_BDT/ribbonTabDefn_BDT.js"></script>
+    <script src="IDE_RibbonUI/keyboardManager.js"></script>
+    <script src="IDE_RibbonUI/ribbon_app.js"></script>
+
+    <script src="IDE_Common/directives/directives.js"></script>
+    <script src="IDE_Common/propertyFieldDef.js"></script>
+    <script src="IDE_Common/ide_commands.js"></script>
+    <script src="IDE_Common/ide_common.js"></script>
+    <script src="js/webmbtMsgList.js"></script>
+    <link rel="stylesheet" href="IDE_Common/ide_common.css">
+    <script src="IDE_Common/Views/AlertDialog_app.js"></script>
+    <script src="IDE_Common/packages/dynamicHtml.js"></script>
+	<script src="IDE_Common/Views/ConsoleMsg.js"></script>
+    <script src="IDE_Common/Help/Help_app.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="IDE_BDT/codemirror-4.7/lib/codemirror.css">
+	<script type="text/javascript" src="IDE_BDT/codemirror-4.7/lib/codemirror.js"></script>
+
+	<link rel="stylesheet" href="IDE_BDT/codemirror-4.7/addon/hint/show-hint.css">
+	<script src="IDE_BDT/codemirror-4.7/addon/hint/show-hint.js"></script>
+	<script src="IDE_BDT/codemirror-4.7/mode/javascript/javascript.js"></script>
+	<script src="IDE_BDT/codemirror-4.7/addon/mode/overlay.js"></script>
+    
+    <script src="IDE_Common/Views/ALMProp_app.js"></script>
+    <script src="IDE_Common/Views/ReqList_app.js"></script>
+    <script src="IDE_Common/Views/ModelProp_app.js"></script>
+    <script src="IDE_Common/Views/UIMap_app.js"></script>
+    <script src="IDE_Common/Views/ScreenShot_app.js"></script>
+    <script src="IDE_Common/Views/ModelMBT_app.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="IDE_BDT/codemirror-4.7/addon/hint/show-hint.css">
+	<script src="IDE_BDT/codemirror-4.7/addon/edit/closetag.js"></script>
+	<script src="IDE_BDT/mscriptHint.js"></script>
+
+ 	<script src="IDE_BDT/codemirror-4.7/addon/edit/closebrackets.js"></script>
+
+ 	<link rel="stylesheet" href="IDE_BDT/codemirror-4.7/addon/fold/foldgutter.css" />
+ 	<script src="IDE_BDT/codemirror-4.7/addon/fold/foldcode.js"></script>
+  	<script src="IDE_BDT/codemirror-4.7/addon/fold/foldgutter.js"></script>
+  	<script src="IDE_BDT/codemirror-4.7/addon/fold/brace-fold.js"></script>
+  	<script src="IDE_BDT/codemirror-4.7/addon/fold/comment-fold.js"></script>
+  	<script src="IDE_BDT/codemirror-4.7/addon/comment/comment.js"></script>
+
+	<link rel="stylesheet" href="IDE_BDT/codemirror-4.7/addon/dialog/dialog.css">
+	<script src="IDE_BDT/codemirror-4.7/addon/dialog/dialog.js"></script>
+	<script src="IDE_BDT/codemirror-4.7/addon/search/searchcursor.js"></script>
+	<script src="IDE_BDT/codemirror-4.7/addon/search/search.js"></script>
+	<script src="IDE_BDT/codemirror-4.7/addon/search/match-highlighter.js"></script>
+	<script src="IDE_BDT/codemirror-4.7/addon/selection/active-line.js"></script>
+	
+	<script src="packages/angular-ui-codemirror/src/ui-codemirror.js"></script>
+
+    <script src="IDE_BDT/BDT_svc.js"></script>
+    <script src="IDE_BDT/BDT_app.js"></script>
+    <script src="IDE_BDT/BDT_Editor_app.js"></script>
+
+    <script src="IDE_BDT/ViewMScriptSandbox_app.js"></script>
+    <script src="IDE_BDT/ViewDataSetVar_app.js"></script>
+    <script src="IDE_BDT/ExecProgress_app.js"></script>
+
+    
+</body>
+
+</html>
+

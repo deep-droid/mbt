@@ -1,0 +1,41 @@
+<html>
+
+<head>
+	<title>TestOptimal MBBA Demo App</title>
+	<script src="js/jquery-1.7.min.js" type="text/javascript"></script>
+</head>
+<body>
+	
+	<table style="border: 1px solid black">
+		<tr style="background-color: #DDDDDD">
+			<th colspan=2 align=center>
+				<h1>MBBA Schedule Shipment</h1>
+			</th>
+		</tr>
+		<tr class=info>
+			<td colspan=2><span>Customer ID: <span id=customerID></span></span> <span>Order Contact: <span id=orderContact></span></span>
+			</td>
+		</tr>
+		<tr class=info>
+			<td colspan=2>
+				<span>Purchase Order #: <span id="purchaseOrderNumber"/></span> &nbsp; Order Date: <span id=orderDate></span>
+			</td>
+		</tr>
+		<tr class=info>
+			<td colspan=2><span>Shipping Address: <span id=shipAddress></span></span></td>
+		</tr>
+		<tr class=info>
+			<td colspan=2><span>Tracking #: <span id="trackingNum"/></span></span></td>
+		</tr>
+		<tr class=info>
+			<td colspan=2><span>Shipping Carrier:<span id=shipCarrier></span></span></td>
+		</tr>
+		<tr><td colspan=2><hr/></td></tr>
+		<tr>
+			<td><button id="printPicklist">Print PickList</button></td>
+			<td><button id="shipOrder">Ship Order</button></td>
+		</tr>
+	</table>
+</body>
+
+</html>

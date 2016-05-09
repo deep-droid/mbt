@@ -1,0 +1,168 @@
+
+html, body {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	overflow: auto;
+	font-family: "Segoe UI" , Verdana, Tahoma, Helvetica, sans-serif;
+	font-size: 10pt;
+	background-color: #FAFAFA;
+}
+
+
+
+#dataDesignDIV .collapsed {
+	width: 20px;
+}
+
+#dataDesignDIV .fieldActionGroup.collapsed {
+	display: none;
+}
+
+
+
+#datatable td {
+	background-color: #bdc3c7;
+	font-weight: bold;
+}
+
+#hideDataSetSection, 
+#dsInteractionList thead tr, 
+#dsRuleList thead tr,
+.subSecHeader {
+	background-color: #EEEEEE;
+	color: #33333;
+	white-space: nowrap;
+}
+
+#datatable td {
+	white-space: nowrap;
+}
+
+#dsFieldList thead tr {
+	background-color: #FAFAFA;
+} 
+
+
+#dsFieldList tbody tr td.noBorder {
+	border-right: none;
+}
+
+#dsFieldList thead tr.actionSec {
+	background-color: #EEEEEE;
+}
+
+#dataSetSection {
+	border-bottom: 1px solid #EEEEEE;
+}
+
+#dataDesignDIV .subSecHeader {
+	border-bottom: 1px solid #999999;
+}
+
+
+#dataDesignDIV .label {
+	padding-left: 15px;
+	color: #777777;
+}
+
+#dsInteractionList {
+	border-right: 1px solid #999999;
+}
+
+#datatable td {
+	margin-top: 15px;
+	border-top: 1px solid #999999;
+}
+
+#dataDesignDIV input, #dataDesignDIV textarea, #dataDesignDIV select {
+	font-size: 10px;
+	background-color: #FAFAFA;
+	border-radius: 3px;
+	border: 1px solid #777777;	
+	padding: 2px;
+	margin-top: 3px;
+}
+
+#dataDesignDIV input {
+	height: 15px;
+}
+
+#dataDesignDIV select {
+	height: 20px;
+}
+
+#dataDesignDIV textarea {
+	height: 45px;
+}
+
+#fieldSection input {
+	width: 100px;
+}
+
+#fieldSection textarea {
+	width: 98px;
+}
+
+#fieldSection select {
+	width: 107px;
+}
+
+#dataDesignDIV input.interactionName {
+	width: 100px;
+}
+
+#dataDesignDIV input.dsName {
+	width: 500px;
+}
+
+#dataDesignDIV input.ruleName {
+	width: 150px;
+}
+
+#dataDesignDIV input.ruleExpr {
+	width: 400px;
+}
+
+#dataDesignDIV .btn {
+	padding: 4px 1px 4px 1px;
+	margin: 0px;
+ 	position: relative; 
+ 	top: 3px;
+}
+
+#dataDesignDIV .btn.hover {
+	background-color: orange;
+}
+
+#dataDesignDIV .btn:active {
+	background-color: #EEEEEE;
+}
+
+#dataDesignDIV .btn.collapseExpand {
+	padding: 3px 2px;
+}
+
+#dataDesignDIV .fieldActionGroup {
+ 	float: right; 
+}
+
+
+#dataTableRow .btn.delete,.actionSec .btn.delete {
+ 	position: relative; 
+ 	top: 5px;
+}
+
+#actionSec td {
+	border-top: 1px solid #777777;
+}
+
+#dsFieldList .seqNum {
+	color: #AAAAAA;
+}
+
+#dataDesignDIV button {
+	font-size: 8pt;
+	height: 20px;
+}

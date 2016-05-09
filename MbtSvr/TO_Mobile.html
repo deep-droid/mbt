@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+    <script src="js/TO_Mobile.js" type="text/javascript"></script>
+
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=3.0;">
+
+	<title>TestOptimal - Mobile</title>
+	
+	<script>
+		var orient = "N"; // S for side
+		function updateOrientation() {
+		    switch(window.orientation){  
+		        case 0:  
+		        // "normal"
+				init_normal();  
+		        	break;  
+		    
+		        case -90:  
+		         // "right";  
+				init_side();
+		          break;  
+		    
+		        case 90:  
+		          // "left";
+				init_side();  
+		          	break;  
+		    
+		        case 180:  
+		         // "flipped";  
+				init_normal();
+		         	break;  
+		     }  
+		 
+		}
+		
+		function initFrame() {
+			if (orient == "N") {
+				init_normal();
+			}
+			else {
+				init_side();
+			}
+		}
+				
+		function init_normal() {
+			orient = "N";
+			$(".normal").show();
+			$(".wideElem").hide();
+			var frameDoc = $(window.frames[0].window.document);
+			$(frameDoc).find(".nonMobile").hide();
+			$(frameDoc).find(".wideElem").hide();
+		}
+		
+		function init_side() {
+			orient = "S";
+			$(".normal").hide();
+			$(".wideElem").show();
+			var frameDoc = $(window.frames[0].window.document);
+			$(frameDoc).find(".nonMobile").hide();
+			$(frameDoc).find(".wideElem").show();
+		}
+		
+		
+		function refreshPda() {
+			eval ("refresh_" + $(".tabSelected").attr("id") + "()");
+			initOrient();
+		}
+		
+		
+		function initOrient() {
+			if (orient=="S") {
+				init_side();
+			}
+			else {
+				init_normal();
+			}
+		}
+		
+		function changeOrient() {
+			if (orient=="N") {
+				init_side();
+			}
+			else {
+				init_normal();
+			}
+		}
+		
+		
+	</script>
+	<style>
+		html,body {
+			font-size: 8px;
+			padding: 0px;
+			margin: 0px;
+			height: 100%;
+			width: 100%;
+			overflow: auto;
+		}
+		
+		#edition {
+			position: relative;
+			top: -5px;
+		}
+		
+		#editionTD {
+			padding-left: 4px;
+			padding-right: 4px;
+		}
+		
+		#headBar .sbIcon {
+			display:inline;
+		}
+		
+		#framePane {
+			overflow: auto;
+		}
+		
+		button.sbIcon {
+			height: 22px;
+			width: 35px;
+		}
+		
+		.expired {
+			background-color: orange;
+		}
+	</style>
+</head>
+<body onorientationchange="updateOrientation();">  
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+		<tr style="background-color: #333333;">
+			<td height="20px" align="left">
+				<img src="img/to_mobile.png" height="15px"/>
+			</td>
+			<td align="right" style="background-color: #777777; color: #FFFFFF;" width="5%" nowrap>	
+				<div id="editionTD" style="height: 100%;  position:relative; top: 3px; font-size:x-small;"><center><img src="img/TO.png" height="15px"/><span id="edition" style=" padding-left: 5px; padding-right: 5px;"></span></center></div>
+			</td>
+		</tr>
+		<tr id="headBar" class="normal" style="background-color: #666666;">
+			<td height="2%" align="left" colspan="2">
+				<button class="sbIcon" onclick="javascript:startButton();"><img src="img/start.png"/></button>
+				<button class="sbIcon" onclick="javascript:stopButton();"><img src="img/stop.png"/></button>
+				<button class="sbIcon" onclick="javascript:pauseButton();"><img src="img/pause.png"/></button>
+				<button class="sbIcon" onclick="javascript:openGraph();"><img src="img/modelGraph.png"/></button>
+				<button class="sbIcon" onclick="javascript:refresh();"><img src="img/refresh.png"/></button>
+				<span style="position: fixed; right: 1px;">
+					<select id="winList" style="background-color: #EEEEEE; font-size:x-small;">
+						<option value=""></option>
+						<option value="CloseModel">Close Model</option>
+						<option value="Stats">Exec Stats</option>
+						<option value="ModelGraph">Model Graph</option>
+						<option value="FileList">Model List</option>
+						<option value="Monitor">Monitor</option>
+						<option value="SeqTrace">Seq Log</option>
+					</select>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td valign=top height="100%" colspan="2">
+				<div style="height:100%; width:100%; overflow:auto;">
+				<iframe name="framePane" id="framePane" scrolling="auto" src="" width="100%" height="100%" frameborder="0"></iframe>
+				</div>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script src="js/webmbtScreenList.js"></script>
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>	
+  	<LINK href="css/webmbtScreenList.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="screenListMain" style="overflow:auto;">
+		<table width="100%" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr class="header" style="height:28px;">
+					<th align="left"><input type="checkbox" id="checkAll"/></th>
+					<th align=left>Snap screens for Current MBT Model</th>
+					<th align=left>
+						<span style="position:relative; top: 2px;">Date Time</span>
+						<div style="float:right; position: relative; top: 0px; margin-right: 5px;">
+							<span id="moreMenu" class="icon-ctrl" style="width: 5px; padding:0px;"><img src="img/more.png"/></span>
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody id="filelist">
+			</tbody>
+		</table>
+	</div>
+
+	<div id="hoverMenu" class="dropDownMenu">
+		<ul>
+			<li class="menuItem" id="menuDelete" onclick="deleteFile();">Delete</li>
+		</ul>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<style>
+
+	.CodeMirror-hints {
+		z-index: 99999 !important;
+	}
+	
+	#MScriptSandbox {
+		background-color: #FAFAFA;
+	}
+	
+	#MScriptSandbox .header {
+		background-color: #EAEAEA;
+		font-weight: bold;
+	}
+	
+	#MScriptSandbox .btnTO:hover {
+		border: 1px solid #FFAD33;
+		background: #fdeeb3;
+		cursor: pointer;
+	}
+    .cm-mscriptFunc {
+		font-style: italic;
+		color: blue;
+	}
+</style>
+<div ng-controller="MScriptSandboxCtrl" id="MScriptSandbox" style="height: 100%;">
+	<div class="header">
+		<div class="titleRow">
+			<span>
+				<img class="btnTO" src="IDE_RibbonUI/img/normal/RunMScriptAll-01.png" ng-click="executeMScriptAll()"
+					popover-placement="right" popover-trigger="mouseenter" popover="Execute all MScript in Sandbox"
+					popover-popup-delay="{{ribbon.helpHintDelay}}"/>
+				<img class="btnTO" src="IDE_RibbonUI/img/normal/RunMScript-01.png" ng-click="executeMScript()"
+					popover-placement="right" popover-trigger="mouseenter" popover="Execute selected MScript lines, if no MScript selected execute current MScript line"
+					popover-popup-delay="{{ribbon.helpHintDelay}}"/>
+				<img class="btnTO" src="IDE_RibbonUI/img/normal/Undo-01.png" ng-click="cm.undo();"/>
+				<img class="btnTO" src="IDE_RibbonUI/img/normal/Redo-01.png" ng-click="cm.redo();"/>
+				<img class="btnTO" src="IDE_RibbonUI/img/normal/Search-01.png" ng-click="cm.execCommand('find');"/>
+				<img class="btnTO" src="IDE_RibbonUI/img/normal/Replace-01.png" ng-click="cm.execCommand('replace');"/>
+				<img class="btnTO" src="img/delete.png" ng-click="mscriptTextDebug=''; mscriptOutput.length=0;"/>
+			</span>
+		</div> 
+	</div>
+	<div style="height: 200px">
+		<div style="height: 100%;" id="debugMScriptSandbox" 
+				ui-codemirror="{ onLoad : codemirrorLoaded }" 
+				ui-codemirror-opts="editorOptions" 
+				ng-model="mscriptTextDebug">
+		</div>
+	</div>
+
+	<div ng-show="mscriptOutput.length>0">
+		<span style="font-weight: bold;">MScript Output</span>
+		<img class="btnTO" src="img/delete.png" ng-click="mscriptOutput.length=0;"/>
+		<ul>
+			<li ng-repeat="execRslt in mscriptOutput track by $index"><pre>{{execRslt}}</pre></li>
+		</ul>
+	</div>
+</div>

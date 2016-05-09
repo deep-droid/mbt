@@ -1,0 +1,394 @@
+body {
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	color: #000000;
+}
+
+.ui-resizable-se {
+	padding: 0px;
+	margin: 0px;
+	width: 14px; 
+	height: 14px; 
+	right: 0px; 
+	bottom: 0px;
+}
+
+.trans .ui-resizable-se {
+	display:none !important;
+}
+
+.state {
+	-moz-border-radius: 5px;
+	border-Radius: 5px;
+	overflow: hidden;
+}
+
+.state.branch, .state.switch {
+	border: none;
+}
+
+.state .head {
+	border-top-left-Radius: 5px;
+	border-top-right-Radius: 5px;
+}
+
+.state.branch .head, .state.switch .head {
+	background:none;
+}
+
+.state.branch .ctnt, .state.switch .ctnt {
+	margin-top: 0px;
+}
+
+.state.branch .head:hover, .state.switch .head:hover {
+	background-color: #EEEEEE;
+}
+
+
+#mainCnt {
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	width:100%;
+	overflow: auto;
+	position: absolute;
+}
+
+#modelCanvas {
+	overflow: auto;
+	position: absolute;
+}
+
+
+.dropState:hover {
+	border: 2px dashed red;
+}
+
+.state.initialNode:hover, .state.finalNode:hover {
+	border: 2px solid red;
+}
+
+.readonly:hover {
+	border: 1px dashed red;	
+}
+
+.ctnt {
+	width: 100%;
+	margin: 0px;
+	padding-top: 3px;
+	overflow: hidden;
+	
+}
+
+.stateFlags {
+	position: relative;
+	top: 2px;
+}
+
+.stateFlags span {
+	color: #FFFFFF;
+	font-size: 11px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 2px;
+	font-weight: bold;
+}
+
+
+.trans {
+	position: absolute;
+	z-index: 10;
+}
+
+.transFlags span {
+	font-size: 9px;
+	font-weight: bold;
+	background-color: #999999;
+	color: #FFFFFF;
+	margin-left: 2px;
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+.seg {
+	margin: 1px;
+	background-color: #000000;	
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.dropHover {
+	border: 2px solid orange;
+}
+
+.icn.break a:hover {
+	color: #FED17E;
+}
+
+.icn.break a {
+	color: #9A9A9A;
+}
+
+.icn.break {
+	padding:0px; 
+	font-size: 12px; 
+	color: orange;
+	background-color: #97C3D4;
+}
+
+.icn.initial, .icn.final {
+	display:none;
+	color: #FFFFFF;
+	font-size: 12px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top:1px;
+	font-weight: bold;
+}
+
+.icn {
+	float:left;
+	border-right: 1px solid #999999;
+	vertical-align: middle;
+	margin-top: 1px;
+}
+
+.branch .icn, .switch .icn {
+	float: none;
+}
+
+.icn a {
+	color: #888888;
+	font-size: 12px;
+	padding-left: 2px;
+	padding-right: 2px;
+	font-weight: bold;
+	height: 17px;
+}
+
+
+.icnRDiv {
+	float:right;
+	padding-right: 1px;
+}
+
+.icnR {
+	border: 1px solid #AAAAAA;
+	height: 13px;
+	background-color: #EEEEEE;
+	margin-top:1px;
+	margin-left: 1px;
+	margin-left: 1px;
+	float:left;
+}
+
+.icnRDiv .icnR img {
+	height: 12px;
+}
+
+.transLink img {
+	position: relative;
+	top: 2px;
+	padding: 1px;
+}
+
+.transLink img:hover {
+	background-color: yellow;
+}
+
+.icnR img:hover {
+	background-color: yellow;
+}
+
+.icn.enabled a {
+	color: #FED17E;
+}
+
+.trans.label {
+	padding: 2px;
+}
+
+.transLink {
+	padding-left: 3px;
+	font-style: italic;
+	font-size: 10px;
+}
+
+
+
+.transStart.break.enabled {
+ 	background-color: #F87431;
+ }
+ 
+
+.arrow, .seg {
+	position: inherit;
+	background-color: #222222;
+	padding: 0px;
+	margin: 0px;
+}
+
+.transStart.break {
+	position: absolute;
+	background-color: #555555;
+	padding: 0px;
+	margin: 0px;
+}
+
+
+.transStart.break:hover, .arrow:hover {
+	background-color: orange;
+	cursor: pointer;
+}
+
+.state.marked {
+	border: 2px dotted orange;
+}
+
+
+.trans .marked {
+	border: 2px solid red;
+}
+
+.seg.marked {
+	border: 1px solid orange;
+}
+
+
+.labelEdit {
+	display: none;
+	z-index: 10;
+}
+
+
+.state div.head {
+	height: 17px;
+}
+
+input {
+	font-size: 12px;
+}
+
+.hilite {
+	z-index: 10002;
+}
+
+.headerLabel {
+	color: #666666;
+	font-size: 10px;
+	font-weight: bold;
+	position: relative;
+	top: 2px;
+	margin-left: 8px;
+	float: left;
+}
+
+
+.state.readonly.initialNode .head, .state.readonly.finalNode .head  {
+	border: 0px;
+}
+
+
+.state {
+	z-index: 1;
+}
+
+.swimlane {
+	position:absolute; 
+	z-index: 0;
+}
+
+.swimlane.horizontal {
+	border-top: 1px solid #BBBBBB; 
+	width: 100%;
+}
+
+.box {
+	position:absolute; 
+	z-index: 0;
+	cursor: arrow;
+}
+
+.vDivider {
+	background-color: #CCCCCC;
+	cursor: n-resize;
+	position:absolute;
+	height: 2px;
+	width: 100%;
+}
+
+.hDivider {
+	cursor: e-resize;
+	background-color: #CCCCCC;
+ 	position: absolute;
+ 	Width: 2px;
+ 	height:100%;
+ }
+
+
+.swimlane.vertical {
+	margin-top: 2px;
+//	border-top: 1px solid #BBBBBB; 
+	border-left: 1px solid #BBBBBB; 
+	height: 100%;
+}
+
+.swimlane.horizontal .laneHeader {
+	border-left: 1px solid #BBBBBB;
+}
+
+.swimlane.vertical .laneHeader {
+	border-top: 1px solid #BBBBBB;
+}
+
+.swimlane .header, .swimlane .laneHeader {
+	cursor: move;
+}
+
+.swimText.vertical {
+	position: relative;
+	font-style: italic;
+}
+
+
+.laneHeader, .swimlane .header {
+	background-color: #DDDDDD;
+	font-weight: bold;
+	font-size: small;
+}
+
+
+
+.initSym {
+	position: absolute;
+	width: 12px;
+}
+
+.finalSym {
+	position: absolute;
+	width: 14px;
+}
+
+.jTagging.stateMark {
+	padding-left: 5px; 
+	padding-right: 5px; 
+	color: #333333; 
+	border-radius: 8px; 
+	background-color: #FFD39B; 
+	top: 1px; 
+	left: 1px; 
+	font-size: medium;
+}
+
+.jTagging.transMark {
+	padding-left: 5px; 
+	padding-right: 5px; 
+	color: #333333; 
+	border-radius: 8px; 
+	background-color: #FFD39B; 
+	top: -18px; 
+	left: 0px; 
+	font-size: medium;
+}

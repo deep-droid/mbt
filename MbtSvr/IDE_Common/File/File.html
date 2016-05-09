@@ -1,0 +1,194 @@
+<style>
+	.collapsed li {
+		display: none;
+	}
+</style>
+<div ng-controller="FileCtrl" id="binningWrapper" class="paneWrapper">
+	<div id="BDT_Header" style="background-color: #AAAAAA;">
+		<div style="width: {{paneWidth_1+'px'}}; height: 25px; text-align: left; display:inline;">
+			<span class="historyNav" ng-click="prevFolder()" ng-hide="folderContext.history.indexOf(folderContext.curFolder)<=0"><img src="img/back.png"/></span><span class="historyNav" ng-click="nextFolder()" ng-hide="folderContext.history.indexOf(folderContext.curFolder)>=folderContext.history.length-1"><img src="img/forward.png"/></span><span class="historyNav" ng-click="displayCurrentFolder()"><img src="img/folderExpanded.png"/>{{folderContext.curFolder.filePath==''?'root/':folderContext.curFolder.filePath}}
+			</span>
+		</div>
+		<div ng-switch="curFilter.getType" style="border:1px solid red; width: {{paneWidth_2+'px'}}; display:inline;">
+			<span ng-switch-when="bin">
+				Project: <input type="text" class="enterProject" ng-required="true" ng-model="curBin.name"
+				ng-blur="binNameChanged()"></input>
+			</span>
+			<span ng-switch-when="folder">
+				Folder: {{folderContext.curFolder.filePath==''?'root/':folderContext.curFolder.filePath}}
+			</span>
+			<span ng-switch-default>
+				Filter by Tags
+			</span>
+		</div>
+	</div>
+
+	<div id="BDT_AppContent" ng-style="{height: (viewHeight-headerHeight) +'px'}">
+		<div class="pane pane_1" ng-switch="showPane_seq" ng-style="{width: paneWidth_1+'px'}">
+		    <div id="myFolders" class="section">
+				<script type="text/ng-template" id="tree_item_renderer.html">
+				    <div class="folderLabel hoverActive">
+				    	<img class="ctrl" ng-click="toggleFolder(folderObj)" ng-src="img/{{folderObj.expanded?'folderExpanded.png':'folderCollapsed.png'}}"/>
+				    	<span= ng-click="openFolder(folderObj)"><span class="clickable"><img class="node-type" ng-src="img/{{folderObj.type}}.png"></img> {{folderObj.name}}</span></span>
+				    </div>
+				    <ul>
+				        <li ng-repeat="folderObj in folderObj.folderList | filter: {type:'folder'}" ng-include="'tree_item_renderer.html'" ng-class="{collapsed: !folderObj.expanded}"></li>
+				    </ul>
+				</script>
+				<div class="paneTitle" ng-click="togglePane(1)">Folders<img id="refreshRoot" class="btn" src="img/refresh.gif" ng-click="refreshRootFolder();" stop-event/></div>
+				<div ng-switch-when="1" class="accordian animate-show pane-content">
+					<ul class="root" >
+					    <li ng-repeat="folderObj in [folderContext.rootFolder]" ng-include="'tree_item_renderer.html'" ng-class="{collapsed: !folderObj.expanded}"></li>
+					</ul>
+				</div>
+		    </div>
+
+			<div id="myBins" class="section">
+				<div class="paneTitle" ng-click="togglePane(2)">Projects</div>
+				<div ng-switch-when="2" class="accordian animate-show pane-content">
+					<div class="binSection">
+						Name: <input type="text" class="enterBin" ng-model="searchBin" 
+							ng-enter="addBin(searchBin); searchBin='';">
+						<button class="newBtn" ng-click="addBin(searchBin); searchBin=''">Add</button>
+					</div>
+			        <table cellspacing="0">
+			        	<thead>
+			        		<tr class="header"><td class="clickSort" ng-click="predicate='name'; reverse=!reverse;">Project Name</td>
+				        		<td class="clickSort" ng-click="predicate='fileCount'; reverse=!reverse;">Files</td>
+				        		<td class="clickSort" ng-click="predicate='tagList.length'; reverse=!reverse;">Tags</td>
+				        		<td><td>
+			        		</tr>
+			        	</thead>
+			        	<tbody>
+				            <tr ng-repeat="binObj in binList | filter: searchBin | orderBy:predicate:reverse"
+				            	class="hoverActive">
+				                <td ng-click="openBin(binObj)" class="clickable">
+				                    {{binObj.name}}
+				                </td>
+				                <td ng-click="openBin(binObj)" class="clickable">
+				                    {{binObj.fileCount}}
+				                </td>
+				                <td ng-click="openBin(binObj)" class="clickable">
+				                    {{binObj.tagList.length}}
+				                </td>
+				                <td>
+									<img class="btn" ng-click="deleteBin(binObj)" src="img/dsDelete.png"/>
+				                </td>
+				            </tr>
+				         <tbody>
+			        </table>
+			     </div>
+		    </div>
+		    
+		    <div id="Search" class="section">
+				<div class="paneTitle" ng-click="togglePane(3)">Search & Filter</div>
+				<div ng-switch-when="3" class="accordian pane-content">
+					<div class="header">Search By Name</div>
+					<div class="searchSection">
+						Name: <input type="text" class="searchInput" ng-model="curFilter.search.searchText" ng-blur="searchFile()" ng-enter="searchFile()">
+					</div>
+					<div class="radioOption">
+						<span ng-click="curFilter.search.type='regexp'" ng-class="{optionChecked: curFilter.search.type=='regexp'}">RegExp</span><span ng-click="curFilter.search.type='contains'" ng-class="{optionChecked: curFilter.search.type=='contains'}">Contains</span><span ng-click="curFilter.search.type='startsWith'" ng-class="{optionChecked: curFilter.search.type=='startsWith'}">Starts With</span><span ng-click="curFilter.search.type='endsWith'" ng-class="{optionChecked: curFilter.search.type=='endsWith'}">Ends With</span>
+					</div>
+					<div>				
+				        <div class="header">Filter By Tag</div>
+							<div ng-repeat="tagObj in tagList" ng-click="addFilterTag(tagObj)" 
+								class="clickable hoverActive filterTag" title="click to add this tag to filter models/datasets">
+			                    {{tagObj.name}}
+				        </div>
+					</div>
+				</div>
+			 </div>
+		     <div id="BTags" class="section">
+				<div class="paneTitle" ng-click="togglePane(4)">Tags</div>
+				<div ng-switch-when="4" class="accordian pane-content">
+				<div class="tagSection">
+					Tag: <input type="text" class="enterTag" ng-model="searchTag" ng-enter="addTag(searchTag); searchTag=''">
+					<button class="newBtn" ng-click="addTag(searchTag); searchTag=''">Add</button>
+				</div>
+		        <table cellspacing="0">
+		        	<thead>
+		        		<tr class="header">
+		        			<td class="clickSort" ng-click="predicate='name'; reverse=!reverse;">Tag Name</td>
+		        			<td class="clickSort" ng-click="predicate='fileCount'; reverse=!reverse;">Files</td>
+		        			<td class="clickSort" ng-click="predicate='binCount'; reverse=!reverse;">Bins</td>
+		        			<td></td>
+		        		</tr>
+		        	</thead>
+		        	<tbody>
+			            <tr ng-repeat="tagObj in tagList | filter: searchTag | orderBy:predicate:reverse" 
+			          		class="hoverActive"
+			          	  	title="click to add this tag to the model/dataset selected.">
+			                <td ng-click="addTagToSelectedFiles(tagObj)" class="clickable">
+			                    {{tagObj.name}}
+			                </td>
+			                <td ng-click="addTagToSelectedFiles(tagObj)" class="clickable">
+			                    {{tagObj.fileCount}}
+			                </td>
+			                <td ng-click="addTagToSelectedFiles(tagObj)" class="clickable">
+			                    {{tagObj.binCount}}
+			                </td>
+			                <td>
+								<img class="btn" ng-click="deleteTag(tagObj)" src="img/dsDelete.png"/>
+			                </td>
+			            </tr>
+			         <tbody>
+		        </table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="pane pane_2" ng-style="{width: paneWidth_2+'px'}" class="pane-content">
+		<div class="pane-content">			
+			<div class="fileListHeader">
+				<div>
+					<span class="radioOption" ng-click="toggleTAllTags()">Match: <span class="" ng-click="curFilter.search.allTags=true" ng-class="{optionChecked: curFilter.allTags}">All Tags</span><span ng-click="curFilter.search.allTags=true" ng-class="{optionChecked: !curFilter.allTags}">Any Tags</span></span>
+					<span class="tagList">Tags: <span class="tag" ng-repeat="tagObj in curFilter.tagList"><span class="tagLabel">{{tagObj.name}}</span>
+					<sup class="delete btn" ng-click="deleteFilterTag(tagObj)">x</sup></span></span>
+				</div>
+			</div>
+		    <table cellspacing="0">
+		       	<thead>
+		       		<tr class="header">
+		       			<td class="clickSort" ng-click="predicate='selected'; reverse=!reverse;"><input type="checkbox" class="modelCheckbox" ng-model="ctrlCheckAllModels" 
+		       					ng-click="checkAllModels(ctrlCheckAllModels)"></input></td>
+		       			<td class="clickSort" ng-click="predicate='type'; reverse=!reverse;" align="center" width="5px">T</td>
+		       			<td class="clickSort" ng-click="predicate='name'; reverse=!reverse;">Model/DataSet Name</td>
+		       			<td class="clickSort" ng-click="predicate='lastModifiedDate'; reverse=!reverse;">Modified Date</td>
+		       			<td class="clickSort" ng-click="predicate='tagList.length'; reverse=!reverse;">Tags</td>
+		       			<td>&nbsp;</td>
+		       		</tr>
+		       	</thead>
+		       	<tbody>
+		            <tr ng-repeat="fileObj in curFilter.fileList | orderBy:predicate:reverse" ng-hide="fileObj.hide"
+		            	class="hoverActive">
+		                <td>
+		                    <input class="modelCheckbox" type="checkbox" ng-model="fileObj.selected"></input>
+		                </td>
+		                <td ng-click="openFile(fileObj)" class="clickable">
+		                    <img class="node-type" ng-src="img/{{fileObj.type}}.png">
+		                </td>
+		                <td>
+		                    <span class="clickable" ng-hide="showEditFileName" ng-click="openFile(fileObj)">{{fileObj.name}}</span>
+							<input class="editFileName" ng-show="showEditFileName" ng-model="newFileName" ng-blur="showEditFileName=false;renameFile(fileObj, newFileName);" ng-enter="showEditFileName=false;renameFile(fileObj, newFileName);"/>
+		                </td>
+		                <td>
+		                	{{fileObj.lastModifiedDate}}
+		                </td>
+		                <td>
+							<span class="tag" ng-repeat="tagObj in fileObj.tagList"><span class="tagLabel">{{tagObj.name}}</span>
+							<sup class="delete btn" ng-click="deleteFileTag(fileObj, tagObj)">x</sup></span>
+		                </td>
+		                <td>
+			                <img ng-click="showEditFileName=!showEditFileName;newFileName=fileObj.name;" ng-model="showEditFileName" class="btn" src="img/edit.png"/>
+		                </td>
+		            </tr>
+		         <tbody>
+		    </table>
+		</div>
+	</div>
+	<div id="divider-1" class="paneDivider" style="z-index: 9; left: {{paneWidth_1}}px; top: {{viewHeightOffset}}px; height: {{viewHeight}}px" title="divider1" draggable>
+	</div>
+</div>
+
+<link rel="stylesheet" href="IDE_Common/File/file.css">

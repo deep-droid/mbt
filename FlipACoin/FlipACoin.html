@@ -1,0 +1,141 @@
+<html>
+<head>
+<title>Flip A Coin</title>
+<script src="jquery.min.js"></script>
+<script>
+   $(document).ready(function() {
+	 showBoth();
+	 $("#reset").click(function() {
+		start();
+	 });
+	 $("#showHead").click(showHead);
+	 $("#showTail").click(showTail);
+	 $("#showBoth").click(showBoth);
+	 
+   });
+
+   function showHead() {
+   		$("#callIt").hide();
+		$("#head").show();
+		$("#tail").hide();
+	}
+
+	function updateLastNum(num_p) {
+			$("#lastNum").text(num_p);
+	}
+
+   function showTail() {
+   		$("#callIt").hide();
+		$("#head").hide();
+		$("#tail").show();
+}
+   
+   function showBoth() {
+		$("#callIt").hide();
+		$("#head").show();
+		$("#tail").show();
+   }
+   
+   
+   var updTimer;
+   var secRemaining = 0;
+   var secInit = 10;
+   var timeoutInterval = 1000;
+   function setInit(init_p) {
+	secInit = init_p;
+   }
+   
+	function start(secInit_p) {
+		$("#lastNum").text("");
+		$("#callIt").show();
+		$("#head").hide();
+		$("#tail").hide();
+		if (updTimer) {
+			clearTimeout(updTimer);
+		}
+		
+		if (secInit_p) {
+			secInit = secInit_p;
+		}
+		secRemaining = secInit;
+		countDownTimer();
+	}
+
+	function countDownTimer () {
+			secRemaining = secRemaining - 1;
+			$("#countDown").text(secRemaining);
+			updTimer = null;
+			if (secRemaining>0) {
+				updTimer = setTimeout (countDownTimer, timeoutInterval);
+			}
+	}
+	
+	
+	
+</script>
+<style>
+	#btn {
+		padding-bottom: 5px;
+	}
+	
+	#workArea {
+		border: 5px ridge #777777;
+		height: 250px;
+	}
+	
+	#countDown {
+		font-size: 100px;
+		font-weight: bold;
+		color: blue;
+		margin-top: 20px;
+	}
+	
+	#head img, #tail img {
+		margin-top: 20px;
+	}
+	
+	#callIt  {
+		margin-top: 20px;
+	}
+	
+	
+	#label {
+		font-size: 30px;
+	}
+	
+	#lastNum {
+		font-size: 30px;
+		color: RED;
+	}
+	
+</style>
+
+</head>
+<body>
+
+<center>
+<h1>Flip A Coin</h1>
+<div id=btn>
+<button id="showHead">Show Head</button>
+<button id="showTail">Show Tail</button>
+<button id="showBoth">Show Both Sides</button>
+<button id="reset">Start</button>
+</div>
+<div id="workArea">
+<div id="head" style="display:inline"> Head
+<img src="dollarHead.jpg"/>
+</div>
+<div id="tail" style="display:inline">
+<img src="dollarTail.jpg"/> Tail
+</div>
+<div id="callIt">
+	<span>Finbonacci Numbers: F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></span><br/>
+	<span>0, 1, 1, 2, 3, ...<span id="lastNum">20</span><br/>
+	<span>Even number => Head, Odd number => Tail</span><br/>
+	<span id="label">Call it: "Head" or "Tail". </span><br/>
+	<span id="countDown"></span>sec remaining
+</div>
+</div>
+</center>
+</body>
+</html>

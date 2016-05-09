@@ -1,0 +1,46 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+}
+
+#graphMain {
+	margin-top: 25px;
+}
+
+#floatMenu {
+	position: fixed;
+	background-color: #EDEDED;
+	border-bottom:1px solid #AAAAAA;
+	z-index:9999;
+	width: 100%;
+}
+
+#btnSpan {
+	float: right;
+}
+
+#btnSpan .btn {
+	background-color: #CCCCCC;
+	margin-left: 2px;
+	margin-right: 3px;
+	margin-top: 2px;
+	padding-left: 3px;
+	padding-right: 5px;
+	border-radius: 6px;
+	color: #333333;
+}
+
+#btnSpan .btn:hover {
+	background-color: orange;
+	color: #FFFFFF;
+}
+
+#graphTitle {
+	font-weight: bold;
+	font-style: italic;
+	color: #666666;
+	margin-left: 5px;
+}

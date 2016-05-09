@@ -1,0 +1,123 @@
+<style>
+	#kpiAttrList td, #kpiRangeList td, #kpiRangeList th {
+		padding-left: 9px;
+	}
+</style>
+
+<div ng-controller="KPICtrl">
+	<div id="appHeader" class="paneTitle" style="height: 25px; text-align: left;">
+		<div class="paneTitle filter" style="width: {{paneWidth_1}}px; overflow:hidden;">
+			<input type="text" placeholder="Search text or regexp" ng-model="filter" ng-change="applyFilter(filter)"/>
+			<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filter=''; applyFilter('')"/></span>
+		</div>
+		<div style="float:left; margin-left: 10px;">
+			KPI: {{curKPI.name}}
+		</div>
+	</div>
+	<div style="height: {{viewHeight-headerHeight}}px;">
+		<div class="pane pane_1" style="width: {{paneWidth_1}}px;">
+			<ul id="editKpiList" class="selection">
+				<li ng-repeat="kpi in kpiList | orderBy:'name'"  ng-click="openKPI(kpi)"
+					ng-class="{selected: kpi==curKPI}" ng-hide="kpi.hide">
+					<input type="checkbox" ng-model="kpi.checked"/> 
+					<span class="kpiName">{{kpi.name}}</span>
+					<img style=" float: right; position: relative; right: 5px; top: -20px;" 
+						ng-src="img/check{{kpi.dashboard?'':'No'}}.png"
+						ng-click="toggleKpiDashboard(kpi);" class="kpiDashboardInd"
+						popover-placement="right" popover-popup-delay="{{ribbon.helpHintDelay}}" 
+						popover-trigger="mouseenter" popover="Publish to Dashboard, click to toggle"/>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" style="width: {{paneWidth_2}}px;">
+			<table id="kpiAttrList" class="table" ng-show="curKPI">
+				<tr>
+					<td class="ToLabel" width="10%">KPI ID</td>
+					<td>{{curKPI.kpiID}}</td>
+				</tr>
+				<tr>
+					<td class="ToLabel">Name<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="A unique identifier assigned to the KPI" href="#" >?</a></td>
+					<td><input type="text" ng-model="curKPI.name" ng-blur="saveKpiName()"/></td>
+				</tr>
+				<tr>
+					<td class="ToLabel">Sequence&nbsp;Number<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="A sequential number used to sort KPI items" href="#" >?</a></td>
+					<td><input type="text" ng-model="curKPI.seqNum" ng-blur="saveKpiSeqNum()"/></td>
+				</tr>
+				<tr>
+					<td class="ToLabel">Description<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="Optional, freetext description, only used for documentation purpose" href="#" >?</a></td>
+					<td><input type="text" ng-model="curKPI.desc" ng-blur="saveKpiDesc()"/></td>
+				</tr>
+				<tr>
+					<td class="ToLabel">Subscribe URL<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="TestOptimal Dashboard server to pull in the KPI. Leave this blank for local KPI." href="#" >?</a></td>
+					<td><input type="text" ng-model="curKPI.hostURL" ng-blur="saveKpiHostURL()"/></td>
+				</tr>
+				<tr>
+					<td class="ToLabel">KPI Element<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="KPI to be used from pre-configured KPI items.  In the future custom KPI may be supported." href="#" >?</a></td>
+					<td>
+						<select ng-model="curKPI.elemSelected" ng-change="saveKpiElem()"
+							ng-options="elem.desc for elem in elemList | orderBy: 'desc'">
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="ToLabel">Suffix<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="Optional, used to add suffix to the KPI value. For example %." href="#" >?</a></td>
+					<td>
+						<input ng-hide="curKPI.remote" type="text" ng-model="curKPI.suffix" ng-blur="saveKpiSuffix()" ng-readonly="curKPI.remote"/>
+						<span ng-show="curKPI.remote">{{curKPI.suffix}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="ToLabel">Duration<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="Duration to be included in this KPI." href="#" >?</a></td>
+					<td>
+						<select ng-model="curKPI.durSelected" ng-change="saveKpiDur()"
+							 ng-hide="curKPI.remote"
+							ng-options="dur.desc for dur in durList">
+						</select>
+						<span ng-show="curKPI.remote">{{curKPI.durType}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="ToLabel">Publish&nbsp;Dashboard<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="Check this box to publish the KPI to Dashboard and ProMBT servers." href="#" >?</a></td>
+					<td><input type="checkbox" ng-model="curKPI.dashboard" ng-change="saveKpiDashboard()"/></td>
+				</tr>
+				<tr>
+					<td class="toLabel">Current Value<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="Readonly, current value for the KPI" href="#" >?</a></td>
+					<td>{{curKPI.value}}</td>
+				</tr>
+				<tr>
+					<td class="toLabel">Current Color<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+	   			   		popover="Readonly, current color for the KPI status." href="#" >?</a></td>
+					<td>{{curKPI.color}}</td>
+				</tr>
+			</table>
+			
+			<table id="kpiRangeList" class="table" ng-show="curKPI && !curKPI.remote">
+				<tr>
+					<th><input type="checkbox" ng-model="allRangeChecked" ng-change="checkAllRanges(allRangeChecked)"/></th>
+					<th width="10%">Color<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.Color}}" href="#" >?</a></th>
+					<th width="20%">Min Value<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.Min}}" href="#" >?</a></th>
+					<th>Max Value<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+	   			   popover="{{fieldDefList.Max}}" href="#" >?</a></th>
+				</tr>
+				<tr ng-repeat="range in curKPI.rangeList">
+					<td><input type="checkbox" ng-model="range.checked"/></td>
+					<td><input type="text" ng-model="range.color" ng-blur="setRange(range)"/></td>
+					<td><input type="text" ng-model="range.min" ng-blur="setRange(range)"/></td>
+					<td><input type="text" ng-model="range.max" ng-blur="setRange(range)"/></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<pane-divider/>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/BatchRun.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+	<script src="packages/jquery.TestOptimal/jquery.flexTooltip.js"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/BatchRun.js"></script>
+</head>
+<body>
+	<table cellspacing="0" cellpadding="2" width="100%">
+		<tr>
+			<td colspan="2">
+				Enter the "Stat Desc" field to auto save the stats after model executions. Select models for execution and click on "Run Selected Models".
+			</td>
+		</tr>
+		<tr>
+			<td>Stat Desc</td>
+			<td><input type=text id='statDesc' size=60 /></td>
+		</tr>
+		<tr>
+			<td class="flexTooltip">Run Options <a class="helpLink" href="http://testoptimal.com/javaDoc/com/webmbt/plugin/LoadPlugin.html#runModel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)" target=_blank>?</a></td>
+			<td><input type=text id='runOptions' size=60 />
+			</td>
+		</tr>
+		<tr>
+			<td>Email On Completion</td>
+			<td><input type=text id='notifyEmail' size=40 /><button onclick='runSelected()'>Run Selected Models</button>
+			</td>
+		</tr>
+	</table>
+	<table width="100%" id=modelList border=0 class="tablesorter">
+		<thead>
+			<tr class=header>
+				<th class="header" width="1%" nowrap>#</th>
+				<th class="header" align=left width="2%" nowrap><input type=checkbox onclick='checkAll(this.checked)'/></th>
+				<th class="header" width="75%">Model Name</th>
+				<th class="header {sorter: 'text'}" width="20%" nowrap>Last Modified Date</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+</html>

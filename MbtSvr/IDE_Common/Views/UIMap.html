@@ -1,0 +1,102 @@
+<style>
+	#UIMap .header {
+		background-color: #DDDDDD;
+		font-weight: bold;
+	}
+	
+	#UIMap tr {
+		cursor: pointer;
+	}
+
+	#UIMap tbody tr:hover {
+		background-color: #FFFFFF;
+	}
+	
+	#UIMap td {
+		padding-left: 3px;
+	}
+	
+	#UIMap li {
+		padding: 2px;
+	}
+	
+	#UIMap li:hover {
+	 	border: 1px solid orange;
+	 	border-radius: 5px;
+	}
+</style>
+
+<div ng-controller="UIMapCtrl" id="UIMap" style="height: 100%;">
+	<table>
+		<thead class="header">
+			<tr>
+				<td ng-click="changeSorting('app')">Application
+		   			<a class="helpHint" popover-placement="right" popover-trigger="mouseenter" 
+		   				popover="Top level grouping of UI elements, click to sort" href="#" >?</a>
+				</td>
+				<td ng-click="changeSorting('win')">Window
+		   			<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+		   				popover="Mid level grouping of UI elements, click to sort" href="#" >?</a>
+				</td>
+				<td ng-click="changeSorting('uiid')">UI ID
+		   			<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+		   				popover="ID assigned to UI element, unique within Application.Window, click to sort" href="#" >?</a>
+				</td>
+				<td ng-click="changeSorting('desc')">Description
+		   			<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+		   				popover="Descriptionf for UI element, click to sort" href="#" >?</a>
+				</td>
+				<td ng-click="changeSorting('loc')">Locator
+		   			<a class="helpHint" popover-placement="bottom" popover-trigger="mouseenter" 
+		   				popover="UI element locator, click to sort" href="#" >?</a>
+				</td>
+				<td ng-click="changeSorting('modelName')">Model/SubModel
+		   			<a class="helpHint" popover-placement="left" popover-trigger="mouseenter" 
+		   				popover="Model/SubModel this UI element is defined in, click to sort" href="#" >?</a>
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="fieldObj in UIMapList|orderBy:sort.column:sort.descending">
+				<td>{{ fieldObj.app }}</td>
+				<td>{{ fieldObj.win }}</td>
+				<td>{{ fieldObj.uiid }}</td>
+				<td>{{ fieldObj.desc }}</td>
+				<td>{{ fieldObj.loc }}</td>
+				<td>{{ fieldObj.uiMapDef.modelName }}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<table style="margin-top: 15px;">
+		<thead class="header">
+			<tr>
+				<td colspan="6">UI Images 
+					<span style="font-weight:none;font-style:italic;font-size:xx-small;">(For SikuliX plugin, for example $click('xyz.png'))</span>
+					<span style="float:right;" ng-mouseover="showTakeImage=true" ng-mouseleave="showTakeImage=false">
+						<table ng-show="showTakeImage">
+							<thead>
+								<tr><td>Image Name:</td><td><input type="text" ng-model="imageName"/></td></tr>
+								<tr><td>Display:</td><td><input type="number" ng-init="screenID=0" min="0" max="5" style="width: 50px;" ng-model="screenID"/></td></tr>
+							</thead>
+						</table>
+						<button ng-click="takeImage();" style="float:right;">Take Image</button>
+					</span>
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="6">
+					<ul style="list-style-type: none; padding-left: 5px; margin-left: 0px;">
+						<li ng-repeat="img in uiImageList" ng-mouseover="img.show=true" 
+							ng-mouseleave="img.show=false" 
+							style="float:left; margin-right: 10px;">
+							<a href="/model/uimap/{{img.fName}}" target=_blank>{{img.fName}}</a>
+							<img src="img/delete.png" ng-show="img.show" ng-click="deleteImage(img);"/>
+						</li>
+					</ul>
+				</td>
+		</tbody>
+	</table>
+</div>

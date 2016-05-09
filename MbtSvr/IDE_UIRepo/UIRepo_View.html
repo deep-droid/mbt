@@ -1,0 +1,160 @@
+
+<style>
+	#UIPageList, #UIPageList ul {
+		padding-left: 2px;
+	}
+	
+	#UIPageList ul {
+		padding-left: 0px;
+	}
+		
+	#UIPageList li {
+		color: #000000;
+		margin-top: 0px;
+		padding-top: 0px;
+		white-space: nowrap;
+		padding-left: 0px;
+		list-style: none;
+		padding-left: 5px;
+		cursor: pointer;
+	}
+	
+	#UIPageList li div:hover, #UIPageList ul li:hover {
+		font-weight: bold;
+	}
+	
+</style>
+
+<div ng-controller="UIRepo_Ctrl">
+	<div id="UIRepo_AppContent" ng-style="{height: (viewHeight-headerHeight) +'px'}">
+		<div class="pane pane_1" ng-style="{width: paneWidth_1+'px'}">
+			<div style="height: 35px; background: #EEEEEE;">
+				<div class="paneTitle filter" style="position: relative; top: 5px;" ng-style="{width: paneWidth_1+'px', overflow: 'hidden'}">
+					<input type="text" placeholder="filter pages by name/tags" ng-model="filter" ng-change="applyFilter(filter)"/>
+					<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filter=''; applyFilter('')"/></span>
+				</div>
+			</div>
+			<ul id="UIPageList">
+				<li style="padding-left: 0px;" ng-repeat="page in pageList" ng-hide="page.hide || page.deleted">
+					<div ng-class="{selected: curObj==page}" style="width:100%;"
+						title="{{page.modelList.length==0?'':'This page is referenced by at least one model.'}}">
+						<img ng-src="img/{{page.expanded?'minus.png':'plus.png'}}" ng-click="toggleExpand(page)" style="position:relative; top: -2px; margin-left: 3px;">
+						<input style="posit	ion:relative; top: 1px;" type="checkbox" class="uiCheck" ng-model="page.selected">
+						<span ng-click="openPage(page)">{{page.name}}</span>
+						<span style="float:right; width: 5px; position:relative; top: -22px; background: GREEN;" ng-show="page.modelList.length>0">&nbsp;</span>
+					</div>
+					<ul ng-show="page.expanded">
+						<li ng-repeat="elem in page.elemList" ng-click="openElem(elem)" ng-class="{selected: curObj==elem}" style="width:100%; margin-left: 30px;" ng-hide="elem.deleted">
+							<input style="position:relative; top:1px;" type="checkbox" class="uiCheck" ng-model="elem.selected">
+							<span>{{elem.name}}</span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" ng-style="{width: paneWidth_2+'px'}" class="pane-content">
+			<div ng-style="{height: (viewHeight-headerHeight)+'px', overflow: 'auto', 'padding-left': '3px'}" ng-show="curObj">
+				<div style="background: #EEEEEE; padding-left: 2px; text-align: left; height: 35px;">
+					<span style="position: relative; top: 5px; left: 5px;"><b>{{curObj.domain?'Element ID':'Page Name'}}</b> 
+						<input type="text" ng-model="curObj.name" 
+							ng-style="{width: (paneWidth_2-280)+'px'}" ng-change="setChanged()"/>
+					</span>
+					<span style="position: relative; top: 5px; margin-left: 8px;">
+						<button ng-show="curObj.changed" ng-click="saveCur()">Save</button>
+						<button ng-show="curObj.changed" ng-click="cancelCur()">Cancel</button>
+						<button ng-click="deleteCur()">Delete</button>
+					</span>
+				</div>
+				<div style="padding-left: 3px;">
+					<table ng-if="curObj.uiCat!='elem'" style="border-spacing: 5px; border-collapse: separate;">
+						<tr>
+							<td width="10%">UI&nbsp;Category</td>
+							<td>
+								<select ng-model="curObj.uiCat" ng-change="setChanged()">
+									<option value="web">Web UI</option>
+									<option value="win">Windows UI</option>
+								</select>
+							</td>
+						</tr>
+						<tr ng-show="curObj.uiCat=='web'">
+							<td width="10%">AUT URL</td>
+							<td>
+								<input type="text" ng-model="curObj.autURL" 
+									ng-style="{width: (paneWidth_2-200)+'px'}" ng-change="setChanged()"/>
+								<a href="#" ng-click="openAUT()">open</a>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top" width="10%">Description</td>
+							<td>
+								<textarea ng-model="curObj.desc" style="height: 100px;" ng-style="{width: (paneWidth_2-150)+'px'}" ng-change="setChanged()"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td width="10%">Tags</td>
+							<td>
+								<input type="text" ng-model="curObj.tags" 
+									ng-style="{width: (paneWidth_2-150)+'px'}" ng-change="setChanged()"/>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">Used&nbsp;By&nbsp;Models</td>
+							<td>
+								<a href="#" ng-show="curObj.modelList.length>0" ng-click="clearModelList(curObj)" style="margin-left: 26px;">Clear Models</a>
+								<span ng-hide="curObj.modelList.length>0">Not used by any models</span><br/>
+								<ul>
+									<li ng-repeat="model in curObj.modelList">{{model}}</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+					<table ng-if="curObj.uiCat=='elem'" style="border-spacing: 5px; border-collapse: separate;">
+						<tr>
+							<td>Element&nbsp;Type</td>
+							<td>
+								<select ng-model="curObj.elemType" ng-change="setChanged()">
+									<option value="button">button</option>
+									<option value="checkbox">checkbox</option>
+									<option value="input">input</option>
+									<option value="link">link</option>
+									<option value="option">option</option>
+									<option value="radio">radio</option>
+									<option value="select">select</option>
+									<option value="text">text</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">Description</td>
+							<td>
+								<textarea ng-model="curObj.desc" style="height: 100px;" ng-style="{width: (paneWidth_2-150)+'px'}" ng-change="setChanged()"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">Locator</td>
+							<td>
+								<select ng-model="curObj.locType" ng-change="setChanged()">
+									<option value="css">css</option>
+									<option value="id">id</option>
+									<option value="img">sikuli</option>
+									<option value="link">link</option>
+									<option value="xpath">xpath</option>
+								</select>
+								<input type="text" ng-model="curObj.locator" ng-style="{width: (paneWidth_2-220)+'px'}" ng-change="setChanged()"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">Domain</td>
+							<td>
+								<textarea ng-model="curObj.domainString" ng-style="{width: (paneWidth_2-150)+'px', height: '200px'}" ng-change="setChanged()"></textarea>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<link rel="stylesheet" href="IDE_UIRepo/UIRepo.css">
+		</div>
+	</div>
+	<pane-divider/>
+</div>

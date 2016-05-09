@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/MScriptEditor.css" rel="stylesheet" type="text/css">
+	<link type="text/css" href="packages/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />	
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <link rel="stylesheet" href="packages/codemirror-5.11/lib/codemirror.css">
+    <script src="packages/codemirror-5.11/lib/codemirror.js"></script>
+    <script src="packages/codemirror-5.11/mode/xml/xml.js"></script>
+	<script src="packages/codemirror-5.11/addon/mode/overlay.js"></script>
+	<script src="packages/codemirror-5.11/addon/search/searchcursor.js"></script>
+	<script src="packages/codemirror-5.11/addon/fold/xml-fold.js"></script>
+	<script src="packages/codemirror-5.11/addon/fold/foldcode.js"></script>
+	<script src="packages/codemirror-5.11/addon/search/match-highlighter.js"></script>
+	<script src="packages/codemirror-5.11/addon/edit/closetag.js"></script>
+
+  	<LINK href="css/MScriptEditorTheme.css" rel="stylesheet" type="text/css">
+
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+
+	<script src="js/MScriptEditorCodeAssist.js"></script>
+	<script src="js/MScriptEditor.js"></script>
+</head>
+<body style="overflow: hidden;">
+	<div class="header" style="overflow:hidden; width:100%; height: 20px;">
+		<div id="mScriptEditHead" style="margin-top: 3px;overflow:hidden; float: left;">
+			<select id="mScriptTypeList" onchange="selectTrigger();">
+			</select>
+			<span id="editScriptType"></span>
+		</div>
+		<div class="actionBtn" style="position: fixed; top: 8px; right: -20px">
+			<span id="searchBtn" class="icon-ctrl" onclick="openSearch();" title="Find / Replace. ctrl/cmd-F"><img src="img/searchSmall.png"/></span>
+			<span id="gotoBtn" class="icon-ctrl" onclick="openGoto();" title="Goto a specific line# or LineID (lid)"><img src="img/goto.png"/></span>
+			<span id="foldBtn" class="icon-ctrl" onclick="foldAll(true);" title="collapse all"><img src="img/foldAll.png"/></span>
+			<span id="expandBtn" class="icon-ctrl" onclick="foldAll(false);" title="expand all"><img src="img/expandAll.png"/></span>
+			<span id="undoBtn" class="devOnly icon-ctrl" onclick="editor.undo();" title="undo, ctrl/cmd-Z"><img src="img/undo.png"/></span>
+			<span id="redoBtn" class="devOnly icon-ctrl" onclick="editor.redo();" title="redo, ctrl/cmd-Y"><img src="img/redo.png"/></span>
+			<span class="devOnly icon-ctrl" style="padding:0px;" onclick="javascript:mScriptCheck(true);" title="Compile and syntax check mScript, ctrl/cmd-K" id="compile"><img class="btnBar" src="img/compile.png"/></span>
+			<span class="icon-ctrl" style="padding:0px;" onclick="javascript:showFlowGraph('flow');" title="Program Structure Diagram (PSD) for current trigger." id="flowGraph"><img class="btnBar" src="img/PSD.png"/></span>
+			<span class="icon-ctrl" title="MScript Editor shortcut key help" style="width: 5px; margin-right:3px;"><a href="http://testoptimal.com/doku/doku.php?id=mscript_editor_shortcut_keys" target=_blank><img src="img/question.png" width="12px"/></a></span>
+			<span id="moreMenu" class="icon-ctrl" style="width: 5px; margin-right:3px;"><img src="img/more.png" style="padding: 1px;"/></span>
+		</div>
+	</div>
+	<div id="editorDiv" style="border: 0; overflow: auto;">
+		<textarea id="mScriptTextarea" disabled class="script" style="border:0;"></textarea>
+	</div>
+	
+	<div class="popupMenu" style="display:none; position: absolute; overflow: hidden;border-radius: 8px; background-color: #DCE9F0;" id="attrOptionSelect">
+		<div style="display: block; width: 100%;" class="popupHeader">
+			<div class="popupMenuLeft">
+				<span class="title"></span>
+			</div>
+			<div class="popupMenuRight">
+				<a href='http://testoptimal.com/doku/doku.php?id=mscriptfunc' target=_blank>wiki</a>
+				<a href='javascript:closePopup();'>close</a>
+			</div>
+		</div>
+		<div class="innerMenu">
+			<select id="popupSelect" multiple="true" style="width:100%; height:100%;"  border=0>
+			</select>
+		</div>
+	</div>
+
+	<div id="hoverMenu" class="dropDownMenu" style="z-index: 9000;">
+		<ul>
+			<li class="menuItem stateTrans" id="menuAddTrigger" onclick="addTrigger();">Add Trigger</li>
+			<li class="menuItem" id="menuDeleteTrigger" style="display:none;" onclick="deleteTrigger();">Delete Trigger</li>
+			<li></li>
+			<li class="menuItem" onclick="mScriptCheck(true);">Compile</li>
+			<li class="menuItem" onclick="evalMScript();">Exec MScript Expr</li>
+			<li class="menuItem stateTrans" onclick="showFlowGraph('flow', 'N');" title="Program Structure Diagram with comments">PSD - with note</li>
+			<li class="menuItem stateTrans" onclick="showFlowGraph('flow', 'Y');" title="Program Structure Diagram without comments">PSD - no note</li>
+			<li class="menuItem stateTrans" onclick="showFlowGraph('triggerFlow');" title="Trigger Call Hierarchy Diagram">Call Hierarchy</li>
+			<li></li>
+			<li class="menuItem" onclick="openSearch();" title="open Find/Replace dialog">Find / Replace</li>
+			<li class="menuItem" onclick="foldAll(true);" title="collapse MScript at first level">Collapse All</li>
+			<li class="menuItem" onclick="foldAll(false);" title="expand MScript at first level">Expand All</li>
+			<li></li>
+			<li class="menuItem model" onclick="getMscriptCoverage();" title="Retrieve MScript coverage for current execution.">Show Coverage</li>
+			<li class="menuItem model" onclick="getMscriptMDC();" title="Show MScript trigger complexity metric (dc - decision conditions, mdc - modified decision conditions.">Show Complexity</li>
+		</ul>
+	</div>
+
+	<div id="searchDialog" class="dialog" title="click to close this dialog">
+		<span class="label">Search</span>
+		<input id="srchField" value="search text" size=15 title="enter search text, lowercase for case insensitive search, /regexpr/ for RegExpr search, up arrow for previous, down arrow / Enter for next"/>
+		<span class="btn" id="prevBtn"><img src="img/prev.png" title="previous match"/></span>
+		<span class="btn" id="nextBtn"><img src="img/next.png" title="next match"/></span>
+		<input id="replaceField" value="replace text" size=15 title="enter replacement text, Enter to replace, up arrow for previous match, down arrow for next match"/>
+		<span class="textBtn replace" id="replaceBtn" title="replace current match" style="padding-left: 5px; padding-right:5px;">R</span>
+		<span class="textBtn replace" id="replaceAllBtn" title="replace all matches with replacement text starting at current match" style="padding-right:0px;"><span>R</span><span style="position: relative; left: -2px;">R</span></span>
+		<span class="msg" id="searchMsg"></span>
+		<span id="closeSrch" class="btn closeDialog" title="close search dialog">x</span>
+	</div>		
+	<div id="compileDialog" class="dialog" title="click to close this dialog">
+		<span class="label">Compile</span>
+		<span class="btn" id="compPrevBtn"><img src="img/prev.png" title="previous error"/></span>
+		<span class="msg" id="compileErrorNum"></span>
+		<span class="btn" id="compNextBtn"><img src="img/next.png" title="next error"/></span>
+		<span class="msg" id="compileMsg"></span>
+		<span class="msg" id="compileErrorLoc"></span>
+		<span id="closeCompile" class="btn closeDialog" title="close Compile dialog">x</span>
+	</div>		
+	<div id="gotoDialog" class="dialog" title="click to close this dialog">
+		<span class="label">Goto</span>
+		<span>LineID (lid):</span>
+		<input id="lidField" value="" size=5 title="enter MScript LineID (lid) and press Enter"/>
+		<span>Line#:</span>
+		<input id="lineNumField" value="" size=5 title="enter line number and press Enter"/>
+		<span class="btn" id="gotoLineBtn" style="background-color: #ddab24; border: none; border-radius: 5px;"><img style="padding: 1px;position: relative; top: 2px;" src="img/goto.png" title="press to scroll editor to the specified line# or lid"/></span>
+		<span class="msg" id="gotoMsg"></span>
+		<span id="closeGoto" class="btn closeDialog" title="close Goto dialog">x</span>
+	</div>		
+	
+</body>
+</html>

@@ -1,0 +1,414 @@
+
+html {
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+body {
+	font-family: verdana;
+	font-size: 10px;
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+#modelName {
+	position: absolute; 
+	left: 0px; 
+	top: 0px;
+	background-color: #F0EEE3;
+	color: #666666;
+	padding: 7px;
+	font-size: x-small;
+	height: 14px;
+	margin: 0px;
+	width: 100%;
+}
+	
+
+table {
+	padding: 0px;
+	margin: 0px;
+}
+
+ul, li {
+	padding: 0px;
+	margin: 0px;
+}
+
+#mainCnt {
+	height: 100%;
+	width: 100%;
+}
+
+#mainCanvas {
+	padding: 0px;
+	margin: 0px;
+	background-color: #ffffff;
+}
+
+.contextMenu {
+	display: none;
+}
+
+#jqContextMenu {
+	cursor: move;
+	background-color: #ffffff;
+}
+
+#jqContextMenu ul {
+	padding-top: 10px;
+}
+
+#jqContextMenu hr {
+	cursor: move;
+}
+
+.ctxMenuItem.readonly:hover {
+	border:none;
+}
+
+#ctxMenuTitle {
+	font-weight: bold;
+	background-color: yelow;
+}
+
+.state .head {
+	background-color: #97C3D4;
+	height:15px;
+	margin-top: 1px;
+	margin-left: 1px;
+	margin-right: 1px;
+	cursor: pointer;
+}
+
+.state {
+	width: 75px;
+	height: 50px;
+	border: 1px solid #555555;
+	position: absolute;
+	color: #111111;
+}
+
+#opaqDiv {
+   opacity: 0.2;
+   filter: alpha(opacity = 20);
+   position:absolute;
+   top:0;
+   left:0;
+   height:100%;
+   width:100%;
+   background-color: #EEEEEE;
+   z-index: 1000;
+   display:none;
+}
+
+#modelNotePad:hover {
+	background-color: yellow;
+}
+
+#notePad {
+	display: none;
+	position: absolute;
+	border-Radius: 8px;
+	z-index: 10001;
+	background-color: rgb(255, 240, 70);
+}
+
+#notePad .noteHeader {
+	padding-top: 8px;
+	padding-bottom: 2px;
+	margin-bottom: 3px;
+	padding-left: 3px;
+	
+	color: #777777;
+	border-bottom: 1px solid #CCCCCC;
+	cursor: move;
+}
+
+#notePad textarea {
+	border: none;
+	height: 150px;
+	width: 250px;
+	background-color: rgb(255, 240, 70);
+	padding: 5px;
+}
+
+
+#editLabel {
+	display: none;
+	position: absolute;
+	border-Radius: 8px;
+	z-index: 10001;
+	background-color: #DDDDDD;
+}
+
+#notePad textarea {
+	border: none;
+}
+
+
+.comment {
+	display:none;
+}
+
+.comment.exists, .transLink.comment.exists {
+	display: inline;
+}
+
+#treeViewPanel, #mcaseViewPanel, #guardsViewPanel {
+	position:fixed; 
+	font-size: 10px;
+	overflow: hidden; 
+	display: none; 
+	border: 1px solid #999999; 
+	background-color: #F0EEE3;
+	border-radius: 5px; 
+	margin: 2px;
+	padding-bottom: 10px;
+	color: #222222;
+}
+
+#treeViewPanel li div, #mcaseViewPanel li div {
+	display:inline;
+}
+	
+#treeViewPanel {
+	top: 30px;
+	right: 16px;
+	width: 200px; 
+	height: 280px; 
+}
+	
+#mcaseViewPanel {
+	top: 70px;
+	right: 48px;
+	width: 180px; 
+	height: 180px; 
+}
+
+#guardsViewPanel {
+	top: 90px;
+	right: 5px;
+	width: 150px; 
+	height: 180px; 
+}
+
+#treeViewCnt {
+	overflow: auto; 
+	height: 245px; 
+}
+
+#mcaseViewCnt {
+	overflow: auto; 
+	height: 145px; 
+}
+
+#guardsViewCnt {
+	overflow: auto; 
+	height: 145px; 
+}
+
+#treeViewPanel li, #mcaseViewPanel li {
+	background-color: #F0EEE3;
+}
+
+#treeViewPanel li span.label:hover, #mcaseViewPanel li span.label:hover {
+	color: #000000;
+}
+
+
+#treeViewClose, #mcaseViewClose, #guardsViewClose {
+	float: right; 
+	position:relative;
+	font-weight: bold; 
+	color: #333333;
+	padding-right: 4px;
+	margin-left: 3px;
+	cursor: pointer;
+}
+
+.header .label {
+	cursor: move;
+}
+
+#treeViewPanel .header {
+	padding-top: 3px;
+	padding-left: 3px; 
+	height: 34px; 
+	width: 100%; 
+	cursor: move;
+	vertical-align: bottom;
+	background-color: #E9E4D3;
+}
+
+#mcaseViewPanel .header {
+	padding-top: 3px; 
+	padding-left: 3px; 
+	height: 34px; 
+	width: 100%; 
+	vertical-align: bottom;
+	cursor: move;
+	background-color: #E9E4D3;
+}
+
+#guardsViewPanel .header {
+	padding-top: 3px;
+	padding-left: 3px; 
+	height: 34px; 
+	width: 100%; 
+	vertical-align: bottom;
+	cursor: move;
+	background-color: #E9E4D3;
+}
+
+#guardsState {
+	margin-top: 10px;
+}
+
+.treecontrol {
+	position: relative; 
+	top: 6px;
+}
+
+li .label {
+	padding-right: 5px;
+}
+
+#treeViewPanel .tvSelected {
+	background-color: orange;
+}
+
+#stateList, #mcaseList {
+	white-space: nowrap;
+}
+
+.mCaseNode.disabledOn, .stepNode.disabledOn {
+	background-color: #AAAAAA;	
+}
+
+.tvStateNode, .tvTransNode, .mCaseNode, .stepNode {
+	border-radius: 5px;	
+	margin-right: 3px;
+	padding-left: 2px;
+	padding-right: 2px;	
+	color: #FFFFFF;
+	background-color: #777777;
+}
+
+
+li span.readonly {
+	border: 1px solid orange;
+}
+
+li .label:hover {
+	background-color: #add8e6;	
+}
+
+#rtMsg {
+	display: none;
+	background-color: #ffe5b4;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding-left: 4px;
+	padding-top: 5px;
+	padding-bottom: 3px;
+    font-Size: 11px;
+    font-weight: bold;
+    fontFamily: arial;
+    color: #000000;
+    width: 100%;
+    fontSize: 11px;
+    overflow: auto;
+    textDecoration: none;
+    z-index: 9999;
+}
+
+.treecontrol a {
+	color: #555555;
+}
+
+.textBtn {
+	display: inline;
+	border-radius: 5px;
+	background-color: #AAAAAA;
+	padding-left: 2px;
+	padding-right: 2px;
+	margin-left: 2px;
+	color: #FFFFFF;
+}
+
+.textBtn:hover {
+	background-color: #add8e6;
+	color: #000000;
+}
+
+
+.delBtn span {
+	position: relative;
+	top: -1px;
+}
+
+#treeViewClose, #mcaseViewClose, #guardsViewClose {
+	padding-left: 2px;
+	margin-right: 2px;
+}
+
+#treeViewClose:hover, #mcaseViewClose:hover, #guardsViewClose:hover {
+	background-color: orange;
+	border-radius: 5px;
+}
+	
+#stateList .breakEnabled {
+	background-color: #FF9900;
+}
+
+#stateList .pausedAt {
+	background-color: #FFCC99;
+}
+
+.nodeIcon {
+	cursor: pointer;
+}
+
+#guardsList li {
+	margin-left: 15px;
+}
+
+#guardsList pre {
+	margin-top: 0px;
+}
+
+.guardFailed {
+	background-color: yellow;
+}
+
+.stereotypeFlag {
+	border-Radius: 8px; 
+	background-color: #77AA77;
+}
+
+.activateType {
+	background-color: #999999;
+}
+
+.removed {
+	color: orange;
+}
+
+.filter {
+	background-color: #AAAAAA;
+	color: #FFFFFF;
+	border-radius: 5px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+#ctxMenuTitle {
+	border-bottom: 2px solid #333333;
+}

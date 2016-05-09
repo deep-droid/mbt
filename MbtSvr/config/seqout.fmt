@@ -1,0 +1,103 @@
+# This is the standard format file. DO NOT change this format file as future release updates
+# will override any changes made.
+# To create a custom format, clone seqoutDDI.fmt and use it as a starting point to add your
+#   customization and add a SeqOut plugin definition with a different plugin id by adding
+#   a suffix to "SeqOut" using the existing SeqOut plugin definition already present in config.properties file.
+#   Optionally you may also want to customize seqout.xsl and seqout.css.  Same restriction applies to these two files
+#   and thus you should only customize the copy of these files.
+# Any html reserved chars must be escaped or encoded to be compatible with xsl rules!
+#
+# Definition of seqout generation format. @xxx@ is the token to be replaced by runtime values and their names 
+# must match exactly the reserved token list. See http://testoptimal.com/doku/doku.php?id=seqoutformat
+# IgnoreCmdList lists all commands to be ignored separated by comma. (case sensitive)
+IgnoreCmdList=
+
+# CopyFileList - list of file names separated by comma to be copied from /config to /report folder
+#   Usually this should include the css file, company log image, etc. so that you only need to maintain
+#   them in one places and the system will automatically copy the updated version to the report folder
+#   folder for the model when the sequence is generated. 
+CopyFileList=config/seqout.css,config/seqout.js,config/demoLogo.png
+
+# RemoveDuplicate - if the duplicate test cases should be removed.  A duplicate test case is considered
+#   duplicate if it has the identical set of transition traversals in exactly the same order as another
+#   test case already generated.
+#   If you set RemoveDuplicate=true, you may force a test case to be preserved by calling mScript function
+#   $setPathFlag('keep'). 
+#   By setting RemoveDuplicate=false, no duplicate test cases(paths) will be removed, however, you can
+#   force the test case (path) to be discarded by calling mScript function $setPathFlag('discard').
+RemoveDuplicate=false
+
+# Custom fields - must be prefixed by char "@". Custom fields are used by seqout.xsl 
+# (or customer seqout xsl) with locator fieldList/field[name='xx']/value
+# You may change these fields in mScript just for the current execution using seqout 
+# plugin function $addCustomField('fieldName','value')
+
+@Company=
+# make sure also adjust #tcList td in seqout.css accordingly.
+@ReqTagColumnCount=12
+@LogoImg=TO.png
+@LogoImgURL=http://TestOptimal.com/
+#StatusStyle must be either RADIO or SELECT
+@StatusStyle=RADIO
+@LinkGraph=N
+@LinkCoverageGraph=N
+# UpdateSection - true or false, if the test case summary and update section should be 
+#   included in the test case report. Update section allows users to record test case
+#   execution status.
+@UpdateSection=true
+
+
+# mscript function/tag formatting. keys and tokens are case sensitive and should not contain white spaces.
+ASSERT=Check: @VALUE1@ @OP@ @VALUE2@. Record passed as @PASSED@ | @ELSE@
+ASSERT.EMPTY.VALUES=Check: success as @PASSED@ | log failure as @ELSE@
+IF=
+IF_END=
+THEN=
+THEN_END=
+ELSE=
+ELSE_END=
+ACTION=@CODE@
+ACTION_END=
+WHILE=
+WHILE_END=
+LOG=@LEVEL@: @MSG@
+closeWindow(NAME)=Close window @NAME@
+setupConfirmResponse(OK)=At next prompt, choose @OK@
+containsText(TEXT)=Contains text @TEXT@
+count(LOCATOR)=Count number of occurence of @LOCATOR@
+doubleClick(LOCATOR)=Double click on @LOCATOR@
+dragAndDrop(FROM,TO)=Drag @FROM@ and drop it on @TO@
+getAlertText()=Text of alert window
+getAttr(LOCATOR,ATTR)=Attribute @ATTR@ of element @LOCATOR@
+getConfirmText()=Text on confirm dialog window
+getCookie(NAME)=Value of cookie @NAME@
+getText(LOCATOR)=Text on @LOCATOR@
+getTitle()=Current window title
+isChecked(LOCATOR)=If checkbox @LOCATOR@ is checked
+getAllWindowsID()=Find all windows IDs
+isAlertPresent(LOCATOR)=Is alert dialog displayed?
+isConfirmPresent()=Is confirm dialog displayed?
+isDisabled(LOCATOR)=Is element @LOCATOR@ disabled?
+isPresent(LOCATOR)=Is element @LOCATOR@ present?
+isVisible(LOCATOR)=Is element @LOCATOR@ visible?
+mouseDown(LOCATOR)=Hold mouse button down while on @LOCATOR@
+mouseOver(LOCATOR)=Move mouse over @LOCATOR@
+mouseUp(LOCATOR)=Release mouse button while on @LOCATOR@
+refresh()=Click Refresh button
+rightClick(LOCATOR)=Right mouse click on @LOCATOR@
+selectFrame(NAME)=Mouse mouse over to frame @NAME@
+selectOption(LOCATOR,OPTION)=Select option @OPTION@ on element @LOCATOR@
+windowName_p(NAME)=Set focus on window @NAME@
+setCheckBox(LOCATOR,CHECKED)=Set checkbox @LOCATOR@ to @CHECKED@
+setRadioButton(LOCATOR,CHECKED)=Set radio button @LOCATOR@ to @CHECKED@
+sizeOf(LOCATOR)=Size of @LOCATOR@
+type(LOCATOR,TEXT)=Type @TEXT@ on field @LOCATOR@
+type(LOCATOR,SHIFTCTRLALT,TEXT)=Type @TEXT@ on field @LOCATOR@ with @CTRL@
+flashGetVariable(LOCATOR)=Flash variable @NAME@ on flash element @LOCATOR@
+snapScreen()=Take screenshot
+gotoURL(URL)=Browse to @URL@
+sleep(MILLIS)=Wait for @MILLIS@ milliseconds
+addTagCheck(TAG,PASSED,MSG)=Requirement tag @TAG@ @PASSED@: @MSG@ @ASSERTID@
+click(LOCATOR)=Click on @LOCATOR@
+getValue(LOCATOR)=value of @LOCATOR@
+callFunc(PARAMS)=call user function @FUNCNAME@ (@PARAMS@)

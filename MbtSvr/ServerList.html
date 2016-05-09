@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ServerList.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<script type="text/javascript" src="packages/jquery.rightClick.js"></script>
+	<script type="text/javascript" src="packages/ctxMenu.js"></script>
+
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/ServerList.js"></script>
+</head>
+<body>
+	<table border="0" cellspacing="0" cellpadding="2" width="100%" class="svr">
+		<thead>
+			<tr class="header">
+				<th align=left title="Server and port number of this server">Server:Port</th>
+				<th align=left title="Name of the license assigned to this server">License Name</th>
+				<th>Edition</th>
+				<th title="Categor code(s) assigned to this server">Category</th>
+				<th title="If this server can be remote started by SvrMgr">Remote Start</th>
+				<th title="Current server status">Status</th>
+				<th title="Date/Time the license was granted to the server">Time Granted License</th>
+				<th title="Date/Time of last contact with the server">Time Last Contacted</th>
+				<th title="Number of sessions currently opened">Sessions</th>
+				<th title="Number of threads currently active">Threads</th>
+				<th title="Date/time model sync was executed">Sync Time</th>
+				<th title="Model Sync status message">Sync Msg</th>
+			</tr>
+		</thead>
+		<tbody id="svrList" class="listContent">
+		</tbody>
+	</table>
+	
+	<div id="ctxMenu" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem" id="ping" title="Pings Runtime server">ping</li>
+			 <li class="ctxMenuItem" id="details" "title="Displays Runtime server details">Server Details</li>
+			 <li class="ctxMenuItem" id="svrLog" title="Display Runtime server log file">Server Log</li>
+			 <li class="ctxMenuItem" id="svrIDE" title="Open svr IDE">Open IDE</li>
+			 <li class="noHL"><hr></li>
+			 <li class="ctxMenuItem" id="renewLic" title="Signal Runtime server to renew license">Renew License</li>
+			 <li class="ctxMenuItem" id="cmd" title="Display and edit server StartCmd">Edit StartCmd</li>
+			 <li class="ctxMenuItem" id="editCat" title="Display and edit server Category">Edit Category</li>
+			 <li class="ctxMenuItem" id="editEdition" title="Display and edit server Edition">Edit Edition</li>
+			 <li class="ctxMenuItem" id="del" title="Delete the server from the list">Delete Server</li>
+			 <li class="noHL"><hr></li>
+			 <li class="ctxMenuItem" id="start" title="Start Runtime server remotely">Start Server</li>
+			 <li class="ctxMenuItem" id="stop" title="Shut down Runtime server">Stop Server</li>
+			 <li class="ctxMenuItem" id="interrupt" title="Interrupt and close all MBT sessions">Interrupt Exec</li>
+		</ul>
+	</div>
+	
+</body>
+</html>

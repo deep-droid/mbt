@@ -1,0 +1,1350 @@
+[0.468][INFO]: COMMAND InitSession {
+   "desiredCapabilities": {
+      "browserName": "chrome",
+      "chrome.switches": [ "--log-path=C:\\Users\\Przemyslaw_Kabacinsk\\Downloads\\TestOptimal_5.1.6_win\\www\\MbtSvr\\log\\chromedriver2.log" ],
+      "chromeOptions": {
+         "args": [ "test-type" ],
+         "extensions": [  ]
+      },
+      "firefox.accessibility.browsewithcaret": true,
+      "ie.nativeEvents": false,
+      "platform": "ANY",
+      "version": ""
+   }
+}
+[0.471][INFO]: Populating Preferences file: {
+   "alternate_error_pages": {
+      "enabled": false
+   },
+   "autofill": {
+      "enabled": false
+   },
+   "browser": {
+      "check_default_browser": false
+   },
+   "distribution": {
+      "import_bookmarks": false,
+      "import_history": false,
+      "import_search_engine": false,
+      "make_chrome_default_for_user": false,
+      "show_welcome_page": false,
+      "skip_first_run_ui": true
+   },
+   "dns_prefetching": {
+      "enabled": false
+   },
+   "profile": {
+      "content_settings": {
+         "pattern_pairs": {
+            "https://*,*": {
+               "media-stream": {
+                  "audio": "Default",
+                  "video": "Default"
+               }
+            }
+         }
+      },
+      "default_content_setting_values": {
+         "geolocation": 1
+      },
+      "default_content_settings": {
+         "geolocation": 1,
+         "mouselock": 1,
+         "notifications": 1,
+         "popups": 1,
+         "ppapi-broker": 1
+      },
+      "password_manager_enabled": false
+   },
+   "safebrowsing": {
+      "enabled": false
+   },
+   "search": {
+      "suggest_enabled": false
+   },
+   "translate": {
+      "enabled": false
+   }
+}
+[0.472][INFO]: Populating Local State file: {
+   "background_mode": {
+      "enabled": false
+   },
+   "ssl": {
+      "rev_checking": {
+         "enabled": false
+      }
+   }
+}
+[0.479][INFO]: Launching chrome: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --disable-hang-monitor --disable-popup-blocking --disable-prompt-on-repost --disable-sync --disable-web-resources --enable-logging --ignore-certificate-errors --load-extension="C:\Users\PRZEMY~1\AppData\Local\Temp\scoped_dir15948_20214\internal" --log-level=0 --metrics-recording-only --no-first-run --password-store=basic --remote-debugging-port=12781 --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --test-type --use-mock-keychain --user-data-dir="C:\Users\PRZEMY~1\AppData\Local\Temp\scoped_dir15948_28540" data:,
+[1.567][INFO]: RESPONSE InitSession {
+   "acceptSslCerts": true,
+   "applicationCacheEnabled": false,
+   "browserConnectionEnabled": false,
+   "browserName": "chrome",
+   "chrome": {
+      "chromedriverVersion": "2.21.371459 (36d3d07f660ff2bc1bf28a75d1cdabed0983e7c4)",
+      "userDataDir": "C:\\Users\\PRZEMY~1\\AppData\\Local\\Temp\\scoped_dir15948_28540"
+   },
+   "cssSelectorsEnabled": true,
+   "databaseEnabled": false,
+   "handlesAlerts": true,
+   "hasTouchScreen": false,
+   "javascriptEnabled": true,
+   "locationContextEnabled": true,
+   "mobileEmulationEnabled": false,
+   "nativeEvents": true,
+   "platform": "Windows NT",
+   "rotatable": false,
+   "takesHeapSnapshot": true,
+   "takesScreenshot": true,
+   "version": "49.0.2623.112",
+   "webStorageEnabled": true
+}
+[1.570][INFO]: COMMAND Navigate {
+   "url": "http://localhost:8888/VendingMachine/VendingMachine.html"
+}
+[1.570][INFO]: Waiting for pending navigations...
+[1.572][INFO]: Done waiting for pending navigations
+[2.168][INFO]: Waiting for pending navigations...
+[2.331][INFO]: Done waiting for pending navigations
+[2.332][INFO]: RESPONSE Navigate
+[2.335][INFO]: COMMAND GetTitle {
+
+}
+[2.335][INFO]: Waiting for pending navigations...
+[2.338][INFO]: Done waiting for pending navigations
+[2.343][INFO]: Waiting for pending navigations...
+[2.345][INFO]: Done waiting for pending navigations
+[2.345][INFO]: RESPONSE GetTitle ""
+[2.348][INFO]: COMMAND GetSource {
+
+}
+[2.348][INFO]: Waiting for pending navigations...
+[2.350][INFO]: Done waiting for pending navigations
+[2.353][INFO]: Waiting for pending navigations...
+[2.354][INFO]: Done waiting for pending navigations
+[2.354][INFO]: RESPONSE GetSource "\u003Chtml xmlns=\"http://www.w3.org/1999/xhtml\">\u003Chead>\n\t\u003Cstyle>\n\t\t#main {\n\t\t\tposition: relative;\n\t\t\tleft: 5px;\n\t\t\ttop: 100px;\n\t\t\tborder-radius: 12px;\n\t\t\tbackground-color: #659EC7;\n\t\t\tcolor: #FFFFFF;\n\t\t\t..."
+[2.356][INFO]: COMMAND GetWindow {
+
+}
+[2.356][INFO]: RESPONSE GetWindow "CDwindow-E02B0A46-CB5B-4894-8C55-A2D9FAFCFD3F"
+[2.360][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.360][INFO]: Waiting for pending navigations...
+[2.361][INFO]: Done waiting for pending navigations
+[2.361][INFO]: Waiting for pending navigations...
+[2.362][INFO]: Done waiting for pending navigations
+[2.362][INFO]: RESPONSE SwitchToFrame
+[2.364][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "cancel"
+}
+[2.364][INFO]: Waiting for pending navigations...
+[2.364][INFO]: Done waiting for pending navigations
+[2.385][INFO]: Waiting for pending navigations...
+[2.386][INFO]: Done waiting for pending navigations
+[2.386][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-1"
+} ]
+[2.388][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-1"
+}
+[2.388][INFO]: Waiting for pending navigations...
+[2.389][INFO]: Done waiting for pending navigations
+[2.428][INFO]: Waiting for pending navigations...
+[2.432][INFO]: Done waiting for pending navigations
+[2.432][INFO]: RESPONSE ClickElement
+[2.435][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.435][INFO]: Waiting for pending navigations...
+[2.451][INFO]: Done waiting for pending navigations
+[2.451][INFO]: Waiting for pending navigations...
+[2.452][INFO]: Done waiting for pending navigations
+[2.452][INFO]: RESPONSE SwitchToFrame
+[2.455][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[2.455][INFO]: Waiting for pending navigations...
+[2.455][INFO]: Done waiting for pending navigations
+[2.472][INFO]: Waiting for pending navigations...
+[2.473][INFO]: Done waiting for pending navigations
+[2.473][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[2.475][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[2.475][INFO]: Waiting for pending navigations...
+[2.477][INFO]: Done waiting for pending navigations
+[2.511][INFO]: Waiting for pending navigations...
+[2.512][INFO]: Done waiting for pending navigations
+[2.512][INFO]: RESPONSE ClickElement
+[2.515][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.515][INFO]: Waiting for pending navigations...
+[2.532][INFO]: Done waiting for pending navigations
+[2.532][INFO]: Waiting for pending navigations...
+[2.533][INFO]: Done waiting for pending navigations
+[2.533][INFO]: RESPONSE SwitchToFrame
+[2.535][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[2.535][INFO]: Waiting for pending navigations...
+[2.536][INFO]: Done waiting for pending navigations
+[2.552][INFO]: Waiting for pending navigations...
+[2.552][INFO]: Done waiting for pending navigations
+[2.552][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[2.554][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[2.554][INFO]: Waiting for pending navigations...
+[2.555][INFO]: Done waiting for pending navigations
+[2.576][INFO]: Waiting for pending navigations...
+[2.577][INFO]: Done waiting for pending navigations
+[2.577][INFO]: RESPONSE GetElementText "0.25"
+[2.581][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.581][INFO]: Waiting for pending navigations...
+[2.582][INFO]: Done waiting for pending navigations
+[2.582][INFO]: Waiting for pending navigations...
+[2.583][INFO]: Done waiting for pending navigations
+[2.583][INFO]: RESPONSE SwitchToFrame
+[2.585][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[2.585][INFO]: Waiting for pending navigations...
+[2.586][INFO]: Done waiting for pending navigations
+[2.601][INFO]: Waiting for pending navigations...
+[2.602][INFO]: Done waiting for pending navigations
+[2.602][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[2.604][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[2.604][INFO]: Waiting for pending navigations...
+[2.605][INFO]: Done waiting for pending navigations
+[2.627][INFO]: Waiting for pending navigations...
+[2.628][INFO]: Done waiting for pending navigations
+[2.628][INFO]: RESPONSE ClickElement
+[2.631][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.631][INFO]: Waiting for pending navigations...
+[2.634][INFO]: Done waiting for pending navigations
+[2.634][INFO]: Waiting for pending navigations...
+[2.635][INFO]: Done waiting for pending navigations
+[2.635][INFO]: RESPONSE SwitchToFrame
+[2.637][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[2.637][INFO]: Waiting for pending navigations...
+[2.638][INFO]: Done waiting for pending navigations
+[2.643][INFO]: Waiting for pending navigations...
+[2.644][INFO]: Done waiting for pending navigations
+[2.644][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[2.645][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[2.645][INFO]: Waiting for pending navigations...
+[2.647][INFO]: Done waiting for pending navigations
+[2.665][INFO]: Waiting for pending navigations...
+[2.666][INFO]: Done waiting for pending navigations
+[2.666][INFO]: RESPONSE GetElementText "0.50"
+[2.669][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.669][INFO]: Waiting for pending navigations...
+[2.670][INFO]: Done waiting for pending navigations
+[2.670][INFO]: Waiting for pending navigations...
+[2.671][INFO]: Done waiting for pending navigations
+[2.671][INFO]: RESPONSE SwitchToFrame
+[2.672][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addHalfDollar')"
+}
+[2.673][INFO]: Waiting for pending navigations...
+[2.680][INFO]: Done waiting for pending navigations
+[2.704][INFO]: Waiting for pending navigations...
+[2.705][INFO]: Done waiting for pending navigations
+[2.705][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-4"
+} ]
+[2.708][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-4"
+}
+[2.708][INFO]: Waiting for pending navigations...
+[2.709][INFO]: Done waiting for pending navigations
+[2.759][INFO]: Waiting for pending navigations...
+[2.760][INFO]: Done waiting for pending navigations
+[2.760][INFO]: RESPONSE ClickElement
+[2.764][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.764][INFO]: Waiting for pending navigations...
+[2.765][INFO]: Done waiting for pending navigations
+[2.765][INFO]: Waiting for pending navigations...
+[2.766][INFO]: Done waiting for pending navigations
+[2.766][INFO]: RESPONSE SwitchToFrame
+[2.768][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[2.768][INFO]: Waiting for pending navigations...
+[2.769][INFO]: Done waiting for pending navigations
+[2.776][INFO]: Waiting for pending navigations...
+[2.777][INFO]: Done waiting for pending navigations
+[2.777][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[2.780][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[2.780][INFO]: Waiting for pending navigations...
+[2.781][INFO]: Done waiting for pending navigations
+[2.790][INFO]: Waiting for pending navigations...
+[2.791][INFO]: Done waiting for pending navigations
+[2.791][INFO]: RESPONSE GetElementText "1.00"
+[2.794][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[2.794][INFO]: Waiting for pending navigations...
+[2.795][INFO]: Done waiting for pending navigations
+[2.795][INFO]: Waiting for pending navigations...
+[2.796][INFO]: Done waiting for pending navigations
+[2.796][INFO]: RESPONSE SwitchToFrame
+[2.799][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "Pepsi"
+}
+[2.799][INFO]: Waiting for pending navigations...
+[2.800][INFO]: Done waiting for pending navigations
+[2.823][INFO]: Waiting for pending navigations...
+[2.826][INFO]: Done waiting for pending navigations
+[2.826][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-5"
+} ]
+[2.828][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-5"
+}
+[2.828][INFO]: Waiting for pending navigations...
+[2.829][INFO]: Done waiting for pending navigations
+[2.870][INFO]: Waiting for pending navigations...
+[2.871][INFO]: Done waiting for pending navigations
+[2.871][INFO]: RESPONSE ClickElement
+[3.374][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.374][INFO]: Waiting for pending navigations...
+[3.375][INFO]: Done waiting for pending navigations
+[3.375][INFO]: Waiting for pending navigations...
+[3.377][INFO]: Done waiting for pending navigations
+[3.377][INFO]: RESPONSE SwitchToFrame
+[3.379][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "productName"
+}
+[3.379][INFO]: Waiting for pending navigations...
+[3.380][INFO]: Done waiting for pending navigations
+[3.418][INFO]: Waiting for pending navigations...
+[3.420][INFO]: Done waiting for pending navigations
+[3.420][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-6"
+} ]
+[3.423][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-6"
+}
+[3.423][INFO]: Waiting for pending navigations...
+[3.425][INFO]: Done waiting for pending navigations
+[3.459][INFO]: Waiting for pending navigations...
+[3.461][INFO]: Done waiting for pending navigations
+[3.461][INFO]: RESPONSE GetElementText "Enjoy your Pepsi"
+[3.464][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.464][INFO]: Waiting for pending navigations...
+[3.465][INFO]: Done waiting for pending navigations
+[3.465][INFO]: Waiting for pending navigations...
+[3.466][INFO]: Done waiting for pending navigations
+[3.466][INFO]: RESPONSE SwitchToFrame
+[3.468][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "cancel"
+}
+[3.468][INFO]: Waiting for pending navigations...
+[3.469][INFO]: Done waiting for pending navigations
+[3.486][INFO]: Waiting for pending navigations...
+[3.487][INFO]: Done waiting for pending navigations
+[3.487][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-1"
+} ]
+[3.489][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-1"
+}
+[3.489][INFO]: Waiting for pending navigations...
+[3.489][INFO]: Done waiting for pending navigations
+[3.533][INFO]: Waiting for pending navigations...
+[3.534][INFO]: Done waiting for pending navigations
+[3.534][INFO]: RESPONSE ClickElement
+[3.537][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.537][INFO]: Waiting for pending navigations...
+[3.537][INFO]: Done waiting for pending navigations
+[3.538][INFO]: Waiting for pending navigations...
+[3.538][INFO]: Done waiting for pending navigations
+[3.538][INFO]: RESPONSE SwitchToFrame
+[3.540][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[3.540][INFO]: Waiting for pending navigations...
+[3.541][INFO]: Done waiting for pending navigations
+[3.547][INFO]: Waiting for pending navigations...
+[3.549][INFO]: Done waiting for pending navigations
+[3.549][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[3.551][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[3.551][INFO]: Waiting for pending navigations...
+[3.552][INFO]: Done waiting for pending navigations
+[3.570][INFO]: Waiting for pending navigations...
+[3.571][INFO]: Done waiting for pending navigations
+[3.571][INFO]: RESPONSE ClickElement
+[3.573][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.573][INFO]: Waiting for pending navigations...
+[3.574][INFO]: Done waiting for pending navigations
+[3.574][INFO]: Waiting for pending navigations...
+[3.575][INFO]: Done waiting for pending navigations
+[3.575][INFO]: RESPONSE SwitchToFrame
+[3.577][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[3.577][INFO]: Waiting for pending navigations...
+[3.578][INFO]: Done waiting for pending navigations
+[3.583][INFO]: Waiting for pending navigations...
+[3.584][INFO]: Done waiting for pending navigations
+[3.584][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[3.586][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[3.586][INFO]: Waiting for pending navigations...
+[3.587][INFO]: Done waiting for pending navigations
+[3.594][INFO]: Waiting for pending navigations...
+[3.595][INFO]: Done waiting for pending navigations
+[3.595][INFO]: RESPONSE GetElementText "0.25"
+[3.598][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.599][INFO]: Waiting for pending navigations...
+[3.599][INFO]: Done waiting for pending navigations
+[3.599][INFO]: Waiting for pending navigations...
+[3.600][INFO]: Done waiting for pending navigations
+[3.600][INFO]: RESPONSE SwitchToFrame
+[3.602][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[3.602][INFO]: Waiting for pending navigations...
+[3.603][INFO]: Done waiting for pending navigations
+[3.608][INFO]: Waiting for pending navigations...
+[3.609][INFO]: Done waiting for pending navigations
+[3.609][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[3.611][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[3.611][INFO]: Waiting for pending navigations...
+[3.611][INFO]: Done waiting for pending navigations
+[3.629][INFO]: Waiting for pending navigations...
+[3.630][INFO]: Done waiting for pending navigations
+[3.630][INFO]: RESPONSE ClickElement
+[3.632][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.632][INFO]: Waiting for pending navigations...
+[3.633][INFO]: Done waiting for pending navigations
+[3.633][INFO]: Waiting for pending navigations...
+[3.634][INFO]: Done waiting for pending navigations
+[3.634][INFO]: RESPONSE SwitchToFrame
+[3.636][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[3.636][INFO]: Waiting for pending navigations...
+[3.636][INFO]: Done waiting for pending navigations
+[3.642][INFO]: Waiting for pending navigations...
+[3.643][INFO]: Done waiting for pending navigations
+[3.643][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[3.645][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[3.645][INFO]: Waiting for pending navigations...
+[3.645][INFO]: Done waiting for pending navigations
+[3.652][INFO]: Waiting for pending navigations...
+[3.653][INFO]: Done waiting for pending navigations
+[3.653][INFO]: RESPONSE GetElementText "0.50"
+[3.656][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.656][INFO]: Waiting for pending navigations...
+[3.657][INFO]: Done waiting for pending navigations
+[3.657][INFO]: Waiting for pending navigations...
+[3.658][INFO]: Done waiting for pending navigations
+[3.658][INFO]: RESPONSE SwitchToFrame
+[3.659][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addHalfDollar')"
+}
+[3.660][INFO]: Waiting for pending navigations...
+[3.661][INFO]: Done waiting for pending navigations
+[3.683][INFO]: Waiting for pending navigations...
+[3.683][INFO]: Done waiting for pending navigations
+[3.684][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-4"
+} ]
+[3.686][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-4"
+}
+[3.686][INFO]: Waiting for pending navigations...
+[3.689][INFO]: Done waiting for pending navigations
+[3.735][INFO]: Waiting for pending navigations...
+[3.736][INFO]: Done waiting for pending navigations
+[3.736][INFO]: RESPONSE ClickElement
+[3.738][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.738][INFO]: Waiting for pending navigations...
+[3.739][INFO]: Done waiting for pending navigations
+[3.739][INFO]: Waiting for pending navigations...
+[3.740][INFO]: Done waiting for pending navigations
+[3.740][INFO]: RESPONSE SwitchToFrame
+[3.741][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[3.741][INFO]: Waiting for pending navigations...
+[3.742][INFO]: Done waiting for pending navigations
+[3.749][INFO]: Waiting for pending navigations...
+[3.751][INFO]: Done waiting for pending navigations
+[3.751][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[3.753][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[3.753][INFO]: Waiting for pending navigations...
+[3.754][INFO]: Done waiting for pending navigations
+[3.760][INFO]: Waiting for pending navigations...
+[3.761][INFO]: Done waiting for pending navigations
+[3.761][INFO]: RESPONSE GetElementText "1.00"
+[3.764][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[3.764][INFO]: Waiting for pending navigations...
+[3.765][INFO]: Done waiting for pending navigations
+[3.765][INFO]: Waiting for pending navigations...
+[3.766][INFO]: Done waiting for pending navigations
+[3.766][INFO]: RESPONSE SwitchToFrame
+[3.768][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "MountainDew"
+}
+[3.768][INFO]: Waiting for pending navigations...
+[3.768][INFO]: Done waiting for pending navigations
+[3.785][INFO]: Waiting for pending navigations...
+[3.786][INFO]: Done waiting for pending navigations
+[3.786][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-7"
+} ]
+[3.788][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-7"
+}
+[3.788][INFO]: Waiting for pending navigations...
+[3.789][INFO]: Done waiting for pending navigations
+[3.823][INFO]: Waiting for pending navigations...
+[3.824][INFO]: Done waiting for pending navigations
+[3.824][INFO]: RESPONSE ClickElement
+[4.326][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.326][INFO]: Waiting for pending navigations...
+[4.327][INFO]: Done waiting for pending navigations
+[4.327][INFO]: Waiting for pending navigations...
+[4.328][INFO]: Done waiting for pending navigations
+[4.328][INFO]: RESPONSE SwitchToFrame
+[4.330][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "productName"
+}
+[4.330][INFO]: Waiting for pending navigations...
+[4.330][INFO]: Done waiting for pending navigations
+[4.345][INFO]: Waiting for pending navigations...
+[4.345][INFO]: Done waiting for pending navigations
+[4.345][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-6"
+} ]
+[4.347][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-6"
+}
+[4.347][INFO]: Waiting for pending navigations...
+[4.348][INFO]: Done waiting for pending navigations
+[4.370][INFO]: Waiting for pending navigations...
+[4.371][INFO]: Done waiting for pending navigations
+[4.371][INFO]: RESPONSE GetElementText "Enjoy your MtnDew"
+[4.374][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.374][INFO]: Waiting for pending navigations...
+[4.375][INFO]: Done waiting for pending navigations
+[4.375][INFO]: Waiting for pending navigations...
+[4.376][INFO]: Done waiting for pending navigations
+[4.376][INFO]: RESPONSE SwitchToFrame
+[4.378][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "cancel"
+}
+[4.378][INFO]: Waiting for pending navigations...
+[4.379][INFO]: Done waiting for pending navigations
+[4.393][INFO]: Waiting for pending navigations...
+[4.394][INFO]: Done waiting for pending navigations
+[4.394][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-1"
+} ]
+[4.396][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-1"
+}
+[4.396][INFO]: Waiting for pending navigations...
+[4.397][INFO]: Done waiting for pending navigations
+[4.428][INFO]: Waiting for pending navigations...
+[4.429][INFO]: Done waiting for pending navigations
+[4.429][INFO]: RESPONSE ClickElement
+[4.433][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.433][INFO]: Waiting for pending navigations...
+[4.450][INFO]: Done waiting for pending navigations
+[4.451][INFO]: Waiting for pending navigations...
+[4.452][INFO]: Done waiting for pending navigations
+[4.452][INFO]: RESPONSE SwitchToFrame
+[4.453][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[4.453][INFO]: Waiting for pending navigations...
+[4.454][INFO]: Done waiting for pending navigations
+[4.460][INFO]: Waiting for pending navigations...
+[4.461][INFO]: Done waiting for pending navigations
+[4.461][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[4.464][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[4.464][INFO]: Waiting for pending navigations...
+[4.465][INFO]: Done waiting for pending navigations
+[4.483][INFO]: Waiting for pending navigations...
+[4.484][INFO]: Done waiting for pending navigations
+[4.484][INFO]: RESPONSE ClickElement
+[4.486][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.486][INFO]: Waiting for pending navigations...
+[4.487][INFO]: Done waiting for pending navigations
+[4.487][INFO]: Waiting for pending navigations...
+[4.487][INFO]: Done waiting for pending navigations
+[4.487][INFO]: RESPONSE SwitchToFrame
+[4.489][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[4.489][INFO]: Waiting for pending navigations...
+[4.490][INFO]: Done waiting for pending navigations
+[4.510][INFO]: Waiting for pending navigations...
+[4.511][INFO]: Done waiting for pending navigations
+[4.511][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[4.514][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[4.514][INFO]: Waiting for pending navigations...
+[4.515][INFO]: Done waiting for pending navigations
+[4.520][INFO]: Waiting for pending navigations...
+[4.522][INFO]: Done waiting for pending navigations
+[4.522][INFO]: RESPONSE GetElementText "0.25"
+[4.524][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.524][INFO]: Waiting for pending navigations...
+[4.525][INFO]: Done waiting for pending navigations
+[4.525][INFO]: Waiting for pending navigations...
+[4.526][INFO]: Done waiting for pending navigations
+[4.526][INFO]: RESPONSE SwitchToFrame
+[4.528][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addHalfDollar')"
+}
+[4.528][INFO]: Waiting for pending navigations...
+[4.529][INFO]: Done waiting for pending navigations
+[4.535][INFO]: Waiting for pending navigations...
+[4.535][INFO]: Done waiting for pending navigations
+[4.535][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-4"
+} ]
+[4.537][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-4"
+}
+[4.537][INFO]: Waiting for pending navigations...
+[4.538][INFO]: Done waiting for pending navigations
+[4.556][INFO]: Waiting for pending navigations...
+[4.557][INFO]: Done waiting for pending navigations
+[4.557][INFO]: RESPONSE ClickElement
+[4.559][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.559][INFO]: Waiting for pending navigations...
+[4.560][INFO]: Done waiting for pending navigations
+[4.560][INFO]: Waiting for pending navigations...
+[4.560][INFO]: Done waiting for pending navigations
+[4.561][INFO]: RESPONSE SwitchToFrame
+[4.564][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[4.564][INFO]: Waiting for pending navigations...
+[4.581][INFO]: Done waiting for pending navigations
+[4.586][INFO]: Waiting for pending navigations...
+[4.587][INFO]: Done waiting for pending navigations
+[4.587][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[4.589][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[4.589][INFO]: Waiting for pending navigations...
+[4.590][INFO]: Done waiting for pending navigations
+[4.596][INFO]: Waiting for pending navigations...
+[4.597][INFO]: Done waiting for pending navigations
+[4.598][INFO]: RESPONSE GetElementText "0.75"
+[4.601][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.601][INFO]: Waiting for pending navigations...
+[4.602][INFO]: Done waiting for pending navigations
+[4.602][INFO]: Waiting for pending navigations...
+[4.603][INFO]: Done waiting for pending navigations
+[4.603][INFO]: RESPONSE SwitchToFrame
+[4.605][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addHalfDollar')"
+}
+[4.605][INFO]: Waiting for pending navigations...
+[4.605][INFO]: Done waiting for pending navigations
+[4.611][INFO]: Waiting for pending navigations...
+[4.612][INFO]: Done waiting for pending navigations
+[4.612][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-4"
+} ]
+[4.615][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-4"
+}
+[4.615][INFO]: Waiting for pending navigations...
+[4.615][INFO]: Done waiting for pending navigations
+[4.633][INFO]: Waiting for pending navigations...
+[4.634][INFO]: Done waiting for pending navigations
+[4.634][INFO]: RESPONSE ClickElement
+[4.635][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.636][INFO]: Waiting for pending navigations...
+[4.637][INFO]: Done waiting for pending navigations
+[4.637][INFO]: Waiting for pending navigations...
+[4.655][INFO]: Done waiting for pending navigations
+[4.655][INFO]: RESPONSE SwitchToFrame
+[4.658][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[4.658][INFO]: Waiting for pending navigations...
+[4.659][INFO]: Done waiting for pending navigations
+[4.663][INFO]: Waiting for pending navigations...
+[4.664][INFO]: Done waiting for pending navigations
+[4.664][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[4.666][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[4.666][INFO]: Waiting for pending navigations...
+[4.667][INFO]: Done waiting for pending navigations
+[4.673][INFO]: Waiting for pending navigations...
+[4.675][INFO]: Done waiting for pending navigations
+[4.675][INFO]: RESPONSE GetElementText "1.25"
+[4.682][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[4.682][INFO]: Waiting for pending navigations...
+[4.683][INFO]: Done waiting for pending navigations
+[4.683][INFO]: Waiting for pending navigations...
+[4.683][INFO]: Done waiting for pending navigations
+[4.683][INFO]: RESPONSE SwitchToFrame
+[4.686][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "Coke"
+}
+[4.686][INFO]: Waiting for pending navigations...
+[4.686][INFO]: Done waiting for pending navigations
+[4.710][INFO]: Waiting for pending navigations...
+[4.711][INFO]: Done waiting for pending navigations
+[4.711][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-8"
+} ]
+[4.713][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-8"
+}
+[4.714][INFO]: Waiting for pending navigations...
+[4.715][INFO]: Done waiting for pending navigations
+[4.765][INFO]: Waiting for pending navigations...
+[4.766][INFO]: Done waiting for pending navigations
+[4.766][INFO]: RESPONSE ClickElement
+[5.269][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[5.269][INFO]: Waiting for pending navigations...
+[5.269][INFO]: Done waiting for pending navigations
+[5.269][INFO]: Waiting for pending navigations...
+[5.270][INFO]: Done waiting for pending navigations
+[5.270][INFO]: RESPONSE SwitchToFrame
+[5.272][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "productName"
+}
+[5.272][INFO]: Waiting for pending navigations...
+[5.273][INFO]: Done waiting for pending navigations
+[5.288][INFO]: Waiting for pending navigations...
+[5.289][INFO]: Done waiting for pending navigations
+[5.289][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-6"
+} ]
+[5.291][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-6"
+}
+[5.291][INFO]: Waiting for pending navigations...
+[5.292][INFO]: Done waiting for pending navigations
+[5.299][INFO]: Waiting for pending navigations...
+[5.301][INFO]: Done waiting for pending navigations
+[5.301][INFO]: RESPONSE GetElementText "Enjoy your Coke"
+[5.304][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[5.304][INFO]: Waiting for pending navigations...
+[5.305][INFO]: Done waiting for pending navigations
+[5.305][INFO]: Waiting for pending navigations...
+[5.306][INFO]: Done waiting for pending navigations
+[5.306][INFO]: RESPONSE SwitchToFrame
+[5.308][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "cancel"
+}
+[5.308][INFO]: Waiting for pending navigations...
+[5.309][INFO]: Done waiting for pending navigations
+[5.314][INFO]: Waiting for pending navigations...
+[5.315][INFO]: Done waiting for pending navigations
+[5.315][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-1"
+} ]
+[5.318][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-1"
+}
+[5.318][INFO]: Waiting for pending navigations...
+[5.319][INFO]: Done waiting for pending navigations
+[5.336][INFO]: Waiting for pending navigations...
+[5.337][INFO]: Done waiting for pending navigations
+[5.337][INFO]: RESPONSE ClickElement
+[5.339][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[5.339][INFO]: Waiting for pending navigations...
+[5.340][INFO]: Done waiting for pending navigations
+[5.340][INFO]: Waiting for pending navigations...
+[5.341][INFO]: Done waiting for pending navigations
+[5.341][INFO]: RESPONSE SwitchToFrame
+[5.343][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addHalfDollar')"
+}
+[5.343][INFO]: Waiting for pending navigations...
+[5.362][INFO]: Done waiting for pending navigations
+[5.369][INFO]: Waiting for pending navigations...
+[5.370][INFO]: Done waiting for pending navigations
+[5.370][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-4"
+} ]
+[5.372][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-4"
+}
+[5.372][INFO]: Waiting for pending navigations...
+[5.373][INFO]: Done waiting for pending navigations
+[5.393][INFO]: Waiting for pending navigations...
+[5.394][INFO]: Done waiting for pending navigations
+[5.394][INFO]: RESPONSE ClickElement
+[5.397][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[5.397][INFO]: Waiting for pending navigations...
+[5.398][INFO]: Done waiting for pending navigations
+[5.398][INFO]: Waiting for pending navigations...
+[5.400][INFO]: Done waiting for pending navigations
+[5.400][INFO]: RESPONSE SwitchToFrame
+[5.402][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[5.402][INFO]: Waiting for pending navigations...
+[5.403][INFO]: Done waiting for pending navigations
+[5.408][INFO]: Waiting for pending navigations...
+[5.409][INFO]: Done waiting for pending navigations
+[5.409][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[5.410][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[5.410][INFO]: Waiting for pending navigations...
+[5.411][INFO]: Done waiting for pending navigations
+[5.418][INFO]: Waiting for pending navigations...
+[5.419][INFO]: Done waiting for pending navigations
+[5.419][INFO]: RESPONSE GetElementText "0.50"
+[5.421][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[5.421][INFO]: Waiting for pending navigations...
+[5.422][INFO]: Done waiting for pending navigations
+[5.422][INFO]: Waiting for pending navigations...
+[5.423][INFO]: Done waiting for pending navigations
+[5.423][INFO]: RESPONSE SwitchToFrame
+[5.425][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addHalfDollar')"
+}
+[5.425][INFO]: Waiting for pending navigations...
+[5.441][INFO]: Done waiting for pending navigations
+[5.447][INFO]: Waiting for pending navigations...
+[5.448][INFO]: Done waiting for pending navigations
+[5.448][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-4"
+} ]
+[5.450][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-4"
+}
+[5.450][INFO]: Waiting for pending navigations...
+[5.451][INFO]: Done waiting for pending navigations
+[5.470][INFO]: Waiting for pending navigations...
+[5.471][INFO]: Done waiting for pending navigations
+[5.471][INFO]: RESPONSE ClickElement
+[5.473][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[5.473][INFO]: Waiting for pending navigations...
+[5.474][INFO]: Done waiting for pending navigations
+[5.474][INFO]: Waiting for pending navigations...
+[5.475][INFO]: Done waiting for pending navigations
+[5.475][INFO]: RESPONSE SwitchToFrame
+[5.476][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[5.476][INFO]: Waiting for pending navigations...
+[5.477][INFO]: Done waiting for pending navigations
+[5.484][INFO]: Waiting for pending navigations...
+[5.485][INFO]: Done waiting for pending navigations
+[5.485][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[5.486][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[5.486][INFO]: Waiting for pending navigations...
+[5.487][INFO]: Done waiting for pending navigations
+[5.493][INFO]: Waiting for pending navigations...
+[5.494][INFO]: Done waiting for pending navigations
+[5.494][INFO]: RESPONSE GetElementText "1.00"
+[5.497][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[5.497][INFO]: Waiting for pending navigations...
+[5.498][INFO]: Done waiting for pending navigations
+[5.499][INFO]: Waiting for pending navigations...
+[5.499][INFO]: Done waiting for pending navigations
+[5.499][INFO]: RESPONSE SwitchToFrame
+[5.501][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "Sprite"
+}
+[5.501][INFO]: Waiting for pending navigations...
+[5.502][INFO]: Done waiting for pending navigations
+[5.517][INFO]: Waiting for pending navigations...
+[5.535][INFO]: Done waiting for pending navigations
+[5.535][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-9"
+} ]
+[5.537][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-9"
+}
+[5.537][INFO]: Waiting for pending navigations...
+[5.537][INFO]: Done waiting for pending navigations
+[5.573][INFO]: Waiting for pending navigations...
+[5.574][INFO]: Done waiting for pending navigations
+[5.574][INFO]: RESPONSE ClickElement
+[6.077][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.077][INFO]: Waiting for pending navigations...
+[6.078][INFO]: Done waiting for pending navigations
+[6.078][INFO]: Waiting for pending navigations...
+[6.079][INFO]: Done waiting for pending navigations
+[6.080][INFO]: RESPONSE SwitchToFrame
+[6.081][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "productName"
+}
+[6.081][INFO]: Waiting for pending navigations...
+[6.082][INFO]: Done waiting for pending navigations
+[6.088][INFO]: Waiting for pending navigations...
+[6.089][INFO]: Done waiting for pending navigations
+[6.089][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-6"
+} ]
+[6.091][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-6"
+}
+[6.091][INFO]: Waiting for pending navigations...
+[6.091][INFO]: Done waiting for pending navigations
+[6.099][INFO]: Waiting for pending navigations...
+[6.100][INFO]: Done waiting for pending navigations
+[6.100][INFO]: RESPONSE GetElementText "Enjoy your Sprite"
+[6.103][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.103][INFO]: Waiting for pending navigations...
+[6.119][INFO]: Done waiting for pending navigations
+[6.120][INFO]: Waiting for pending navigations...
+[6.120][INFO]: Done waiting for pending navigations
+[6.120][INFO]: RESPONSE SwitchToFrame
+[6.122][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "cancel"
+}
+[6.122][INFO]: Waiting for pending navigations...
+[6.122][INFO]: Done waiting for pending navigations
+[6.127][INFO]: Waiting for pending navigations...
+[6.128][INFO]: Done waiting for pending navigations
+[6.128][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-1"
+} ]
+[6.130][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-1"
+}
+[6.130][INFO]: Waiting for pending navigations...
+[6.131][INFO]: Done waiting for pending navigations
+[6.147][INFO]: Waiting for pending navigations...
+[6.148][INFO]: Done waiting for pending navigations
+[6.148][INFO]: RESPONSE ClickElement
+[6.150][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.150][INFO]: Waiting for pending navigations...
+[6.151][INFO]: Done waiting for pending navigations
+[6.151][INFO]: Waiting for pending navigations...
+[6.152][INFO]: Done waiting for pending navigations
+[6.152][INFO]: RESPONSE SwitchToFrame
+[6.154][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[6.154][INFO]: Waiting for pending navigations...
+[6.155][INFO]: Done waiting for pending navigations
+[6.161][INFO]: Waiting for pending navigations...
+[6.162][INFO]: Done waiting for pending navigations
+[6.162][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[6.164][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[6.164][INFO]: Waiting for pending navigations...
+[6.166][INFO]: Done waiting for pending navigations
+[6.183][INFO]: Waiting for pending navigations...
+[6.185][INFO]: Done waiting for pending navigations
+[6.185][INFO]: RESPONSE ClickElement
+[6.187][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.187][INFO]: Waiting for pending navigations...
+[6.188][INFO]: Done waiting for pending navigations
+[6.188][INFO]: Waiting for pending navigations...
+[6.188][INFO]: Done waiting for pending navigations
+[6.188][INFO]: RESPONSE SwitchToFrame
+[6.190][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[6.190][INFO]: Waiting for pending navigations...
+[6.191][INFO]: Done waiting for pending navigations
+[6.196][INFO]: Waiting for pending navigations...
+[6.197][INFO]: Done waiting for pending navigations
+[6.197][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[6.200][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[6.200][INFO]: Waiting for pending navigations...
+[6.201][INFO]: Done waiting for pending navigations
+[6.207][INFO]: Waiting for pending navigations...
+[6.208][INFO]: Done waiting for pending navigations
+[6.208][INFO]: RESPONSE GetElementText "0.25"
+[6.210][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.210][INFO]: Waiting for pending navigations...
+[6.211][INFO]: Done waiting for pending navigations
+[6.211][INFO]: Waiting for pending navigations...
+[6.212][INFO]: Done waiting for pending navigations
+[6.212][INFO]: RESPONSE SwitchToFrame
+[6.214][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[6.214][INFO]: Waiting for pending navigations...
+[6.215][INFO]: Done waiting for pending navigations
+[6.220][INFO]: Waiting for pending navigations...
+[6.221][INFO]: Done waiting for pending navigations
+[6.221][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[6.223][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[6.223][INFO]: Waiting for pending navigations...
+[6.224][INFO]: Done waiting for pending navigations
+[6.240][INFO]: Waiting for pending navigations...
+[6.241][INFO]: Done waiting for pending navigations
+[6.241][INFO]: RESPONSE ClickElement
+[6.243][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.243][INFO]: Waiting for pending navigations...
+[6.244][INFO]: Done waiting for pending navigations
+[6.244][INFO]: Waiting for pending navigations...
+[6.245][INFO]: Done waiting for pending navigations
+[6.245][INFO]: RESPONSE SwitchToFrame
+[6.247][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[6.247][INFO]: Waiting for pending navigations...
+[6.248][INFO]: Done waiting for pending navigations
+[6.253][INFO]: Waiting for pending navigations...
+[6.254][INFO]: Done waiting for pending navigations
+[6.254][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[6.256][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[6.256][INFO]: Waiting for pending navigations...
+[6.257][INFO]: Done waiting for pending navigations
+[6.263][INFO]: Waiting for pending navigations...
+[6.264][INFO]: Done waiting for pending navigations
+[6.264][INFO]: RESPONSE GetElementText "0.50"
+[6.267][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.267][INFO]: Waiting for pending navigations...
+[6.268][INFO]: Done waiting for pending navigations
+[6.268][INFO]: Waiting for pending navigations...
+[6.269][INFO]: Done waiting for pending navigations
+[6.269][INFO]: RESPONSE SwitchToFrame
+[6.271][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[6.271][INFO]: Waiting for pending navigations...
+[6.272][INFO]: Done waiting for pending navigations
+[6.277][INFO]: Waiting for pending navigations...
+[6.278][INFO]: Done waiting for pending navigations
+[6.278][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[6.280][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[6.280][INFO]: Waiting for pending navigations...
+[6.281][INFO]: Done waiting for pending navigations
+[6.299][INFO]: Waiting for pending navigations...
+[6.301][INFO]: Done waiting for pending navigations
+[6.301][INFO]: RESPONSE ClickElement
+[6.303][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.303][INFO]: Waiting for pending navigations...
+[6.304][INFO]: Done waiting for pending navigations
+[6.304][INFO]: Waiting for pending navigations...
+[6.304][INFO]: Done waiting for pending navigations
+[6.305][INFO]: RESPONSE SwitchToFrame
+[6.306][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[6.306][INFO]: Waiting for pending navigations...
+[6.307][INFO]: Done waiting for pending navigations
+[6.312][INFO]: Waiting for pending navigations...
+[6.313][INFO]: Done waiting for pending navigations
+[6.313][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[6.316][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[6.316][INFO]: Waiting for pending navigations...
+[6.317][INFO]: Done waiting for pending navigations
+[6.322][INFO]: Waiting for pending navigations...
+[6.323][INFO]: Done waiting for pending navigations
+[6.323][INFO]: RESPONSE GetElementText "0.75"
+[6.326][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.326][INFO]: Waiting for pending navigations...
+[6.327][INFO]: Done waiting for pending navigations
+[6.327][INFO]: Waiting for pending navigations...
+[6.328][INFO]: Done waiting for pending navigations
+[6.328][INFO]: RESPONSE SwitchToFrame
+[6.330][INFO]: COMMAND FindElements {
+   "using": "xpath",
+   "value": "id('addQuarter')"
+}
+[6.330][INFO]: Waiting for pending navigations...
+[6.333][INFO]: Done waiting for pending navigations
+[6.353][INFO]: Waiting for pending navigations...
+[6.354][INFO]: Done waiting for pending navigations
+[6.354][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-2"
+} ]
+[6.355][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-2"
+}
+[6.356][INFO]: Waiting for pending navigations...
+[6.357][INFO]: Done waiting for pending navigations
+[6.375][INFO]: Waiting for pending navigations...
+[6.376][INFO]: Done waiting for pending navigations
+[6.376][INFO]: RESPONSE ClickElement
+[6.378][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.378][INFO]: Waiting for pending navigations...
+[6.379][INFO]: Done waiting for pending navigations
+[6.379][INFO]: Waiting for pending navigations...
+[6.380][INFO]: Done waiting for pending navigations
+[6.380][INFO]: RESPONSE SwitchToFrame
+[6.383][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "amount"
+}
+[6.383][INFO]: Waiting for pending navigations...
+[6.400][INFO]: Done waiting for pending navigations
+[6.406][INFO]: Waiting for pending navigations...
+[6.407][INFO]: Done waiting for pending navigations
+[6.407][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-3"
+} ]
+[6.409][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-3"
+}
+[6.409][INFO]: Waiting for pending navigations...
+[6.410][INFO]: Done waiting for pending navigations
+[6.417][INFO]: Waiting for pending navigations...
+[6.418][INFO]: Done waiting for pending navigations
+[6.418][INFO]: RESPONSE GetElementText "1.00"
+[6.421][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[6.421][INFO]: Waiting for pending navigations...
+[6.422][INFO]: Done waiting for pending navigations
+[6.422][INFO]: Waiting for pending navigations...
+[6.423][INFO]: Done waiting for pending navigations
+[6.423][INFO]: RESPONSE SwitchToFrame
+[6.424][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "Water"
+}
+[6.424][INFO]: Waiting for pending navigations...
+[6.425][INFO]: Done waiting for pending navigations
+[6.440][INFO]: Waiting for pending navigations...
+[6.457][INFO]: Done waiting for pending navigations
+[6.457][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-10"
+} ]
+[6.460][INFO]: COMMAND ClickElement {
+   "id": "0.04798060749669841-10"
+}
+[6.460][INFO]: Waiting for pending navigations...
+[6.461][INFO]: Done waiting for pending navigations
+[6.497][INFO]: Waiting for pending navigations...
+[6.515][INFO]: Done waiting for pending navigations
+[6.515][INFO]: RESPONSE ClickElement
+[7.018][INFO]: COMMAND SwitchToFrame {
+   "id": null
+}
+[7.018][INFO]: Waiting for pending navigations...
+[7.019][INFO]: Done waiting for pending navigations
+[7.019][INFO]: Waiting for pending navigations...
+[7.019][INFO]: Done waiting for pending navigations
+[7.019][INFO]: RESPONSE SwitchToFrame
+[7.021][INFO]: COMMAND FindElements {
+   "using": "id",
+   "value": "productName"
+}
+[7.021][INFO]: Waiting for pending navigations...
+[7.022][INFO]: Done waiting for pending navigations
+[7.027][INFO]: Waiting for pending navigations...
+[7.029][INFO]: Done waiting for pending navigations
+[7.029][INFO]: RESPONSE FindElements [ {
+   "ELEMENT": "0.04798060749669841-6"
+} ]
+[7.033][INFO]: COMMAND GetElementText {
+   "id": "0.04798060749669841-6"
+}
+[7.033][INFO]: Waiting for pending navigations...
+[7.034][INFO]: Done waiting for pending navigations
+[7.042][INFO]: Waiting for pending navigations...
+[7.043][INFO]: Done waiting for pending navigations
+[7.043][INFO]: RESPONSE GetElementText "Enjoy your Water"
+[10.364][INFO]: COMMAND CloseWindow {
+
+}
+[11.442][INFO]: RESPONSE CloseWindow

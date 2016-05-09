@@ -1,0 +1,182 @@
+<style>
+
+	#tcList .header {
+		background-color: #F0F0F0;
+	}
+	
+	#tcList tbody tr:hover {
+		background-color: #EEEEEE;
+		cursor: pointer;
+	}
+	
+	.covered.passed, .passed {
+		background-color: lightblue;
+	}
+	
+	.covered {
+		background-color: #EEEEEE;
+	}
+	
+	.covered.failed, .failed {
+		background-color: orange;
+	}
+	
+	.covered.blocked, .blocked {
+		background-color: yellow;
+	}
+	
+ 	#reqList {
+ 		padding-top: 3px;
+		font-size: 10pt;
+ 	}
+ 	
+	#reqList span {
+		border-radius: 6px;
+		padding-left: 3px;
+		padding-right: 3px;
+		margin-right: 3px;
+		background-color: #EEEEEE;
+	}
+	
+	#legendStatus {
+		margin-left: 10px;
+	}
+	
+	#legendStatus span {
+		padding-left: 5px; 
+		padding-right: 5px; 
+		border: 1px solid #999999;
+	}
+	
+	#legends {
+		font-size: 10pt;
+		margin-top: 5px; 
+		padding-top: 3px; 
+		padding-bottom: 3px; 
+		border-top: 1px solid #EEEEEE;
+	}
+	
+	table {
+		padding-top: 0px;
+		margin-top: 0px;
+		top: -3px;
+		position:relative;
+	}
+	
+	#reqMatrix {
+		border-top: 1px solid #EEEEEE;
+		margin-top: 5px;
+		cursor: arrow;
+	}
+	
+	#reqMatrix tbody tr:hover {
+		background-color: #EEEEEE;
+	}
+	
+	#reqMatrix tbody tr {
+		line-height: 15px;
+	}
+	
+	#reqMatrix thead {
+		background-color: #EEEEEE;
+	}
+	
+	#reqListing, #statDescDiv {
+		margin-bottom: 5px;
+		padding-left: 4px;
+		margin-top: 3px;
+	}
+	
+		
+	.tcStatus {
+		width: 5px;
+	}
+	
+	#tagMode {
+		font-size: small;
+		color: blue;
+		font-weight: none;
+		cursor: pointer;
+	}
+	
+	#tagMode:hover {
+		text-decoration: underline;
+	}
+	
+	.tlabel {
+		border-bottom: 1px solid #AAAAAA;
+	}
+	
+	#statDescDiv input {
+		width: 500px;
+	}
+	
+</style>
+
+<div ng-controller="ReqCtrl">
+	<div class="paneTitle" style="height: {{headerHeight}}px">
+		Requirement Traceability Matrix: {{curModelExec.modelExec.modelName}}
+	</div>
+	<div class="pane pane_2" style="height: {{viewHeight-headerHeight}}px; width: 100%;">
+		<div id="statDescDiv">
+			<span><b>Stat Desc:</b> <input type="text" style="width: {{viewWidth - 175}}px;" ng-model="curModelExec.modelExec.statDesc" ng-blur="saveStatDesc();"/></span>
+			<span style="float: right;">ExecID: {{curModelExec.modelExec.execID}}</span>
+		</div>
+		<div id="reqListing">
+			<b>Requirements:</b>
+			<span class="tag" ng-repeat="reqObj in curModelExec.reqList">
+					{{curModelExec.reqList.indexOf(reqObj)+1}}<sup><small class="p_{{reqObj.priority}}">{{reqObj.priority==''?'':reqObj.priority.substring(0,1)}}</small></sup>: {{reqObj.tag}}
+			</span>
+		</div>
+		<table border="0" cellspacing="1" id="tcList">
+			<thead>
+				<tr>
+					<th width="1%" align="center" class="tlabel" valign="middle" rowspan="2">TC#</th>
+					<th width="1%" align="center" class="tlabel" valign="middle" rowspan="2" title="Number of transitions in test case">Length</th>
+					<th align="center" colspan="{{curModelExec.reqList.length}}">
+						Requirement Tags
+						<span id="tagMode" ng-click="tagShowMode=(tagShowMode=='show tag name'?'hide tag name':'show tag name')" 
+							ng-model="tagShowMode" ng-init="tagShowMode='show tag name'">{{tagShowMode}}
+						</span>
+					</th>
+				</tr>
+				<tr>
+					<td align="center" ng-repeat="reqObj in curModelExec.reqList" 
+						class="tlabel"
+						title="Priority {{reqObj.priority}}, requirement tag {{reqObj.tag}}">
+						<span ng-hide="tagShowMode=='hide tag name'">{{curModelExec.reqList.indexOf(reqObj)+1}}<sup><small class="p_{{reqObj.priority}}">{{reqObj.priority==''?'':reqObj.priority.substring(0,1)}}</small></sup></span>
+						<span ng-show="tagShowMode=='hide tag name'"><small>{{reqObj.tag}}</small></span>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="tcID" ng-repeat="tcObj in curModelExec.tcList" 
+					ng-click="gotoTestCase(tcObj)">
+					<th align="right" class="colTC" style="white-space: nowrap;">
+						<span class="tcStatus {{tcObj.tcStatus}}">&nbsp;</span>
+						<span ng-click="setCurTestCase(tcObj)">{{tcObj.tcID}} {{tcObj.pathName}}</span>
+						<span style="width: 5px;" class="{{tcObj.status}}">&nbsp;</span>
+					</th>
+					<td align="center">{{tcObj.StepList.length}}</td>
+					<td align="center" ng-repeat="tagObj in curModelExec.reqList"
+						class="{{tcObj.Requirements.indexOf(tagObj.tag)>=0?'covered':''}} {{tcObj.ReqStatusList[tagObj.tag]}}"
+						ng-click="alert(tagObj.tag);" ng-switch="tcObj.ReqStatusList[tagObj.tag]">
+							<span ng-switch-when="passed">&#x2713;</span>
+							<span ng-switch-when="partial">&#x2713;</span>
+							<span ng-switch-when="failed">&#x2717;</span>
+							<span ng-switch-when="blocked">&#x2717;</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+			
+		<div id="legends">Execution Status: 
+			<span id="legendStatus">
+				<span class="covered">&#x2713; Partially Passed</span>
+				<span class="covered passed">&#x2713; Passed</span>
+				<span class="covered failed">&#x2717; Failed</span>
+				<span class="covered blocked">&#x2717; Blocked</span>
+			</span>	
+		</div>
+	</div>
+</div>

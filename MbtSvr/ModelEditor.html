@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link type="text/css" href="packages/ui-lightness/jquery.ui.all.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="packages/JSDiagram/JSDiagram.css" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ModelEditor.css" rel="stylesheet" type="text/css">
+	<link href="css/ModelEditorViews.css" rel="stylesheet" type="text/css"/>
+  	
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+	<script type="text/javascript" src="packages/jquery.rightClick.js"></script>
+	<script type="text/javascript" src="packages/ctxMenu.js"></script>
+
+	<script type="text/javascript" src="packages/jquery.TestOptimal/jquery.jTagging.js"></script>
+
+	<script type="text/javascript" src="packages/JSDiagram/JSDiagram.js"></script>
+	<script type="text/javascript" src="packages/JSDiagram/strategyS.js"></script>
+	<script type="text/javascript" src="packages/JSDiagram/strategyL.js"></script>
+	<script type="text/javascript" src="packages/JSDiagram/strategyLoop.js"></script>
+	<script type="text/javascript" src="packages/JSDiagram/strategyC.js"></script>
+	<script type="text/javascript" src="packages/JSDiagram/strategyAny.js"></script>
+
+	<link rel="stylesheet" href="packages/treeview/jquery.treeview.css" />
+	<script src="packages/jquery.cookie.js" type="text/javascript"></script>
+	<script src="packages/treeview/jquery.treeview.js" type="text/javascript"></script>
+	<script src="packages/treeview/jquery.treeview_edit.js" type="text/javascript"></script>
+
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+
+	<script src="packages/dagre.min.js"></script>
+	
+	<script src="js/ModelView.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/ModelEditor.js"></script>
+
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+	
+	<script src="js/ModelViewRequirements.js" type="text/javascript"></script>
+	<script src="js/ModelViewDefects.js" type="text/javascript"></script>
+	
+	<script type="text/javascript" src="packages/markdown/js/MarkdownDeep.min.js"></script>
+	<script src="js/ModelViewAnnot.js" type="text/javascript"></script>
+
+<!--
+<script src="packages/html2canvas/html2canvas.js"></script>
+<script src="packages/html2canvas/jquery.plugin.html2canvas.js"></script>
+-->
+
+<style>
+	.pathViewAttr img {
+		cursor: pointer;
+		border-radius: 4px;
+		background-color: #EEEEEE;
+	}
+	
+	.pathViewAttr img:hover {
+		background-color: orange;
+	}
+	
+	#annotIdxSlider {
+		background: #999999;
+		width: 95%;
+	}
+	
+	.pathViewAttr input {
+		font-size: 10px;
+		height: 10px;
+	}
+	
+	.pathViewAttr img {
+		position:relative;
+		top: 5px;
+	}
+	
+	#annotViewCnt {
+		background: #EEEEEE;
+		height: 100%;
+		border-top: 2px;
+		border-top-style: outset;
+		margin-top: 3px;
+		padding: 5px;
+	}
+</style>
+</head>
+<body style="padding:0px; margin:0px; overflow:hidden;">
+	<div style="width:100%;">
+		<span id="modelName" style="overflow:hidden;"><span class="name"></span> <img style="position:relative; top: 2px;" src="img/notepad.png" id="modelNotePad" onclick="popupNotePad('scxml');"/>
+		</span>
+		<span style="float: right; position:relative; top: 3px; background-color: #f0eee3; padding-left: 2px;">
+			<span id="searchBtn" class="icon-ctrl" onclick="openSearch();" title="Find states/transitions by name or requirement tag">
+				<img src="img/search.png"/>
+			</span>
+			<span class="icon-ctrl" style="margin-top: 5px;" onclick="javascript:parentWinObj.modelPropDialog();"><img class="btnBar" id="modelProp" title="Open model property dialog." src="img/modelProp.png"/><span class=sc></span></span>
+			<span class="icon-ctrl" onclick="javascript:parentWinObj.mbtSettingDialog();"><img class="btnBar" id="mbtSetting" title="Open MBT Setting dialog." src="img/mbtSetting.png"/><span class=sc></span></span>
+			<span class="icon-ctrl" onclick="javascript:parentWinObj.canvasProperty();"><img class="btnBar" id="canvasSetting" title="Open Model Canvas Setting dialog." src="img/canvasSetting.png"/><span class=sc></span></span>
+			<span class="icon-ctrl" onclick="javascript:parentWinObj.runWinAction('Model', 'popupTreeView');"><img class="btnBar" id="treeView" title="Open Model Tree View." src="img/treeview.png"/><span class=sc></span></span>
+			<span class="icon-ctrl" onclick="javascript:parentWinObj.runWinAction('Model','popupMCaseView');"><img class="btnBar" id="mcaseView" title="Open MCase View." src="img/mcaseview.png"/><span class=sc></span></span>
+			<span class="icon-ctrl"><a href="http://testoptimal.com/ModelCanvasHelp/ModelCanvas_Help.html" target=_blank title="Model canvas help"><img src="img/question.png"/></a></span>
+		</span>
+	</div>
+	<div id=rtMsg title='click to clear Sys Msg'></div>
+	<div id="wrapper" style="position: absolute; top:25px; overflow:auto;">
+		<div id="modelCanvas" style="overflow:hidden;">
+		</div>
+		<div id="notePad">
+			<div class="noteHeader"></div>
+			<textarea></textarea>
+		</div>
+		<div id="editLabel">
+			<textarea onblur="closeEditLabel();"></textarea>
+		</div>
+		<div id="ctxMenuState" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle"><span class="menuNodeType">Node/State</span> Menu:</li>
+				 <li class="ctxMenuItem readonly" id="stateProp"><span class="menuNodeType">Node/State</span> Property</li>
+				 <li class="ctxMenuItem readonly" id="stateAnnot"><span class="menuNodeType">Node/State</span> Annotation</span></li>
+				 <li class="ctxMenuItem readonly" id="stateMScript">MScript Triggers</li>
+				 <li class="ctxMenuItem" id="stateNotepad"><span class="menuNodeType">Node/State</span> Notepad</li>
+				 <li class="ctxMenuItem" id="openSubModel">Open Sub-Model</li>
+				 <li class="ctxMenuItem" id="showSubModel">Show Sub-Model</li>
+				 <li class="ctxMenuItem" id="hideSubModel">Hide Sub-Model</li>
+				 <li class="ctxMenuItem" id="addStateReq">Add Sub-<span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem" id="showSubStates">Show Sub-States</li>
+				 <li class="ctxMenuItem" id="hideSubStates">Hide Sub-States</li>
+				 <li class="ctxMenuItem cfg subState" id="addVertSyncReq">Add SyncBar (V))</li>
+				 <li class="ctxMenuItem cfg subState" id="addHorzSyncReq">Add SyncBar (H)</li>
+				 <li class="ctxMenuItem cfg subState" id="addBranchReq">Add Branch Node</li>
+				 <li class="ctxMenuItem cfg subState" id="addSwitchReq">Add Switch Node</li>
+ 				 <li class="ctxMenuItem subState" id="addInitialReq">Add Initial <span class="menuNodeType">Node/State</span></li>
+ 				 <li class="ctxMenuItem subState" id="addFinalReq">Add Final <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem" id="addTrans">Add <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem" id="delState">Delete <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem align" id="alignLeft">Align Left</li>
+				 <li class="ctxMenuItem align" id="alignRight">Align Right</li>
+				 <li class="ctxMenuItem align" id="alignTop">Align Top</li>
+				 <li class="ctxMenuItem align" id="alignBottom">Align Bottom</li>
+				 <li class="ctxMenuItem pasteState subState" id="pasteState">Paste Marked <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem subState" id="insStateSubModel">Paste SubModel</li>
+				 <li class="ctxMenuItem subState" id="pasteTrans">Paste Marked <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem subState" id="markSubStates">Mark Sub-<span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem" id="addMCase">Add To MCase</li>
+				 <li class="ctxMenuItem readonly" id="toggleStateBreak">Toggle Breakpoint</li>
+				 <li class="ctxMenuItem" id="guardView">Open Guard View</li>
+			</ul>
+		</div>
+		<div id="ctxMenuTrans" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle"><span class="menuEdgeType">Edge/Transition</span> Menu:</li>
+				 <li class="ctxMenuItem readonly" id="transProp"><span class="menuEdgeType">Edge/Transition</span> Property</li>
+				 <li class="ctxMenuItem readonly" id="transAnnot"><span class="menuEdgeType">Edge/Transition</span> Annotation</span></li>
+				 <li class="ctxMenuItem readonly" id="transMScript">MScript Triggers</li>
+				 <li class="ctxMenuItem" id="transDataSet"><span class="menuEdgeType">Edge/Transition</span> DataSet</li>
+				 <li class="ctxMenuItem" id="transNotepad"><span class="menuEdgeType">Edge/Transition</span> Notepad</li>
+				 <li class="ctxMenuItem" id="copyTrans">Copy From Marked <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem" id="delTrans">Delete <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem" id="reverseTrans">Reverse <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem" id="addMCase">Add To MCase</li>
+				 <li class="ctxMenuItem readonly" id="toggleTransBreak">Toggle Breakpoint</li>
+			</ul>
+		</div>
+		<div id="ctxMenuModel" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle">Model Menu:</li>
+				 <li class="ctxMenuItem" id="editModelProp">Model Property</li>
+				 <li class="ctxMenuItem" id="editCanvasProp">Canvas Setting</li>
+				 <!--li class="ctxMenuItem" id="editExecSetting">MBT Setting</li-->
+				 <li class="ctxMenuItem" id="modelNotepad">Model Notepad</li>
+				 <!--li class="ctxMenuItem" id="treeView">Tree View</li-->
+				 <!--li class="ctxMenuItem" id="mcaseView">MCase View</li-->
+				 <!--li class="ctxMenuItem" id="modelMScript">MScript</li-->
+				 <li class="ctxMenuItem" id="addStateReq">Add <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem cfg" id="addVertSyncReq">Add SyncBar (V)</li>
+				 <li class="ctxMenuItem cfg" id="addHorzSyncReq">Add SyncBar (H)</li>
+				 <li class="ctxMenuItem cfg" id="addBranchReq">Add Branch Node</li>
+				 <li class="ctxMenuItem cfg" id="addSwitchReq">Add Switch Node</li>
+ 				 <li class="ctxMenuItem" id="addInitialReq">Add Initial <span class="menuNodeType">Node/State</span></li>
+ 				 <li class="ctxMenuItem" id="addFinalReq">Add Final <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem mbba" id="addSwimlaneReq">Add Swimlane</li>
+				 <li class="ctxMenuItem" id="addBoxReq">Add Box</li>
+				 <li class="ctxMenuItem pasteState" id="pasteState">Paste Marked <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem" id="insSubModel">Paste SubModel</li>
+				 <li class="ctxMenuItem align" id="alignLeft">Align Left</li>
+				 <li class="ctxMenuItem align" id="alignRight">Align Right</li>
+				 <li class="ctxMenuItem align" id="alignTop">Align Top</li>
+				 <li class="ctxMenuItem align" id="alignBottom">Align Bottom</li>
+				 <li class="ctxMenuItem" id="markAll">Mark All <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem" id="openSearch">Find & Mark</li>
+				 <li class="ctxMenuItem" id="clearBreaks">Clear Breaks</li>
+				 <li class="ctxMenuItem" id="clearMarks">Clear Marks</li>
+				 <li class="ctxMenuItem" id="showAllSubModels">Show All SubModels</li>
+				 <li class="ctxMenuItem" id="hideAllSubModels">Hide All SubModels</li>
+				 <li class="ctxMenuItem" id="startReplay">Replay</li>
+				 <li class="ctxMenuItem" id="stopReplay">Stop Replay</li>
+				 <li class="ctxMenuItem" id="showCoverage">Show Coverage</li>
+				 <li class="ctxMenuItem" id="showUncovered">Show Not-Covered</li>
+				 <li class="ctxMenuItem" id="autoLayout">Auto Layout</li>
+			</ul>
+		</div>
+		<div id="ctxMenuSwimlane" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem" id="editProp">Edit Property</li>
+				 <li class="ctxMenuItem" id="delSwimlane">Delete Swimlane</li>
+			</ul>
+		</div>
+		<div id="ctxMenuBox" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem" id="editProp">Edit Property</li>
+				 <li class="ctxMenuItem" id="delBox">Delete Box</li>
+			</ul>
+		</div>
+		
+		<div id="treeViewPanel" class="viewPanel">
+			<div class="header">
+				<div style="float: left;" class="viewTitle">
+					<span class='label'>State/Transition Tree View</span><br/>
+					<span class="treecontrol">
+						<span class='textBtn' onclick="addStateToServerReq('', 0, 0, true);">Add State</span>
+						<a style="cursor: point;" href="?#"><span class='textBtn' title='Collapse&nbsp;All'>Collapse</span></a>
+						<a style="cursor: point;" href="?#"><span class='textBtn' title='Expand&nbsp;All'>Expand</span></a> 
+					</span>
+				</div>
+				<div id="treeViewClose" style="position:absolute; right: 1px; top:1px;">X</div>
+			</div>
+			<div id="treeViewCnt">
+				<ul id="stateList"></ul>
+			</div>
+		</div>
+		
+		<div id="mcaseViewPanel" class="viewPanel">
+			<div class="header">
+				<div style="float: left;" class="viewTitle">
+					<span class='label'>MCase View</span><br/>
+					<span class='treecontrol'>
+						<a><span class='textBtn plusU'>Add MCase</span></a>
+					</span>
+				</div>
+				<div id="mcaseViewClose" style="position: absolute; right: 1px; top: 1px;">X</div>
+			</div>
+			<div id="mcaseViewCnt">
+				<ul id="mcaseList"></ul>
+			</div>
+		</div>
+		
+		<div id="guardsViewPanel" class="viewPanel">
+			<div class="header">
+				<div>
+					<div style="float: left;" class="viewTitle">
+						<div class='label'>Guard View</div>
+					</div>
+					<div id="guardsViewClose">X</div>
+				</div>
+				<div id=guardsState style="padding-top: 8px;">State: <span id="guardsStateName"></div>
+			</div>
+			<div id="guardsViewCnt">
+				<ul id="guardsList"></ul>
+			</div>
+		</div>
+		
+		<div id="reqViewPanel" class="viewPanel">
+			<div class="header">
+				<div>
+					<div id=reqDiv class="viewHeader">
+						<div class="viewTitle">
+								Requirements <span id="asOfReq"></span>
+						</div>
+					</div>
+					<div id="reqViewClose" class="viewClose">X</div>
+				</div>
+				<div class="viewLine">
+					<span>
+						<a style="cursor: point;"><span class='textBtn' id='showReqCoverageBtn'>Coverage</span></a>
+						<a style="cursor: point;"><span class='textBtn' id='filterBtn'>Filter<span id="filterStatus"></span></span></a>
+					</span>
+					<span style="float:right; position:relative; left: 14px;">
+						<a style="cursor: point;"><span class='textBtn' id='syncReqBtn'>Sync</span></a>
+						<a class="syncMode" style="cursor: point;"><span class='textBtn' id='saveReqBtn'>Import & Save</span></a>
+					</span>
+				</div>
+				
+				<div id="filterSPAN">
+					Filter <select id="filterType">
+						<option value="versions">AUT Version</option>
+						<option value="desc">Description</option>
+						<option value="modifiedDate">Date&nbsp;Mod.</option>
+						<option value="keywords">Keyword</option>
+						<option value="reqname">Name</option>
+						<option value="reqGroup">Req. Group</option>
+						<option value="sprints">Sprint</option>
+						<option value="status">Status</option>
+						<option value="storyids">Story ID</option>
+						<option value="tag">Tag</option>
+					</select>
+					<input id="filterValue"></input>
+					<span id="closeFilter" class='textBtn'>x</span>
+				</div>
+			</div>
+			<div id="reqViewCnt" class="viewCnt">
+				<table id="tagList" width="100%" cellspacing=0; cellpadding="0" class="tablesorter">
+
+				</table>
+			</div>
+		</div>
+		<div id="defectsViewPanel" class="viewPanel">
+			<div class="header">
+				<div>
+					<div id=defectsDiv class="viewHeader">
+						<div class="viewTitle">
+							Defects View
+						</div>
+					</div>
+					<div id="defectsViewClose" class="viewClose">X</div>
+				</div>
+				<div class="viewLine">
+					<span>
+
+					</span>
+					<span style="float:right; position:relative; left: 14px;">
+						<a style="cursor: point;"><span class='textBtn' id='refreshDefectsBtn'>Refresh</span></a>
+					</span>
+				</div>
+			</div>
+			<div id="defectsViewCnt">
+				<table id="defectsList" width="100%" cellspacing=0; cellpadding="0" class="tablesorter">
+					<thead>
+						<tr>
+							<th width='1%'>#</th>
+							<th nowrap title="User assigned unique id within this model for the defect in <i>assertID</i> in <i>assert</i> tag">Assert&nbsp;ID</th>
+							<th title="Unique id assgined to the defect by Defect System.">Defect&nbsp;ID</th>
+							<th nowrap title="Requirement Tag">Req.&nbsp;Tag&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="annotViewPanel" class="viewPanel" style="width:400px;height:400px;">
+			<div class="header">
+				<div>
+					<div id=annotDiv class="viewHeader">
+						<div class="viewTitle">
+							Annotation View
+						</div>
+					</div>
+					<div id="annotViewClose" class="viewClose">X</div>
+				</div>
+				<div class="viewLine">
+					<span>
+						<span class="pathViewAttr">Thread <input type="text" id="pathThreadIdx" style="width: 20px;" title="Enter virtual user/thread index, 0 for the first thread"/></span>
+						<span class="pathViewAttr">Path <input type="text" id="pathIdx" style="width: 30px;" title="Enter test path (test case) index, 0 for the first test path"/></span>
+						<span class="pathViewAttr" id="pathStepBack"><img src="img/back.png"/></span>
+						<span class="pathViewAttr">Step: <span id="pathStepIdx"></span></span>
+						<span class="pathViewAttr" id="pathStepNext"><img src="img/next.png"/></span>
+					</span>
+					<span style="float:right; position:relative; left: 14px;">
+						<a style="cursor: point;"><span class='textBtn' id='refreshAnnotBtn'>Refresh</span></a>
+					</span>
+				</div>
+			</div>
+			<center><div id="annotIdxSlider"></div></center>
+			<div id="annotViewCnt">
+			</div>
+		</div>
+
+		<div id="tvStateCtx" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle"><span class="menuNodeType">Node/State</span> Menu:</li>
+				 <li class="ctxMenuItem" id="stateProp"><span class="menuNodeType">Node/State</span> Property</li>
+				 <li class="ctxMenuItem readonly" id="stateNotepad"><span class="menuNodeType">Node/State</span> Notepad</li>
+				 <li class="ctxMenuItem" id="addStateReq">Add Sub-<span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem cfg" id="addVertSyncReq">Add SyncBar (V))</li>
+				 <li class="ctxMenuItem cfg" id="addHorzSyncReq">Add SyncBar (H)</li>
+				 <li class="ctxMenuItem cfg" id="addBranchReq">Add Branch Node</li>
+				 <li class="ctxMenuItem cfg" id="addSwitchReq">Add Switch Node</li>
+ 				 <li class="ctxMenuItem" id="addInitialReq">Add Initial <span class="menuNodeType">Node/State</span></li>
+ 				 <li class="ctxMenuItem" id="addFinalReq">Add Final <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem" id="delState">Delete <span class="menuNodeType">Node/State</span></li>
+				 <li class="ctxMenuItem" id="addTrans">Add <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem" id="pasteTrans">Paste <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem updown" id="moveUp">Move Up</li>
+				 <li class="ctxMenuItem updown" id="moveDown">Move Down</li>
+				 <li class="ctxMenuItem" id="addMCase">Add To MCase</li>
+				 <li class="ctxMenuItem readonly" id="toggleBreak">Toggle Breakpoint</li>
+				 <li class="ctxMenuItem" id="tvGuardView">Guard View</li>
+			</ul>
+		</div>
+		
+		<div id="tvTransCtx" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle"><span class="menuEdgeType">Edge/Transition</span> Menu:</li>
+				 <li class="ctxMenuItem" id="transProp"><span class="menuEdgeType">Edge/Transition</span> Property</li>
+				 <li class="ctxMenuItem" id="transDataSet"><span class="menuEdgeType">Edge/Transition</span> DataSet</li>
+				 <li class="ctxMenuItem" id="transNotepad"><span class="menuNodeType">Node/State</span> Notepad</li>
+				 <li class="ctxMenuItem" id="delTrans">Delete <span class="menuEdgeType">Edge/Transition</span></li>
+				 <li class="ctxMenuItem updown" id="moveUp">Move Up</li>
+				 <li class="ctxMenuItem updown" id="moveDown">Move Down</li>
+				 <li class="ctxMenuItem" id="addMCase">Add To MCase</li>
+				 <li class="ctxMenuItem readonly" id="toggleBreak">Toggle Breakpoint</li>
+			</ul>
+		</div>
+	
+		<div id="ctxMenuMCase" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle">MCase Menu:</li>
+				 <li class="ctxMenuItem" id="mcaseProp">MCase Property</li>
+				 <li class="ctxMenuItem readonly" id="mcaseNotepad">Notepad</li>
+				 <li class="ctxMenuItem" id="moveUp">Move Up</li>
+				 <li class="ctxMenuItem" id="moveDown">Move Down</li>
+				 <li class="ctxMenuItem" id="delMCase">Delete MCase</li>
+				 <li class="ctxMenuItem" id="toggleDisable">Toggle Disabled</li>
+			</ul>
+		</div>
+		<div id="ctxMenuStep" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle">MCase Step Menu:</li>
+				 <li class="ctxMenuItem" id="stepProp">Step Property</li>
+				 <li class="ctxMenuItem readonly" id="stepNotepad">Notepad</li>
+				 <li class="ctxMenuItem" id="moveUp">Move Up</li>
+				 <li class="ctxMenuItem" id="moveDown">Move Down</li>
+				 <li class="ctxMenuItem" id="delStep">Delete Step</li>
+				 <li class="ctxMenuItem" id="toggleDisable">Toggle Disabled</li>
+			</ul>
+		</div>
+		
+		<div id="ctxMenuReq" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle">Requirement Menu:</li>
+				 <li class="ctxMenuItem" id="reqDetails">Show Details</li>
+				 <li class="ctxMenuItem" id="reqCoverag">Show Coverage</li>
+				 <li class="ctxMenuItem readonly syncMode" id="reqDelete">Delete</li>
+			</ul>
+		</div>
+
+		<div id="ctxMenuDefect" class="contextMenu">
+			<ul>
+				 <li class="ctxMenuItem noHover" id="ctxMenuTitle">Defect Menu:</li>
+				 <li class="ctxMenuItem" id="defectDetails">Show Details</li>
+				 <li class="ctxMenuItem" id="defectReplay">Replay Defect</li>
+				 <li class="ctxMenuItem" id="defectMCase">Make MCase</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="opaqDiv"></div>
+	
+
+</body>
+</html>

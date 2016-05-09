@@ -1,0 +1,16 @@
+html {
+	background-color: #Ebeff5;
+}
+
+table {
+	background-color: #Ebeff5;
+}
+
+table td {
+	padding-left: 2px;
+}
+
+#archList tr:hover {
+	background-color: #F2F7F8;
+	
+}

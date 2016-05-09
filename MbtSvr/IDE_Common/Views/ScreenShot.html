@@ -1,0 +1,37 @@
+<style>
+	#ScreenShot .header {
+		background-color: #DDDDDD;
+		font-weight: bold;
+	}
+	
+	#ScreenShot tr {
+		cursor: pointer;
+	}
+
+	#ScreenShot tbody tr:hover {
+		background-color: #FFFFFF;
+	}
+</style>
+
+<div ng-controller="ScreenShotCtrl" id="ScreenShot" style="height: 100%;">
+	<div>
+		Screenshot files taken during test execution. 
+		<button class="btn btn-primary" ng-click="delScreenshots()">Delete</button>
+	</div>
+	<table class="table">
+		<thead class="header">
+			<tr>
+				<td><input type="checkbox" ng-model="checkAll" ng-click="toggleCheckAll()"/></td>
+				<td ng-click="changeSorting('fname')">ScreenShot File</td>
+				<td ng-click="changeSorting('lastmodified')">Create Date/Time</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="screenshotObj in screenshotList|orderBy:sort.column:sort.descending">
+				<td><input type="checkbox" ng-model="screenshotObj.checked"/></td>
+				<td><a href="/model/snapscreen/{{screenshotObj.fname}}" target=_blank>{{screenshotObj.fname}}</a></td>
+				<td nowrap>{{screenshotObj.lastmodified}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

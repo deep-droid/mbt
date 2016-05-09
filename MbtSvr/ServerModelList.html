@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ServerList.css" rel="stylesheet" type="text/css" />
+  	<LINK href="css/ServerModelList.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<script type="text/javascript" src="packages/jquery.rightClick.js"></script>
+	<script type="text/javascript" src="packages/ctxMenu.js"></script>
+
+  	<LINK href="packages/tablesorter/themes/blue/style.css" rel="stylesheet" type="text/css">
+	<script src="packages/tablesorter/jquery.metadata.js"></script>
+	<script src="packages/tablesorter/jquery.tablesorter.min.js"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/ServerModelList.js"></script>
+</head>
+<body>
+	<table border="0" id="modelListTB" cellspacing="0" cellpadding="2" width="100%" id="main" 
+			class="tablesorter">
+		<thead id="modelListHeader" class="header">
+		</thead>
+		<tbody id="modelList" class="listContent">
+		</tbody>
+	</table>
+	<div>&nbsp;</div>
+	
+	<div id="ctxMenu" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem" id="details" title="List all archives for the model">Show Archives</li>
+			 <li class="ctxMenuItem" id="stats" title="Model execution stats">Model Stats</li>
+			 <li class="ctxMenuItem" id="del" title="Delete model">Delete Model</li>
+		</ul>
+	</div>
+
+</body>
+</html>

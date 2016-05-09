@@ -1,0 +1,139 @@
+<style>
+	#progressArea td {
+		padding-left: 2px;
+	}
+	
+	#progressArea .header {
+		background-color: #EEEEEE;
+	}
+	
+	#progressArea .selected {
+		background-color: lightblue;
+	}
+	
+	#debug tbody tr:hover {
+		background-color: #FCECEC;
+	}
+	
+	#Debug .btnTO:hover {
+		border: 1px solid #FFAD33;
+		background: #fdeeb3;
+		cursor: pointer;
+	}
+	
+	#Debug .travItem {
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	#Debug .travItem:hover {
+		background-color: #DDDDDD;
+	}
+
+	#Debug .travItem.selected {
+		background-color: red;
+		color: #FFFFFF;
+	}
+</style>
+<div ng-controller="ExecProgressCtrl" id="Debug" style="height: 100%;">
+	<img style="position: fixed; top: 10px; right: 50px"class="btnTO" src="IDE_RibbonUI/img/normal/Refresh-01.png" ng-click="refreshProgress()"/>
+
+	<div id="progressArea" style="background-color: #F9F9F9 !important">
+		<table>
+			<thead class="header">
+				<tr class="header">
+					<td width="1%">
+						<img src="img/{{expProgExecSetting?'minus':'plus'}}.png" ng-init="expProgExecSetting=true" ng-click="expProgExecSetting=!expProgExecSetting"/>
+					</td>
+					<td colspan="2">
+						Execution Settings
+					</td>
+				</tr>
+			</thead>
+			<tbody ng-show="expProgExecSetting" class="progressExecSetting">
+				<tr><td></td><td>Status</td><td>{{execProg.execStatus.execStatus}}</td></tr>
+				<tr><td></td><td>MBT Mode</td><td>{{execProg.execStatus.mbtMode}}</td></tr>
+				<tr><td></td><td>Debug</td><td>{{execProg.execStatus.debugFlag}}</td></tr>
+				<tr><td></td><td>Iterations</td><td>{{execProg.execStatus.numLoop}}</td></tr>
+				<tr><td></td><td>Virtual Users</td><td>{{execProg.execStatus.numThread}}</td></tr>
+			</tbody>
+	
+			<thead class="header">
+				<tr class="header">
+					<td width="1%">
+						<img src="img/{{expProgExecStatus?'minus':'plus'}}.png" ng-init="expProgExecStatus=true" ng-click="expProgExecStatus=!expProgExecStatus"/> 
+					</td>
+					<td colspan="2">
+						Execution Status
+					</td>
+				</tr>
+			</thead>
+			<tbody ng-show="expProgExecStatus" class="progressExecStatus">
+				<tr><td></td><td>Start Time</td><td>{{execProg.execStatus.startTime}}</td></tr>
+				<tr><td></td><td>Elapse Time</td><td>{{execProg.execStatus.elapseTime}}</td></tr>
+				<tr><td></td><td>Remaining</td><td>{{execProg.execStatus.remainingTime}}</td></tr>
+				<tr><td></td><td>End Time</td><td>{{execProg.execStatus.endTime}}</td></tr>
+				<tr><td></td><td>Progress</td><td>{{execProg.execStatus.progressPcnt}}%</td></tr>
+				<tr><td></td><td>Active Virtual Users</td><td>{{execProg.execStatus.activeThreads}}</td></tr>
+			</tbody>
+	
+			<thead class="header">
+				<tr class="header">
+					<td width="1%">
+						<img src="img/{{expProgJVMStatus?'minus':'plus'}}.png" ng-init="expProgJVMStatus=true" ng-click="expProgJVMStatus=!expProgJVMStatus"/> 
+					</td>
+					<td colspan="2">
+						JVM Status
+					</td>
+				</tr>
+			</thead>
+			<tbody ng-show="expProgJVMStatus" class="progressJVMStatus">
+				<tr><td></td><td>Total Memory</td><td>{{execProg.execStatus.memoryMax}}</td></tr>
+				<tr><td></td><td>Percent Used</td><td>{{execProg.execStatus.memoryUsedPct}}</td></tr>
+			</tbody>
+	
+			<thead class="header">
+				<tr class="header">
+					<td width="1%">
+						<img src="img/{{expProgStopCond?'minus':'plus'}}.png" ng-init="expProgStopCond=true" ng-click="expProgStopCond=!expProgStopCond"/> 
+					</td>
+					<td colspan="2">
+						Stop Conditions
+					</td>
+				</tr>
+			</thead>
+			<tbody ng-show="expProgStopCond" class="progressStopCond">
+				<tr ng-hide="execProg.execStatus.stopReqCoverage==''"><td></td><td>Requirement Coverage (%)</td><td>{{execProg.execStatus.stopReqCoverage}}</td></tr>
+				<tr ng-hide="execProg.execStatus.stopTransCoverage==''"><td></td><td>Trans Coverage (%)</td><td>{{execProg.execStatus.stopTransCoverage}}</td></tr>
+				<tr ng-hide="execProg.execStatus.stopTransCount==''"><td></td><td>Trans Trav Count</td><td>{{execProg.execStatus.stopTransCount}}</td></tr>
+				<tr ng-hide="execProg.execStatus.stopMinute==''"><td></td><td>Elapse Time (mins)</td><td>{{execProg.execStatus.stopMinute}}</td></tr>
+				<tr ng-hide="execProg.execStatus.stopException==''"><td></td><td>Exception Count</td><td>{{execProg.execStatus.stopException}}</td></tr>
+				<tr ng-hide="execProg.execStatus.stopPathCount==''"><td></td><td>Path Count</td><td>{{execProg.execStatus.stopPathCount}}</td></tr>
+			</tbody>
+			
+			<thead class="header">
+				<tr class="header">
+					<td width="1%">
+						<img src="img/{{expProgStepHist?'minus':'plus'}}.png" ng-init="expProgStepHist=true" ng-click="expProgStepHist=!expProgStepHist"/> 
+					</td>
+					<td colspan="2">
+						Execution Trace (recent mscript executed)
+						<img class="btnTO" src="img/Eraser.png" ng-click="clearMScriptHighlight()"/>
+					</td>
+				</tr>
+			</thead>
+			<tbody ng-show="expProgStepHist" class="progressStepHist">
+				<tr>
+					<td colspan="3">
+				 		<span ng-repeat="lid in execProg.lidHist">
+				 			&#8594;<span ng-class="{selected: lid.selected, travItem: true}"
+								ng-click="highlightMScript(lid);" title="Step {{$index+1}}">
+								{{lid.lid}}
+							</span>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

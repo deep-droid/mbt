@@ -1,0 +1,21 @@
+>>> Date: 2016-5-6 
+17:59:51.421 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:51.509 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:51.634 INFO [vUser-15-thread-1] Insert one halfdollar successful
+17:59:52.305 INFO [vUser-15-thread-1] Correct drink has been dispensed: Pepsi
+17:59:52.438 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:52.497 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:52.604 INFO [vUser-15-thread-1] Insert one halfdollar successful
+17:59:53.215 INFO [vUser-15-thread-1] Correct drink has been dispensed: MountainDew
+17:59:53.365 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:53.441 INFO [vUser-15-thread-1] Insert one halfdollar successful
+17:59:53.518 INFO [vUser-15-thread-1] Insert one halfdollar successful
+17:59:54.145 INFO [vUser-15-thread-1] Correct drink has been dispensed: Coke
+17:59:54.262 INFO [vUser-15-thread-1] Insert one halfdollar successful
+17:59:54.337 INFO [vUser-15-thread-1] Insert one halfdollar successful
+17:59:54.944 INFO [vUser-15-thread-1] Correct drink has been dispensed: Sprite
+17:59:55.51 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:55.108 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:55.167 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:55.261 INFO [vUser-15-thread-1] Insert one quarter successful
+17:59:55.887 INFO [vUser-15-thread-1] Correct drink has been dispensed: Water

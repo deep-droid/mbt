@@ -1,0 +1,41 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	overflow: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #F5F5F5;
+}
+
+table {
+	font-size: small;
+
+}
+
+.exception {
+	background-color: yellow;
+}
+
+.label {
+	font-weight: bold;
+}
+
+.logo {
+	width: 22px;
+	margin: 2px;
+	position: relative;
+	top: 2px;
+}
+
+
+.reportHeader {
+	margin-top: 0px;
+	padding-top: 1px;
+	background-color: #EAEAEA;
+	color: #555555;
+	border-bottom: 2px ridge #3A7DA1;
+	font-size: large;
+	font-weight: bold;
+}

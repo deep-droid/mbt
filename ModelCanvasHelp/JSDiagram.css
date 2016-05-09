@@ -1,0 +1,242 @@
+body {
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	color: #000000;
+}
+
+.ui-resizable-se {
+	padding: 0px;
+	margin: 0px;
+	width: 14px; 
+	height: 14px; 
+	right: 0px; 
+	bottom: 0px;
+}
+
+.state {
+	-moz-border-radius: 5px;
+	border-Radius: 5px;
+}
+
+.state .head {
+	border-top-left-Radius: 5px;
+	border-top-right-Radius: 5px;
+}
+
+
+#mainCnt {
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	width:100%;
+	overflow: auto;
+	position: absolute;
+}
+
+#modelCanvas {
+	overflow: auto;
+	position: absolute;
+}
+
+
+.dropState:hover {
+	border: 2px dashed red;
+}
+
+
+.ctnt {
+	width: 100%;
+	margin: 0px;
+	padding-top: 3px;
+	overflow: hidden;
+	
+}
+
+.stateFlags {
+	position: relative;
+	top: 2px;
+}
+
+.stateFlags span {
+	color: #FFFFFF;
+	font-size: 11px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 2px;
+	font-weight: bold;
+}
+
+
+.trans {
+	position: absolute;
+	z-index: 10;
+}
+
+.transFlags span {
+	font-size: 9px;
+	font-weight: bold;
+	background-color: #777777;
+	color: #FFFFFF;
+	margin-left: 2px;
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+.seg {
+	margin: 1px;
+	background-color: #000000;	
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.dropHover {
+	border: 2px solid orange;
+}
+
+.icn.break a:hover {
+	color: #FED17E;
+}
+
+
+.icn.break {
+	float:left;
+	padding:0px; 
+	font-size: 12px; 
+	background-color: #97C3D4;
+}
+
+.icn.initial, .icn.final {
+	display:none;
+	color: #FFFFFF;
+	font-size: 12px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top:1px;
+	font-weight: bold;
+}
+
+.icn {
+	float:left;
+	border-right: 1px solid #999999;
+	vertical-align: middle;
+	margin-top: 1px;
+}
+
+.icn a {
+	color: #888888;
+	font-size: 12px;
+	padding-left: 2px;
+	padding-right: 2px;
+	font-weight: bold;
+	height: 17px;
+}
+
+
+.icnRDiv {
+	float:right;
+	padding-right: 1px;
+}
+
+.icnR {
+	border: 1px solid #AAAAAA;
+	height: 13px;
+	background-color: #EEEEEE;
+	margin-top:1px;
+	margin-left: 1px;
+	margin-left: 1px;
+	float:left;
+}
+
+.icnRDiv .icnR img {
+	height: 12px;
+}
+
+.transLink img {
+	position: relative;
+	top: 2px;
+	padding: 1px;
+}
+
+.transLink img:hover {
+	background-color: yellow;
+}
+
+.icnR img:hover {
+	background-color: yellow;
+}
+
+.icn.enabled a {
+	color: #FED17E;
+}
+
+.trans.label {
+	padding: 2px;
+}
+
+.transLink {
+	padding-left: 3px;
+	font-style: italic;
+	font-size: 10px;
+}
+
+
+
+.transStart.break.enabled {
+ 	background-color: #F87431;
+ }
+ 
+
+.arrow, .seg {
+	position: inherit;
+	background-color: #222222;
+	padding: 0px;
+	margin: 0px;
+}
+
+.transStart.break {
+	position: absolute;
+	background-color: #222222;
+	padding: 0px;
+	margin: 0px;
+}
+
+
+.transStart.break:hover, .arrow:hover {
+	background-color: orange;
+	cursor: pointer;
+}
+
+.state.marked, .transName.marked {
+	border: 2px dotted orange;
+}
+
+.seg.marked {
+	border: 1px dotted orange;
+}
+
+
+.labelEdit {
+	display: none;
+	z-index: 10;
+}
+
+
+.state div.head {
+	height: 17px;
+}
+
+.headerLabel {
+	color: #FFFF99;
+	font-size: 10px;
+}
+
+input {
+	font-size: 12px;
+}
+
+.hilite {
+	z-index: 10002;
+}
+

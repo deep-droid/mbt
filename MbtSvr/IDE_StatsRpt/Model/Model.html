@@ -1,0 +1,146 @@
+<style>
+	#execList thead th {
+		border-bottom: 1px solid #CCCCCC;
+	}
+	
+	#modelDesc {
+		padding-top: 2px;
+		margin-bottom: 3px;
+		border-bottom: 1px solid #EEEEEE;
+	}
+	
+	.multiValue {
+		margin-top: 0px;
+	}
+	
+	ul.multiValue {
+		padding-left: 0px;
+	}
+	
+	ul.multiValue {
+		list-style-type: none;
+	}
+</style>
+
+<div ng-controller="ModelCtrl" id="modelTab">
+	<div id="appHeader" class="paneTitle" style="height: 25px; text-align: left;">
+		<div class="paneTitle filter" style="width: {{paneWidth_1}}px; overflow:hidden;">
+			<input class="headerSearch" type="text" placeholder="Search text or regexp" ng-model="filter" ng-change="applyFilter(filter)"/>
+			<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filter=''; applyFilter('')"/></span>
+			<span style="display:none;" id=imp>File: <input id="fileupload" type="file" name="filename"></span>
+		</div>
+		<div style="float:left; margin-left: 10px;">
+			<div>Model: <span ng-if="curModel.name.length>0">{{curModel.name}} <small>(id: {{curModel.modelID}})</small>
+					<a style="float:none;" title="Model graph" target=_blank class="appBtn" href="GraphModel.html?type=ModelGraph"><img class="appIcon" src="img/modelGraph.png"/></a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div style="height: {{viewHeight-headerHeight - 25}}px;">
+		<div class="pane pane_1" style="width: {{paneWidth_1}}px;">
+			<ul id="modelList" class="selection">
+				<li ng-repeat="model in modelList" ng-click="openModel(model)" 
+					ng-class="{selected: model.selected}" ng-hide="model.hide">
+					<img src="img/model.png"/> <span class="modelName">{{model.name}}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" style="width: {{paneWidth_2}}px;">
+			<div class="pane-content">
+<table border="0">
+	<tr><td colspan="2" id="modelDesc"><span class="labelTO">Description:</span> {{curModel.desc}}</td></tr>
+	<tr><td valign="top">
+		<table border="0">
+			<tr><td class="labelTO" width="20%" valign="top">Versions:</td>
+				<td class="value">
+					<div ng-if="curModel.AUTVer.length>0">AUT: {{curModel.AUTVer}}</div>
+					<div ng-if="curModel.modelVer.length>0">Model: {{curModel.modelVer}}</div>
+					<div ng-if="curModel.reqVer.length>0">Requirements: {{curModel.reqVer}}</div>
+					<div ng-if="curModel.TOVer.length>0">TestOptimal: {{curModel.TOVer}}</div>
+				</td>
+			</tr>
+			<tr><td class="labelTO">Coverage Type:</td><td class="label">{{curModel.coverageType}}</td></tr>
+			<tr><td class="labelTO" valign="top">Stop Condition(s):</td>
+				<td class="labelTO">
+					<div ng-if="model.stopOn.travCount">Traversal Count: {{curModel.stopOn.travCount}}</div>
+					<div ng-if="model.stopOn.elapseTime">Elapse Time {{curModel.stopOn.elapseTime}} minutes</div>
+					<div ng-if="model.stopOn.transCoverage">Transition Coverage: {{curModel.stopOn.transCoverage}} %</div>
+					<div ng-if="model.stopOn.reqCoverage">Requirement Coverage: {{curModel.stopOn.reqCoverage}}</div>
+					<div ng-if="model.stopOn.failCount">Failure Count: {{curModel.stopOn.failCount}}</div>
+					<div ng-if="model.stopOn.testcaseCount">Test Case Count: {{curModel.stopOn.testcaseCount}}</div>
+				</td>
+			</tr>
+			<tr><td class="labelTO" valign="top" ng-if="curModel.subModels.length>0">Sub Models:</td>
+				<td class="labelTO">
+					<div ng-repeat="subModel in curModel.subModels">{{subModel}}</div>
+				</td>
+			</tr>
+		</table>
+	</td>
+	<td valign="top">
+		<table border="0">
+			<tr><td class="labelTO" width="20%">Sequencer:</td><td class="value">{{curModel.sequencer}}</td></tr>
+			<tr><td class="labelTO">Random Seed:</td><td class="value">{{curModel.seed}}</td></tr>
+			<tr><td class="labelTO" valign="top">Plugins:</td>
+				<td>
+					<div ng-repeat="plugin in curModel.plugins">{{plugin}}</div>
+				</td>
+			</tr>
+		</table>
+	</td></tr>
+</table>
+							
+<table cellspacing="1" id="execList">
+	<thead>
+		<tr>
+			<td></td>
+			<th class="clickSort" ng-click="predicate='execID'; reverse=!reverse;">ExecID</th>
+			<th align="left" class="clickSort" ng-click="predicate='statDesc'; reverse=!reverse;">Stat Description</th>
+			<th class="clickSort" ng-click="predicate='startTime'; reverse=!reverse;">Start Date/Time</th>
+			<th class="clickSort" ng-click="predicate='elapseTime'; reverse=!reverse;">Duration</th>
+			<th class="clickSort" ng-click="predicate='tcCount'; reverse=!reverse;">Test Cases</th>
+			<th class="clickSort" ng-click="predicate='status'; reverse=!reverse;">Status</th>
+			<th class="clickSort" ng-click="predicate='failCount'; reverse=!reverse;">Failures</th>
+			<th colspan="2">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+     <tr ng-repeat="execObj in curModel.execList | orderBy:predicate:reverse" ng-hide="execObj.hide"
+     	ng-if="execObj" class="{{execObj.selected?'selected':''}}">
+     	<td>
+     		<span class="tcStatus {{execObj.status}}">&nbsp;</span>
+     	</td>
+         <td align="center" ng-click="openModelExec(execObj)" class="clickable">
+             {{execObj.execID}}
+         </td>
+         <td ng-click="openModelExec(execObj)" class="clickable">
+         	{{execObj.statDesc}}
+         </td>
+         <td align="center" ng-click="openModelExec(execObj)" class="clickable">
+         	{{execObj.startTime}}
+         </td>
+         <td align="center" ng-click="openModelExec(execObj)" class="clickable">
+       	{{execObj.elapseTime}}
+         </td>
+         <td align="center" ng-click="openModelExec(execObj)" class="clickable">
+         	{{execObj.tcCount}}
+         </td>
+         <td align="center" ng-click="openModelExec(execObj)" class="clickable">
+         	{{execObj.status}}
+         </td>
+         <td align="center" ng-click="openModelExec(execObj)" class="clickable">
+         	{{execObj.failCount}}
+         </td>
+         <td class="clickable" align="right">
+         	<span class="appBtn" title="toggle model execution keep flag, which keeps model execution from being purged"><img class="appIcon" ng-src="{{execObj.keep?'img/locked.png':'img/unlocked.png'}}" ng-click="toggleKeep(execObj)"/></span>
+         </td>
+         <td class="clickable" align="left">
+         	<span class="appBtn" title="delete model execution stats"><img class="appIcon" ng-hide="execObj.keep" src="img/delete16.png" ng-click="deleteModelExec(execObj)"/></span>
+         </td>
+     </tr>
+  <tbody>
+</table>
+		     </div>
+		</div>
+		<pane-divider/>
+	</div>

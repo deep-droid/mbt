@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ServerLicenseList.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<script type="text/javascript" src="packages/jquery.rightClick.js"></script>
+	<script type="text/javascript" src="packages/ctxMenu.js"></script>
+
+
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/ServerLicenseList.js"></script>
+</head>
+<body>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="lic">
+		<thead>
+			<tr class="header">
+				<th align=left>License Name</th>
+				<th>Category</th>
+				<th>Edition</th>
+				<th>Session Limit</th>
+				<th>Thread Limit</th>
+				<th>Instance Limit</th>
+				<th>Instance Count</th>
+				<th>Status</th>
+				<th>Expiration Date</th>
+			</tr>
+		</thead>
+		<tbody id="licList" class="listContent">
+		</tbody>
+	</table>
+	<div id="ctxMenu" class="contextMenu">
+		<ul>
+			 <li class="ctxMenuItem" id="licDetails">License Details</li>
+			 <li class="ctxMenuItem" id="addLic">Add License</li>
+			 <li class="ctxMenuItem" id="deleteLic">Delete License</li>
+			 <li class="ctxMenuItem" id="renameLic">Rename License</li>
+			 <li class="ctxMenuItem" id="editCatCode">Edit CatCode</li>
+			 <li class="ctxMenuItem" id="shutdownSvr">Shutdown Server(s)</li>
+		</ul>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,291 @@
+<html>
+
+<head>
+	<style>
+		#main {
+			position: relative;
+			left: 5px;
+			top: 5px;
+			border-radius: 12px;
+			background-color: #659EC7;
+			color: #FFFFFF;
+			width: 375px;
+		}
+		
+		.action:hover, .product:hover, .feedback:hover, .goal:hover {
+			background-color: orange;
+		}
+		
+		.action, .product, .feedback, .goal {
+			padding-left: 4px;
+			padding-right: 4px;
+			border-radius: 8px;
+			border: 1px solid green;
+			background-color: #DDDDDD;
+			color: #333333;
+		}
+		
+		
+		#amount {
+			border-style: groove;
+			border-width: 2px;
+			background-color: #DDDDDD;
+			color: GREEN;
+			font-size: 14px;
+			font-weight: bold;
+			width: 75px;
+			padding-left: 8px;
+		}
+		
+		#message, #productName {
+			width: 350px;
+			height: 25px;
+			color: #00FFFF;
+			font-size: 18px;
+			
+		}
+		
+		#productName {
+			font-weight: bold;
+		}
+		
+		#amountDIV{
+			border-top: 1px solid #333333;
+		}
+	</style>
+  	<script src="js/jquery-1.7.min.js"></script>
+  	<script src="js/jquery.cookie.js"></script>
+	<script>
+	
+		var balance = 0.0;
+		var drinkPrice = 1.0;
+		var msgWelome = "Welcome to <i><b>MBT Drinks</b></i>!  Quarter & HalfDollar Coins Only.";
+		var tmr;
+				
+		$(document).ready(function() {
+			reset();
+			
+//			setInterval(function() {$("#productName").toggle();}, 1000);
+			
+			$("#addQuarter").click(function() {
+				if (balance >= 1.0) {
+					return;
+				}
+				addToBalance(0.25);
+			});
+
+			$("#addHalfDollar").click(function() {
+				if (balance >= 1.0) {
+					return;
+				}
+				addToBalance(0.50);
+			});
+
+			$("#cancel").click(reset);
+
+			$(".product").click(function() {
+				if (balance < 1.0) {
+					return;
+				}
+				$("#message").hide();
+				$("#productName").html("Enjoy your " + $(this).html());
+				$("#productLabel").show();
+				tmr = setTimeout(reset, 10000);
+			});
+		});
+		
+		function updateMsg(msg) {
+			$("#message").html(msg);
+		}
+		
+
+		function addToBalance(amnt) {
+			balance += amnt;
+			updateDisplay();
+		}
+		
+		function updateDisplay() {
+			$("#amount").text(balance.toFixed(2));
+		}
+		
+		function reset() {
+			if (tmr) {
+				clearTimeout(tmr);
+			}
+			balance = 0.0;
+			$("#price").text("$" + drinkPrice.toFixed(2));
+			updateDisplay();
+			$("#productLabel").hide();
+			$("#message").show();
+			updateMsg(msgWelome);
+		}
+	
+		function setDrinkPrice(price) {
+			drinkPrice = price;
+			reset();
+		}
+		
+		function startTimer(duration, display) {
+		var timer = duration, minutes, seconds;
+		setInterval(function () {
+<!-- 			minutes = parseInt(timer / 60, 10);
+			seconds = parseInt(timer % 60, 10);
+
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+
+			display.text(minutes + ":" + seconds);
+ -->
+			display.text(timer);
+			if (--timer < 0) {
+				timer = duration;
+			}
+		}, 1000);
+		}
+
+		jQuery(function ($) {
+			//ten seconds
+			var timerDuration = 10,
+				display = $('#time');
+			startTimer(timerDuration, display);
+		});
+	</script>
+
+</head>
+
+<body>
+
+<!-- 	<div style="float: left">
+		<img src="VendingMachine.jpg" width="250px" />
+	</div>
+ -->	<table style="float: left" id="main" cellspacing="3" cellpadding="2">
+		<tr>
+			<td colspan="2"><center><marquee id="message" behavior ="scroll" direction="left"
+			scrollamount="4"></marquee><span id="productLabel">&nbsp;<span id="productName"></span></span></center></td>
+			</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr id="amountDIV">
+			<td>Deposited:</td><td><div id="amount" style="width: 100px; float:left">0</div><div style="float:left; padding-left: 15px;">Drink for <span id="price"></span></div></td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>Are you ready to start?:</td>
+			<td>
+				<span id="Yes" class="feedback"><font color="brown"><i>Yes, I'm ready</i></font></span>
+				<span id="Exit" class="feedback"><font color="brown"><i>Exit</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>What's your goal:</td>
+			<td>
+				<span id="10" class="goal"><font color="brown"><i>10</i></font></span>
+				<span id="15" class="goal"><font color="brown"><i>15</i></font></span>
+				<span id="20" class="goal"><font color="brown"><i>20</i></font></span>
+				<span id="25" class="goal"><font color="brown"><i>25</i></font></span>
+				<span id="40" class="goal"><font color="green"><i>40</i></font></span>
+				<span id="50" class="goal"><font color="green"><i>50</i></font></span>
+				<span id="75" class="goal"><font color="green"><i>75</i></font></span>
+				<span id="100" class="goal"><font color="green"><i>100</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>How many can you complete?:</td>
+			<td>
+				<span id="5" class="goal"><font color="brown"><i>5</i></font></span>
+				<span id="10" class="goal"><font color="brown"><i>10</i></font></span>
+				<span id="15" class="goal"><font color="brown"><i>15</i></font></span>
+				<span id="20" class="goal"><font color="brown"><i>20</i></font></span>
+				<span id="25" class="goal"><font color="brown"><i>25</i></font></span>
+				<span id="30" class="goal"><font color="green"><i>30</i></font></span>
+				<span id="35" class="goal"><font color="brown"><i>35</i></font></span>
+				<span id="40" class="goal"><font color="brown"><i>40</i></font></span>
+				<span id="50" class="goal"><font color="green"><i>50</i></font></span>
+				<span id="60" class="goal"><font color="green"><i>60</i></font></span>
+				<span id="75" class="goal"><font color="green"><i>75</i></font></span>
+				<span id="100" class="goal"><font color="green"><i>100</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>Continue with training?:</td>
+			<td>
+				<span id="Ok" class="feedback"><font color="brown"><i>Ok</i></font></span>
+				<span id="Exit" class="feedback"><font color="brown"><i>Exit</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>Level:</td>
+			<td>
+				<span id="Easy" class="feedback"><font color="brown"><i>Easy 60s</i></font></span>
+				<span id="Medium" class="feedback"><font color="brown"><i>Medium 75s</i></font></span>
+				<span id="Hard" class="feedback"><font color="green"><i>Hard 90s</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>Series: 12 11 10 8 13</td>
+			<td>
+				<span id="Done" class="feedback"><font color="brown"><i>Done</i></font></span>
+			</td>
+		</tr>
+		<tr>
+			<td>Complete 12</td>
+			<td>
+				<span id="Done" class="feedback"><font color="brown"><i>Done</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>
+				<span id="Done" class="feedback"><font color="brown"><i>Time <span id="time"></span> seconds</i></font></span>		
+			</td>
+		</tr>
+		<tr>
+			<td>Complete 11</td>
+			<td>
+				<span id="Done" class="feedback"><font color="brown"><i>Done</i></font></span>
+			</td>
+		</tr>
+		<tr>
+			<td>Complete 10</td>
+			<td>
+				<span id="Done" class="feedback"><font color="brown"><i>Done</i></font></span>
+			</td>
+		</tr>
+		<tr>
+			<td>Complete 8</td>
+			<td>
+				<span id="Done" class="feedback"><font color="brown"><i>Done</i></font></span>
+			</td>
+		</tr>
+		<tr>
+			<td>Complete 13</td>
+			<td>
+				<span id="Done" class="feedback"><font color="brown"><i>Done</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>Feedback for the training:</td>
+			<td>
+				<span id="Easy" class="feedback"><font color="brown"><i>Easy</i></font></span>
+				<span id="Ok" class="feedback"><font color="brown"><i>Ok</i></font></span>
+				<span id="Hard" class="feedback"><font color="green"><i>Hard</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>Feedback for the training:</td>
+			<td>
+				<span id="Easy" class="feedback"><font color="brown"><i>Easy</i></font></span>
+				<span id="Ok" class="feedback"><font color="brown"><i>Ok</i></font></span>
+				<span id="Hard" class="feedback"><font color="green"><i>Hard</i></font></span>
+			</td>
+		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+	</table>
+</body>
+</d	>

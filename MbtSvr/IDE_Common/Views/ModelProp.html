@@ -1,0 +1,13 @@
+
+<div ng-controller="ModelPropCtrl" id="ModelProp" style="height: 100%;" ng-form="modelPropForm">
+	<table id="modelProp">
+		<tr ng-repeat="fieldObj in modelPropList">
+			<td class="labelNoWrap labelTO" valign="top" width="1%">{{fieldObj.msgDef.code}}
+	   			<a ng-show="fieldObj.msgDef" class="helpHint" popover-placement="right" popover-trigger="mouseenter" popover="{{fieldObj.msgDef.desc}}" href="#" >?</a>
+			</td>
+			<td>
+				<prop-field field="fieldObj"></prop-field>
+			</td>
+		</tr>
+	</table>
+</div>

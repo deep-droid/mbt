@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ExecStat.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script src="packages/jquery.progressbar.js"></script>
+	
+	<link href="packages/facebox_1.3/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="packages/facebox_1.3/facebox.js" type="text/javascript"></script>
+	<script src="js/webmbtMsgList.js"></script>
+	<script src="js/webmbtUtility.js"></script>
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/ExecStat.js"></script>
+  	<title></title>
+</head>
+<body style="overflow:hidden;">
+	<div class="header" style="height: 18px;">
+		<table id="statDetail" cellspacing="0" cellpadding="0" width="100%" border="0">
+			<tr class="header" style="height: 20px;"><td>
+				<div id="statDescTD" style="float:left; margin-top: 3px;">
+					<span class="curView">
+						Stat Desc <select id="statID" onchange="javascript:loadStat(this.value);"></select>
+					</span>
+					<span class="batch" style="display:none;">
+						<span id="batchExecTitle" title="">Batch Exec</span>
+						<select name="batchExecID" onchange="javascript:loadBatchExecStat(this.value);">
+						</select>
+					</span>
+				</div>
+				<div id="moreMenu" class="icon-ctrl"><button onclick="manageStats()">Manage Stats</button></div>
+			</td></tr>
+		</table>
+	</div>
+
+	<div id="statsMain" style="overflow:auto;">
+		<table width="100%" cellspacing="0" cellpadding="1">
+			<tr style="padding:0px;">
+				<td class="label">Browser:</td><td><span id="browser"></span></td>
+				<td class="label">Plugin(s):</td><td colspan="3"><span id="plugins"></span></td>
+			</tr>
+			<tr>
+				<td class="label">Start Time:</td><td><span id="startTime"></span></td>
+				<td class="label">Elapse Time:</td><td><span id="elapseTime"></span></td>
+				<td class="label">End Time:</td><td><span id="endTime"></span></td>
+			</tr>
+			<tr>
+				<td class="label">MBT Mode:</td><td><span id="mbtMode" class="field"></span></td>
+				<td class="label">Iterations:</td><td><span id="numLoop" class="field"></span></td>
+				<td class="label">Virtual Users:</td><td><span id="numThread" title="Number of concurrent threads to execute MBT" class="field"></span></td>
+			</tr>
+		</table>
+		<table width=100% cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid #AAAAAA">
+			<tr>
+				<th colspan=5 class="header" align="left" valign=middle style="height: 10px;padding:0px;">
+					<span class="covGraphDesc" style="height:10px;padding:0px;padding-left:2px;">
+						Overall Coverage
+					</span>
+					<span class="icon-ctrl" onclick="openCoverageGraph();"
+						 style="height:10px;padding:0px;" 
+						title="Generate Coverage Graph from the model and execution stats">
+						<img class="btnBar" src="img/covGraph.png"/>
+					</span>
+					<span class="icon-ctrl" onclick="openTravMSC();" 
+						 style="height:10px; padding:0px;"
+						title="Generate Traveral MSG from the model execution stats">
+						<img class="btnBar" src="img/execMSC.png"/>
+					</span>
+				</th>
+			</tr>
+			<tr>
+				<td class="header" style="height: 10px;padding:0px;padding-bottom:2px;">&nbsp;</td>
+				<td class="header" align="center" style="height: 10px;padding:0px;padding-bottom:2px;">Traversals</td>
+				<td class="header" align="center" style="height: 10px;padding:0px;padding-bottom:2px;">Covered</td>
+				<td class="header" align="center" style="height: 10px;padding:0px;padding-bottom:2px;">Un-Covered</td>
+				<td class="header" align="left" style="height: 10px;padding:0px;padding-bottom:2px;">Coverage</td>
+			</tr>
+			<tr>
+				<td align="left" class="label" id="coverageStateLabel">State</td>
+				<td align="center"><span id="stateTraversal" class="field"></span></td>
+				<td align="center"><span id="stateCovered" class="field"></span></td>
+				<td align="center"><span id="stateUncovered" class="field"></span></td>
+				<td align="left"><span class="progressbar" id="stateCoverageBar">0%</span><span id="stateCoverageDir"></span></td>
+			</tr>
+			<tr>
+				<td align="left" class="label" id="coverageTransLabel">Transition</td>
+				<td align="center"><span id="transTraversal" class="field"></span></td>
+				<td align="center"><span id="transCovered" class="field"></span></td>
+				<td align="center"><span id="transUncovered" class="field"></span></td>
+				<td align="left"><span class="progressbar" id="transCoverageBar">0%</span><span id="transCoverageDir"></span></td>
+			</tr>
+			<tr id="tagStat">
+				<td align="left" class="label" title="Requirement tags">Req. Tags</td>
+				<td align="center"><span id="tagsTraversal" class="field"></span></td>
+				<td align="center"><span id="tagsCovered" class="field"></span></td>
+				<td align="center"><span id="tagsUncovered" class="field"></span></td>
+				<td align="left"><span class="progressbar" id="tagsCoverageBar">0%</span><span id="tagsCoverageDir"></span></td>
+			</tr>
+			<tr id="mscriptStat">
+				<td align="left" class="label">MScript</td>
+				<td align="center"><span id="mscriptTraversals" class="field"></span></td>
+				<td align="center"><span id="mscriptCovered" class="field"></span></td>
+				<td align="center"><span id="mscriptUncovered" class="field"></span></td>
+				<td align="left"><span class="progressbar" id="mscriptCoverageBar">0%</span><span id="mscriptCoverageDir"></span></td>
+			</tr>
+		</table>
+		<table width=100% cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid #AAAAAA">
+			<tr>
+				<td class="header" style="height: 10px;padding:0px;padding-top:2px;">
+					<img id="hide_statetransstats" src='img/minus.png' onclick="javascript:toggleHide('statetransstats')"/>
+	 				Test Coverage
+				</td>
+			</tr>
+			<tr><td style="padding-left:0px;">
+				<table id="statetransstats" cellspacing="0" cellpadding="0" height="100%" width="100%" border="0">
+					<thead>
+						<tr class="header" style="height: 10px;padding:0px;padding-top:2px;">
+							<td align='center'>
+								<span width='100%' title='state and transition (event)'><span id="stateTransLabel">State:Trans</span>
+									<select name=type id=type value="ALL" onchange="javascript:filterType(this.value);">
+										<option value="ALL">All</option>
+										<option value="STATE" id="stateOnlyLabel">State</option>
+										<option value="TRANS" id="transOnlyLabel">Trans</option>
+									</select>
+								</span>
+							</td>
+							<td align='center'><span title='number of script executions'>Exec</span></td>
+							<td align='center'><span title='number of level 1 exceptions'>L<small><i>1</i></small></span></td>
+							<td align='center'><span title='number of level 2 exceptions'>L<small><i>2</i></small></span></td>
+							<td align='center'><span title='number of level 3 exceptions'>L<small><i>3</i></small></span></td>
+							<td align='center'><span title='number of level 4 exceptions'>L<small><i>4</i></small></span></td>
+							<td align='center' style="border-right: 1px dotted gray"><span title='number of level 5 exceptions'>L<small><i>5</i></small></span></td>
+							<td align='center' colspan='3'><span title='statistical comparison of this execution compared with past executions'>Response Time</span></td>
+						</tr>
+					</thead>
+					<tbody>
+					
+					</tbody>
+				</table>
+				</td>
+			</tr>
+		</table>
+		<table width=100% cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid #AAAAAA">
+			<tr>
+				<td class="header" style="height: 10px;padding:0px;padding-top:2px;">
+	 				<img id="hide_tagstats" src='img/minus.png' onclick="javascript:toggleHide('tagstats')"/>
+	 				Requirements Coverage
+				</td>
+			</tr>
+			<tr><td style="padding-left:0px;">
+				<table id="tagstats" cellspacing="0" cellpadding="2" height="100%" width="100%" border="0">
+					<thead>
+						<tr class='header'>
+							<td align='center' width='*'>
+								<span width='100%'>Tag</span>
+							</td>
+							<td align='center' title='Requirement priority' width='1%'>P</td>
+							<td class="header" align='center'><span title='Passed count'>Passed</span></td>
+							<td class="header" align='center'><span title='Failed count'>Failed</span></td>
+						</tr>
+					</thead>
+					<tbody>
+					
+					</tbody>
+				</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+</body>
+</html>

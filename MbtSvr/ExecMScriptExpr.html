@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/ExecMScriptExpr.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+
+	<script src="js/common.js"></script>
+	<script src="js/ExecMScriptExpr.js"></script>
+</head>
+<body>
+	<table width=100% border=0>
+	 	<tr>
+	 		<td colspan=3>Enter mscript expression or select from dropdown lists to execute while model execution is paused. Multiple lines are separated by Enter (Carriage Return) and are executed sequentially.</td>
+	 	</tr>
+		<tr>
+			<td>System Function: </td>
+			<td colspan=2><select id=sysFuncSelect onchange='addFunc("sysFuncSelect");'></select></td>
+		</tr>
+		<tr id="pluginFunc">
+			<td>Plugin Function: </td>
+			<td nowrap colspan=2><select id=pluginFuncSelect onchange='addFunc("pluginFuncSelect");'></select></td>
+		</tr>
+		<tr>
+			<td>
+				<span id=execMScriptBtns>
+					<span class="icon-ctrl" onclick="javascript:parent.stepInButton();"><img class="btnBar" id="stepInBtn" title="Step into/over mScript line" src="img/stepin.png"/></span>
+					<span class="icon-ctrl" onclick="javascript:parent.stepOverButton();"><img class="btnBar" id="bStepOver" title="Step over to next traversal (state or transition)" src="img/stepOver.png"/></span>
+					<span class="icon-ctrl" onclick="javascript:parent.stepLineButton();"><img class="btnBar" id="stepLineBtn" title="Step over a specified number of mScript lines or advance to a specific mScript line number" src="img/stepLine.png"/></span>
+				</span>
+			</td>
+			<td colspan=2 id=pluginList title="click to open mscript function javadoc">
+				<span id=mscriptFuncLink class=pluginLink><a href='http://testoptimal.com/javaDoc/com/webmbt/plugin/MbtScriptExecutor.html' title='open MScript documentation for system functions' target=_blank>Sys Func</a></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan=3><textarea id='mscriptExpr' rows=5 cols=80></textarea></td>
+		</tr>
+		<tr><td colspan=2><button id='execMScriptBtn' onclick='javascript:execMScript();'>Execute</button></td>
+			<td align=right><button id='clearMScriptBtn' onclick='javascript:clearMScript();'>Clear</button></td>
+		</tr>
+		<tr><td colspan=3 style='border-top: 2px solid #AAAAAA'>
+			<textarea id=mscriptResult rows=5 cols=80 style="background-color: #Ebeff5;border:none;" readonly></textarea>
+		</td></tr>
+	</table>
+</body>
+</html>

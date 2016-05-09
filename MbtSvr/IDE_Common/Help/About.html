@@ -1,0 +1,39 @@
+<style>
+	#about {
+		padding-left: 2px;
+	}
+	
+	#about .logo {
+	}
+	
+	#about .header {
+		padding-top: 4px;
+		font-weight: bold;
+		font-style: italic;
+		padding-bottom: 2px;
+		border-bottom: 1px solid #AAAAAA;
+	}
+	
+	#about .summary {
+		margin-left: 5px;
+	}
+	
+	#about .featureItem {
+		margin-left: 20px;
+	}
+	
+	#about .moreInfo {
+		margin-top: 15px;
+		font-style: italic;
+	}
+	
+</style>
+<div id="about" ng-controller="AboutCtrl">
+	<form id="aboutTO" ng-ENTER="closeAbout()" ng-ESCAPE="closeAbout()">
+		<div class="header"><img class="logo" width="15px" src="img/to.png"><span dynamic="about.header"></span></div>
+		<div class="summary" dynamic="about.summary"></div>
+		<div class="featureItem" ng-repeat="feature in about.features" dynamic="feature"></div>
+		<div class="moreInfo">More info at <a href="http://{{about.moreInfoURL}}" target=_blank>http://{{about.moreInfoURL}}</a></div>
+		<div ng-hide="about.native" style='position: relative; top: 20px; left: 0px; font-size: 8px; font-style: italic; font-weight: bold;'>Powered by <a href='http://testoptimal.com/' target=_blank>TestOptimal</a><input type="text" class="autoClose" style="width:1px;"/></div>
+	</form>
+</div>

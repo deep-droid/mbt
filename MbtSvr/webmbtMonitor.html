@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<LINK href="css/common.css" rel="stylesheet" type="text/css">
+  	<LINK href="css/webmbtMonitor.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="packages/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="packages/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<script src="packages/jquery.progressbar.js"></script>
+	<link href="packages/facebox_1.3/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="packages/facebox_1.3/facebox.js" type="text/javascript"></script>
+	<script src="js/webmbtMsgList.js"></script>
+	<script src="js/webmbtUtility.js"></script>
+
+	<script src="packages/shortcut.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/webmbtMonitor.js"></script>
+</head>
+<body>
+	<div class="header">
+		<table border="0" width="100%">
+			<tr><td>
+					Execution Status
+				</td>
+				<td align=right>
+					<span id="syncClock" class="field"></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="monitorMain" style="overflow: auto;">
+		<table id="monitor" cellspacing="0" cellpadding="1" width="100%">
+			<tr>
+				<td class="label">Status:</td><td><span id="execStatus" class="field"></span></td>
+				<td class="label">Debug:</td><td><span id="debugFlag" class="field"></span></td>
+				<td class="label">DryRun:</td><td><span id="dryRunFlag" class="field"></span></td>
+			</tr>
+			<tr>
+				<td class="label">MBT Mode:</td><td><span id="mbtMode" class="field"></span></td>
+				<td class="label">Iterations:</td><td><span id="numLoop" class="field"></span></td>
+				<td class="label">Virtual Users:</td><td><span class="field" id="numThread" title="Number of concurrent threads to execute MBT" class="field"></span></td>
+			</tr>
+		</table>
+		<table id="monitor" cellspacing="0" cellpadding="1" style="margin-top: 4px;" width="100%">
+			<tr>
+				<td colspan="6" class="header sectionTop"  align="left">MBT Execution Progress
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Start Time:</td><td><span id="startTime" class="field"></span></td>
+				<td class="label" title="Elapse time in minutes">Elapse Time:</td><td><span id="elapseTime" class="field"></span></td>
+				<td class="label">End Time:</td><td><span id="endTime" class="field"></span></td>
+			</tr>
+			<tr class="progressSection">
+				<td class="label" align="left">Progress:</td><td colspan="3"><span class="progressbar" id="execProgressBar">0%</span></td>
+				<td class="label" align="left" nowrap>Remaining:</td><td><span id="remaining" class="field"></span></td>
+			</tr>
+			<tr>
+				<td class="label">JVM Memory:</td><td colspan="3"><span class="progressbar" id="jvmMemBar">0%</span>&nbsp; of <span id="jvmStat" class="field" title="Max JVM heap size, set by -Xmx jvm option"></span>&nbsp;total</td>
+				<td class="label">Active Threads:</td><td><span id="activeThreads" class="field"></span></td>
+			</tr>
+		</table>
+		<table id="monitor" cellspacing="0" cellpadding="1" style="margin-top: 4px;" width="100%">
+			<tr class="nonBasic">
+				<td colspan="6" class="header sectionTop" align="left">Stop Conditions
+					<span id="stopMsg"></span>
+				</td>
+			</tr>
+			<tr class="nonBasic">
+				<td class="label" title="To stop MBT execution when transition coverage in percent reaches this value" id="transCoverageLabel">Trans Coverage:</td><td><span id="stopTransCoverage" class="field"></span><small>%</small></td>
+				<td class="label" title="To stop MBT execution when transition traversals(events) reaches this value" id="transTravCountLabel">Trans Trav Count:</td><td><span id="stopTransCount" class="field"></span></td>
+				<td class="label" title="To stop MBT execution when elapse time has reached this value">Elapse Time:</td><td><span id="stopElapseTime" class="field"></span>&nbsp;(minutes)</td>
+			</tr>
+			<tr class="nonBasic">
+				<td class="label"  title="To stop MBT execution when requirement (tag) coverage in perentage reaches this value">Req. Coverage:</td><td class="field"><span  id="stopReqCoverage"></span><small>%</small></td>
+				<td class="label" title="To stop MBT execution when number of paths (test cases) reaches this value">Path Count:</td><td><span id="stopPathCount" class="field"></span></td>
+				<td class="label" title="To stop MBT execution when number of exceptions reaches this value">Exception Count:</td><td><span id="stopException" class="field"></span></td>
+			</tr>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="1" style="margin-top: 4px;" border="0">
+			<tr>
+				<th colspan="5" class="header sectionTop" align="left">Testing Coverage
+				</th>
+			</tr>
+			<tr>
+				<td class="header label">&nbsp;</td>
+				<td align="center" class="label header">Traversals</td>
+				<td align="center" class="label header">Covered</td>
+				<td align="center" class="label header">Un-Covered</td>
+				<td align="center" class="label header wideElem">Coverage</td>
+			</tr>								
+			<tr>
+				<td align="left" class="label" id="stateLabel">State</td>
+				<td align="center"><span id="stateTraversal" class="field"></span></td>
+				<td align="center"><span id="stateCovered" class="field"></span></td>
+				<td align="center"><span id="stateUncovered" class="field"></span></td>
+				<td align="left" class="wideElem"><span class="progressbar" id="stateCoverageBar">0%</span></td>
+			</tr>
+			<tr>
+				<td align="left" class="label" id="transLabel">Transition</td>
+				<td align="center"><span id="transTraversal" class="field"></span></td>
+				<td align="center"><span id="transCovered" class="field"></span></td>
+				<td align="center"><span id="transUncovered" class="field"></span></td>
+				<td align="left" class="wideElem"><span class="progressbar" id="transCoverageBar">0%</span></td>
+			</tr>
+		</table>
+		
+		<table width="100%" cellspacing="0" cellpadding="1" style="margin-top: 4px;" border="0" id="perfStatSec" class="nonBasic">
+			<thead>
+				<tr>
+					<th colspan="7" class="header sectionTop" align="left">Performance Stats & Exceptions &nbsp;&nbsp;<a id="snapScreen" class="cmd" href="javascript:snapScreen();">SnapScreen</a>
+					</th>
+				</tr>
+				<tr class="header">
+					<td class="label header" align="left">Thread</td>
+					<td class="label header" align="left">Type</td>
+					<td class="label header" align="center">Rate</td>
+					<td class="label header" align="center">Count</td>
+					<td class="label header" align="center">Average</td>
+					<td class="label header" align="center">Min</td>
+					<td class="label header" align="center">Max</td>
+				</tr>
+				<tr>
+					<td rowspan="4" class="label">All</td>
+					<td class="label" id="TCLabel2">Test Cases</td>
+					<td align="center"><span id="perfTCRate" class="field"></span></td>
+					<td align="center"><span id="perfTCCount" class="field"></span></td>
+					<td align="center"><span id="perfTCAvg" class="field"></span></td>
+					<td align="center"><span id="perfTCMin" class="field"></span></td>
+					<td align="center"><span id="perfTCMax" class="field"></span></td>
+				</tr>
+				<tr>
+					<td class="label" id="stateLabel2">State</td>
+					<td align="center"><span id="perfStatesRate" class="field"></span></td>
+					<td align="center"><span id="perfStatesCount" class="field"></span></td>
+					<td align="center"><span id="perfStatesAvg" class="field"></span></td>
+					<td align="center"><span id="perfStatesMin" class="field"></span></td>
+					<td align="center"><span id="perfStatesMax" class="field"></span></td>
+				</tr>
+				<tr>
+					<td class="label" id="transLabel2">Transition</td>
+					<td align="center"><span id="perfTransRate" class="field"></span></td>
+					<td align="center"><span id="perfTransCount" class="field"></span></td>
+					<td align="center"><span id="perfTransAvg" class="field"></span></td>
+					<td align="center"><span id="perfTransMin" class="field"></span></td>
+					<td align="center"><span id="perfTransMax" class="field"></span></td>
+				</tr>
+				<tr>
+					<td class="label">Exception</td>
+					<td align="center"><span id="exceptRate" class="field"></span></td>
+					<td align="center"><span id="exceptCount" class="field"></span></td>
+					<td align="center"><span id="exceptAvg" class="field"></span></td>
+					<td align="center"><span id="exceptMin" class="field"></span></td>
+					<td align="center"><span id="exceptMax" class="field"></span></td>
+				</tr>
+			</thead>
+			<tbody>
+	
+			</tbody>
+		</table>
+		
+		<table width="100%" cellspacing="0" cellpadding="1" border="0" id="remotesessions" style="DISPLAY:none; margin-top: 4px;" class="nonBasic rmtAgent">
+			<colgroup valign="top"></colgroup>
+			<colgroup valign="top"></colgroup>
+			<colgroup valign="top"></colgroup>
+			<colgroup valign="top"></colgroup>
+			<colgroup valign="top"></colgroup>
+			<colgroup valign="top"></colgroup>
+			<thead>
+				<tr>
+					<th colspan="6" class="header sectionTop" align="left">Remote Agents (Remote Plugin only - unassigned: <span id="unassignedCount"></span>, assigned: <span id="assignedCount"></span>)
+					</th>
+				</tr>
+				<tr class="header">
+					<th class="label" align="center">Agent ID</th>
+					<th class="label" align="center" title="Current agent status">Status</th>
+					<th class="label" align="center" title="Time of last communication with the agent">Timestamp</th>
+					<th class="label" align="center" title="Total number of commands executed and queued for execution">Count</th>
+					<th class="label" align="center" title="Average response time">Response</th>
+					<th class="label" align="center">Commands</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="1" border="0" id="remotecmds" style="DISPLAY:none; margin-top: 4px;" class="nonBasic rmtAgent">
+			<colgroup valign="top" align="left"></colgroup>
+			<colgroup valign="top" align="center"></colgroup>
+			<colgroup valign="top" align="center"></colgroup>
+			<colgroup valign="top" align="center"></colgroup>
+			<colgroup valign="top" align="center"></colgroup>
+			<colgroup valign="top" align="center"></colgroup>
+			<thead>
+				<tr>
+					<th colspan="6" class="header sectionTop" align="left">Remote Command Performance Stats (cumulative) <a class="cmd" href="javascript:clearCmdStats();">clear</a></th>
+				</tr>
+				<tr class="header">
+					<th class="label" align="center">Command Name</th>
+					<th class="label" align="center" title="Number of invokation">Count</th>
+					<th class="label" align="center" title="Average response time in milliseconds">Average (ms)</th>
+					<th class="label" align="center" title="Best response time in milliseconds">Best (ms)</th>
+					<th class="label" align="center" title="Worst response time in milliseconds">Worst (ms)</th>
+					<th class="label" align="center" title="Standard deviation">Std Dev</th>
+				</tr>
+			</thead>
+			<tbody id="cmdStats">
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

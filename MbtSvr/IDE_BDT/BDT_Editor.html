@@ -1,0 +1,192 @@
+
+<style>
+
+	.highlight {
+		background-color: orange;
+	}
+	
+	#execList thead th {
+		border-bottom: 1px solid #CCCCCC;
+	}
+	
+	.sectionHeader {
+		background-color: #EAEAEA;
+		font-weight: bold;
+	}
+	
+	.dsCheck {
+		font-size: x-small;
+		height: 8px;
+	}
+	
+	#dsFieldList {
+		padding-left: 5px;
+	}
+	#dsFieldList td {
+		padding-left: 2px;
+	}
+	
+	.fieldData, #dsFieldList td {
+		white-space: nowrap;
+	}
+	
+	#dsFieldList input {
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+		
+	.dsLabel {
+		padding-left: 5px;
+	}
+
+	.tableSep {
+		border-top: 1px solid #DEDEDE; 
+		padding-top: 3px;
+		padding-bottom: 5px;
+		background-color: #F5F5F5;
+	}
+	
+	#dsAppHeader input, #dsAppContent input, #dsAppContent textarea, #dsAppContent select {
+		font-size: 10pt;
+	}	
+	
+	
+	#dsList .dsName {
+		padding-left: 4px;
+	}
+
+	#dataSetSection .subHeader {
+		font-style: italic;
+		border-bottom: 1px dotted #CCCCCC;
+	}
+
+    .CodeMirror {
+       border: 1px solid #eee;
+       height: 100% !important;
+    }
+    
+    .breakpoints {
+    	width: .8em;
+    }
+    
+
+	.CodeMirror pre {
+		line-height: 1.25 !important;
+	}
+    
+    .CodeMirror-scroll {
+       overflow-y: hidden;
+       overflow-x: auto;
+    }
+    .CodeMirror-focused .cm-matchhighlight {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+      background-position: bottom;
+      background-repeat: repeat-x;
+    }
+    
+    .CodeMirror .pausedAt {
+    	background-color: #FFDFDD;
+    }
+    
+    span.cm-mscriptFunc {
+		font-style: italic;
+		color: blue;
+	}
+	
+	.MScriptMarkerLine.execStatsFailed {
+		background: #ffa; 
+		color: #a00; 
+		padding: 2px 5px 3px; 
+	}
+	
+	.MScriptMarkerLine.execStatsPassed {
+		background: green; 
+		color: #FFFFFF; 
+		padding: 2px 5px 3px; 
+	}
+	
+	.MScriptMarkerIcon {
+	    color: white; 
+	    background-color: #ef8330; 
+	    font-weight: bold; 
+	    border-radius: 50%; 
+	    padding: 0 3px; 
+	    margin-right: 7px;
+	}
+
+	.MScriptMarker {
+		border-radius: 4px; 
+		padding: 3px; 
+		font-weight: bold;
+		color: #FFFFFF;
+	}
+	
+	.markerExec {
+		opacity: 1.0;
+		background-color: red;
+	}
+	
+	.markerCursor {
+		opacity: 1.0;
+		background-color: blue;
+	}
+
+	.markerLine {
+		opacity: 1.0;
+		background-color: green;
+	}
+	
+	.markerPausedAt {
+		opacity: 1.0;
+		background-color: #461B7E;
+	}
+	
+	.compileSuccess {
+		background-color: lightgreen;
+	}
+	
+	.compileError {
+		background-color: yellow;
+	}
+</style>
+
+
+<div ng-controller="BDT_Ctrl">
+	<div id="BDT_Header" class="paneTitle" style="height: 25px; text-align: left;">
+		<div class="paneTitle filter" ng-style="{width: paneWidth_1+'px', overflow: 'hidden'}">
+			<input type="text" placeholder="Enter text to filter BDT List" ng-model="filter" ng-change="applyFilter(filter)"/>
+			<span class="appBtn" title="clear filter field"><img class="appIcon" src="img/delete16.png" width="12px" ng-click="filter=''; applyFilter('')"/></span>
+		</div>
+		<div style="float:right; right:0px;" ng-hide="curBDT.modelName==undefined">
+			<span class="rightPaneTitle">
+				Test Suite <input type="text" class="BDT" ng-model="curBDT.modelName" 
+				ng-style="{width: (paneWidth_2-200)+'px'}" ng-blur="renameBDT();"/>
+			</span>
+			<button style="float:right;" ng-click="loadBDT();">Refresh</button>
+			<button style="float:right;" ng-click="saveBDT();">Save</button>
+		</div>
+	</div>
+	
+	<div id="BDT_AppContent" ng-style="{height: (viewHeight-headerHeight) +'px'}">
+		<div class="pane pane_1" ng-style="{width: paneWidth_1+'px'}">
+			<ul id="BDTList" class="selection">
+				<li ng-repeat="BDTObj in BDTList" ng-if="BDTObj" ng-hide="BDTObj.hide" 
+					ng-class="{selected: BDTObj.modelName==curBDT.modelName}">
+					<input type="checkbox" class="BDTCheck" ng-model="BDTObj.selected">
+						<span class="BDT" ng-click="openBDT(BDTObj)">{{BDTObj.modelName}}</span>
+					</input>
+				</li>
+			</ul>
+		</div>
+		<div class="pane pane_2" ng-style="{width: paneWidth_2+'px'}" class="pane-content">
+			<div ng-style="{height: (viewHeight-headerHeight)+'px', overflow: 'auto'}" ng-hide="curBDT.modelName==undefined">
+				<div style="height: 100%;" id="BDTSection" ui-codemirror="{ onLoad : codemirrorLoaded }" ui-codemirror-opts="editorOptions" 
+					 ng-model="curBDT.script" ui-refresh="mscriptRefresh">
+			    </div>
+			</div>
+			
+			<link rel="stylesheet" href="IDE_BDT/BDT.css">
+		</div>
+	</div>
+	<pane-divider/>
+</div>

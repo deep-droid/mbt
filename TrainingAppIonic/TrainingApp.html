@@ -125,6 +125,16 @@
 			reset();
 		}
 		
+		function hide()
+		{
+<!--  			elements = elements.length ? elements : [elements];
+			for (var index = 0; index < elements.length; index++) {
+				elements[index].style.display = 'none';
+			}		 
+ -->			
+		$(".amountDIV").hide();
+		}
+		
 		function startTimer(duration, display) {
 		var timer = duration, minutes, seconds;
 		setInterval(function () {
@@ -167,6 +177,14 @@
 		<tr id="amountDIV">
 			<td>Deposited:</td><td><div id="amount" style="width: 100px; float:left">0</div><div style="float:left; padding-left: 15px;">Drink for <span id="price"></span></div></td>
 		</tr>
+		<tr><td colspan="2"><hr/></td></tr>
+		<tr>
+			<td>Go?:</td>
+			<td>
+				<span id="OK" class="feedback" action="hide"><font color="brown"><i>OK</i></font></span>
+			</td>
+		</tr>
+
 		<tr><td colspan="2"><hr/></td></tr>
 		<tr>
 			<td>Are you ready to start?:</td>

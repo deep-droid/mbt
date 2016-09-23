@@ -9,24 +9,41 @@ function getPlayerMove(data) {
 
   var ballStop = getBallStats(ball, data.settings);
 
-  var attackDirection = Math.atan2(ballStop.y - currentPlayer.y, ballStop.x - currentPlayer.x - ball.settings.radius * 2);
+  //if (data.playerIndex == 2)
+	var attackDirection = Math.atan2(ballStop.y - currentPlayer.y, ballStop.x - currentPlayer.x - ball.settings.radius * 2);
 
+	if ((
+		{
+			attackDirection = 0;	
+			velocity = 0;
+		}
+		
+	
+	
+		
   //ball of the left
-  if (ballStop.x < currentPlayer.x) {
-	  //above ball.settings.radius
-	  if (ballStop.y < currentPlayer.y) {
-	      attackDirection = Math.atan2(ballStop.y - currentPlayer.y - ball.settings.radius, ballStop.x - currentPlayer.x - ball.settings.radius);
-	  } else
-	  {
-		  attackDirection = Math.atan2(ballStop.y - currentPlayer.y + ball.settings.radius, ballStop.x - currentPlayer.x - ball.settings.radius);
-	  }
-  }
+  // if (ballStop.x < currentPlayer.x) {
+	  // //above ball.settings.radius
+	  // if (ballStop.y < currentPlayer.y) {
+	      // attackDirection = Math.atan2(ballStop.y - currentPlayer.y - ball.settings.radius, ballStop.x - currentPlayer.x - ball.settings.radius);
+	  // } else
+	  // {
+		  // attackDirection = Math.atan2(ballStop.y - currentPlayer.y + ball.settings.radius, ballStop.x - currentPlayer.x - ball.settings.radius);
+	  // }
+  // }
 
   
   return {
     direction: attackDirection,
     velocity: currentPlayer.velocity + data.settings.player.maxVelocityIncrement
   };
+}
+
+function getDistance(ball, currentPlayer)
+{
+	Math.abs(ball.x - data.x)<=20)&&
+		(Math.abs(ball.y - data.y)<=20))
+	return 
 }
 
 function getBallStats(ball, gameSettings) {
